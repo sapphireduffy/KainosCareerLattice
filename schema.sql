@@ -1,9 +1,6 @@
 DROP DATABASE IF EXISTS CareerLattice;
 CREATE DATABASE CareerLattice;
 
-CREATE USER user@localhost IDENTIFIED WITH mysql_native_password BY 'careerLattice!';
-GRANT SELECT ON CareerLattice.Role to user@localhost;
-
 USE CareerLattice;
 
 CREATE TABLE User (
