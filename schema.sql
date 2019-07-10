@@ -1,8 +1,8 @@
 DROP DATABASE IF EXISTS CareerLattice;
 CREATE DATABASE CareerLattice;
 
-DROP USER IF EXISTS user@localhost;
 CREATE USER user@localhost IDENTIFIED WITH mysql_native_password BY 'careerLattice!';
+GRANT SELECT ON CareerLattice.Role to user@localhost;
 
 USE CareerLattice;
 
@@ -129,5 +129,3 @@ INSERT INTO Role_Capability (RoleID, CapabilityID)
 VALUES (31,3), (32,4), (33,5), (34,6);
 INSERT INTO Role_Capability (RoleID, CapabilityID)
 VALUES (35,4), (36,5), (37,6);
-
-GRANT SELECT ON CareerLattice.Role to user@localhost;
