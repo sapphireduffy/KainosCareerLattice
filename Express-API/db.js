@@ -1,38 +1,29 @@
-const mysql = require('mysql');
+var mysql = require('mysql');
 
-const db = mysql.createConnection ({
-    host: 'localhost',
-    user: 'username',
-    password: 'password',
-    database: 'test_db'
-});
+class Database {
+    constructor( config ) {
+        this.con = mysql.createConnection({
+            host: 'localhost',
+            user: 'empuser2',
+            password: 'empPwd!',
+            database: 'BookingSystem'
+        });
 
-db.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected to MySQL");
-});
+        this.con.connect(function(err) {
+            if (err) throw err;
+            console.log("Connected!");
+        });
+    }
 
-exports.getAllFromTable = function (callback) {
-    console.log("Fetched data from table");
-    db.query(
-        "SELECT id, name, age FROM test_table;",
-        function (err, rows) {
-            if (err, rows) {
-                callback(rows);
-            }
-        }
-    );
-};
+    query(sql, args){
+        return new Promise( ( resolve, reject ) => {
+            this.con.query( sql, args, ( err, rows ) => {
+                if ( err )
+                    return reject( err );
+                resolve( rows );
+            } );
+        } );
+    }
+}
 
-/*exports.addCourse = function (course, callback) {
-    console.log("Add course executed: " + course);
-    db.query (
-        'INSERT INTO Course SET ?', course,
-        function(err, rows) {
-            console.log("Added course");
-            if(err, rows) {
-                callback(rows);
-            }
-        }
-    );
-}*/
+module.exports = Database;
