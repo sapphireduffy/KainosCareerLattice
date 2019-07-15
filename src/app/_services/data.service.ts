@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
 import axios from "axios";
-//Code by Megan O'Kane
 @Injectable()
-export class DealService {
+export class DataService {
   headers: any;
   private roleUrl = "/api/roles";
 
@@ -14,7 +13,6 @@ export class DealService {
     });
   }
 
-  //get all deals, passes in business id of deals to get
   getRoleByDepartment(departmentID: number) {
     return axios
       .get(this.roleUrl, {
@@ -24,7 +22,7 @@ export class DealService {
         headers: this.getHeaders()
       })
       .then(function(response) {
-        return response;
+        return response.data;
       })
       .catch(function(error) {
         if (error.response) {
