@@ -1,0 +1,21 @@
+.card-title {
+    text-align: center
+}
+
+.card-title {
+    font-family: "Helvetica", serif, times;
+}
+
+.col-sm-4 {
+    height: 100px;
+    width: 100px;
+    padding-top: 2%; 
+    padding-bottom: 2%; 
+    padding-left: 2.5%; 
+    padding-right: 2.5%; 
+    /* border-radius: 20px; */
+}
+
+.grid-container {
+    grid-template-columns: auto auto auto;
+}
