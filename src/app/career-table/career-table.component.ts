@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DataService } from '../_services/data.service';
 
 @Component({
   selector: 'app-career-table',
@@ -85,12 +86,14 @@ export class CareerTableComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
     //call endpoint
+    this.dataService.getRoleByDepartment(1).then(response =>{
+      this.roles = response;
+      console.log(this.roles);
+    })
   }
 
-
-  
 }
