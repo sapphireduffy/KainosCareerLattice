@@ -1,0 +1,38 @@
+<table role='grid' class='table table-striped'>
+    <thead>
+        
+        <tr role='row'>
+            <!-- Colspan should be equal to no. capabilities -->
+            <th class='job-family' scole='col' [attr.colspan]='capabilities.length + 1' rowspan='1'>Sales & Marketing</th>
+        </tr>
+     
+        <tr class='job-capabilities-parent' role='row' >
+            <th></th>
+            <th *ngFor="let capability of capabilities">{{capability.name}}</th>
+            <!-- <th class='job-capabilities'>Business Development</th>
+            <th class='job-capabilities'>Account Management</th>
+            <th class='job-capabilities'>Sales</th>
+            <th class='job-capabilities'>Inside Sales Development</th>
+            <th class='job-capabilities'>Pre Sales & Bid Management</th>
+            <th class='job-capabilities'>Marketing</th> -->
+        </tr>
+    </thead>
+    <tbody *ngIf="roles">
+        <tr class='job-level-parent' *ngFor="let band of bands">
+            <td class='job-level'>{{band.name}}</td>
+
+            <div *ngFor="let job of roles">
+                <!-- <td class='job-role' *ngIf="job.band == band.name">{{job.name}}</td>
+                 -->
+                 <td class='job-role' *ngIf="job.band == band.name && job.capability == 'Business Development'">{{job.name}}</td>
+            </div>
+            <!-- Uncomment this to get job names printing -->
+            <!-- <td class='job-role' *ngIf="job.capability == 'Business Development'">{{job.name}}</td> -->
+
+
+            <!-- <td class='job-level job-level-inspire' role='row'>Executive</td> -->
+            <!-- <td>{{roles.BandName}}</td>
+            <td>{{roles.Name}}</td> -->
+        </tr>
+    </tbody>
+</table>
