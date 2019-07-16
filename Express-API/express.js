@@ -43,6 +43,33 @@ app.get("/roles", cors(), function(request, response) {
   });
 });
 
+app.get("/capabilities", cors(), function(request, response) {
+  db.query(
+    "SELECT Name FROM Capability WHERE DepartmentID =" +
+      JSON.stringify(request.query.departmentID)
+  ).then(rows => {
+    response.send(rows);
+  });
+});
+
+app.get("/departments", cors(), function(request, response) {
+  db.query(
+    "SELECT Name FROM Department WHERE DepartmentID =" +
+      JSON.stringify(request.query.departmentID)
+  ).then(rows => {
+    response.send(rows);
+  });
+});
+
+app.get("/allData", cors(), function(request, response) {
+  db.query(
+    "SELECT Department.Name AS 'DepartmentName', Capability.Name AS 'CapabilityName', Role.Name AS 'RoleName' FROM Department JOIN Capability ON Department.DepartmentID = Capability.DepartmentID JOIN Role_Capability ON Role_Capability.CapabilityID = Capability.CapabilityID JOIN Role ON Role_Capability.RoleID = Role.RoleID JOIN Band ON Role.BandID = Band.BandID WHERE Department.DepartmentID=" +
+    JSON.stringify(request.query.departmentID)
+  ).then(rows => {
+    response.send(rows);
+  });
+});
+
 app.get("/", function(req, res) {
   res.sendFile("seeCourses.html", { root: __dirname });
 });
