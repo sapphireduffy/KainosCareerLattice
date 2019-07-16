@@ -141,22 +141,3 @@ values (35,4), (36,5), (37,6);
 
 
 grant all on CareerLattice.* to user@localhost;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
