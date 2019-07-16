@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms'
 import { HttphandlerService } from '../httphandler.service'
 import { JwtHelperService } from '@auth0/angular-jwt'
+import { AuthGuardComponent } from '../auth-guard/auth-guard.component';
 
 @Component({
   selector: 'app-login',
@@ -11,30 +12,18 @@ import { JwtHelperService } from '@auth0/angular-jwt'
 export class LoginComponent implements OnInit {
 
   private form: FormGroup;
-  submitted = false;
   private helper = new JwtHelperService();
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  constructor(private httpHandler : HttphandlerService){
+  constructor(private httpHandler : HttphandlerService, private authGuard: AuthGuardComponent){
     this.form = new FormGroup({
-      username: new FormControl(Validators.required),
-      password: new FormControl(Validators.required),
+      username: new FormControl(),
+      password: new FormControl(),
     })
   }
 
-  get loginControls(){
-    return this.form.controls;
-  }
-
   onSubmit(){
-    this.submitted =  true;
-
-    if(!this.form.invalid){
-      console.log("here");
-        return;
-    }
     var username = this.form.value.username
     var password = this.form.value.password
     this.httpHandler.post("/api/login", {"Username" : username, "Password": password}).then(res => {
@@ -42,6 +31,7 @@ export class LoginComponent implements OnInit {
       if(response.hasOwnProperty('token')){
         var jwt = this.helper.decodeToken(response.token)
         console.log(jwt)
+        this.authGuard.setToken(jwt)
       } else {
         console.log(response.error)
       }
