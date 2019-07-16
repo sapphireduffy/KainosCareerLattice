@@ -1,0 +1,32 @@
+<div *ngIf="loaded">
+  <div class="modal-header" [ngStyle]="{ 'background-color': modalColour }">
+    <h2 class="modal-title" id="exampleModalLabel">{{ roleToDisplay.name }}</h2>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="activeModal.dismiss()"
+    >
+      x
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <h4>Job Summary</h4>
+    <p *ngIf="roleToDisplay.summary">{{ roleToDisplay.summary }}</p>
+
+    <h5>Job Specification</h5>
+    <p>
+      ....
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="activeModal.dismiss()"
+    >
+      Close
+    </button>
+  </div>
+</div>
