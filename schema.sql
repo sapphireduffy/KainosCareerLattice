@@ -1,5 +1,6 @@
 DROP DATABASE IF EXISTS career_lattice;
 CREATE DATABASE career_lattice;
+
 USE career_lattice;
 
 -- ---------------------------------- TABLES ---------------------------- --
@@ -181,4 +182,3 @@ VALUES (51,10), (52,10), (53,10), (54,10);
 
 INSERT INTO role_capability (role_id, capability_id) -- role-capability links for Central Services Teams
 VALUES (55,11), (56,11), (57,11), (58,11);
-
