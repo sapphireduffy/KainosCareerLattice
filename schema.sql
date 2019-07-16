@@ -8,7 +8,6 @@ CREATE TABLE user (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    salt VARCHAR(255) NOT NULL,
     type ENUM('Employee', 'Admin') NOT NULL
 );
 
@@ -90,13 +89,13 @@ VALUES ('Executive', 1), ('Leadership Executive', 1), ('Principal', 1), ('Manage
 ('Senior Associate', 2), ('Associate', 1), ('Trainee', 1), ('Apprentice', 1);
 
 INSERT INTO role (name, department_id, band_id)
-VALUES ('Head of Business Unit', 1, 1), ('Head of Business Unit', 1, 1), ('Head of Business Unit', 1, 1), 
-('Head of Business Unit', 1, 1);
+VALUES ('Head Of Business Unit', 1, 1), ('Head Of Business Unit', 1, 1), ('Head Of Business Unit', 1, 1), 
+('Head Of Business Unit', 1, 1);
 INSERT INTO role (name, department_id, band_id)
-values ('Sales Director', 1, 2), ('Sales Director', 1, 2), ('Sales Director', 1, 2), 
+VALUES ('Sales Director', 1, 2), ('Sales Director', 1, 2), ('Sales Director', 1, 2), 
 ('Marketing Leader', 1, 2);
 INSERT INTO role (name, department_id, band_id)
-values ('Business Development Director', 1, 3), ('Account Director', 1, 3), ('Senior Sales Executive', 1, 3), 
+VALUES ('Business Development Director', 1, 3), ('Account Director', 1, 3), ('Senior Sales Executive', 1, 3), 
 ('Country Manager', 1, 3), ('Senior Presales Manager', 1, 3), ('Senior Marketing Manager', 1, 3);
 INSERT INTO role (name, department_id, band_id)
 VALUES ('Business Development Manager', 1, 4), ('Account Manager', 1, 4), ('Sales Executive', 1, 4), 
@@ -141,5 +140,3 @@ SELECT department.name AS 'Department Name', capability.name AS 'Capability Name
 FROM department JOIN capability ON department.department_id = capability.department_id JOIN role_capability ON
 role_capability.capability_id = capability.capability_id JOIN role ON role_capability.role_id = role.role_id 
 WHERE department.department_id = 1;
-
-select * from viewLattice;
