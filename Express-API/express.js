@@ -36,7 +36,7 @@ function runQuery(startingQuery, values) {
 
 app.get("/roles", cors(), function(request, response) {
   db.query(
-    "SELECT * FROM Role WHERE DepartmentID =" +
+    "SELECT * FROM role WHERE department_id =" +
       JSON.stringify(request.query.departmentID)
   ).then(rows => {
     response.send(rows);
@@ -45,16 +45,16 @@ app.get("/roles", cors(), function(request, response) {
 
 app.get("/capabilities", cors(), function(request, response) {
   db.query(
-    "SELECT Name FROM Capability WHERE DepartmentID =" +
+    "SELECT name FROM capability WHERE department_id =" +
       JSON.stringify(request.query.departmentID)
   ).then(rows => {
-    response.send(rows);
+    response.send(rows)
   });
 });
 
 app.get("/departments", cors(), function(request, response) {
   db.query(
-    "SELECT Name FROM Department WHERE DepartmentID =" +
+    "SELECT name FROM department WHERE department_id =" +
       JSON.stringify(request.query.departmentID)
   ).then(rows => {
     response.send(rows);
@@ -63,7 +63,7 @@ app.get("/departments", cors(), function(request, response) {
 
 app.get("/allData", cors(), function(request, response) {
   db.query(
-    "SELECT Department.Name AS 'DepartmentName', Capability.Name AS 'CapabilityName', Role.Name AS 'RoleName' FROM Department JOIN Capability ON Department.DepartmentID = Capability.DepartmentID JOIN Role_Capability ON Role_Capability.CapabilityID = Capability.CapabilityID JOIN Role ON Role_Capability.RoleID = Role.RoleID JOIN Band ON Role.BandID = Band.BandID WHERE Department.DepartmentID=" +
+    "SELECT department.name AS 'DepartmentName', capability.name AS 'CapabilityName', role.name AS 'RoleName' FROM department JOIN capability ON department.department_id = capability.department_id JOIN role_capability ON role_capability.capability_id = capability.capability_id JOIN role ON role_capability.role_id = role.role_id JOIN band ON role.band_id = band.band_id WHERE department.department_id=" +
     JSON.stringify(request.query.departmentID)
   ).then(rows => {
     response.send(rows);

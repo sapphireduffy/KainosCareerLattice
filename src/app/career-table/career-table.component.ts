@@ -35,9 +35,9 @@ export class CareerTableComponent implements OnInit {
     for(let capability of this.capabilities){
       var roles = [];
       for(let roleCap of this.roleCapabilityData){
-        if(capability.Name == roleCap.CapabilityName){
+        if(capability.name == roleCap.CapabilityName){
           roles.push(roleCap.RoleName);
-          this.rolesCapabilityMap.set(capability.Name, roles);
+          this.rolesCapabilityMap.set(capability.name, roles);
         }
       }
     }
