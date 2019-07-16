@@ -30,8 +30,9 @@ class LoginHandler {
                     bcrypt.compare(params.Password, password, function(err, res) {
                         console.log(res)
                         if(res){
-                            jwt.sign({ Username: params.Username, Type: rows[0].Type }, fs.readFileSync('./private.key', 'utf8'), { algorithm: 'RS256' }, function(err, token) {
-                                console.log("token generated")
+                            var privateKey = "MIIBOQIBAAJBALGl6FHDEQVgmKFfZhSCdUfKjnGUv/g38++jeSso7CRF+j5oMBrS"
+                            jwt.sign({ Username: params.Username, Type: rows[0].Type }, privateKey, function(err, token) {
+                                console.log("token generated: "+token)
                                 resolve({"token" : token})
                             });
                         } else {
