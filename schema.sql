@@ -47,7 +47,7 @@ CREATE TABLE role (
     department_id INT,
     band_id INT,
     summary MEDIUMTEXT,
-    job_spec_url mediumtext,
+    job_spec_url VARCHAR(500),
     FOREIGN KEY (department_id)
         REFERENCES department (department_id),
     FOREIGN KEY (band_id)
@@ -128,29 +128,29 @@ VALUES ('Sales Associate', 1, 7), ('Sales Development Representative', 1, 7), ('
 INSERT INTO role (name, department_id, band_id)
 VALUES ('Sales Development Representative', 1, 8), ('Trainee Presales Associate', 1, 8), ('Marketing Assistant', 1, 8);
 
-INSERT INTO role (name, department_id, band_id, summary, sharepoint_link) -- Roles in the Technical Department
+INSERT INTO role (name, department_id, band_id, summary, job_spec_url) -- Roles in the Technical Department
 VALUES ('Lead Software Engineer', 2, 5, 'Expert in their field, is consulted by others, supervises others, works well even if under pressure, effectively coaches people.', 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Shared%20Documents/Job%20Descriptions/Software%20Engineering/Job%20Specification%20-%20Lead%20Software%20Engineer%20-%20Consultant.pdf?csf=1&e=Ul5LFK'), 
 ('Senior Software Engineer', 2, 6, 'Delivers with limited supervision, trusted to make tactical decisions.', 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Shared%20Documents/Job%20Descriptions/Software%20Engineering/Job%20Specification%20-%20Senior%20Software%20Engineer%20-%20Senior%20Associate.pdf?csf=1&e=K4tAWT'),
 ('Associate Software Engineer', 2, 7, 'Established deliverer, works well in a team.', 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Shared%20Documents/Job%20Descriptions/Software%20Engineering/Job%20Specification%20-%20Software%20Engineer%20-%20Associate.pdf?csf=1&e=VcEmvE'),
 ('Trainee Software Engineer', 2, 8, 'Graduate entry level, here to learn, but primarily to contribute to projects.', 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Shared%20Documents/Job%20Descriptions/Software%20Engineering/Job%20Specification%20-%20Software%20Engineer%20-%20Trainee.pdf?csf=1&e=5JqNE0'),
 ('Apprentice Software Engineer', 2, 9, 'Here primarily to learn; contributes to projects.', null);
-INSERT INTO role (name, department_id, band_id, summary, sharepoint_link)
+INSERT INTO role (name, department_id, band_id, summary, job_spec_url)
 VALUES ('Senior Security Architect', 2, 4, 'Serves the company\'s commercial and delivery interests, owns single initiatives or projects, advocates effective coaching and ensures that it happens.', 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Shared%20Documents/Job%20Descriptions/Cyber%20Security/Job%20Specification%20-%20Senior%20Security%20Architect%20-%20Manager.pdf?csf=1&e=DJdlxg'), 
 ('Security Architect', 2, 5, 'Expert in their field, is consulted by others, supervises others, works well even if under pressure, effectively coaches people.', 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Shared%20Documents/Job%20Descriptions/Cyber%20Security/Job%20Specification%20-%20Security%20Architect%20-%20Consultant.pdf?csf=1&e=4T0KM0'), 
 ('Security Engineer', 2, 6, 'Works within teams to establish good security practices, supporting the design, development and testing of the service being delivered for both application and infrastructure. Is viewed as an authority figure for cyber security and will bring strong technical leadership including mentoring and coaching Kainos people, to strengthen our security capability across the organisation.', 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Shared%20Documents/Job%20Descriptions/Cyber%20Security/Job%20Specification%20-%20Senior%20Security%20Engineer%20-%20Senior%20Associate.pdf?csf=1&e=3XLX9o');
-INSERT INTO role (name, department_id, band_id, summary, sharepoint_link) 
+INSERT INTO role (name, department_id, band_id, summary, job_spec_url) 
 VALUES ('Chief Technology Officer', 2, 1, 'Owns and leads a business area (e.g. a BU) or supporting function (e.g. Legal or HR) with responsibility for budget, people and profit & loss.', null), 
 ('Technology Leader', 2, 2, 'Recognised leader and developer of Kainos talent, continuously improves Kainos, comfortable in novel situations, owns multiple initiatives, accountable for delivery at Programme level.', null), 
 ('Principal Architect', 2, 3, 'Recognised leader and developer of Kainos talent, continuously improves Kainos, comfortable in novel situations, owns multiple initiatives, accountable for delivery at Programme level.', null),
 ('Solution Architect', 2, 4, 'Designs and delivers large-scale solutions from scratch.', 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Shared%20Documents/Job%20Descriptions/Architect/Job%20Specification%20-%20Solution%20Architect%20-%20Manager.pdf?csf=1&e=TQLL8t'), 
 ('Technical Architect', 2, 5, 'Expert in their field, is consulted by others, supervises others, works well even if under pressure, effectively coaches people.', 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Shared%20Documents/Job%20Descriptions/Architect/Job%20Specification%20-%20Technical%20Architect%20-%20Consultant.pdf?csf=1&e=jS7nhb');
-INSERT INTO role (name, department_id, band_id, summary, sharepoint_link) 
+INSERT INTO role (name, department_id, band_id, summary, job_spec_url) 
 VALUES ('Lead Ops Engineer', 2, 5, 'Expert in their field, is consulted by others, supervises others, works well even if under pressure, effectively coaches people.', 'https://kainossoftwareltd.sharepoint.com/:w:/r/people/Shared%20Documents/Job%20Descriptions/Ops/Consultant%20-%20Lead%20Ops%20Engineer.docx?d=wb1eb28ea306941f5a9d527dd85cab4cc&csf=1&e=UThzhB'), 
 ('Senior Ops Engineer', 2, 6, 'Delivers with limited supervision, trusted to make tactical decisions.', 'https://kainossoftwareltd.sharepoint.com/:w:/r/people/Shared%20Documents/Job%20Descriptions/Ops/Senior%20Associate%20-%20Senior%20Ops%20Engineer.docx?d=w4f827b196eb24246a3b3e62e3452b4dd&csf=1&e=Y7Fya1'),
 ('Associate Ops Engineer', 2, 7, 'Established deliverer, works well in a team.', 'https://kainossoftwareltd.sharepoint.com/:w:/r/people/Shared%20Documents/Job%20Descriptions/Ops/Associate%20-%20Ops%20Engineer.docx?d=w23925c8ff78e4c5194339c330de2ee23&csf=1&e=4ayWez'),
 ('Trainee Ops Engineer', 2, 8, 'Graduate entry level, here to learn, but primarily to contribute to projects.', 'https://kainossoftwareltd.sharepoint.com/:w:/r/people/Shared%20Documents/Job%20Descriptions/Ops/Trainee%20-%20Trainee%20Ops%20Engineer.docx?d=w0d08acc91803408c8e03119d43fff3d3&csf=1&e=0HCzjC');
 
-INSERT INTO role (name, department_id, band_id, summary, sharepoint_link) -- Roles in the Central Services Teams department
+INSERT INTO role (name, department_id, band_id, summary, job_spec_url) -- Roles in the Central Services Teams department
 VALUES ('Lead Systems Engineer', 6, 5, 'Expert in their field, is consulted by others, supervises others, works well even if under pressure, effectively coaches people.', 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Shared%20Documents/Job%20Descriptions/Systems/Lead%20Systems%20Engineer.pdf?csf=1&e=UUsqcP'), 
 ('Senior Systems Engineer', 6, 6, 'Delivers with limited supervision, trusted to make tactical decisions.', 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Shared%20Documents/Job%20Descriptions/Systems/Senior%20Systems%20Engineer.pdf?csf=1&e=FgNeeH'), 
 ('Associate Systems Engineer', 6, 7, 'Established deliverer, works well in a team.', 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Shared%20Documents/Job%20Descriptions/Systems/Systems%20Engineer.pdf?csf=1&e=2iC8xD'), 
