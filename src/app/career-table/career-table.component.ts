@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from '../_services/data.service';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Component({
   selector: 'app-career-table',
@@ -8,123 +7,40 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
   styleUrls: ['./career-table.component.css']
 })
 export class CareerTableComponent implements OnInit {
-  // departmentID is passed from previous page in order to know what department data to show
-  @Input() departmentID;
-  @Input() currentCapability:any;
 
-  rolesCap = new Map<string, string[]>();
-  
-  // Roles is filled by data service
-    // roles:any[];
+  rolesCapabilityMap = new Map<string, string[]>();
+  capabilities = [];
+  roleCapabilityData: any;
   departmentName: any;
-  roles = [
-    {
-      "name": "Head of Business Unit",
-      "band": "Executive",
-      "capability": "Business Development",
-    },
-    {
-      "name": "Sales Director",
-      "band": "Leadership Community",
-      "capability": "Business Development"
-    },
-    {
-      "name": "Business Development Director",
-      "band": "Principal",
-      "capability": "Business Development"
-    },
-    {
-      "name": "Senior Sales Executive",
-      "band": "Principal",
-      "capability": "Sales"
-    }
-  ];
-
-  bands = [
-    {
-      "name": "Executive"
-    },
-    {
-      "name": "Leadership Community"
-    },
-    {
-      "name": "Principal"
-    },
-    {
-      "name": "Manager"
-    },
-    {
-      "name": "Consultant"
-    },
-    {
-      "name": "Senior Associate"
-    },
-    {
-      "name": "Associate"
-    },
-    {
-      "name": "Trainee"
-    },
-    {
-      "name": "Apprentice"
-    }
-  ]
-
-  capabilities = [
-    
-  ];
 
   constructor(private dataService: DataService) { }
-  role_capability: any;
-  allData: any;
+ 
   ngOnInit() {
-    //call endpoint
-    this.dataService.getRoleByDepartment(1).then(response =>{
-      this.roles = response;
-      console.log(this.roles);
+    //todo: pass in actual department id in user story 2
+    this.dataService.getCapabilityNamesByDepartment(1).then(response =>{
+      this.capabilities = response;
+    });
+
+    this.dataService.getAllData(1).then(response => {
+      this.roleCapabilityData = response;
+      this.sortRoleCapabilityMap();
     })
 
     this.dataService.getDepartmentDetails(1).then(response =>{
       this.departmentName = response;
-      // departmentName2 = JSON.parse(departmentName);
-      console.log(this.departmentName);
-    })
-
-    this.dataService.getCapabilityNamesByDepartment(1).then(response =>{
-      this.capabilities = response;
-      // departmentName2 = JSON.parse(departmentName);
-      console.log(this.capabilities);
-    })
-
-    this.dataService.getRoleByCapability(1).then(response =>{
-      this.role_capability = response;
-      // departmentName2 = JSON.parse(departmentName);
-      console.log(this.capabilities);
-    })
-
-    this.dataService.getAllData(1).then(response => {
-      this.allData = response;
-      console.log(this.allData);
-      this.sortRoles();
     })
   }
 
-  sortRoles(){
-    for(let cap of this.capabilities){
+  sortRoleCapabilityMap(){
+    for(let capability of this.capabilities){
       var roles = [];
-      for(let d of this.allData){
-        
-        if(cap.Name == d.CapabilityName){
-        
-          roles.push(d.RoleName);
-          this.rolesCap.set(cap.Name, roles);
+      for(let roleCap of this.roleCapabilityData){
+        if(capability.Name == roleCap.CapabilityName){
+          roles.push(roleCap.RoleName);
+          this.rolesCapabilityMap.set(capability.Name, roles);
         }
       }
     }
-
-    console.log(this.rolesCap);
-
-
   }
 
 }

@@ -8,17 +8,17 @@
         </tr>
 
         <tr>
-                <th *ngFor='let cap of rolesCap | keyvalue' >{{cap.key}}</th>
+                <th *ngFor='let capability of rolesCapabilityMap | keyvalue' >{{capability.key}}</th>
            
 
             
         </tr>
             <tr>
-                <th *ngFor='let cap of rolesCap | keyvalue;  let i = index '>
+                <th *ngFor='let roleCap of rolesCapabilityMap | keyvalue;  let i = index ' class='column'>
                 
 
-                        <p *ngFor='let p of cap.value'>
-                                <a href='#'>{{p}}</a>
+                        <p *ngFor='let role of roleCap.value'>
+                                <a href='#'>{{role}}</a> 
                         </p>
                         
                     </th>
