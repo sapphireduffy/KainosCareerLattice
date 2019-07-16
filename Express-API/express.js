@@ -36,7 +36,7 @@ function runQuery(startingQuery, values) {
 
 app.get("/roles", cors(), function(request, response) {
   db.query(
-    "SELECT * FROM role WHERE department_id =" +
+    "SELECT role_id, name, department_id, band_id FROM role WHERE department_id =" +
       JSON.stringify(request.query.departmentID)
   ).then(rows => {
     response.send(rows);

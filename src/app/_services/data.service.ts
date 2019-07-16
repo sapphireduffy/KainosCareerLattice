@@ -1,11 +1,13 @@
 import { Injectable } from "@angular/core";
 import axios from "axios";
+
+const departmentUrl = "/api/departments";
+const capabilityUrl = "/api/capabilities";
+const getAllDataUrl = "/api/allData";
+
 @Injectable()
 export class DataService {
   headers: any;
-  private departmentUrl = "/api/departments";
-  private capabilityUrl = "/api/capabilities";
-  private getAllDataUrl = "/api/allData"
 
   constructor() {}
 
@@ -17,7 +19,7 @@ export class DataService {
 
   getDepartmentDetails(departmentID: number) {
     return axios
-      .get(this.departmentUrl, {
+      .get(departmentUrl, {
         params: {
           departmentID: departmentID
         },
@@ -42,7 +44,7 @@ export class DataService {
 
   getCapabilityNamesByDepartment(departmentID: number) {
     return axios
-      .get(this.capabilityUrl, {
+      .get(capabilityUrl, {
         params: {
           departmentID: departmentID
         },
@@ -67,7 +69,7 @@ export class DataService {
 
   getAllData(departmentID: number) {
     return axios
-      .get(this.getAllDataUrl, {
+      .get(getAllDataUrl, {
         params: {
           departmentID: departmentID
         },

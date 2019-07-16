@@ -16,7 +16,6 @@ export class CareerTableComponent implements OnInit {
   constructor(private dataService: DataService) { }
  
   ngOnInit() {
-    //todo: pass in actual department id in user story 2
     this.dataService.getCapabilityNamesByDepartment(1).then(response =>{
       this.capabilities = response;
     });

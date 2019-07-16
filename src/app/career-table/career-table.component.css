@@ -15,10 +15,6 @@ table {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.job-level {
-    /* background-color: red; */
-}
-
 .job-capabilities {
     background-color: #95989a;
     color: white;
@@ -27,7 +23,6 @@ table {
 
 /* JOB LEVEL STYLES */
 .job-level {
-    /* color: white; */
     text-align: center;
     padding: 15px;
 }
@@ -41,7 +36,3 @@ table {
 .job-level-discover {
     background-color: #009639;
 }
-
-/* .column {
-    padding: 0;
-} */
