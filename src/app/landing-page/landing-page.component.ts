@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-landing-page',
@@ -7,9 +8,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingPageComponent implements OnInit {
 
-  constructor() { }
+  private departmentWatcher = new Subject<number>();
+  public departmentId$ = this.departmentWatcher.asObservable();
 
-  ngOnInit() {
+  public switchDepartment(depId : number) {
+    if (depId) {
+      this.departmentWatcher.next(depId);
+    }
   }
 
+  constructor() { }
+
+  subDepartment: Subscription;
+  ngOnInit(): void {
+    
+  }
+
+
+  setDepartmentID(){
+    this.switchDepartment(3);
+
+    this.subDepartment = this.departmentId$.subscribe((id =>{
+      var test = id;
+      console.log(test);
+    }));
+  }
 }
