@@ -7,11 +7,11 @@
     font-weight: lighter;
 }
 
-
 .grid-container {
     padding: 150px;
    }
 
    .card {
     margin:20px 0px;
+    cursor: pointer;
    }
