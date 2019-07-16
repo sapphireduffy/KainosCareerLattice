@@ -7,7 +7,7 @@ USE career_lattice;
 
 CREATE TABLE user (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(255) NOT NULL,
+    username VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     type ENUM('Employee', 'Admin') NOT NULL
 );
@@ -47,7 +47,7 @@ CREATE TABLE role (
     department_id INT,
     band_id INT,
     summary MEDIUMTEXT,
-    sharepoint_link VARCHAR(500),
+    job_spec_url mediumtext,
     FOREIGN KEY (department_id)
         REFERENCES department (department_id),
     FOREIGN KEY (band_id)
@@ -79,11 +79,13 @@ CREATE VIEW viewDepartments AS
 SELECT department_id, name
 FROM department;
 
-CREATE VIEW viewLattice AS
-SELECT department.name AS 'Department Name', capability.name AS 'Capability Name', role.name AS 'Role Name'
+CREATE VIEW viewTableData AS
+SELECT department.department_id, department.name AS 'Department Name', band.band_id, band.name AS 'Band Name', 
+capability.capability_id, capability.name AS 'Capability Name', role.role_id, role.name AS 'Role Name'
 FROM department JOIN capability ON department.department_id = capability.department_id JOIN role_capability ON
-role_capability.capability_id = capability.capability_id JOIN role ON role_capability.role_id = role.role_id 
-WHERE department.department_id = 1;
+role_capability.capability_id = capability.capability_id JOIN role ON role_capability.role_id = role.role_id JOIN band
+ON band.band_id = role.band_id 
+ORDER BY band.band_id ASC, capability.capability_id ASC;
 
 -- ---------------------------------- INSERTS ---------------------------- --
 
@@ -107,7 +109,7 @@ VALUES ('Executive', 1), ('Leadership Executive', 1), ('Principal', 1), ('Manage
 ('Senior Associate', 2), ('Associate', 3), ('Trainee', 3), ('Apprentice', 3);
 
 INSERT INTO role (name, department_id, band_id) -- Roles in the Sales & Marketing department
-VALUES ('Head Of Business Unit', 1, 1), ('Head Of Business Unit', 1, 1), ('Head Of Business Unit', 1, 1), ('Head Of Business Unit', 1, 1);
+VALUES ('Head of Business Unit', 1, 1), ('Head of Business Unit', 1, 1), ('Head of Business Unit', 1, 1), ('Head of Business Unit', 1, 1);
 INSERT INTO role (name, department_id, band_id)
 VALUES ('Sales Director', 1, 2), ('Sales Director', 1, 2), ('Sales Director', 1, 2), ('Marketing Leader', 1, 2);
 INSERT INTO role (name, department_id, band_id)
@@ -144,9 +146,9 @@ VALUES ('Chief Technology Officer', 2, 1, 'Owns and leads a business area (e.g. 
 ('Technical Architect', 2, 5, 'Expert in their field, is consulted by others, supervises others, works well even if under pressure, effectively coaches people.', 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Shared%20Documents/Job%20Descriptions/Architect/Job%20Specification%20-%20Technical%20Architect%20-%20Consultant.pdf?csf=1&e=jS7nhb');
 INSERT INTO role (name, department_id, band_id, summary, sharepoint_link) 
 VALUES ('Lead Ops Engineer', 2, 5, 'Expert in their field, is consulted by others, supervises others, works well even if under pressure, effectively coaches people.', 'https://kainossoftwareltd.sharepoint.com/:w:/r/people/Shared%20Documents/Job%20Descriptions/Ops/Consultant%20-%20Lead%20Ops%20Engineer.docx?d=wb1eb28ea306941f5a9d527dd85cab4cc&csf=1&e=UThzhB'), 
-('Senior Ops Engineer', 2, 4, 'Delivers with limited supervision, trusted to make tactical decisions.', 'https://kainossoftwareltd.sharepoint.com/:w:/r/people/Shared%20Documents/Job%20Descriptions/Ops/Senior%20Associate%20-%20Senior%20Ops%20Engineer.docx?d=w4f827b196eb24246a3b3e62e3452b4dd&csf=1&e=Y7Fya1'),
-('Associate Ops Engineer', 2, 3, 'Established deliverer, works well in a team.', 'https://kainossoftwareltd.sharepoint.com/:w:/r/people/Shared%20Documents/Job%20Descriptions/Ops/Associate%20-%20Ops%20Engineer.docx?d=w23925c8ff78e4c5194339c330de2ee23&csf=1&e=4ayWez'),
-('Trainee Ops Engineer', 2, 4, 'Graduate entry level, here to learn, but primarily to contribute to projects.', 'https://kainossoftwareltd.sharepoint.com/:w:/r/people/Shared%20Documents/Job%20Descriptions/Ops/Trainee%20-%20Trainee%20Ops%20Engineer.docx?d=w0d08acc91803408c8e03119d43fff3d3&csf=1&e=0HCzjC');
+('Senior Ops Engineer', 2, 6, 'Delivers with limited supervision, trusted to make tactical decisions.', 'https://kainossoftwareltd.sharepoint.com/:w:/r/people/Shared%20Documents/Job%20Descriptions/Ops/Senior%20Associate%20-%20Senior%20Ops%20Engineer.docx?d=w4f827b196eb24246a3b3e62e3452b4dd&csf=1&e=Y7Fya1'),
+('Associate Ops Engineer', 2, 7, 'Established deliverer, works well in a team.', 'https://kainossoftwareltd.sharepoint.com/:w:/r/people/Shared%20Documents/Job%20Descriptions/Ops/Associate%20-%20Ops%20Engineer.docx?d=w23925c8ff78e4c5194339c330de2ee23&csf=1&e=4ayWez'),
+('Trainee Ops Engineer', 2, 8, 'Graduate entry level, here to learn, but primarily to contribute to projects.', 'https://kainossoftwareltd.sharepoint.com/:w:/r/people/Shared%20Documents/Job%20Descriptions/Ops/Trainee%20-%20Trainee%20Ops%20Engineer.docx?d=w0d08acc91803408c8e03119d43fff3d3&csf=1&e=0HCzjC');
 
 INSERT INTO role (name, department_id, band_id, summary, sharepoint_link) -- Roles in the Central Services Teams department
 VALUES ('Lead Systems Engineer', 6, 5, 'Expert in their field, is consulted by others, supervises others, works well even if under pressure, effectively coaches people.', 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Shared%20Documents/Job%20Descriptions/Systems/Lead%20Systems%20Engineer.pdf?csf=1&e=UUsqcP'), 
@@ -182,3 +184,6 @@ VALUES (51,10), (52,10), (53,10), (54,10);
 
 INSERT INTO role_capability (role_id, capability_id) -- role-capability links for Central Services Teams
 VALUES (55,11), (56,11), (57,11), (58,11);
+
+
+
