@@ -13,7 +13,7 @@ var db = new Database();
 
 var loginHandler = new LoginHandler(); 
 //loginHandler.createUser({"Username": "test2", "Password" : "myPassword"},db);
-loginHandler.login({"Username": "test2", "Password" : "myPassword"},db);
+//loginHandler.login({"Username": "test2", "Password" : "myPassword"},db);
 
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(express.urlencoded());
@@ -43,6 +43,22 @@ app.post('/bookcourse', cors(), function (request, response) {
 
 app.get('/', function (req, res) {
 	res.sendFile('seeCourses.html', { root: __dirname });
+});
+
+app.get('/test', function (req, res) {
+	res.send({"abc": 123});
+});
+
+app.post('/login', cors(), function (request, response) {
+	console.log(request.body);
+	console.log(request.body.Password)
+	loginHandler.login(request.body, db).then(token => {
+		//console.log(token)
+		response.send(token)
+	}, reason => {
+		//console.log(reason)
+		response.send(reason)
+	})
 });
 
 app.listen(PORT, () => {

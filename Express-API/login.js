@@ -20,23 +20,31 @@ class LoginHandler {
     }
 
     login(params, db){
-        console.log("LOGIN")
-        db.query("SELECT Password,Salt,Type FROM User WHERE Username = ? ",[params.Username]).then(rows => {
-            console.log(rows)
-            var password = rows[0].Password
-            var type = rows[0].Type
-            bcrypt.compare(params.Password, password, function(err, res) {
-                console.log(res)
-                if(res){
-                    jwt.sign({ Username: params.Username, Type: rows[0].Type }, fs.readFileSync('./private.key', 'utf8'), { algorithm: 'RS256' }, function(err, token) {
-                        console.log("token generated")
-                        return token
-                    });
+       var promise = new Promise( ( resolve, reject ) => {
+            console.log("LOGIN")
+            db.query("SELECT Password,Salt,Type FROM User WHERE Username = ? ",[params.Username]).then(rows => {
+                console.log(rows)
+                console.log(rows.length)
+                if(rows.length > 0){
+                    var password = rows[0].Password
+                    bcrypt.compare(params.Password, password, function(err, res) {
+                        console.log(res)
+                        if(res){
+                            jwt.sign({ Username: params.Username, Type: rows[0].Type }, fs.readFileSync('./private.key', 'utf8'), { algorithm: 'RS256' }, function(err, token) {
+                                console.log("token generated")
+                                resolve({"token" : token})
+                            });
+                        } else {
+                            reject ({"error":"Password invalid"})
+                        }
+                    })
                 } else {
-                    return false
+                    reject ({"error":"Username invalid"})
                 }
             })
         })
+
+        return promise
     }
 }
 
