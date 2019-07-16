@@ -133,7 +133,7 @@ VALUES (35,4), (36,5), (37,6);
 -- ---------------------------------- VIEWS ------------------------------- --
 
 CREATE VIEW viewDepartments AS 
-SELECT department_id, Name
+SELECT department_id, name
 FROM department;
 
 CREATE VIEW viewLattice AS
