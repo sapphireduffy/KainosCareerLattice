@@ -1,0 +1,20 @@
+<table>
+    <ng-container>
+        <tr role='row'>
+            <th class='job-family' scole='col' [attr.colspan]='capabilities.length + 1' rowspan='1' *ngFor='let department of departmentName'>{{department.name}}</th>
+        </tr>
+        <tr>
+        </tr>
+        <tr>
+            <th *ngFor='let capability of rolesCapabilityMap | keyvalue' >{{capability.key}}</th>
+        </tr>
+            <tr>
+                <th *ngFor='let roleCap of rolesCapabilityMap | keyvalue;  let i = index ' class='column'>
+                    <p *ngFor='let role of roleCap.value'>
+                        <a href='#'>{{role}}</a> 
+                    </p>
+                </th>
+            </tr>
+    </ng-container>
+</table>
+<br> 
