@@ -70,8 +70,8 @@ app.get("/allData", cors(), function(request, response) {
   });
 });
 
-app.get("/", function(req, res) {
-  res.sendFile("seeCourses.html", { root: __dirname });
+app.get('/', function (req, res) {
+	res.sendFile('landing-page.component.html', { root: __dirname });
 });
 
 app.listen(PORT, () => {
