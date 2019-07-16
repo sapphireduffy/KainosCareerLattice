@@ -124,18 +124,7 @@ export class CareerTableComponent implements OnInit {
 
     console.log(this.rolesCap);
 
-    for(let cap of this.rolesCap){
-        // console.log(cap);
 
-        for(let i of cap){
-          console.log(i);
-
-        // for(var o = 0; o<i.length; o++){
-        //     console.log(i[o]);
-        // }
-
-        }
-    }
   }
 
 }
