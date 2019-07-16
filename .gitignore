@@ -1,4 +1,5 @@
 .DS_STORE
+config.json
 
 /dist/
 /bazel-out

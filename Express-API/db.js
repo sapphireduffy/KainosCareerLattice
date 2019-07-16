@@ -1,12 +1,13 @@
 var mysql = require('mysql');
+var CONFIG = require('./config.json');
 
 class Database {
     constructor( config ) {
         this.con = mysql.createConnection({
-            host: 'localhost',
-            user: 'empuser2',
-            password: 'empPwd!',
-            database: 'BookingSystem'
+            host: CONFIG.host,
+            user: CONFIG.user,
+            password: CONFIG.password,
+            database: CONFIG.database
         });
 
         this.con.connect(function(err) {
