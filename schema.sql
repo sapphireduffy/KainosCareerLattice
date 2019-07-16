@@ -136,17 +136,6 @@ CREATE VIEW viewDepartments AS
 SELECT department_id, Name
 FROM department;
 
-/** 
-CREATE VIEW viewRoles AS
-SELECT Department.DepartmentID, Department.Name AS 'Department Name', 
-Capability.CapabilityID, Capability.Name AS 'Capability Name', Band.BandID, Band.Name AS 'Band Name',
-Role.RoleID, Role.Name AS 'Role Name'
-FROM Department JOIN Capability ON Department.DepartmentID = Capability.DepartmentID JOIN Role_Capability ON
-Role_Capability.CapabilityID = Capability.CapabilityID JOIN Role ON Role_Capability.RoleID = Role.RoleID 
-JOIN Band ON Role.BandID = Band.BandID
-WHERE Department.Name = 'Sales & Marketing';
-**/
-
 CREATE VIEW viewLattice AS
 SELECT department.name AS 'Department Name', capability.name AS 'Capability Name', role.name AS 'Role Name'
 FROM department JOIN capability ON department.department_id = capability.department_id JOIN role_capability ON
