@@ -23,14 +23,4 @@ export class LandingPageComponent implements OnInit {
   ngOnInit(): void {
     
   }
-
-
-  setDepartmentID(){
-    this.switchDepartment(3);
-
-    this.subDepartment = this.departmentId$.subscribe((id =>{
-      var test = id;
-      console.log(test);
-    }));
-  }
 }
