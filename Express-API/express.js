@@ -55,6 +55,8 @@ app.post('/login', cors(), function (request, response) {
 	loginHandler.login(request.body, db).then(token => {
 		//console.log(token)
 		response.send(token)
+		//response.cookie("token", token, { httpOnly: true })
+		//response.send({"Sucesss":true})
 	}, reason => {
 		//console.log(reason)
 		response.send(reason)
