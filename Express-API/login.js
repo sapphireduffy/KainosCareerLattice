@@ -9,8 +9,8 @@ class LoginHandler {
     createUser(params, db){
         bcrypt.genSalt(saltRounds, function(err, salt) {
             bcrypt.hash(params.Password, salt, function(err, hash) {
-                db.query("INSERT INTO User(Username, Password, Salt, Type) VALUES (?,?,?,?) ",
-                        [params.Username,hash,salt,'Employee']).then(rows => {
+                db.query("INSERT INTO user(username, password, type) VALUES (?,?,?) ",
+                        [params.Username,hash,'Employee']).then(rows => {
                     console.log("USER ADDED")
                 })
             });
@@ -20,15 +20,15 @@ class LoginHandler {
     login(params, db){
        var promise = new Promise( ( resolve, reject ) => {
             console.log("LOGIN")
-            db.query("SELECT Password,Salt,Type FROM User WHERE Username = ? ",[params.Username]).then(rows => {
+            db.query("SELECT password,type FROM user WHERE username = ? ",[params.Username]).then(rows => {
                 if(rows.length > 0){
-                    var password = rows[0].Password
+                    var password = rows[0].password
                     bcrypt.compare(params.Password, password, function(err, res) {
                         console.log(res)
                         if(res){
-                            jwt.sign({ Username: params.Username, Type: rows[0].Type }, key.privateKey, function(err, token) {
+                            jwt.sign({ Username: params.Username, Type: rows[0].type }, key.privateKey, function(err, token) {
                                 console.log("token generated: "+token)
-                                resolve({"token" : token})
+                                resolve(token)
                             });
                         } else {
                             reject ({"error":"Password invalid"})
@@ -39,7 +39,6 @@ class LoginHandler {
                 }
             })
         })
-
         return promise
     }
 }

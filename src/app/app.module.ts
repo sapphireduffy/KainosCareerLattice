@@ -10,6 +10,7 @@ import { routing } from './app-routing.module';
 import { AuthGuardComponent} from './auth-guard/auth-guard.component';
 import { DataService } from './_services/data.service';
 import { CareerTableComponent } from './career-table/career-table.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { CareerTableComponent } from './career-table/career-table.component';
   providers: [ 
     HttphandlerService, 
     AuthGuardComponent,
-    DataService
+    DataService,
+    CookieService
   ],
 })
 export class AppModule {}
