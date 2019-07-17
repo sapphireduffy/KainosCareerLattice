@@ -63,7 +63,7 @@ app.get("/departments", cors(), function(request, response) {
 
 app.get("/allData", cors(), function(request, response) {
   db.query(
-    "SELECT department.name AS 'DepartmentName', capability.name AS 'CapabilityName', role.name AS 'RoleName' FROM department JOIN capability ON department.department_id = capability.department_id JOIN role_capability ON role_capability.capability_id = capability.capability_id JOIN role ON role_capability.role_id = role.role_id JOIN band ON role.band_id = band.band_id WHERE department.department_id=" +
+    "SELECT department.name AS 'DepartmentName', capability.name AS 'CapabilityName', role.name AS 'RoleName' FROM department JOIN capability ON department.department_id = capability.department_id JOIN role_capability ON role_capability.capability_id = capability.capability_id JOIN role ON role_capability.role_id = role.role_id JOIN band ON role.band_id = band.band_id WHERE department.department_id =  " +
     JSON.stringify(request.query.departmentID)
   ).then(rows => {
     response.send(rows);
