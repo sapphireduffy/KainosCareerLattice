@@ -16,6 +16,7 @@ export class CareerTableComponent implements OnInit {
   capabilities = [];
   jobsInDep: any;
   bands: any;
+  r = [];
 
   constructor(private dataService: DataService) { }
  
@@ -31,12 +32,38 @@ export class CareerTableComponent implements OnInit {
 
     await this.dataService.getRolesInDepartment(1).then(response => {
       this.jobsInDep = response;
-      // console.log(this.jobsInDep);
+      console.log(this.jobsInDep);
     })
 
     await this.dataService.getBands().then(response =>{
       this.bands = response;
-      console.log(this.bands);
+      // console.log(this.bands);
     })
+
+ 
   }
+
+
+  // getRoles(){
+  //   for(let band of this.bands){
+  //     for(let cap of this.capabilities){
+  //       for(let role of this.jobsInDep){
+  //           if(role.capability_id == cap.capability_id && role.band_id == band.band_id){
+       
+  //               var rn = {
+  //                 roleID:role.role_id,
+  //                 roleName: role.RoleName,
+  //                 bandName: band.name,
+  //                 capName: cap.CapabilityName
+  //               };
+  //               this.r.push(rn);
+  //           }
+  //       }
+
+
+
+  //     }
+
+  //   }
+  // }
 }
