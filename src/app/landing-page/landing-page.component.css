@@ -8,10 +8,11 @@
 }
 
 .grid-container {
-    padding: 150px;
-   }
+    padding: 0px;
+    padding-top: 50px;
+}
 
    .card {
     margin:20px 0px;
     cursor: pointer;
-   }
+}
