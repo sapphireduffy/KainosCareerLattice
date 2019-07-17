@@ -17,6 +17,9 @@ import { CareerTableComponent } from './career-table/career-table.component';
     LoginComponent,
     CareerTableComponent
   ],
+  bootstrap: [ 
+    AppComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
