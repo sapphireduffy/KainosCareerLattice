@@ -45,7 +45,7 @@ app.get("/roles", cors(), function(request, response) {
 
 app.get("/capabilities", cors(), function(request, response) {
   db.query(
-    "SELECT name FROM capability WHERE department_id =" +
+    "SELECT name, capability_id FROM capability WHERE department_id =" +
       JSON.stringify(request.query.departmentID)
   ).then(rows => {
     response.send(rows)
@@ -61,10 +61,17 @@ app.get("/departments", cors(), function(request, response) {
   });
 });
 
-app.get("/rolesInDepByBand", cors(), function(request, response) {
+app.get("/rolesInDep", cors(), function(request, response) {
   db.query(
-    "SELECT * FROM viewTableData WHERE band_id =" +
-      JSON.stringify(request.query.bandID) + " and department_id =" + JSON.stringify(request.query.departmentID)
+    "SELECT * FROM viewTableData WHERE department_id =" + JSON.stringify(request.query.departmentID)
+  ).then(rows => {
+    response.send(rows);
+  });
+});
+
+app.get("/bands", cors(), function(request, response) {
+  db.query(
+    "SELECT * FROM band"
   ).then(rows => {
     response.send(rows);
   });

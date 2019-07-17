@@ -9,7 +9,7 @@
         </tr>
         <tr *ngFor="let d of bands" >
            <!-- <td *ngFor="let d of bands">{{d}}</td> -->
-           <td>{{d}}</td>
+           <td>{{d.name}}</td>
            <td *ngFor='let x of executiveJobs' class='column'>
                 <!-- <p *ngFor='let role of roleCap.value'> -->
                     <a href='#'>{{x.RoleName}}</a>

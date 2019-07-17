@@ -4,7 +4,8 @@ import axios from "axios";
 const departmentUrl = "/api/departments";
 const capabilityUrl = "/api/capabilities";
 const getAllDataUrl = "/api/allData";
-const getRolesInDepartmentByBandURL = '/api/rolesInDepByBand';
+const getRolesInDepartmentURL = '/api/rolesInDep';
+const getBandsURL = "/api/bands";
 
 @Injectable()
 export class DataService {
@@ -95,12 +96,35 @@ export class DataService {
       });
   }
 
-  getRolesInDepartmentByBand(departmentID: number, bandID: number) {
+  getRolesInDepartment(departmentID: number) {
     return axios
-      .get(getRolesInDepartmentByBandURL, {
+      .get(getRolesInDepartmentURL, {
         params: {
-          departmentID: departmentID,
-          bandID: bandID
+          departmentID: departmentID
+        },
+        headers: this.getHeaders()
+      })
+      .then(function(response) {
+        return response.data;
+      })
+      .catch(function(error) {
+        if (error.response) {
+          return {
+            error: error.response.data.Message,
+            statusCode: error.response.statusCode
+          };
+        } else {
+          if (error.message) {
+            return { error: error.message };
+          }
+        }
+      });
+  }
+
+  getBands() {
+    return axios
+      .get(getBandsURL, {
+        params: {
         },
         headers: this.getHeaders()
       })
