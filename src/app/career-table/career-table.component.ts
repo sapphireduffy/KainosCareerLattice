@@ -6,6 +6,7 @@ import { DataService } from '../_services/data.service';
   templateUrl: './career-table.component.html',
   styleUrls: ['./career-table.component.css']
 })
+
 export class CareerTableComponent implements OnInit {
 
   rolesCapabilityMap = new Map<string, string[]>();
@@ -13,19 +14,22 @@ export class CareerTableComponent implements OnInit {
   roleCapabilityData: any;
   departmentName: any;
 
-  constructor(private dataService: DataService) { }
- 
-  ngOnInit() {
-    this.dataService.getCapabilityNamesByDepartment(1).then(response =>{
+  constructor(private dataService: DataService) {}
+
+  ngOnInit(): void {
+    var urlParams = new URLSearchParams(window.location.search)
+    var id = parseInt(urlParams.get('id'))
+
+    this.dataService.getCapabilityNamesByDepartment(id).then(response =>{
       this.capabilities = response;
     });
 
-    this.dataService.getAllData(1).then(response => {
+    this.dataService.getAllData(id).then(response => {
       this.roleCapabilityData = response;
       this.sortRoleCapabilityMap();
     })
 
-    this.dataService.getDepartmentDetails(1).then(response =>{
+    this.dataService.getDepartmentDetails(id).then(response =>{
       this.departmentName = response;
     })
   }
@@ -41,5 +45,4 @@ export class CareerTableComponent implements OnInit {
       }
     }
   }
-
 }
