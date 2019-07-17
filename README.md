@@ -4,7 +4,7 @@
 All secret files must be moved to ther root directory of the project after cloning
 
 # Express package list
-Change to Express-API directory and run 'npm create'
+Change to Express-API directory
 <ul>
   <li>mysql</li>
   <li>jsonwebtoken</li>
@@ -14,7 +14,7 @@ Change to Express-API directory and run 'npm create'
 </ul>
 
 # Angular package list
-Change to the Angular directory and run 'npm create'
+Change to the Angular directory
 <ul>
   <li>@angular/cli</li>
   <li>@ng-bootstrap/ng-bootstrap</li>
