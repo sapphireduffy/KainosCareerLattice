@@ -6,7 +6,7 @@
         <tr>
         </tr>
         <tr>
-            <th *ngFor='let capability of rolesCapabilityMap | keyvalue' >{{capability.key}}</th>
+            <th *ngFor='let capability of rolesCapabilityMap | keyvalue' class='job-capabilities' >{{capability.key}}</th>
         </tr>
             <tr>
                 <th *ngFor='let roleCap of rolesCapabilityMap | keyvalue;  let i = index ' class='column'>

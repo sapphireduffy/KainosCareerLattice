@@ -30,7 +30,8 @@ export class CareerTableComponent implements OnInit {
     })
   }
 
-  sortRoleCapabilityMap(){
+  sortRoleCapabilityMap(){ 
+    console.log(this.roleCapabilityData);
     for(let capability of this.capabilities){
       var roles = [];
       for(let roleCap of this.roleCapabilityData){
