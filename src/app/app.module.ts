@@ -8,7 +8,7 @@ import { CareerTableComponent } from './career-table/career-table.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { routing } from './app-routing.module';
-import { CookieService } from 'ngx-cookie-service';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +24,6 @@ import { CookieService } from 'ngx-cookie-service';
   ],
   providers: [
     DataService, 
-    CookieService
   ],
   bootstrap: [
     AppComponent

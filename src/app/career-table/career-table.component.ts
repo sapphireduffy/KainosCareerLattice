@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../_services/data.service';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-career-table',
@@ -15,7 +14,7 @@ export class CareerTableComponent implements OnInit {
   roleCapabilityData: any;
   departmentName: any;
 
-  constructor(private dataService: DataService, private cookieService: CookieService) {}
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
     var urlParams = new URLSearchParams(window.location.search)
