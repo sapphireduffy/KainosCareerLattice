@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms'
 import { HttphandlerService } from '../httphandler.service'
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import privateKey from '../../../../privateKey.js'
+import { verify } from 'jsonwebtoken'
 
 @Component({
   selector: 'app-login',
@@ -12,13 +15,22 @@ export class LoginComponent implements OnInit {
 
   private form: FormGroup;
 
-  ngOnInit() {}
-
-  constructor(private router: Router, private httpHandler : HttphandlerService){
+  constructor(private router: Router, private httpHandler : HttphandlerService, private cookieService : CookieService){
     this.form = new FormGroup({
       username: new FormControl(),
       password: new FormControl(),
     })
+  }
+
+  ngOnInit() {
+    try {
+      var token = this.cookieService.get('token')
+      if(token != undefined && token != null && token != ''){
+        if(verify(token, privateKey.privateKey)){
+          this.router.navigate(['home'])
+        }
+      }
+    } catch (err){}
   }
 
   onSubmit(){
