@@ -16,6 +16,7 @@ export class CareerTableComponent implements OnInit {
   example = ['a','b','c','','e','f']
 
   executiveJobs: any;
+  executiveJobsBlanks: any;
 
 
   constructor(private dataService: DataService) { }
@@ -23,6 +24,7 @@ export class CareerTableComponent implements OnInit {
   async ngOnInit() {
     this.dataService.getCapabilityNamesByDepartment(1).then(response =>{
       this.capabilities = response;
+      console.log(this.capabilities);
     });
 
     this.dataService.getAllData(1).then(response => {
@@ -37,6 +39,13 @@ export class CareerTableComponent implements OnInit {
     await this.dataService.getRolesInDepartmentByBand(1, 1).then(response => {
       this.executiveJobs = response;
       console.log(this.executiveJobs);
+      /*for (let job in this.executiveJobs) {
+        var isJobInCapibility = true;
+        for (let cap in this.capabilities) {
+          if (job["capability_id"] = cap["name"])
+        }
+        
+      }*/
     })
 
    

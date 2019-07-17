@@ -10,18 +10,26 @@
         <tr *ngFor="let d of bands" >
            <!-- <td *ngFor="let d of bands">{{d}}</td> -->
            <td>{{d}}</td>
-        </tr>
-        <tr>
-            <!-- <td>Band</td> -->
-            <td *ngFor='let ex of example' class='column'>
+           <td *ngFor='let x of executiveJobs' class='column'>
                 <!-- <p *ngFor='let role of roleCap.value'> -->
-                    <a href='#'>{{ex}}</a>
+                    <a href='#'>{{x.RoleName}}</a>
                     <!-- <a href='#'>{{role}}</a>  -->
                 <!-- </p> -->
 
                 <!-- If role does not match the capability, do not print -->
             </td>
         </tr>
+        <!-- <tr> -->
+            <!-- <td>Band</td> -->
+            <!-- <td *ngFor='let ex of example' class='column'> -->
+                <!-- <p *ngFor='let role of roleCap.value'> -->
+                    <!-- <a href='#'>{{ex}}</a> -->
+                    <!-- <a href='#'>{{role}}</a>  -->
+                <!-- </p> -->
+
+                <!-- If role does not match the capability, do not print -->
+            <!-- </td> -->
+        <!-- </tr> -->
     </ng-container>
 </table>
 <br> 
