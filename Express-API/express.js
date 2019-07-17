@@ -5,15 +5,12 @@ const express = require('express')
 var path = require('path')
 
 const app = express();
-const PORT = 8000
+const PORT = 8000;
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 var db = new Database();
-
 var loginHandler = new LoginHandler(); 
-//loginHandler.createUser({"Username": "test2", "Password" : "myPassword"},db);
-//loginHandler.login({"Username": "test2", "Password" : "myPassword"},db);
 
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(express.urlencoded());
@@ -21,32 +18,43 @@ app.use(express.urlencoded());
 //Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 
-function bookCourse(body) {
-	//Create new Query and format it to string
-	var query = 'INSERT INTO Employee_Course(CourseID, Name, Email) VALUES (?,?,?)';
-	var array = [body.CourseID, body.Name, body.Email]
-	runQuery(query, array)
-	return true;
-}
-
-app.get('/courses', cors(), function (request, response) {
-	db.query("SELECT * FROM Course").then(rows => {
-		response.send(rows)
-	})
+app.get("/roles", cors(), function(request, response) {
+  db.query(
+    "SELECT role_id, name, department_id, band_id FROM role WHERE department_id = ?",
+      [JSON.stringify(request.query.departmentID)]
+  ).then(rows => {
+    response.send(rows);
+  });
 });
 
-app.post('/bookcourse', cors(), function (request, response) {
-	console.log(request.body);
-	var ans = bookCourse(request.body);
-	response.send("<html><script>alert('Successfully booked course')</script><meta http-equiv=\"refresh\" content=\"1; url=http://127.0.0.1:8000/\"></html>");
+app.get("/capabilities", cors(), function(request, response) {
+  db.query(
+    "SELECT name FROM capability WHERE department_id = ?",
+      [JSON.stringify(request.query.departmentID)]
+  ).then(rows => {
+    response.send(rows)
+  });
 });
 
-app.get('/', function (req, res) {
-	res.sendFile('seeCourses.html', { root: __dirname });
+app.get("/departments", cors(), function(request, response) {
+  db.query(
+    "SELECT name FROM department WHERE department_id = ?",
+      [JSON.stringify(request.query.departmentID)]
+  ).then(rows => {
+    response.send(rows);
+  });
 });
 
-app.get('/test', function (req, res) {
-	res.send({"abc": 123});
+app.get("/allData", cors(), function(request, response) {
+  db.query(
+    "SELECT department.name AS 'DepartmentName', capability.name AS 'CapabilityName', role.name AS 'RoleName"+
+    "FROM department JOIN capability ON department.department_id = capability.department_id JOIN role_capability"+
+    "ON role_capability.capability_id = capability.capability_id JOIN role ON role_capability.role_id = role.role_id"+
+    "JOIN band ON role.band_id = band.band_id WHERE department.department_id= ?",
+    [JSON.stringify(request.query.departmentID)]
+  ).then(rows => {
+    response.send(rows);
+  });
 });
 
 app.post('/login', cors(), function (request, response) {
@@ -62,5 +70,5 @@ app.post('/login', cors(), function (request, response) {
 });
 
 app.listen(PORT, () => {
-	console.log('Server is running on PORT:', PORT);
+  console.log("Server is running on PORT:", PORT);
 });

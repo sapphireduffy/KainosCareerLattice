@@ -8,11 +8,14 @@ import { LoginComponent } from './login/login.component';
 import { HttphandlerService } from './httphandler.service';
 import { routing } from './app-routing.module';
 import { AuthGuardComponent} from './auth-guard/auth-guard.component';
+import { DataService } from './_services/data.service';
+import { CareerTableComponent } from './career-table/career-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    CareerTableComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +23,10 @@ import { AuthGuardComponent} from './auth-guard/auth-guard.component';
     ReactiveFormsModule,
     routing
   ],
-  providers: [ HttphandlerService, AuthGuardComponent],
-  bootstrap: [AppComponent]
+  providers: [ 
+    HttphandlerService, 
+    AuthGuardComponent,
+    DataService
+  ],
 })
-export class AppModule { }
+export class AppModule {}

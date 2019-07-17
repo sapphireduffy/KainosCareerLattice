@@ -1,0 +1,38 @@
+.job-family {
+    background-color: #003471;
+    color: white;
+}
+
+th, td {
+    padding: 15px;
+    background-color: ghostwhite;
+    border: 1px solid black;
+}
+
+table {
+    border-collapse: collapse;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.job-capabilities {
+    background-color: #95989a;
+    color: white;
+}
+
+
+/* JOB LEVEL STYLES */
+.job-level {
+    text-align: center;
+    padding: 15px;
+}
+
+.job-level-inspire {
+    background-color: #5C068C;
+}
+.job-level-explore {
+    background-color: #00558C;
+}
+.job-level-discover {
+    background-color: #009639;
+}
