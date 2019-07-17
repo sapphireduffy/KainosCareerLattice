@@ -11,12 +11,16 @@ import { AuthGuardComponent} from './auth-guard/auth-guard.component';
 import { DataService } from './_services/data.service';
 import { CareerTableComponent } from './career-table/career-table.component';
 import { CookieService } from 'ngx-cookie-service';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    CareerTableComponent
+    CareerTableComponent,
+    LandingPageComponent, 
+    NavbarComponent
   ],
   bootstrap: [ 
     AppComponent

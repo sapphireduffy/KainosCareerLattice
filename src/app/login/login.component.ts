@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       } else {
         console.log("TOKEN SET")
       }
-      this.router.navigate(['/careerTable'])
+      this.router.navigate(['home'])
     })
   }
 
