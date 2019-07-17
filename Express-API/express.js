@@ -40,7 +40,7 @@ app.get("/capabilities", cors(), function(request, response) {
 app.get("/departments", cors(), function(request, response) {
   db.query(
     "SELECT name FROM department WHERE department_id = ?",
-      [equest.query.departmentID]
+      [request.query.departmentID]
   ).then(rows => {
     response.send(rows);
   });

@@ -2,6 +2,7 @@
 config.json
 privateKey.js
 config.json
+secretFiles.zip
 
 /dist/
 /bazel-out
