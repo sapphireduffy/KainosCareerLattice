@@ -72,7 +72,7 @@ app.get("/allData", cors(), function(request, response) {
 
 app.get("/role", cors(), function(request, response) {
   db.query(
-    "SELECT role_id, name, summary FROM role WHERE role_id=" +
+    "SELECT role_id, name, summary, sharepoint_link FROM role WHERE role_id=" +
       JSON.stringify(request.query.roleID)
   ).then(rows => {
     response.send(rows);

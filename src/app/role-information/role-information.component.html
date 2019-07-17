@@ -1,5 +1,5 @@
-<div *ngIf="loaded">
-  <div class="modal-header" [ngStyle]="{ 'background-color': modalColour }">
+<div>
+  <div class="modal-header">
     <h2 class="modal-title" id="exampleModalLabel">{{ roleToDisplay.name }}</h2>
     <button
       type="button"
@@ -12,13 +12,17 @@
   </div>
 
   <div class="modal-body">
-    <h4>Job Summary</h4>
-    <p *ngIf="roleToDisplay.summary">{{ roleToDisplay.summary }}</p>
+    <div *ngIf="roleToDisplay.summary">
+      <h5>Job Summary</h5>
+      <p *ngIf="roleToDisplay.summary">{{ roleToDisplay.summary }}</p>
+    </div>
 
-    <h5>Job Specification</h5>
-    <p>
-      ....
-    </p>
+    <div *ngIf="roleToDisplay.sharepoint_link">
+      <h5>Job Description</h5>
+      <p>
+        <a [href]="safeUrl">sharepoint link for {{ roleToDisplay.name }}</a>
+      </p>
+    </div>
   </div>
   <div class="modal-footer">
     <button

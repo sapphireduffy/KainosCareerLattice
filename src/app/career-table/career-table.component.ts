@@ -23,16 +23,16 @@ export class CareerTableComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.dataService.getCapabilityNamesByDepartment(1).then(response => {
+    this.dataService.getCapabilityNamesByDepartment(2).then(response => {
       this.capabilities = response;
     });
 
-    this.dataService.getAllData(1).then(response => {
+    this.dataService.getAllData(2).then(response => {
       this.roleCapabilityData = response;
       this.sortRoleCapabilityMap();
     });
 
-    this.dataService.getDepartmentDetails(1).then(response => {
+    this.dataService.getDepartmentDetails(2).then(response => {
       this.departmentName = response;
     });
   }
@@ -53,12 +53,10 @@ export class CareerTableComponent implements OnInit {
     }
   }
 
-  async openRoleInfoModal(selectedRole) {
-    await this.dataService
-      .getRoleInformation(selectedRole.roleID)
-      .then(response => {
-        const modalRef = this.modalService.open(RoleInformationComponent);
-        modalRef.componentInstance.roleToDisplay = response[0];
-      });
+  async openRoleInfoModal(selectedRoleId) {
+    await this.dataService.getRoleInformation(selectedRoleId).then(response => {
+      const modalRef = this.modalService.open(RoleInformationComponent);
+      modalRef.componentInstance.roleToDisplay = response[0];
+    });
   }
 }

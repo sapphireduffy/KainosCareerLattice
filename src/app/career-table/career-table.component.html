@@ -23,7 +23,9 @@
         class="column"
       >
         <p *ngFor="let role of roleCap.value">
-          <a (click)="openRoleInfoModal(role)">{{ role.Name }}</a>
+          <a class="role-clickable" (click)="openRoleInfoModal(role.roleID)">{{
+            role.Name
+          }}</a>
         </p>
       </th>
     </tr>
