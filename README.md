@@ -16,7 +16,7 @@ Change to Express-API directory and run 'npm create'
 # Angular package list
 Change to the Angular directory and run 'npm create'
 <ul>
-  <li>@angular/cli<li>
+  <li>@angular/cli</li>
   <li>@ng-bootstrap/ng-bootstrap</li>
   <li>ngx-cookie-service</li>
   <li>jsonwebtoken</li>
