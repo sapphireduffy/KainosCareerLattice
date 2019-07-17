@@ -1,20 +1,27 @@
 <table>
     <ng-container>
         <tr role='row'>
-            <th class='job-family' scole='col' [attr.colspan]='capabilities.length + 1' rowspan='1' *ngFor='let department of departmentName'>{{department.name}}</th>
+            <th class='job-family' scope='col' [attr.colspan]='capabilities.length + 1' rowspan='1' *ngFor='let department of departmentName'>{{department.name}}</th>
         </tr>
         <tr>
+            <th></th>
+            <th *ngFor='let capability of capabilities' class='job-capabilities' >{{capability.name}}</th>
+        </tr>
+        <tr *ngFor="let d of bands" >
+           <!-- <td *ngFor="let d of bands">{{d}}</td> -->
+           <td>{{d}}</td>
         </tr>
         <tr>
-            <th *ngFor='let capability of rolesCapabilityMap | keyvalue' class='job-capabilities' >{{capability.key}}</th>
+            <!-- <td>Band</td> -->
+            <td *ngFor='let ex of example' class='column'>
+                <!-- <p *ngFor='let role of roleCap.value'> -->
+                    <a href='#'>{{ex}}</a>
+                    <!-- <a href='#'>{{role}}</a>  -->
+                <!-- </p> -->
+
+                <!-- If role does not match the capability, do not print -->
+            </td>
         </tr>
-            <tr>
-                <th *ngFor='let roleCap of rolesCapabilityMap | keyvalue;  let i = index ' class='column'>
-                    <p *ngFor='let role of roleCap.value'>
-                        <a href='#'>{{role}}</a> 
-                    </p>
-                </th>
-            </tr>
     </ng-container>
 </table>
 <br> 
