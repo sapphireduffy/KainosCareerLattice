@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HttphandlerService } from './httphandler.service';
-import { routing } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { AuthGuardComponent} from './auth-guard/auth-guard.component';
 import { DataService } from './_services/data.service';
 import { CareerTableComponent } from './career-table/career-table.component';
@@ -29,7 +29,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
-    routing
+    AppRoutingModule
   ],
   providers: [ 
     HttphandlerService, 

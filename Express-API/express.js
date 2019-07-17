@@ -22,7 +22,7 @@ app.use(express.json());
 app.get("/roles", cors(), function(request, response) {
   db.query(
     "SELECT role_id, name, department_id, band_id FROM role WHERE department_id = ?",
-      [JSON.stringify(request.query.departmentID)]
+      [request.query.departmentID]
   ).then(rows => {
     response.send(rows);
   });
@@ -31,7 +31,7 @@ app.get("/roles", cors(), function(request, response) {
 app.get("/capabilities", cors(), function(request, response) {
   db.query(
     "SELECT name FROM capability WHERE department_id = ?",
-      [JSON.stringify(request.query.departmentID)]
+      [request.query.departmentID]
   ).then(rows => {
     response.send(rows)
   });
@@ -40,7 +40,7 @@ app.get("/capabilities", cors(), function(request, response) {
 app.get("/departments", cors(), function(request, response) {
   db.query(
     "SELECT name FROM department WHERE department_id = ?",
-      [JSON.stringify(request.query.departmentID)]
+      [equest.query.departmentID]
   ).then(rows => {
     response.send(rows);
   });
@@ -48,12 +48,13 @@ app.get("/departments", cors(), function(request, response) {
 
 app.get("/allData", cors(), function(request, response) {
   db.query(
-    "SELECT department.name AS 'DepartmentName', capability.name AS 'CapabilityName', role.name AS 'RoleName"+
-    "FROM department JOIN capability ON department.department_id = capability.department_id JOIN role_capability"+
-    "ON role_capability.capability_id = capability.capability_id JOIN role ON role_capability.role_id = role.role_id"+
+    "SELECT department.name AS 'DepartmentName', capability.name AS 'CapabilityName', role.name AS 'RoleName' "+
+    "FROM department JOIN capability ON department.department_id = capability.department_id JOIN role_capability "+
+    "ON role_capability.capability_id = capability.capability_id JOIN role ON role_capability.role_id = role.role_id "+
     "JOIN band ON role.band_id = band.band_id WHERE department.department_id= ?",
-    [JSON.stringify(request.query.departmentID)]
+    [request.query.departmentID]
   ).then(rows => {
+    console.log(request.query.departmentID)
     response.send(rows);
   });
 });
@@ -64,7 +65,7 @@ app.post('/login', cors(), function (request, response) {
 	loginHandler.login(request.body, db).then(token => {
     //console.log(token)
     response.cookie('token',token)
-		response.send(token)
+		response.send({'token':token})
 	}, reason => {
 		//console.log(reason)
 		response.send(reason)

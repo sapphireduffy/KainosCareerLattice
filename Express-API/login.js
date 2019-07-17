@@ -1,6 +1,6 @@
 var bcrypt = require('bcrypt')
 var jwt = require('jsonwebtoken')
-var key = require('./privateKey.js')
+var key = require('../privateKey.js')
 const saltRounds = 10;
 
 class LoginHandler {

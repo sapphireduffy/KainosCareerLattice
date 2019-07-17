@@ -18,7 +18,7 @@ export class CareerTableComponent implements OnInit {
 
   ngOnInit(): void {
     var id = this.dataService.deptID;
-
+    
     this.dataService.getCapabilityNamesByDepartment(id).then(response =>{
       this.capabilities = response;
     });

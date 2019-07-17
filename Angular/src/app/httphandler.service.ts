@@ -9,9 +9,10 @@ export class HttphandlerService {
   constructor(private http: HttpClient) { }
 
   post(url, data){
+    console.log("POST: "+url)
     return new Promise( ( resolve, reject ) => {
       this.http.post(url, data, {responseType: 'json'}).subscribe(res => {
-        //console.log(res)
+        console.log(res)
         resolve(res)
       })
     })

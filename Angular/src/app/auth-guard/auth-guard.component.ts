@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 import { CookieService } from 'ngx-cookie-service';
-import privateKey from '../../../Express-API/privateKey.js'
+import privateKey from '../../../../privateKey.js'
 import { decode, verify } from 'jsonwebtoken'
 
 
@@ -14,7 +14,7 @@ export class AuthGuardComponent implements CanActivate {
     
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
       var token = this.cookieService.get('token')
-      if(token != undefined && token != null){
+      if(token != undefined && token != null && token != ''){
         if(verify(token, privateKey.privateKey)){
           this.token = decode(token)
           console.log("SESSION VALID")
