@@ -18,13 +18,7 @@ import { routing } from "./app-routing.module";
     CareerTableComponent,
     RoleInformationComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    routing,
-    NgbModule,
-    NgbActiveModal
-  ],
+  imports: [BrowserModule, HttpClientModule, routing, NgbModule],
   providers: [DataService],
   bootstrap: [AppComponent],
   entryComponents: [RoleInformationComponent]
