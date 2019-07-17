@@ -1,26 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { DataService } from '../_services/data.service';
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.css']
 })
+
 export class LandingPageComponent implements OnInit {
+  
+  constructor(private dataService: DataService, private router: Router){}
 
-  private departmentWatcher = new Subject<number>();
-  public departmentId$ = this.departmentWatcher.asObservable();
+  ngOnInit(): void {}
 
-  public switchDepartment(depId : number) {
-    if (depId) {
-      this.departmentWatcher.next(depId);
-    }
-  }
-
-  constructor() { }
-
-  subDepartment: Subscription;
-  ngOnInit(): void {
-    
+  public switchDepartment(choosenDeptID: number) {
+    this.dataService.deptID = choosenDeptID;
+    this.router.navigate(['/career']);
   }
 }

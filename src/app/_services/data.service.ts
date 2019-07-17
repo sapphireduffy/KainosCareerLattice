@@ -8,6 +8,7 @@ const getAllDataUrl = "/api/allData";
 @Injectable()
 export class DataService {
   headers: any;
+  public deptID
 
   constructor() {}
 

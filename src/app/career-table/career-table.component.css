@@ -4,7 +4,7 @@
 }
 
 th, td {
-    padding: 15px;
+    padding: 15px; 
     background-color: ghostwhite;
     border: 1px solid black;
 }
@@ -24,7 +24,7 @@ table {
 /* JOB LEVEL STYLES */
 .job-level {
     text-align: center;
-    padding: 15px;
+    padding: 15px; 
 }
 
 .job-level-inspire {
@@ -35,4 +35,8 @@ table {
 }
 .job-level-discover {
     background-color: #009639;
+}
+
+.body { 
+    padding-top: 70px;
 }
