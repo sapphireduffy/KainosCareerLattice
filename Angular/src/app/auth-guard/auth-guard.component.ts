@@ -22,6 +22,7 @@ export class AuthGuardComponent implements CanActivate {
         }
       }
       console.log("SESSION INVALID")
+      this.router.navigate(['login']);
       return false
     }
 }
