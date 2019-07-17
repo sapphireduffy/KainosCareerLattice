@@ -21,16 +21,16 @@ export class CareerTableComponent implements OnInit {
   constructor(private dataService: DataService) { }
  
   async ngOnInit() {
-    this.dataService.getCapabilityNamesByDepartment(1).then(response =>{
+    this.dataService.getCapabilityNamesByDepartment(2).then(response =>{
       this.capabilities = response;
       // console.log(this.capabilities);
     });
 
-    this.dataService.getDepartmentDetails(1).then(response =>{
+    this.dataService.getDepartmentDetails(2).then(response =>{
       this.departmentName = response;
     })
 
-    await this.dataService.getRolesInDepartment(1).then(response => {
+    await this.dataService.getRolesInDepartment(2).then(response => {
       this.jobsInDep = response;
       console.log(this.jobsInDep);
     })
