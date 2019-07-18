@@ -1,0 +1,36 @@
+<div>
+  <div class="modal-header">
+    <h2 class="modal-title" id="exampleModalLabel">{{ roleToDisplay.name }}</h2>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="activeModal.dismiss()"
+    >
+      x
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div *ngIf="roleToDisplay.summary">
+      <h5>Job Summary</h5>
+      <p *ngIf="roleToDisplay.summary">{{ roleToDisplay.summary }}</p>
+    </div>
+
+    <div *ngIf="roleToDisplay.job_spec_url">
+      <h5>Job Description</h5>
+      <p>
+        <a [href]="safeUrl">Sharepoint Link for: {{ roleToDisplay.name }}</a>
+      </p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="activeModal.dismiss()"
+    >
+      Close
+    </button>
+  </div>
+</div>

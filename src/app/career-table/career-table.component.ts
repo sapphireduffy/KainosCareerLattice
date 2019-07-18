@@ -1,69 +1,56 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from '../_services/data.service';
+import { Component, OnInit } from "@angular/core";
+import { DataService } from "../_services/data.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { RoleInformationComponent } from "../role-information/role-information.component";
+import { Role } from "../_classes/role";
+import { TestBed } from '@angular/core/testing';
 
 @Component({
-  selector: 'app-career-table',
-  templateUrl: './career-table.component.html',
-  styleUrls: ['./career-table.component.css']
+  selector: "app-career-table",
+  templateUrl: "./career-table.component.html",
+  styleUrls: ["./career-table.component.css"]
 })
 export class CareerTableComponent implements OnInit {
-
   departmentName: any;
-  // bands = ["Executive", "Leadership Community", "Principal", "Manager", "Consultant", "Senior Associate", "Associate", "Trainee", "Apprentice"]
-  example = ['a','b','c','','e','f']
-
-  
   capabilities = [];
   jobsInDep: any;
   bands: any;
   r = [];
 
-  constructor(private dataService: DataService) { }
- 
-  async ngOnInit() {
-    this.dataService.getCapabilityNamesByDepartment(2).then(response =>{
+  constructor(
+    private dataService: DataService,
+    private modalService: NgbModal
+  ) {}
+
+  ngOnInit(): void {
+    var urlParams = new URLSearchParams(window.location.search);
+    var id = parseInt(urlParams.get("id"));
+
+    this.dataService.getCapabilityNamesByDepartment(id).then(response => {
       this.capabilities = response;
-      // console.log(this.capabilities);
     });
 
-    this.dataService.getDepartmentDetails(2).then(response =>{
-      this.departmentName = response;
-    })
-
-    await this.dataService.getRolesInDepartment(2).then(response => {
+    this.dataService.getRolesInDepartment(id).then(response => {
       this.jobsInDep = response;
       console.log(this.jobsInDep);
-    })
+    });
 
-    await this.dataService.getBands().then(response =>{
+    this.dataService.getBands().then(response => {
       this.bands = response;
-      // console.log(this.bands);
-    })
+    });
 
- 
+    this.dataService.getDepartmentDetails(id).then(response => {
+      this.departmentName = response;
+    });
   }
 
+  async openRoleInfoModal(selectedRoleId) {
+    await this.dataService.getRoleInformation(selectedRoleId).then(response => {
+      const modalRef = this.modalService.open(RoleInformationComponent);
+      modalRef.componentInstance.roleToDisplay = response[0];
+    });
+  }
 
-  // getRoles(){
-  //   for(let band of this.bands){
-  //     for(let cap of this.capabilities){
-  //       for(let role of this.jobsInDep){
-  //           if(role.capability_id == cap.capability_id && role.band_id == band.band_id){
-       
-  //               var rn = {
-  //                 roleID:role.role_id,
-  //                 roleName: role.RoleName,
-  //                 bandName: band.name,
-  //                 capName: cap.CapabilityName
-  //               };
-  //               this.r.push(rn);
-  //           }
-  //       }
-
-
-
-  //     }
-
-  //   }
-  // }
 }
+
+
