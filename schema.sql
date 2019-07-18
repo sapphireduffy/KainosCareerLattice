@@ -105,7 +105,6 @@ SELECT band.band_id, band.name, band.school_id, band.description_id,commercial_a
 customer_focus, developing_yourself_and_others, planning_and_organising, job_specific_knowledge
 FROM band JOIN  band_description_id ON band.description_id = band_description_id.description_id;
 
-
 -- ---------------------------------- INSERTS ---------------------------- --
 
 INSERT INTO user (username, password, type)
