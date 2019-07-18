@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataService } from '../_services/data.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -9,13 +8,12 @@ import { DataService } from '../_services/data.service';
 })
 
 export class LandingPageComponent implements OnInit {
-  
-  constructor(private dataService: DataService, private router: Router){}
+
+  constructor(private router: Router){}
 
   ngOnInit(): void {}
 
   public switchDepartment(choosenDeptID: number) {
-    this.dataService.deptID = choosenDeptID;
-    this.router.navigate(['/career']);
+    this.router.navigate(['career'], { queryParams: { id: choosenDeptID }})
   }
 }

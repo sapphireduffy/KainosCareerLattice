@@ -3,30 +3,24 @@ CREATE DATABASE career_lattice;
 
 USE career_lattice;
 
--- ---------------------------------- TABLES ---------------------------- --
+-- ---------------------------------- TABLES ---------------------------- -- 
 
 CREATE TABLE user (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     type ENUM('Employee', 'Admin') NOT NULL
-);
-
- 
+); 
 
 CREATE TABLE department (
     department_id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL
 );
 
- 
-
 CREATE TABLE school (
     school_id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL
 );
-
- 
 
 CREATE TABLE band (
     band_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -39,8 +33,6 @@ CREATE TABLE band (
         REFERENCES school (school_id)
 );
 
- 
-
 CREATE TABLE capability (
     capability_id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
@@ -48,8 +40,6 @@ CREATE TABLE capability (
     FOREIGN KEY (department_id)
         REFERENCES department (department_id)
 );
-
- 
 
 CREATE TABLE role (
     role_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -64,8 +54,6 @@ CREATE TABLE role (
         REFERENCES band (band_id)
 );
 
- 
-
 CREATE TABLE role_capability (
     role_id INT,
     capability_id INT,
@@ -75,8 +63,6 @@ CREATE TABLE role_capability (
     FOREIGN KEY (capability_id)
         REFERENCES capability (capability_id)
 );
-
- 
 
 CREATE TABLE capability_lead (
     capability_lead_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -94,8 +80,8 @@ SELECT department_id, name
 FROM department;
 
 CREATE VIEW viewTableData AS
-SELECT department.department_id, department.name AS 'Department Name', band.band_id, band.name AS 'Band Name', 
-capability.capability_id, capability.name AS 'Capability Name', role.role_id, role.name AS 'Role Name'
+SELECT department.department_id, department.name AS 'DepartmentName', band.band_id, band.name AS 'BandName', 
+capability.capability_id, capability.name AS 'CapabilityName', role.role_id, role.name AS 'RoleName'
 FROM department JOIN capability ON department.department_id = capability.department_id JOIN role_capability ON
 role_capability.capability_id = capability.capability_id JOIN role ON role_capability.role_id = role.role_id JOIN band
 ON band.band_id = role.band_id 
@@ -158,7 +144,6 @@ VALUES ('Chief Technology Officer', 2, 1, 'Owns and leads a business area (e.g. 
 ('Principal Architect', 2, 3, 'Recognised leader and developer of Kainos talent, continuously improves Kainos, comfortable in novel situations, owns multiple initiatives, accountable for delivery at Programme level.', null),
 ('Solution Architect', 2, 4, 'Designs and delivers large-scale solutions from scratch.', 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Shared%20Documents/Job%20Descriptions/Architect/Job%20Specification%20-%20Solution%20Architect%20-%20Manager.pdf?csf=1&e=TQLL8t'), 
 ('Technical Architect', 2, 5, 'Expert in their field, is consulted by others, supervises others, works well even if under pressure, effectively coaches people.', 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Shared%20Documents/Job%20Descriptions/Architect/Job%20Specification%20-%20Technical%20Architect%20-%20Consultant.pdf?csf=1&e=jS7nhb');
-
 INSERT INTO role (name, department_id, band_id, summary, job_spec_url) 
 VALUES ('Lead Ops Engineer', 2, 5, 'Expert in their field, is consulted by others, supervises others, works well even if under pressure, effectively coaches people.', 'https://kainossoftwareltd.sharepoint.com/:w:/r/people/Shared%20Documents/Job%20Descriptions/Ops/Consultant%20-%20Lead%20Ops%20Engineer.docx?d=wb1eb28ea306941f5a9d527dd85cab4cc&csf=1&e=UThzhB'), 
 ('Senior Ops Engineer', 2, 6, 'Delivers with limited supervision, trusted to make tactical decisions.', 'https://kainossoftwareltd.sharepoint.com/:w:/r/people/Shared%20Documents/Job%20Descriptions/Ops/Senior%20Associate%20-%20Senior%20Ops%20Engineer.docx?d=w4f827b196eb24246a3b3e62e3452b4dd&csf=1&e=Y7Fya1'),
@@ -188,7 +173,6 @@ VALUES (31,3), (32,4), (33,5), (34,6);
 INSERT INTO role_capability (role_id, capability_id)
 VALUES (35,4), (36,5), (37,6);
 
-
 INSERT INTO role_capability (role_id, capability_id) -- role-capability links for Technical
 VALUES (38,7), (39,7), (40,7), (41,7), (42,7);
 INSERT INTO role_capability (role_id, capability_id)
@@ -197,5 +181,6 @@ INSERT INTO role_capability (role_id, capability_id)
 VALUES (46,9), (47,9), (48,9), (49,9), (50,9);
 INSERT INTO role_capability (role_id, capability_id)
 VALUES (51,10), (52,10), (53,10), (54,10);
+
 INSERT INTO role_capability (role_id, capability_id) -- role-capability links for Central Services Teams
 VALUES (55,11), (56,11), (57,11), (58,11);

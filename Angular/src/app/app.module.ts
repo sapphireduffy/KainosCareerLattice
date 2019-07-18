@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'; 
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgbModule, NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -12,6 +13,7 @@ import { DataService } from './_services/data.service';
 import { CareerTableComponent } from './career-table/career-table.component';
 import { CookieService } from 'ngx-cookie-service';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { RoleInformationComponent } from "./role-information/role-information.component";
 import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
@@ -20,7 +22,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     LoginComponent,
     CareerTableComponent,
     LandingPageComponent, 
-    NavbarComponent
+    NavbarComponent,
+    RoleInformationComponent
   ],
   bootstrap: [ 
     AppComponent
@@ -29,7 +32,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [ 
     HttphandlerService, 
@@ -37,5 +41,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     DataService,
     CookieService
   ],
+  entryComponents: [
+    RoleInformationComponent
+  ]
 })
 export class AppModule {}
