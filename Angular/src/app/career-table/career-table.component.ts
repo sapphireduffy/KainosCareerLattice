@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { DataService } from "../_services/data.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { RoleInformationComponent } from "../role-information/role-information.component";
-import { Role } from "../_classes/role";
 
 @Component({
   selector: "app-career-table",
@@ -18,7 +17,7 @@ export class CareerTableComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private modalService: NgbModal
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     var urlParams = new URLSearchParams(window.location.search);

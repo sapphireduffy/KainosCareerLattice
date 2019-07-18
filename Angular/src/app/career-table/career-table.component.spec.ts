@@ -8,9 +8,9 @@ describe('CareerTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CareerTableComponent ]
+      declarations: [CareerTableComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
