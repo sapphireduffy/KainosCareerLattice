@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     try {
       var token = this.cookieService.get('token')
-      if(token != undefined && token != null && token != ''){
+      if(token){
         if(verify(token, privateKey.privateKey)){
           this.router.navigate(['home'])
         }
