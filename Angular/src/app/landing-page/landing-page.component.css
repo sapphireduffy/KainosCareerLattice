@@ -8,11 +8,10 @@
 }
 
 .grid-container {
-    padding: 0px;
-    padding-top: 50px;
+    padding-top: 50px 0 0 0;
 }
 
-   .card {
+.card {
     margin:20px 0px;
     cursor: pointer;
 }

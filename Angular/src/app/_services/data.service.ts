@@ -3,9 +3,7 @@ import axios from "axios";
 
 const departmentUrl = "/api/departments";
 const capabilityUrl = "/api/capabilities";
-const getAllDataUrl = "/api/allData";
-
-const getRolesInDepartmentURL = '/api/rolesInDep';
+const getRolesInDepartmentURL = "/api/rolesInDep";
 const getBandsURL = "/api/bands";
 const roleUrl = "/api/role";
 
@@ -49,31 +47,6 @@ export class DataService {
   getCapabilityNamesByDepartment(departmentID: number) {
     return axios
       .get(capabilityUrl, {
-        params: {
-          departmentID: departmentID
-        },
-        headers: this.getHeaders()
-      })
-      .then(function(response) {
-        return response.data;
-      })
-      .catch(function(error) {
-        if (error.response) {
-          return {
-            error: error.response.data.Message,
-            statusCode: error.response.statusCode
-          };
-        } else {
-          if (error.message) {
-            return { error: error.message };
-          }
-        }
-      });
-  }
-
-  getAllData(departmentID: number) {
-    return axios
-      .get(getAllDataUrl, {
         params: {
           departmentID: departmentID
         },
