@@ -1,0 +1,25 @@
+language: node_js
+node_js:
+  - "12.4.0"
+
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+
+installs:
+
+  - "npm start"
+  - "node express.js"
+  - "sudo mysql"
+
+script:
+  - echo "skipping tests"
+
+test:
+  adapter: mysql
+  database: "career_lattice"
+  username: "user"
+  encoding: utf8
