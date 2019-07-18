@@ -21,4 +21,18 @@ Change to the Angular directory and 'npm install' the following
   <li>ngx-cookie-service</li>
   <li>jsonwebtoken</li>
   <li>axios</li>
+  <li>stream</li>
 </ul>
+
+Then you need to modify 
+```
+angular/node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs/browser.js
+```
+and modify the following line at the bottom;
+```
+// old:
+node: false,
+// new:
+node: { crypto: true, stream: true },
+```
+to fix crypto
