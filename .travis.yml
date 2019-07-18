@@ -11,12 +11,10 @@ addons:
 
 installs:
 
-  - "npm start"
-  - "node express.js"
-  - "sudo mysql"
+  - npm install
 
 script:
-  - echo "skipping tests"
+  - npm run ci
 
 test:
   adapter: mysql
