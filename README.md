@@ -7,12 +7,14 @@ All secret files must be moved to ther root directory of the project after cloni
 
 <h2>Express package list</h2>
 Change to Express-API directory and run the following
+
 ```
 npm install mysql jsonwebtoken bcrypt path cors
 ```
 
 <h2>Angular package list</h2>
 Change to the Angular directory run the following
+
 ```
 npm install @angular/cli @ng-bootstrap/ng-bootstrap ngx-cookie-service jsonwebtoken axios stream
 ```
