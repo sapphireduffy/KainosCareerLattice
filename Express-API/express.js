@@ -11,7 +11,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 var db = new Database();
 var loginHandler = new LoginHandler();
-//loginHandler.createUser({Username : "test2", Password: "pass"}, db) 
 
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(express.urlencoded());
@@ -67,11 +66,9 @@ app.post('/login', cors(), function (request, response) {
 	console.log(request.body);
 	console.log(request.body.Password)
 	loginHandler.login(request.body, db).then(token => {
-    //console.log(token)
     response.cookie('token',token)
 		response.send({'token':token})
 	}, reason => {
-		//console.log(reason)
 		response.send(reason)
 	})
 });

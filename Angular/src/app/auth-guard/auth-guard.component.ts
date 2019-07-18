@@ -14,7 +14,7 @@ export class AuthGuardComponent implements CanActivate {
     
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
       var token = this.cookieService.get('token')
-      if(token != undefined && token != null && token != ''){
+      if(token){
         if(verify(token, privateKey.privateKey)){
           this.token = decode(token)
           console.log("SESSION VALID")

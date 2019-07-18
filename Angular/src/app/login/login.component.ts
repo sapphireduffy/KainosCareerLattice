@@ -3,7 +3,7 @@ import { FormControl,FormGroup, Validators } from '@angular/forms'
 import { HttphandlerService } from '../httphandler.service'
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import privateKey from '../../../../privateKey.js'
+import { privateKey } from '../../../../privateKey.js'
 import { verify } from 'jsonwebtoken'
 
 @Component({
