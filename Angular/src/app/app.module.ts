@@ -1,26 +1,48 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { HttpClientModule } from "@angular/common/http";
-import { NgModule } from "@angular/core";
-import { DataService } from "./_services/data.service";
-import { AppComponent } from "./app.component";
-import { RoleInformationComponent } from "./role-information/role-information.component";
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http'; 
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
-import { CareerTableComponent } from "./career-table/career-table.component";
-import { LandingPageComponent } from "./landing-page/landing-page.component";
-import { NavbarComponent } from "./navbar/navbar.component";
-import { routing } from "./app-routing.module";
+
+import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { HttphandlerService } from './httphandler.service';
+import { AppRoutingModule } from './app-routing.module';
+import { AuthGuardComponent} from './auth-guard/auth-guard.component';
+import { DataService } from './_services/data.service';
+import { CareerTableComponent } from './career-table/career-table.component';
+import { CookieService } from 'ngx-cookie-service';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { RoleInformationComponent } from "./role-information/role-information.component";
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LandingPageComponent,
-    NavbarComponent,
+    LoginComponent,
     CareerTableComponent,
+    LandingPageComponent, 
+    NavbarComponent,
     RoleInformationComponent
   ],
-  imports: [BrowserModule, HttpClientModule, routing, NgbModule],
-  providers: [DataService],
-  bootstrap: [AppComponent],
-  entryComponents: [RoleInformationComponent]
+  bootstrap: [ 
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    NgbModule
+  ],
+  providers: [ 
+    HttphandlerService, 
+    AuthGuardComponent,
+    DataService,
+    CookieService
+  ],
+  entryComponents: [
+    RoleInformationComponent
+  ]
 })
 export class AppModule {}

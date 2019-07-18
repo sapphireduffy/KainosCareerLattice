@@ -19,6 +19,7 @@ export class RoleInformationComponent implements OnInit {
 
   ngOnInit(): void {
     this.safeUrl = this.sanitise(this.roleToDisplay.job_spec_url);
+    console.log(this.roleToDisplay)
   }
 
   closeModal() {

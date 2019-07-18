@@ -23,20 +23,25 @@ export class CareerTableComponent implements OnInit {
   ngOnInit(): void {
     var urlParams = new URLSearchParams(window.location.search);
     var id = parseInt(urlParams.get("id"));
+    console.log(id)
 
     this.dataService.getCapabilityNamesByDepartment(id).then(response => {
+      console.log(response)
       this.capabilities = response;
     });
 
     this.dataService.getRolesInDepartment(id).then(response => {
+      console.log(response)
       this.jobsInDep = response;
     });
 
     this.dataService.getBands().then(response => {
+      console.log(response)
       this.bands = response;
     });
 
     this.dataService.getDepartmentDetails(id).then(response => {
+      console.log(response)
       this.departmentName = response;
     });
   }
