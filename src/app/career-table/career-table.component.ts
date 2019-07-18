@@ -3,7 +3,6 @@ import { DataService } from "../_services/data.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { RoleInformationComponent } from "../role-information/role-information.component";
 import { Role } from "../_classes/role";
-import { TestBed } from '@angular/core/testing';
 
 @Component({
   selector: "app-career-table",
@@ -15,7 +14,6 @@ export class CareerTableComponent implements OnInit {
   capabilities = [];
   jobsInDep: any;
   bands: any;
-  r = [];
 
   constructor(
     private dataService: DataService,
@@ -32,7 +30,6 @@ export class CareerTableComponent implements OnInit {
 
     this.dataService.getRolesInDepartment(id).then(response => {
       this.jobsInDep = response;
-      console.log(this.jobsInDep);
     });
 
     this.dataService.getBands().then(response => {
@@ -50,7 +47,4 @@ export class CareerTableComponent implements OnInit {
       modalRef.componentInstance.roleToDisplay = response[0];
     });
   }
-
 }
-
-

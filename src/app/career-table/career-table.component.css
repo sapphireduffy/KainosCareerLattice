@@ -42,3 +42,7 @@ table {
 .role-clickable {
   cursor: pointer;
 }
+
+table {
+  margin: 0 auto;
+}

@@ -17,8 +17,6 @@ CREATE TABLE department (
     name VARCHAR(100) NOT NULL
 );
 
-
-
 CREATE TABLE school (
     school_id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL
