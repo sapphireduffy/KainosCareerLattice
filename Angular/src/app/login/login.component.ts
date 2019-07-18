@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl,FormGroup, Validators } from '@angular/forms'
-import { HttphandlerService } from '../httphandler.service'
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import privateKey from '../../../../privateKey.js'
-import { verify } from 'jsonwebtoken'
+import privateKey from '../../../../privateKey.js';
+import { HttphandlerService } from '../httphandler.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   private form: FormGroup;
 
-  constructor(private router: Router, private httpHandler : HttphandlerService, private cookieService : CookieService){
+  constructor(private router: Router, private httpHandler: HttphandlerService, private cookieService: CookieService) {
     this.form = new FormGroup({
       username: new FormControl(),
       password: new FormControl(),
@@ -25,20 +24,20 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     try {
       var token = this.cookieService.get('token')
-      if(token != undefined && token != null && token != ''){
-        if(verify(token, privateKey.privateKey)){
+      if (token != undefined && token != null && token != '') {
+        if (verify(token, privateKey.privateKey)) {
           this.router.navigate(['home'])
         }
       }
-    } catch (err){}
+    } catch (err) { }
   }
 
-  onSubmit(){
+  onSubmit() {
     var username = this.form.value.username
     var password = this.form.value.password
-    this.httpHandler.post("/api/login", {"Username" : username, "Password": password}).then(res => {
-      var response = (Object) (res)
-      if(response.hasOwnProperty('error')){
+    this.httpHandler.post("/api/login", { "Username": username, "Password": password }).then(res => {
+      var response = (Object)(res)
+      if (response.hasOwnProperty('error')) {
         console.log("INVALID LOGIN")
       } else {
         console.log("TOKEN SET")
