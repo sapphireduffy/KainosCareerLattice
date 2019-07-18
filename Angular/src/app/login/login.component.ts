@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms'
-import { HttphandlerService } from '../httphandler.service'
+import { HttphandlerService } from '../_services/httphandler.service'
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import privateKey from '../../../../privateKey.js'

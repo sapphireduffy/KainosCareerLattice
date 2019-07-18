@@ -6,7 +6,7 @@ import { NgbModule, NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { HttphandlerService } from './httphandler.service';
+import { HttphandlerService } from './_services/httphandler.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthGuardComponent} from './auth-guard/auth-guard.component';
 import { DataService } from './_services/data.service';
