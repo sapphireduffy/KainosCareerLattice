@@ -1,5 +1,6 @@
 .DS_STORE
 config.json
+privateKey.js
 
 /dist/
 /bazel-out
