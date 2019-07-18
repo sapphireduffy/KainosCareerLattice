@@ -1,5 +1,5 @@
 var mysql = require("mysql");
-var CONFIG = require("./config.json");
+var CONFIG = require("../config.json");
 
 class Database {
   constructor(config) {
