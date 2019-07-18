@@ -5,7 +5,7 @@ All secret files must be moved to ther root directory of the project after cloni
 
 # If the node-modules are not present in Express-Api & Angular;
 
-# Express package list
+<h1>Express package list</h1>
 Change to Express-API directory and 'npm install' the following
 <ul>
   <li>mysql</li>
@@ -15,7 +15,7 @@ Change to Express-API directory and 'npm install' the following
   <li>cors</li>
 </ul>
 
-# Angular package list
+<h1>Angular package list</h1>
 Change to the Angular directory and 'npm install' the following
 <ul>
   <li>@angular/cli</li>
