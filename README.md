@@ -3,6 +3,8 @@
 # Secret files
 All secret files must be moved to ther root directory of the project after cloning
 
+# If the node-modules are not present in Express-Api & Angular;
+
 # Express package list
 Change to Express-API directory and 'npm install' the following
 <ul>
