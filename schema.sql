@@ -80,8 +80,8 @@ SELECT department_id, name
 FROM department;
 
 CREATE VIEW viewTableData AS
-SELECT department.department_id, department.name AS 'Department Name', band.band_id, band.name AS 'Band Name', 
-capability.capability_id, capability.name AS 'Capability Name', role.role_id, role.name AS 'Role Name'
+SELECT department.department_id, department.name AS 'DepartmentName', band.band_id, band.name AS 'BandName', 
+capability.capability_id, capability.name AS 'CapabilityName', role.role_id, role.name AS 'RoleName'
 FROM department JOIN capability ON department.department_id = capability.department_id JOIN role_capability ON
 role_capability.capability_id = capability.capability_id JOIN role ON role_capability.role_id = role.role_id JOIN band
 ON band.band_id = role.band_id 
@@ -184,6 +184,3 @@ VALUES (51,10), (52,10), (53,10), (54,10);
 
 INSERT INTO role_capability (role_id, capability_id) -- role-capability links for Central Services Teams
 VALUES (55,11), (56,11), (57,11), (58,11);
-
-
-

@@ -10,11 +10,10 @@ import { Role } from "../_classes/role";
   styleUrls: ["./career-table.component.css"]
 })
 export class CareerTableComponent implements OnInit {
-  rolesCapabilityMap = new Map<string, Role[]>();
-  capabilities = [];
-  roleCapabilityData: any;
   departmentName: any;
-  roles = [];
+  capabilities = [];
+  jobsInDep: any;
+  bands: any;
 
   constructor(
     private dataService: DataService,
@@ -29,33 +28,17 @@ export class CareerTableComponent implements OnInit {
       this.capabilities = response;
     });
 
-    this.dataService.getAllData(id).then(response => {
-      this.roleCapabilityData = response;
-      this.sortRoleCapabilityMap();
+    this.dataService.getRolesInDepartment(id).then(response => {
+      this.jobsInDep = response;
     });
-    this.dataService.getCapabilityNamesByDepartment(id).then(response => {
-      this.capabilities = response;
+
+    this.dataService.getBands().then(response => {
+      this.bands = response;
     });
 
     this.dataService.getDepartmentDetails(id).then(response => {
       this.departmentName = response;
     });
-  }
-
-  sortRoleCapabilityMap() {
-    for (let capability of this.capabilities) {
-      this.roles = [];
-      for (let roleCap of this.roleCapabilityData) {
-        if (capability.name == roleCap.CapabilityName) {
-          var roleToDisplay: Role = {
-            roleID: roleCap.RoleId,
-            Name: roleCap.RoleName
-          };
-          this.roles.push(roleToDisplay);
-        }
-      }
-      this.rolesCapabilityMap.set(capability.name, this.roles);
-    }
   }
 
   async openRoleInfoModal(selectedRoleId) {

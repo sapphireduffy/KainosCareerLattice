@@ -17,10 +17,10 @@
       <p *ngIf="roleToDisplay.summary">{{ roleToDisplay.summary }}</p>
     </div>
 
-    <div *ngIf="roleToDisplay.sharepoint_link">
+    <div *ngIf="roleToDisplay.job_spec_url">
       <h5>Job Description</h5>
       <p>
-        <a [href]="safeUrl">sharepoint link for {{ roleToDisplay.name }}</a>
+        <a [href]="safeUrl">Sharepoint Link for: {{ roleToDisplay.name }}</a>
       </p>
     </div>
   </div>
