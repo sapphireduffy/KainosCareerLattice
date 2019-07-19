@@ -3,7 +3,6 @@ import { DataService } from "../_services/data.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { RoleInformationComponent } from "../role-information/role-information.component";
 import { BandInformationComponent } from '../band-information/band-information.component';
-import { Role } from "../_classes/role";
 
 @Component({
   selector: "app-career-table",
