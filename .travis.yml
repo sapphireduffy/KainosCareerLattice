@@ -1,3 +1,6 @@
+dist: trusty 
+sudo: false 
+
 language: node_js
 node_js:
   - "12.4.0"
@@ -9,15 +12,16 @@ addons:
     packages:
       - google-chrome-stable
 
-installs:
+cache:
+  directories:
+    - ./node_modules
 
+
+installs:
   - npm install
+  - npm install angular
+  - npm install express
+  - npm install mysql
 
 script:
   - npm run ci
-
-test:
-  adapter: mysql
-  database: "career_lattice"
-  username: "user"
-  encoding: utf8
