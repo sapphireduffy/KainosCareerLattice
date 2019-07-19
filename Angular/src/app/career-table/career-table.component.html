@@ -1,32 +1,33 @@
 <header>
   <app-navbar></app-navbar>
 </header>
-
-<table>
-    <ng-container>
-        <tr role='row'>
-            <th
-            class="job-family"
-            scole="col"
-            [attr.colspan]="capabilities.length + 1"
-            rowspan="1"
-            *ngFor="let department of departmentName"
-          >
-            {{ department.name }}
-          </th>
-        </tr>
-        <tr>
-            <th class='job-family'></th>
-            <th *ngFor='let capability of capabilities' class='job-headings' >{{capability.name}}</th>
-        </tr>
-        <tr *ngFor="let band of bands">
-          <td [class.job-level-inspire]='band.band_id <= 3' [class.job-level-explore]='band.band_id  > 3 && band.band_id <= 6' 
-          [class.job-level-discover]='band.band_id  > 6' class='job-level'>{{band.name}}</td>
-          <td *ngFor="let cap of capabilities">
-            <span *ngFor="let job of jobsInDep">
-              <span *ngIf="job.capability_id == cap.capability_id && job.band_id == band.band_id" (click)="openRoleInfoModal(job.role_id)" class='role-clickable'>{{job.RoleName}}</span>
-            </span>
-          </td>
-        </tr>
-    </ng-container>
-</table>
+<div class='container'>
+  <table class='table'>
+      <ng-container>
+          <tr role='row'>
+              <th
+              class="job-family"
+              scope="col"
+              [attr.colspan]="capabilities.length + 1"
+              rowspan="1"
+              *ngFor="let department of departmentName"
+            >
+              {{ department.name }}
+            </th>
+          </tr>
+          <tr>
+              <th class='job-family'></th>
+              <th scope="row" *ngFor='let capability of capabilities' class='job-headings'>{{capability.name}}</th>
+          </tr>
+          <tr *ngFor="let band of bands">
+            <td scope='row' [class.job-level-inspire]='band.band_id <= 3' [class.job-level-explore]='band.band_id  > 3 && band.band_id <= 6' 
+            [class.job-level-discover]='band.band_id  > 6' class='job-level' (click)="openBandInfoModal(band.band_id)">{{band.name}}</td>
+            <td *ngFor="let cap of capabilities">
+              <span *ngFor="let job of jobsInDep">
+                <span scope='row' *ngIf="job.capability_id == cap.capability_id && job.band_id == band.band_id" (click)="openRoleInfoModal(job.role_id)" class='role-clickable'>{{job.RoleName}}</span>
+              </span>
+            </td>
+          </tr>
+      </ng-container>
+  </table>
+</div>

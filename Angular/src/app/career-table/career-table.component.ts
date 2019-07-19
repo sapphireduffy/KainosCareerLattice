@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { DataService } from "../_services/data.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { RoleInformationComponent } from "../role-information/role-information.component";
+import { BandInformationComponent } from '../band-information/band-information.component';
 
 @Component({
   selector: "app-career-table",
@@ -49,6 +50,13 @@ export class CareerTableComponent implements OnInit {
     await this.dataService.getRoleInformation(selectedRoleId).then(response => {
       const modalRef = this.modalService.open(RoleInformationComponent);
       modalRef.componentInstance.roleToDisplay = response[0];
+    });
+  }
+
+  async openBandInfoModal(selectedBandId) {
+    await this.dataService.getBandInformation(selectedBandId).then(response => {
+      const modalRef = this.modalService.open(BandInformationComponent);
+      modalRef.componentInstance.bandToDisplay = response[0];
     });
   }
 }

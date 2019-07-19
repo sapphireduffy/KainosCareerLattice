@@ -1,0 +1,17 @@
+.discover {
+    background-color: #009639;
+}
+.explore {
+    background-color: #00558c;
+}
+.inspire {
+    background-color: #5c068c;
+}
+
+.modal-header {
+    color: white;
+}
+
+.modal-body div:not(:first-child) {
+    margin-top: 2em;
+}
