@@ -15,6 +15,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { RoleInformationComponent } from "./role-information/role-information.component";
 import { NavbarComponent } from './navbar/navbar.component';
+import { BandInformationComponent } from './band-information/band-information.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     CareerTableComponent,
     LandingPageComponent, 
     NavbarComponent,
-    RoleInformationComponent
+    RoleInformationComponent,
+    BandInformationComponent
   ],
   bootstrap: [ 
     AppComponent
@@ -42,7 +44,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     CookieService
   ],
   entryComponents: [
-    RoleInformationComponent
+    RoleInformationComponent,
+    BandInformationComponent
   ]
 })
 export class AppModule {}

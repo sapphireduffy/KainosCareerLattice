@@ -1,0 +1,69 @@
+<div>
+    <div class="modal-header" [class.explore]="bandToDisplay.school_id == 2" 
+        [class.discover]="bandToDisplay.school_id == 3" [class.inspire]="bandToDisplay.school_id == 1">
+        <h2 class="modal-title" id="exampleModalLabel">{{ bandToDisplay.name }}</h2>
+        <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="activeModal.dismiss()">
+        x
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <div *ngIf="bandToDisplay.commercial_awareness">
+            <h5>Commercial Awareness</h5>
+            <p>{{ bandToDisplay.commercial_awareness }}</p>
+        </div>
+
+        <div *ngIf="bandToDisplay.communicating_and_teamwork">
+            <h5>Communicating and Teamwork</h5>
+            <p>{{ bandToDisplay.communicating_and_teamwork }}</p>
+        </div>
+
+        <div *ngIf="bandToDisplay.innovation_and_continuous_improvement">
+            <h5>Innovation & Continuous Improvement</h5>
+            <p>
+                {{ bandToDisplay.innovation_and_continuous_improvement }}
+            </p>
+        </div>
+
+        <div *ngIf="bandToDisplay.customer_focus">
+                <h5>Customer Focus</h5>
+                <p>
+                    {{ bandToDisplay.customer_focus }}
+                </p>
+        </div>
+
+        <div *ngIf="bandToDisplay.developing_yourself_and_others">
+                <h5>Developing Yourself & Others</h5>
+                <p>
+                    {{ bandToDisplay.developing_yourself_and_others }}
+                </p>
+        </div>
+
+        <div *ngIf="bandToDisplay.planning_and_organising">
+                <h5>Planning & Organisation</h5>
+                <p>
+                    {{ bandToDisplay.planning_and_organising }}
+                </p>
+        </div>
+
+        <div *ngIf="bandToDisplay.job_specific_knowledge">
+                <h5>Job Specific Knowledge</h5>
+                <p>
+                    {{ bandToDisplay.job_specific_knowledge }}
+                </p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="activeModal.dismiss()"
+        >
+        Close
+        </button>
+    </div>
+</div>

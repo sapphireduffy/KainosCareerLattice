@@ -8,6 +8,7 @@ const getAllDataUrl = "/api/allData";
 const getRolesInDepartmentURL = '/api/rolesInDep';
 const getBandsURL = "/api/bands";
 const roleUrl = "/api/role";
+const getUniqueBandURL = "/api/uniqueband";
 
 @Injectable()
 export class DataService {
@@ -150,6 +151,31 @@ export class DataService {
       .get(roleUrl, {
         params: {
           roleID: roleID
+        },
+        headers: this.getHeaders()
+      })
+      .then(function(response) {
+        return response.data;
+      })
+      .catch(function(error) {
+        if (error.response) {
+          return {
+            error: error.response.data.Message,
+            statusCode: error.response.statusCode
+          };
+        } else {
+          if (error.message) {
+            return { error: error.message };
+          }
+        }
+      });
+  }
+
+  getBandInformation(bandId: number) {
+    return axios
+      .get(getUniqueBandURL, {
+        params: {
+          bandId: bandId
         },
         headers: this.getHeaders()
       })

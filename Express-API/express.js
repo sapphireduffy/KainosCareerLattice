@@ -36,6 +36,15 @@ app.get("/capabilities", cors(), function(request, response) {
   });
 });
 
+app.get("/uniqueband", cors(), function(request, response) {
+  db.query(
+    "SELECT * FROM viewBandData WHERE band_id = ?",
+    [request.query.bandId]
+  ).then(rows => {
+    response.send(rows);
+  });
+});
+
 app.get("/departments", cors(), function(request, response) {
   db.query(
     "SELECT name FROM department WHERE department_id = ?",
