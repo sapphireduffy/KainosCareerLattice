@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms'
 import { HttphandlerService } from '../httphandler.service'
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
-import { privateKey } from '../../../../privateKey.js'
-import { verify } from 'jsonwebtoken'
+import { AuthGuardComponent } from '../auth-guard/auth-guard.component';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   private form: FormGroup;
 
-  constructor(private router: Router, private httpHandler : HttphandlerService, private cookieService : CookieService){
+  constructor(private router: Router, private httpHandler : HttphandlerService, private authGuard : AuthGuardComponent){
     this.form = new FormGroup({
       username: new FormControl(),
       password: new FormControl(),
@@ -23,14 +21,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    try {
-      var token = this.cookieService.get('token')
-      if(token){
-        if(verify(token, privateKey.privateKey)){
-          this.router.navigate(['home'])
-        }
-      }
-    } catch (err){}
+    if(this.authGuard.validToken()){
+      this.router.navigate(['home'])
+    } 
   }
 
   onSubmit(){
