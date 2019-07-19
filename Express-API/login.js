@@ -3,6 +3,9 @@ var jwt = require('jsonwebtoken')
 var key = require('../privateKey.js')
 const saltRounds = 10;
 
+var vars = require('../Variables/vars.js')
+console.log(vars.getVars("../Variables/.env"))
+
 class LoginHandler {
     constructor( config ) { }
 

@@ -2,9 +2,9 @@ import { Injectable } from "@angular/core";
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 import { CookieService } from 'ngx-cookie-service';
 import privateKey from '../../../../privateKey.js'
+import { FsService } from 'ngx-fs';
+import vars from '../../../../Variables'
 import { decode, verify } from 'jsonwebtoken'
-import { DataService } from '../_services/data.service.js';
-
 
 @Injectable()
 export class AuthGuardComponent implements CanActivate {
@@ -14,6 +14,7 @@ export class AuthGuardComponent implements CanActivate {
     constructor(private router: Router, private cookieService: CookieService){}
 
     validToken(){
+      console.log(vars.getVars("../../../../Variables/.env"))
       try {
         var token = this.cookieService.get('token')
         if(token){
