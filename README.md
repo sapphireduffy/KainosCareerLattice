@@ -5,36 +5,8 @@ All secret files must be moved to ther root directory of the project after cloni
 
 # If the node-modules are not present in Express-Api & Angular;
 
-<h2>Express package list</h2>
-Change to Express-API directory and 'npm install' the following
-<ul>
-  <li>mysql</li>
-  <li>jsonwebtoken</li>
-  <li>bcrypt</li>
-  <li>path</li>
-  <li>cors</li>
-</ul>
-
-<h2>Angular package list</h2>
-Change to the Angular directory and 'npm install' the following
-<ul>
-  <li>@angular/cli</li>
-  <li>@ng-bootstrap/ng-bootstrap</li>
-  <li>ngx-cookie-service</li>
-  <li>jsonwebtoken</li>
-  <li>axios</li>
-  <li>stream</li>
-</ul>
-
-Then you need to modify 
+Run 
 ```
-angular/node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs/browser.js
+npm install
 ```
-and modify the following line at the bottom;
-```
-// old:
-node: false,
-// new:
-node: { crypto: true, stream: true },
-```
-to fix crypto
+in both the Angular and Express-API directories
