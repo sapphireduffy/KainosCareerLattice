@@ -7,14 +7,12 @@
                 </span>
 
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                    <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
-                        <input class="input100" type="text" formControlName="username" name="Username">
-                        <span class="focus-input100" data-placeholder="Username"></span>
+                    <div class="wrap-input100 m-t-85 m-b-35" data-validate = "Enter username">
+                        <input class="input100" type="text" formControlName="username" name="Username" placeholder="Username">
                     </div>
 
-                    <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
-                        <input class="input100" type="password" formControlName="password"  name="Password">
-                        <span class="focus-input100" data-placeholder="Password"></span>
+                    <div class="wrap-input100 m-b-50" data-validate="Enter password">
+                        <input class="input100" type="password" formControlName="password"  name="Password" placeholder="Password">
                     </div>
                     
 
