@@ -43,3 +43,8 @@
   .role-clickable {
     cursor: pointer;
   }
+
+  .container {
+    overflow-x: auto; 
+    width: 90%;
+  }
