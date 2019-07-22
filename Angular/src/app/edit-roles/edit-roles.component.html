@@ -3,9 +3,7 @@
       </header>
 
       <div class='container'>
-        <div *ngIf="showAlert">
-          <alert [alertMessage]="alertMessage" [alertType]="alertType" ></alert>
-        </div>
+        <ngb-alert *ngIf="showAlert" type="{{alertType}}" (close)="showAlert = false">{{alertMessage}}</ngb-alert>
         <table class='table'>
             <ng-container>
                 <tr role='row'>

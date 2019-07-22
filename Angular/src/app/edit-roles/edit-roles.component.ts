@@ -19,7 +19,7 @@ export class EditRolesComponent implements OnInit {
   id:any;
   alertMessage:string;
   alertType:string;
-  showAlert = false;
+  showAlert;
 
   constructor(
     private dataService: DataService,
@@ -28,6 +28,7 @@ export class EditRolesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.showAlert = false;
     var urlParams = new URLSearchParams(window.location.search);
     this.id = parseInt(urlParams.get("id"));
     console.log(this.id)

@@ -18,8 +18,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { BandInformationComponent } from './band-information/band-information.component';
 import { EditRolesComponent } from './edit-roles/edit-roles.component';
 import { AddRoleModalComponent } from "./add-role-modal/add-role-modal.component";
-import { AlertComponentComponent } from './alert-component/alert-component.component';
-
 
 @NgModule({
   declarations: [
@@ -31,8 +29,7 @@ import { AlertComponentComponent } from './alert-component/alert-component.compo
     RoleInformationComponent,
     BandInformationComponent,
     EditRolesComponent,
-    AddRoleModalComponent,
-    AlertComponentComponent
+    AddRoleModalComponent
   ],
   bootstrap: [AppComponent],
   imports: [
