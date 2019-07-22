@@ -24,4 +24,4 @@ installs:
   - npm install mysql
 
 script:
-  - echo "skipping tests"
+  - ng test
