@@ -17,6 +17,8 @@ export class EditRolesComponent implements OnInit {
   jobsInDep: any;
   bands: any;
   id:any;
+  alertMessage:string;
+  alertType:string;
 
   constructor(
     private dataService: DataService,
@@ -25,6 +27,8 @@ export class EditRolesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.alertMessage = "test";
+    this.alertType = "success";
     var urlParams = new URLSearchParams(window.location.search);
     this.id = parseInt(urlParams.get("id"));
     console.log(this.id)
