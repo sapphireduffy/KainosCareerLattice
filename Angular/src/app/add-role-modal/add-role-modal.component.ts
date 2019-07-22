@@ -60,8 +60,6 @@ export class AddRoleModalComponent implements OnInit {
     }
     this.setNewRole();
 
-    console.log(this.newRole);
-
     this.dataService
       .createRole(this.newRole)
       .then(result => this.roleAdded.emit(result))
@@ -69,7 +67,5 @@ export class AddRoleModalComponent implements OnInit {
         this.roleAdded.emit(error);
       });
     this.closeModal();
-
-    
   }
 }

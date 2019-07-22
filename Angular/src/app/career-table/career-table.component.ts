@@ -60,10 +60,4 @@ export class CareerTableComponent implements OnInit {
       modalRef.componentInstance.bandToDisplay = response[0];
     });
   }
-
-  openAddRoleModal() {
-    const modalRef = this.modalService.open(AddRoleModalComponent);
-    // modalRef.componentInstance.departmentName =
-    //modalRef.componentInstance.bandId =
-  }
 }

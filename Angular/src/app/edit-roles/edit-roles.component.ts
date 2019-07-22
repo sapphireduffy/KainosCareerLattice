@@ -31,7 +31,6 @@ export class EditRolesComponent implements OnInit {
     this.showAlert = false;
     var urlParams = new URLSearchParams(window.location.search);
     this.id = parseInt(urlParams.get("id"));
-    console.log(this.id)
     this.loadRoles();
   }
 
@@ -96,8 +95,6 @@ export class EditRolesComponent implements OnInit {
     modalRef.componentInstance.bandId = roleBandId;
     modalRef.componentInstance.capabilityId =  roleCapabilityId;
     modalRef.componentInstance.roleAdded.subscribe(data =>{
-     
-      console.log(data.data)
       if(data.data.hasOwnProperty('success')){
         this.showAlert = true;
         this.alertMessage = data.data.success;
