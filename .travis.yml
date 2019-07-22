@@ -19,6 +19,7 @@ cache:
 
 installs:
   - npm install
+  - npm install ng-common
   - npm install angular
   - npm install express
   - npm install mysql
