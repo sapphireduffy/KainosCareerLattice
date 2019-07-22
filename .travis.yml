@@ -26,10 +26,6 @@ installs:
 
   before_script:
   - npm install -g @angular/cli
-  - npm install ng-common
-  - npm install angular
-  - npm install express
-  - npm install mysql
 
 script:
   - ng test
