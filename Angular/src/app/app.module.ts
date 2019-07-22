@@ -29,7 +29,8 @@ import { AddRoleModalComponent } from "./add-role-modal/add-role-modal.component
     NavbarComponent,
     RoleInformationComponent,
     BandInformationComponent,
-    EditRolesComponent
+    EditRolesComponent,
+    AddRoleModalComponent
   ],
   bootstrap: [AppComponent],
   imports: [

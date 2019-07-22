@@ -23,7 +23,7 @@
                   <td scope='row' [class.job-level-inspire]='band.band_id <= 3' [class.job-level-explore]='band.band_id  > 3 && band.band_id <= 6' 
                   [class.job-level-discover]='band.band_id  > 6' class='job-level' (click)="openBandInfoModal(band.band_id)">{{band.name}}</td>
                   <td *ngFor="let cap of capabilities">
-                      <button scope='row' (click)="openRoleInfoModal(roleExists(cap, band).ID)" class='role-clickable'>{{roleExists(cap, band).Role}}</button>
+                      <button scope='row' (click)="switchModal(roleExists(cap, band))" class='role-clickable'>{{roleExists(cap, band).Role}}</button>
                   </td>
                 </tr>
             </ng-container>

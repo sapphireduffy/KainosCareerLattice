@@ -1,8 +1,9 @@
 export class Role {
-  role_id?: number;
-  name: string;
-  department_id: number;
-  band_id: number;
+  roleId?: number;
+  roleName: string;
+  departmentId: number;
+  bandId: number;
   summary: string;
-  job_spec_url: string;
+  jobSpecUrl: string;
+  capabilityId:number;
 }

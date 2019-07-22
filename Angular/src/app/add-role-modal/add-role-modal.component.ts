@@ -12,6 +12,7 @@ import { DataService } from "../_services/data.service";
 export class AddRoleModalComponent implements OnInit {
   @Input() departmentId;
   @Input() bandId;
+  @Input() capabilityId;
   @Output() roleAdded = new EventEmitter();
   newRole: Role;
   public addRoleForm: FormGroup;
@@ -40,11 +41,12 @@ export class AddRoleModalComponent implements OnInit {
 
   setNewRole() {
     this.newRole = {
-      name: this.addRoleForm.get("roleName").value,
-      department_id: this.departmentId,
-      band_id: this.bandId,
+      roleName: this.addRoleForm.get("roleName").value,
+      departmentId: this.departmentId,
+      bandId: this.bandId,
       summary: this.addRoleForm.get("roleSummary").value,
-      job_spec_url: this.addRoleForm.get("roleSharePointLink").value
+      jobSpecUrl: this.addRoleForm.get("roleSharePointLink").value,
+      capabilityId: this.capabilityId
     };
   }
 
