@@ -3,6 +3,7 @@ import { DataService } from "../_services/data.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { RoleInformationComponent } from "../role-information/role-information.component";
 import { BandInformationComponent } from '../band-information/band-information.component';
+import { AddRoleModalComponent } from '../add-role-modal/add-role-modal.component';
 
 @Component({
   selector: "app-edit-roles",
@@ -14,6 +15,7 @@ export class EditRolesComponent implements OnInit {
   capabilities = [];
   jobsInDep: any;
   bands: any;
+  id:any;
 
   constructor(
     private dataService: DataService,
@@ -22,15 +24,15 @@ export class EditRolesComponent implements OnInit {
 
   ngOnInit(): void {
     var urlParams = new URLSearchParams(window.location.search);
-    var id = parseInt(urlParams.get("id"));
-    console.log(id)
+    this.id = parseInt(urlParams.get("id"));
+    console.log(this.id)
 
-    this.dataService.getCapabilityNamesByDepartment(id).then(response => {
+    this.dataService.getCapabilityNamesByDepartment(this.id).then(response => {
       console.log(response)
       this.capabilities = response;
     });
 
-    this.dataService.getRolesInDepartment(id).then(response => {
+    this.dataService.getRolesInDepartment(this.id).then(response => {
       console.log(response)
       this.jobsInDep = response;
     });
@@ -40,7 +42,7 @@ export class EditRolesComponent implements OnInit {
       this.bands = response;
     });
 
-    this.dataService.getDepartmentDetails(id).then(response => {
+    this.dataService.getDepartmentDetails(this.id).then(response => {
       console.log(response)
       this.departmentName = response;
     });
@@ -52,10 +54,19 @@ export class EditRolesComponent implements OnInit {
         return {"Role":this.jobsInDep[i].RoleName, "ID":this.jobsInDep[i].role_id}
       }
     }
-    return {"Role":"Add new role", "ID":-1}
+   
+    return {"Role":"Add new role", "ID":-1, "BandId":band.band_id, "CapabilityId": cap.capability_id}
   }
 
-  async openRoleInfoModal(selectedRoleId) {
+  async switchModal(selectedRole) {
+    if(selectedRole.ID == -1){
+      this.openAddRoleModal(selectedRole.BandId, selectedRole.CapabilityId);
+    }else{
+      this.openRoleInfoModal(selectedRole.ID);
+    }
+  }
+
+  async openRoleInfoModal(selectedRoleId){
     await this.dataService.getRoleInformation(selectedRoleId).then(response => {
       const modalRef = this.modalService.open(RoleInformationComponent);
       modalRef.componentInstance.roleToDisplay = response[0];
@@ -67,5 +78,12 @@ export class EditRolesComponent implements OnInit {
       const modalRef = this.modalService.open(BandInformationComponent);
       modalRef.componentInstance.bandToDisplay = response[0];
     });
+  }
+
+  openAddRoleModal(roleBandId, roleCapabilityId) {
+    const modalRef = this.modalService.open(AddRoleModalComponent);
+    modalRef.componentInstance.departmentId = this.id;
+    modalRef.componentInstance.bandId = roleBandId;
+    modalRef.componentInstance.capabilityId =  roleCapabilityId;
   }
 }
