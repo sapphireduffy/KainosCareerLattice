@@ -5,11 +5,11 @@ Changes made for this branch
 - [ ] All manual tests passing
 - [ ] All unit tests passing 
 - [ ] All UI tests passing
-- [ ] Code reviewed by peer:
-- [ ] *No redundant whitespace*
-- [ ] *Indentation correct*
-- [ ] *Naming conventions followed*
-- [ ] *Comments added (where needed)*
-- [ ] *No commented out redundant code*
-- [ ] *Branch name correct*
+- [ ] Code reviewed by peer:\
+&nbsp; - *No redundant whitespace*\
+&nbsp; - *Indentation correct*\
+&nbsp; - *Naming conventions followed*\
+&nbsp; - *Comments added (where needed)*\
+&nbsp; - *No commented out redundant code*\
+&nbsp; - *Branch name correct*
 - [ ] Code reviewed by TA
