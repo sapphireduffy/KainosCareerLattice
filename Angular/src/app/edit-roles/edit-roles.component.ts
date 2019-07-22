@@ -5,11 +5,11 @@ import { RoleInformationComponent } from "../role-information/role-information.c
 import { BandInformationComponent } from '../band-information/band-information.component';
 
 @Component({
-  selector: "app-add-role",
-  templateUrl: "./add-role.component.html",
-  styleUrls: ["./add-role.component.css"]
+  selector: "app-edit-roles",
+  templateUrl: "./edit-roles.component.html",
+  styleUrls: ["./edit-roles.component.css"]
 })
-export class AddRoleComponent implements OnInit {
+export class EditRolesComponent implements OnInit {
   departmentName: any;
   capabilities = [];
   jobsInDep: any;

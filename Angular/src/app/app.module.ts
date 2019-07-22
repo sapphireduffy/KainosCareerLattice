@@ -16,7 +16,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { RoleInformationComponent } from "./role-information/role-information.component";
 import { NavbarComponent } from './navbar/navbar.component';
 import { BandInformationComponent } from './band-information/band-information.component';
-import { AddRoleComponent } from './add-role/add-role.component';
+import { EditRolesComponent } from './edit-roles/edit-roles.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { AddRoleComponent } from './add-role/add-role.component';
     NavbarComponent,
     RoleInformationComponent,
     BandInformationComponent,
-    AddRoleComponent
+    EditRolesComponent
   ],
   bootstrap: [ 
     AppComponent
