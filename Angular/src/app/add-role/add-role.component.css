@@ -1,0 +1,50 @@
+.job-family {
+    background-color: #003471;
+    color: white;
+  }
+  
+th,
+td {
+  padding: 15px;
+  background-color: ghostwhite;
+  border: 1px solid black;
+}
+
+table {
+  border-collapse: collapse;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0 auto 1em auto;
+}
+
+.job-headings {
+    background-color: #95989a;
+    color: white;
+    position: relative;
+}
+
+/* JOB LEVEL STYLES */
+.job-level {
+  text-align: center;
+  padding: 15px;
+  color: white;
+}
+
+.job-level-inspire {
+  background-color: #5c068c;
+}
+.job-level-explore {
+  background-color: #00558c;
+}
+.job-level-discover {
+  background-color: #009639;
+}
+
+.role-clickable {
+  cursor: pointer;
+}
+
+.container {
+  overflow-x: auto; 
+  width: 90%;
+}
