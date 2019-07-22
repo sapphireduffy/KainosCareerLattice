@@ -6,7 +6,6 @@ Changes made for this branch
 - [ ] All unit tests passing 
 - [ ] All UI tests passing
 - [ ] Code reviewed by peer:
-&nbsp;&nbsp;&nbsp;&nbsp; - [ ] Code reviewed by peer
 &nbsp;&nbsp;&nbsp;&nbsp; - [ ] No redundant whitespace
 &nbsp;&nbsp;&nbsp;&nbsp; - [ ] Indentation correct
 &nbsp;&nbsp;&nbsp;&nbsp; - [ ] Naming conventions followed
