@@ -16,6 +16,11 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { RoleInformationComponent } from "./role-information/role-information.component";
 import { NavbarComponent } from './navbar/navbar.component';
 
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +28,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     CareerTableComponent,
     LandingPageComponent, 
     NavbarComponent,
-    RoleInformationComponent
+    RoleInformationComponent,
+    ConfirmationDialogComponent
   ],
   bootstrap: [ 
     AppComponent
@@ -33,7 +39,10 @@ import { NavbarComponent } from './navbar/navbar.component';
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [ 
     HttphandlerService, 
@@ -42,7 +51,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     CookieService
   ],
   entryComponents: [
-    RoleInformationComponent
+    RoleInformationComponent,
+    ConfirmationDialogComponent
   ]
 })
 export class AppModule {}
