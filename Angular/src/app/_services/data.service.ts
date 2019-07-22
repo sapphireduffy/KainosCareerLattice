@@ -5,9 +5,11 @@ const departmentUrl = "/api/departments";
 const capabilityUrl = "/api/capabilities";
 const getAllDataUrl = "/api/allData";
 
-const getRolesInDepartmentURL = '/api/rolesInDep';
+const getRolesInDepartmentURL = "/api/rolesInDep";
 const getBandsURL = "/api/bands";
 const roleUrl = "/api/role";
+const addRoleUrl = "/api/addRole";
+const getUniqueBandURL = "/api/uniqueband";
 
 @Injectable()
 export class DataService {
@@ -124,8 +126,7 @@ export class DataService {
   getBands() {
     return axios
       .get(getBandsURL, {
-        params: {
-        },
+        params: {},
         headers: this.getHeaders()
       })
       .then(function(response) {
@@ -155,6 +156,51 @@ export class DataService {
       })
       .then(function(response) {
         return response.data;
+      })
+      .catch(function(error) {
+        if (error.response) {
+          return {
+            error: error.response.data.Message,
+            statusCode: error.response.statusCode
+          };
+        } else {
+          if (error.message) {
+            return { error: error.message };
+          }
+        }
+      });
+  }
+
+  getBandInformation(bandId: number) {
+    return axios
+      .get(getUniqueBandURL, {
+        params: {
+          bandId: bandId
+        },
+        headers: this.getHeaders()
+      })
+      .then(function(response) {
+        return response.data;
+      })
+      .catch(function(error) {
+        if (error.response) {
+          return {
+            error: error.response.data.Message,
+            statusCode: error.response.statusCode
+          };
+        } else {
+          if (error.message) {
+            return { error: error.message };
+          }
+        }
+      });
+  }
+
+  createRole(param: any) {
+    return axios
+      .post(addRoleUrl, param, { headers: this.getHeaders() })
+      .then(function(response) {
+        return response;
       })
       .catch(function(error) {
         if (error.response) {

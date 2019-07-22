@@ -1,0 +1,86 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">Add Role</h5>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss()"
+  >
+    x
+  </button>
+</div>
+
+<form [formGroup]="addRoleForm" (ngSubmit)="onSubmit()" autocomplete="off">
+  <div class="modal-body" data-keyboard="false" data-backdrop="static">
+    <div class="form-group">
+      <label for="roleName">Role Name</label>
+      <input
+        type="text"
+        formControlName="roleName"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && formControls.roleName.errors }"
+      />
+      <div
+        *ngIf="submitted && formControls.roleName.errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="formControls.roleName.errors.required">
+          Role Name is a required field
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="roleSummary">Role Summary</label>
+      <input
+        type="text"
+        formControlName="roleSummary"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': submitted && formControls.roleSummary.errors
+        }"
+      />
+      <div
+        *ngIf="submitted && formControls.roleSummary.errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="formControls.roleSummary.errors.maxlength">
+          Max characters reached for Role Summary
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="roleSharePointLink">Role Sharepoint Link</label>
+      <input
+        type="text"
+        formControlName="roleSharePointLink"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': submitted && formControls.roleSharePointLink.errors
+        }"
+      />
+      <div
+        *ngIf="submitted && formControls.roleSharePointLink.errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="formControls.roleSharePointLink.errors.maxlength">
+          Max characters reached for Role Sharepoint Link
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="activeModal.dismiss()"
+    >
+      Close
+    </button>
+    <button type="submit" class="btn btn-success">
+      Add Role
+    </button>
+  </div>
+</form>

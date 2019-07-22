@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { privateKey } from '../../../../privateKey.js'
 import { verify } from 'jsonwebtoken'
 import { HttphandlerService } from '../httphandler.service.js';
+import { AuthGuardComponent } from '../auth-guard/auth-guard.component';
 
 @Component({
   selector: 'app-login',
