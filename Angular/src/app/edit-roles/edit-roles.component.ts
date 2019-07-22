@@ -4,6 +4,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { RoleInformationComponent } from "../role-information/role-information.component";
 import { BandInformationComponent } from '../band-information/band-information.component';
 import { AddRoleModalComponent } from '../add-role-modal/add-role-modal.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-edit-roles",
@@ -21,7 +22,8 @@ export class EditRolesComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -30,26 +32,7 @@ export class EditRolesComponent implements OnInit {
     var urlParams = new URLSearchParams(window.location.search);
     this.id = parseInt(urlParams.get("id"));
     console.log(this.id)
-
-    this.dataService.getCapabilityNamesByDepartment(this.id).then(response => {
-      console.log(response)
-      this.capabilities = response;
-    });
-
-    this.dataService.getRolesInDepartment(this.id).then(response => {
-      console.log(response)
-      this.jobsInDep = response;
-    });
-
-    this.dataService.getBands().then(response => {
-      console.log(response)
-      this.bands = response;
-    });
-
-    this.dataService.getDepartmentDetails(this.id).then(response => {
-      console.log(response)
-      this.departmentName = response;
-    });
+    this.loadRoles();
   }
 
   roleExists(cap, band){
@@ -84,10 +67,36 @@ export class EditRolesComponent implements OnInit {
     });
   }
 
+  loadRoles(){
+
+    this.dataService.getCapabilityNamesByDepartment(this.id).then(response => {
+      console.log(response)
+      this.capabilities = response;
+    });
+
+    this.dataService.getRolesInDepartment(this.id).then(response => {
+      console.log(response)
+      this.jobsInDep = response;
+    });
+
+    this.dataService.getBands().then(response => {
+      console.log(response)
+      this.bands = response;
+    });
+
+    this.dataService.getDepartmentDetails(this.id).then(response => {
+      console.log(response)
+      this.departmentName = response;
+    });
+  }
+
   openAddRoleModal(roleBandId, roleCapabilityId) {
     const modalRef = this.modalService.open(AddRoleModalComponent);
     modalRef.componentInstance.departmentId = this.id;
     modalRef.componentInstance.bandId = roleBandId;
     modalRef.componentInstance.capabilityId =  roleCapabilityId;
+    modalRef.componentInstance.roleAdded.subscribe(data =>{
+      this.loadRoles();
+    });
   }
 }
