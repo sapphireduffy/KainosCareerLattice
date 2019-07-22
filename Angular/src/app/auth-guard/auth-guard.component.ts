@@ -6,9 +6,6 @@ import { decode, verify } from 'jsonwebtoken'
 
 @Injectable()
 export class AuthGuardComponent implements CanActivate {
-
-    public token: Object
-
     constructor(private router: Router, private cookieService: CookieService){}
 
     validToken(){
@@ -16,13 +13,16 @@ export class AuthGuardComponent implements CanActivate {
         var token = this.cookieService.get('token')
         if(token){
           if(verify(token, privateKey.privateKey)){
-            this.token = decode(token)
-            console.log(this.token["Type"]);
+            var token = decode(token)
             return true
           }
         }
       } catch (err){}
       return false
+    }
+
+    isAdmin(){
+      return decode(this.cookieService.get('token'))["Type"] == "Admin"
     }
     
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
