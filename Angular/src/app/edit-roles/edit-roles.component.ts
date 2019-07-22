@@ -48,7 +48,7 @@ export class EditRolesComponent implements OnInit {
     if(selectedRole.ID == -1){
       this.openAddRoleModal(selectedRole.BandId, selectedRole.CapabilityId);
     }else{
-      this.openRoleInfoModal(selectedRole.ID);
+      this.openEditRoleModal(selectedRole.ID) ;
     }
   }
 
@@ -90,6 +90,27 @@ export class EditRolesComponent implements OnInit {
   }
 
   openAddRoleModal(roleBandId, roleCapabilityId) {
+    const modalRef = this.modalService.open(AddRoleModalComponent);
+    modalRef.componentInstance.departmentId = this.id;
+    modalRef.componentInstance.bandId = roleBandId;
+    modalRef.componentInstance.capabilityId =  roleCapabilityId;
+    modalRef.componentInstance.roleAdded.subscribe(data =>{
+     
+      console.log(data.data)
+      if(data.data.hasOwnProperty('success')){
+        this.showAlert = true;
+        this.alertMessage = data.data.success;
+        this.alertType = "success";
+      } else {
+        this.showAlert = true;
+        this.alertMessage = data.data.error;
+        this.alertType = "danger";
+      }
+      this.loadRoles();
+    });
+  }
+
+  openEditRoleModal(roleId) {
     const modalRef = this.modalService.open(AddRoleModalComponent);
     modalRef.componentInstance.departmentId = this.id;
     modalRef.componentInstance.bandId = roleBandId;

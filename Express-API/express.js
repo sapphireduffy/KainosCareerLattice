@@ -37,6 +37,16 @@ app.post('/addrole', cors(), function (request, response) {
   })
 });
 
+app.put('/editrole', cors(), function (request, response) {
+  console.log(request.body)
+	rolesHandler.editRole(request.body, db).then(result => {
+    console.log(result)
+    response.send(result)
+  }, reject => {
+    response.send(reject)
+  })
+});
+
 app.get("/roles", cors(), function(request, response) {
   db.query(rolesQuery,[request.query.departmentID]).then(rows => {
     response.send(rows);
