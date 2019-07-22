@@ -2,7 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { DataService } from "../_services/data.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { RoleInformationComponent } from "../role-information/role-information.component";
-import { BandInformationComponent } from '../band-information/band-information.component';
+import { BandInformationComponent } from "../band-information/band-information.component";
+import { AddRoleModalComponent } from "../add-role-modal/add-role-modal.component";
 
 @Component({
   selector: "app-career-table",
@@ -23,25 +24,25 @@ export class CareerTableComponent implements OnInit {
   ngOnInit(): void {
     var urlParams = new URLSearchParams(window.location.search);
     var id = parseInt(urlParams.get("id"));
-    console.log(id)
+    console.log(id);
 
     this.dataService.getCapabilityNamesByDepartment(id).then(response => {
-      console.log(response)
+      console.log(response);
       this.capabilities = response;
     });
 
     this.dataService.getRolesInDepartment(id).then(response => {
-      console.log(response)
+      console.log(response);
       this.jobsInDep = response;
     });
 
     this.dataService.getBands().then(response => {
-      console.log(response)
+      console.log(response);
       this.bands = response;
     });
 
     this.dataService.getDepartmentDetails(id).then(response => {
-      console.log(response)
+      console.log(response);
       this.departmentName = response;
     });
   }
@@ -58,5 +59,11 @@ export class CareerTableComponent implements OnInit {
       const modalRef = this.modalService.open(BandInformationComponent);
       modalRef.componentInstance.bandToDisplay = response[0];
     });
+  }
+
+  openAddRoleModal() {
+    const modalRef = this.modalService.open(AddRoleModalComponent);
+    // modalRef.componentInstance.departmentName =
+    //modalRef.componentInstance.bandId =
   }
 }
