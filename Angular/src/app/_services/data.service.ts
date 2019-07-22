@@ -8,7 +8,7 @@ const getAllDataUrl = "/api/allData";
 const getRolesInDepartmentURL = "/api/rolesInDep";
 const getBandsURL = "/api/bands";
 const roleUrl = "/api/role";
-const addRoleUrl = "/api/addRole";
+const addRoleUrl = "/api/addrole";
 const getUniqueBandURL = "/api/uniqueband";
 
 @Injectable()
