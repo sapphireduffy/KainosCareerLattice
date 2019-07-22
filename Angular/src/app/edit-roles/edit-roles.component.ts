@@ -19,6 +19,7 @@ export class EditRolesComponent implements OnInit {
   id:any;
   alertMessage:string;
   alertType:string;
+  showAlert = false;
 
   constructor(
     private dataService: DataService,
@@ -27,8 +28,6 @@ export class EditRolesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.alertMessage = "test";
-    this.alertType = "success";
     var urlParams = new URLSearchParams(window.location.search);
     this.id = parseInt(urlParams.get("id"));
     console.log(this.id)
@@ -96,6 +95,17 @@ export class EditRolesComponent implements OnInit {
     modalRef.componentInstance.bandId = roleBandId;
     modalRef.componentInstance.capabilityId =  roleCapabilityId;
     modalRef.componentInstance.roleAdded.subscribe(data =>{
+     
+      console.log(data.data)
+      if(data.data.hasOwnProperty('success')){
+        this.showAlert = true;
+        this.alertMessage = data.data.success;
+        this.alertType = "success";
+      } else {
+        this.showAlert = true;
+        this.alertMessage = data.data.error;
+        this.alertType = "danger";
+      }
       this.loadRoles();
     });
   }

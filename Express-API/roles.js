@@ -9,14 +9,17 @@ class RolesHandler {
             console.log(createRoleQuery)
             console.log([params.roleName,params.departmentId,params.bandId,params.summary,params.jobSpecUrl])
             console.log(db.query(createRoleQuery,[params.roleName,params.departmentId,params.bandId,params.summary,params.jobSpecUrl]))
-            db.query(createRoleQuery,[params.roleName,params.departmentId,params.bandId,params.summary,params.jobSpecUrl]).then(rows => {
-                console.log(rows.insertId)
-                db.query(createRoleCapabilityLinkQuery,[rows.insertId,params.capabilityId]).then(result => {
-                    console.log("SUCESSFULLY ADDED ROLE")
-                    resolve({"Message":"Successfully added role"})
+            try {
+                db.query(createRoleQuery,[params.roleName,params.departmentId,params.bandId,params.summary,params.jobSpecUrl]).then(rows => {
+                    console.log(rows.insertId)
+                    db.query(createRoleCapabilityLinkQuery,[rows.insertId,params.capabilityId]).then(result => {
+                        console.log("SUCESSFULLY ADDED ROLE")
+                        resolve({"success":"Successfully added role"})
+                    })
                 })
-            })
-            reject({"Message":"Error adding role"})
+            } catch (err){
+                reject({"error":"Error adding role"})
+            }
         })
     }
 }
