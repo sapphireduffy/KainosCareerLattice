@@ -24,8 +24,5 @@ installs:
   - npm install express
   - npm install mysql
 
-  before_script:
-  - npm install -g @angular/cli
-
 script:
   - ng test
