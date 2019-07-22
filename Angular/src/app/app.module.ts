@@ -53,7 +53,9 @@ import { EditRoleModalComponent } from './edit-role-modal/edit-role-modal.compon
   entryComponents: [
     RoleInformationComponent,
     BandInformationComponent,
-    AddRoleModalComponent
+    AddRoleModalComponent,
+    EditRoleModalComponent
+
   ]
 })
 export class AppModule {}

@@ -5,6 +5,7 @@ import { RoleInformationComponent } from "../role-information/role-information.c
 import { BandInformationComponent } from '../band-information/band-information.component';
 import { AddRoleModalComponent } from '../add-role-modal/add-role-modal.component';
 import { Router } from '@angular/router';
+import { EditRoleModalComponent } from '../edit-role-modal/edit-role-modal.component';
 
 @Component({
   selector: "app-edit-roles",
@@ -111,10 +112,8 @@ export class EditRolesComponent implements OnInit {
   }
 
   openEditRoleModal(roleId) {
-    const modalRef = this.modalService.open(AddRoleModalComponent);
-    modalRef.componentInstance.departmentId = this.id;
-    modalRef.componentInstance.bandId = roleBandId;
-    modalRef.componentInstance.capabilityId =  roleCapabilityId;
+    const modalRef = this.modalService.open(EditRoleModalComponent);
+    modalRef.componentInstance.roleId = roleId;
     modalRef.componentInstance.roleAdded.subscribe(data =>{
      
       console.log(data.data)
