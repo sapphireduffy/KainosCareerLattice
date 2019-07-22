@@ -1,7 +1,10 @@
 <nav class="navbar navbar-dark bg-primary">
-        <img src="../../assets/Kainos_Logo.png" style="height: 50px;" alt="Kainos Logo" class="d-inline-block align-top" alt="Kainos logo">
-        <a class="nav-element" href="/home">Career Lattice</a>
-        <p class="nav-element">{{this.authComponent.token["Type"]}}</p>
-        <input type="checkbox" class="data-toggle" data-toggle="data-toggle">
+    <img src="../../assets/Kainos_Logo.png" style="height: 50px;" alt="Kainos Logo" class="d-inline-block align-top" alt="Kainos logo">
+    <a class="nav-element" href="/home">Career Lattice</a>
+    <div *ngIf="this.authComponent.isAdmin()" class="btn-group btn-toggle">
+        <button (click)="switchRoleToAdmin(true)" class="btn" [ngClass]="{'btn-primary': this.dataService.isAdmin}">Admin</button>
+        <button (click)="switchRoleToAdmin(false)" class="btn" [ngClass]="{'btn-primary': !this.dataService.isAdmin}">Employee</button>
+    </div>
+    <p *ngIf="!this.authComponent.isAdmin()" class="nav-element">Employee</p>
 </nav>
 <body></body>
