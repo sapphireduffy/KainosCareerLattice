@@ -2,8 +2,8 @@
 .nav-element {
     color: #fff; 
     font-size: x-large;
+    margin: 0;
   }
-
 
 .bg-primary {
     background-color: #003471!important;
