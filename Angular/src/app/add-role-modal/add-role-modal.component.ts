@@ -4,7 +4,6 @@ import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { Role } from "../model/Role";
 import { DataService } from "../_services/data.service";
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: "app-add-role-modal",

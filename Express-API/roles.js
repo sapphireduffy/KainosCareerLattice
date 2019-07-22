@@ -23,4 +23,4 @@ class RolesHandler {
         })
     }
 }
-module.exports = RolesHandler;
+module.exports = RolesHandler
