@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import privateKey from '../../../../privateKey.js';
-import { HttphandlerService } from '../httphandler.service';
+import { privateKey } from '../../../../privateKey.js'
+import { verify } from 'jsonwebtoken'
+import { HttphandlerService } from '../httphandler.service.js';
 
 @Component({
   selector: 'app-login',
@@ -24,8 +25,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     try {
       var token = this.cookieService.get('token')
-      if (token != undefined && token != null && token != '') {
-        if (verify(token, privateKey.privateKey)) {
+      if(token){
+        if(verify(token, privateKey.privateKey)){
           this.router.navigate(['home'])
         }
       }

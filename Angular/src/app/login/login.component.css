@@ -12,7 +12,6 @@ body, html {
 	font-family: sans-serif;
 }
 
-/*---------------------------------------------*/
 a {
 	font-family: Arial;
 	font-size: 14px;
@@ -23,28 +22,6 @@ a {
 	-webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
-}
-
-a:focus {
-	outline: none !important;
-}
-
-a:hover {
-	text-decoration: none;
-  color: #333333;
-}
-
-/*---------------------------------------------*/
-h1,h2,h3,h4,h5,h6 {
-	margin: 0px;
-}
-
-p {
-	font-family: Arial;
-	font-size: 14px;
-	line-height: 1.7;
-	color: #666666;
-	margin: 0px;
 }
 
 ul, li {
@@ -59,36 +36,16 @@ input {
 	border: none;
 }
 
-textarea {
-  outline: none;
-  border: none;
-}
-
-textarea:focus, input:focus {
-  border-color: transparent !important;
-}
-
 input:focus::-webkit-input-placeholder { color:transparent; }
 input:focus:-moz-placeholder { color:transparent; }
 input:focus::-moz-placeholder { color:transparent; }
 input:focus:-ms-input-placeholder { color:transparent; }
-
-textarea:focus::-webkit-input-placeholder { color:transparent; }
-textarea:focus:-moz-placeholder { color:transparent; }
-textarea:focus::-moz-placeholder { color:transparent; }
-textarea:focus:-ms-input-placeholder { color:transparent; }
 
 input::-webkit-input-placeholder { color: #adadad;}
 input:-moz-placeholder { color: #adadad;}
 input::-moz-placeholder { color: #adadad;}
 input:-ms-input-placeholder { color: #adadad;}
 
-textarea::-webkit-input-placeholder { color: #adadad;}
-textarea:-moz-placeholder { color: #adadad;}
-textarea::-moz-placeholder { color: #adadad;}
-textarea:-ms-input-placeholder { color: #adadad;}
-
-/*---------------------------------------------*/
 button {
 	outline: none !important;
 	border: none;
@@ -99,13 +56,6 @@ button:hover {
 	cursor: pointer;
 }
 
-iframe {
-	border: none !important;
-}
-
-
-/*//////////////////////////////////////////////////////////////////
-[ Utility ]*/
 .txt1 {
   font-family: Arial;
   font-size: 15px;
@@ -118,14 +68,6 @@ iframe {
   font-size: 15px;
   color: #57b846;
   line-height: 1.5;
-}
-
-/*//////////////////////////////////////////////////////////////////
-[ login ]*/
-
-.limiter {
-  width: 100%;
-  margin: 0 auto;
 }
 
 .container-login100 {
@@ -143,19 +85,6 @@ iframe {
   background: #fff;  
 }
 
-.wrap-login100 {
-  width: 390px;
-  background: #fff;
-}
-
-
-/*------------------------------------------------------------------
-[ Form ]*/
-
-.login100-form {
-  width: 100%;
-}
-
 .login100-form-title {
   display: block;
   font-size: 39px;
@@ -163,22 +92,6 @@ iframe {
   line-height: 1.2;
   text-align: center;
 }
-
-.login100-form-avatar {
-  display: block;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin: 0 auto;
-}
-
-.login100-form-avatar img {
-  width: 100%;
-}
-
-/*------------------------------------------------------------------
-[ Input ]*/
 
 .wrap-input100 {
   width: 100%;
@@ -198,7 +111,6 @@ iframe {
   padding: 0 5px;
 }
 
-/*---------------------------------------------*/ 
 .focus-input100 {
   position: absolute;
   display: block;
@@ -207,23 +119,6 @@ iframe {
   top: 0;
   left: 0;
   pointer-events: none;
-}
-
-.focus-input100::before {
-  content: "";
-  display: block;
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-  transition: all 0.4s;
-
-  background: #57b846;
 }
 
 .focus-input100::after {
@@ -261,20 +156,6 @@ iframe {
 
 .has-val.input100 + .focus-input100::before {
   width: 100%;
-}
-
-
-/*------------------------------------------------------------------
-[ Button ]*/
-.container-login100-form-btn {
-  width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
 .login100-form-btn {
@@ -315,15 +196,6 @@ iframe {
   -webkit-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
   -o-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
   -ms-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
-}
-
-
-
-/*------------------------------------------------------------------
-[ Alert validate ]*/
-
-.validate-input {
-  position: relative;
 }
 
 .alert-validate::before {
@@ -388,9 +260,6 @@ iframe {
   }
 }
 
-
-/*//////////////////////////////////////////////////////////////////
-[ Login more ]*/
 .login-more li {
   position: relative;
   padding-left: 16px;
