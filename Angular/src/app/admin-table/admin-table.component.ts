@@ -3,11 +3,11 @@ import { DataService } from "../_services/data.service";
 import { ModalService } from '../modal.service';
 
 @Component({
-  selector: "app-edit-roles",
-  templateUrl: "./edit-roles.component.html",
-  styleUrls: ["./edit-roles.component.css"]
+  selector: "app-admin-table",
+  templateUrl: "./admin-table.component.html",
+  styleUrls: ["./admin-table.component.css"]
 })
-export class EditRolesComponent implements OnInit {
+export class AdminTableComponent implements OnInit {
   departmentName: any;
   capabilities = [];
   jobsInDep: any;
@@ -35,7 +35,7 @@ export class EditRolesComponent implements OnInit {
         return {"Role":this.jobsInDep[i].RoleName, "ID":this.jobsInDep[i].role_id}
       }
     }
-    return {"Role":"Add new role", "ID":-1, "BandId":band.band_id, "CapabilityId": cap.capability_id}
+    return {"Role":"+", "ID":-1, "BandId":band.band_id, "CapabilityId": cap.capability_id}
   }
 
   async switchModal(selectedRole) {
