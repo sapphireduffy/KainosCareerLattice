@@ -18,6 +18,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { BandInformationComponent } from './band-information/band-information.component';
 import { EditRolesComponent } from './edit-roles/edit-roles.component';
 import { AddRoleModalComponent } from "./add-role-modal/add-role-modal.component";
+import {MatIconModule, MatIcon} from '@angular/material/icon';
+import { AddCapabilityComponent } from './add-capability/add-capability.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { AddRoleModalComponent } from "./add-role-modal/add-role-modal.component
     RoleInformationComponent,
     BandInformationComponent,
     EditRolesComponent,
-    AddRoleModalComponent
+    AddRoleModalComponent,
+    AddCapabilityComponent
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -37,7 +40,8 @@ import { AddRoleModalComponent } from "./add-role-modal/add-role-modal.component
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    MatIconModule
   ],
   providers: [
     HttphandlerService,
@@ -48,7 +52,8 @@ import { AddRoleModalComponent } from "./add-role-modal/add-role-modal.component
   entryComponents: [
     RoleInformationComponent,
     BandInformationComponent,
-    AddRoleModalComponent
+    AddRoleModalComponent,
+    AddCapabilityComponent
   ]
 })
 export class AppModule {}

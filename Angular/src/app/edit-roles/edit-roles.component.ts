@@ -5,6 +5,7 @@ import { RoleInformationComponent } from "../role-information/role-information.c
 import { BandInformationComponent } from '../band-information/band-information.component';
 import { AddRoleModalComponent } from '../add-role-modal/add-role-modal.component';
 import { Router } from '@angular/router';
+import { AddCapabilityComponent } from '../add-capability/add-capability.component';
 
 @Component({
   selector: "app-edit-roles",
@@ -48,9 +49,32 @@ export class EditRolesComponent implements OnInit {
   async switchModal(selectedRole) {
     if(selectedRole.ID == -1){
       this.openAddRoleModal(selectedRole.BandId, selectedRole.CapabilityId);
-    }else{
+    }
+    else if (selectedRole == 'addCapability') {
+      this.openAddCapabilityModal();
+    }
+    else {
       this.openRoleInfoModal(selectedRole.ID);
     }
+  }
+
+  openAddCapabilityModal() {
+    const modalRef = this.modalService.open(AddCapabilityComponent);
+    modalRef.componentInstance.departmentId = this.id;
+    modalRef.componentInstance.capabilityAdded.subscribe(data =>{
+     
+      console.log(data.data)
+      if(data.data.hasOwnProperty('success')){
+        this.showAlert = true;
+        this.alertMessage = data.data.success;
+        this.alertType = "success";
+      } else {
+        this.showAlert = true;
+        this.alertMessage = data.data.error;
+        this.alertType = "danger";
+      }
+      this.loadRoles();
+    });
   }
 
   async openRoleInfoModal(selectedRoleId){

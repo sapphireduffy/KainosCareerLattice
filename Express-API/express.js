@@ -8,9 +8,11 @@ const PORT = 8000
 const Database = require('./db.js')
 const LoginHandler = require('./login.js')
 const RolesHandler = require('./roles.js')
+const CapabilityHandler = require('./capability')
 const db = new Database()
 const loginHandler = new LoginHandler()
 const rolesHandler = new RolesHandler()
+const capabilityHandler = new CapabilityHandler()
 
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(express.urlencoded())
@@ -31,6 +33,14 @@ app.post('/addrole', cors(), function (request, response) {
   console.log(request.body)
 	rolesHandler.createRole(request.body, db).then(result => {
     console.log(result)
+    response.send(result)
+  }, reject => {
+    response.send(reject)
+  })
+});
+
+app.post('/addcapability', cors(), function (request, response) {
+  capabilityHandler.createCapability(request.body, db).then(result => {
     response.send(result)
   }, reject => {
     response.send(reject)
