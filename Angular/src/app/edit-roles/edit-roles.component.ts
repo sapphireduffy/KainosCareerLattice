@@ -50,29 +50,16 @@ export class EditRolesComponent implements OnInit {
         this.displayAlert(data)
       })
     }
-    else if (selectedRole == 'addCapability') {
-      this.modalService.openAddCapabilityModal(this.departmentId).then(data => {
-        this.displayAlert(data)
-      })
-    }
     else {
       this.modalService.openRoleInfoModal(selectedRole.ID);
     }
   }
 
-  /*async openRoleInfoModal(selectedRoleId){
-    await this.dataService.getRoleInformation(selectedRoleId).then(response => {
-      const modalRef = this.modalService.openRoleInfoModal(selected)
-      modalRef.componentInstance.roleToDisplay = response[0];
+  openCapabilityModal(){
+    this.modalService.openAddCapabilityModal(this.departmentId).then(data => {
+      this.displayAlert(data)
     });
-  }*/
-
-  /*async openBandInfoModal(selectedBandId) {
-    await this.dataService.getBandInformation(selectedBandId).then(response => {
-      const modalRef = this.modalService.open(BandInformationComponent);
-      modalRef.componentInstance.bandToDisplay = response[0];
-    });
-  }*/
+  }
 
   loadRoles(){
     this.dataService.getCapabilityNamesByDepartment(this.departmentId).then(response => {

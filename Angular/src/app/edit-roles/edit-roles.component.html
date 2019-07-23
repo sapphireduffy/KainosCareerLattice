@@ -18,7 +18,7 @@
           </tr>
           <tr>
               <th class='job-family'>
-                <div><button class='btn btn-primary' id='addCapability' (click)="switchModal('addCapability')">Add Capability +</button></div>
+                <div><button class='btn btn-primary' id='addCapability' (click)="openCapabilityModal()">Add Capability +</button></div>
               </th>
               <th scope="row" *ngFor='let capability of capabilities' class='job-headings'>{{capability.name}}</th>
               <!-- <button class='btn btn-primary' id='addCapability' (click)="switchModal('newCap')">Add Capability +</button> -->
