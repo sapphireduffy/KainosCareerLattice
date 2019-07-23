@@ -51,7 +51,9 @@ export class EditRolesComponent implements OnInit {
       })
     }
     else if (selectedRole == 'addCapability') {
-      this.modalService.openAddCapabilityModal(this.departmentId);
+      this.modalService.openAddCapabilityModal(this.departmentId).then(data => {
+        this.displayAlert(data)
+      })
     }
     else {
       this.modalService.openRoleInfoModal(selectedRole.ID);
