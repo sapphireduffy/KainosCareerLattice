@@ -5,6 +5,7 @@ import { Role } from "../model/Role";
 import { DataService } from "../_services/data.service";
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: "app-edit-role-modal",
@@ -12,25 +13,30 @@ import { Observable } from 'rxjs';
   styleUrls: ["./edit-role-modal.component.css"]
 })
 export class EditRoleModalComponent implements OnInit {
-  @Input() departmentId;
-  @Input() bandId;
-  @Input() capabilityId;
+  @Input() roleToEdit:any;
+  @Input() currentCapabilityId:any;
+  @Input() currentBandId:any;
+  @Input() capbilities:any;
+  @Input() bands:any;
   @Output() roleEdited = new EventEmitter();
   editedRole: Role;
   public editRoleForm: FormGroup;
   public submitted = false;
+  public currentBandName;
   constructor(
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
     private dataService: DataService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.editRoleForm = this.formBuilder.group({
-      roleName: ["", Validators.required],
-      roleSummary: ["", Validators.maxLength(65000)],
-      roleSharePointLink: ["", Validators.maxLength(500)]
+      roleName: [this.roleToEdit.name, Validators.required],
+      roleSummary: [this.roleToEdit.summary, Validators.maxLength(65000)],
+      roleSharePointLink: [this.roleToEdit.job_spec_url, Validators.maxLength(500)],
+      roleBand: [this.currentBandName],
+      roleCapability: [this.currentCapabilityId]
     });
   }
 
@@ -44,12 +50,10 @@ export class EditRoleModalComponent implements OnInit {
 
   setEditRole() {
     this.editedRole = {
+      roleId: this.roleToEdit.role_id,
       roleName: this.editRoleForm.get("roleName").value,
-      departmentId: this.departmentId,
-      bandId: this.bandId,
       summary: this.editRoleForm.get("roleSummary").value,
       jobSpecUrl: this.editRoleForm.get("roleSharePointLink").value,
-      capabilityId: this.capabilityId
     };
   }
   deleteUser(){
@@ -70,8 +74,6 @@ export class EditRoleModalComponent implements OnInit {
     }
     this.setEditRole();
 
-    console.log(this.editedRole);
-
     this.dataService
       .editRole(this.editedRole)
       .then(result => this.roleEdited.emit(result))
@@ -80,7 +82,7 @@ export class EditRoleModalComponent implements OnInit {
       });
     this.closeModal();
 
-    
+
   }
 
 

@@ -1,5 +1,5 @@
 const createRoleQuery = "INSERT INTO role(name, department_id, band_id, summary, job_spec_url) VALUES (?,?,?,?,?) "
-const editRoleQuery = "UPDATE role SET name=?, department_id=?, band_id=?, summary=?, job_spec_url=?) WHERE role_id=?"
+const editRoleQuery = "UPDATE role SET name=?, summary=?, job_spec_url=? WHERE role_id=?"
 const createRoleCapabilityLinkQuery = "INSERT INTO role_capability(role_id,capability_id) VALUES (?,?) "
 const deleterole = " DELETE FROM role where role_id= ? "
 
@@ -27,28 +27,25 @@ class RolesHandler {
     }
 
 
-    editRole(params, db) {
-        return new Promise((resolve, reject) => {
-            console.log(editRoleQuery)
-            console.log([params.roleName, params.departmentId, params.bandId, params.summary, params.jobSpecUrl])
-            console.log(db.query(editRoleQuery, [params.roleName, params.departmentId, params.bandId, params.summary, params.jobSpecUrl]))
-            try {
-                db.query(editRoleQuery, [params.roleName, params.departmentId, params.bandId, params.summary, params.jobSpecUrl, params.roleId]).then(rows => {
-                    console.log(rows.insertId)
-                    resolve({ "success": "Successfully edited role" })
-
-                })
-            } catch (err) {
-                reject({ "error": "Error editing role" })
-            }
-        })
-    }
+editRole(params, db){
+    return new Promise( ( resolve, reject ) => {
+        console.log(editRoleQuery)
+        try {
+            db.query(editRoleQuery,[params.roleName,params.summary,params.jobSpecUrl, params.roleId]).then(rows => {
+                    resolve({"success":"Successfully edited role"})
+                
+            })
+        } catch (err){
+            reject({"error":"Error editing role"})
+        }
+    })
+}
 
     deleteRole(params, db) {
         return new Promise((resolve, reject) => {
 
             try {
-                db.query(deleteRole, [params.roleId]).then(rows => {
+                db.query(deleterole, [params.roleId]).then(rows => {
                     resolve({ "success": "Successfully deleting role" })
                 })
             } catch (err) {

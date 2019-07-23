@@ -20,9 +20,11 @@ app.use(express.json())
 
 const rolesQuery = "SELECT role_id, name, department_id, band_id FROM role WHERE department_id = ?"
 const capabilitiesQuery = "SELECT name, capability_id FROM capability WHERE department_id = ?"
+const capabilityNameQuery = "SELECT name FROM capability WHERE capability_id = ?"
 const departmentsQuery = "SELECT name FROM department WHERE department_id = ?"
 const rolesInDepQuery = "SELECT * FROM viewTableData WHERE department_id = ?"
 const bandsQuery = "SELECT * FROM band"
+const bandNameQuery = "SELECT name FROM band WHERE band_id = ?"
 const getRoleQuery = "SELECT role_id, name, summary, job_spec_url FROM role WHERE role_id = ?"
 
 const tokenCookieName = 'token'
@@ -69,6 +71,12 @@ app.get("/capabilities", cors(), function(request, response) {
   });
 });
 
+app.get("/capabilityName", cors(), function(request, response) {
+  db.query(capabilityNameQuery,[request.query.capabilityId]).then(rows => {
+    response.send(rows);
+  });
+});
+
 app.get("/uniqueband", cors(), function(request, response) {
   db.query(
     "SELECT * FROM viewBandData WHERE band_id = ?",
@@ -92,6 +100,12 @@ app.get("/rolesInDep", cors(), function(request, response) {
 
 app.get("/bands", cors(), function(request, response) {
   db.query(bandsQuery).then(rows => {
+    response.send(rows);
+  });
+});
+
+app.get("/bandName", cors(), function(request, response) {
+  db.query(bandNameQuery,[request.query.bandId]).then(rows => {
     response.send(rows);
   });
 });

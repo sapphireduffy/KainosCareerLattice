@@ -111,22 +111,27 @@ export class EditRolesComponent implements OnInit {
     });
   }
 
-  openEditRoleModal(roleId) {
-    const modalRef = this.modalService.open(EditRoleModalComponent);
-    modalRef.componentInstance.roleId = roleId;
-    modalRef.componentInstance.roleAdded.subscribe(data =>{
+  async openEditRoleModal(roleId) {
+    await this.dataService.getRoleInformation(roleId).then(response => {
+      const modalRef = this.modalService.open(EditRoleModalComponent);
+      console.log(response[0]);
+      modalRef.componentInstance.roleToEdit = response[0];
+      modalRef.componentInstance.capabilities = this.capabilities;
+      modalRef.componentInstance.bands = this.bands;
+      modalRef.componentInstance.roleEdited.subscribe(data =>{
      
-      console.log(data.data)
-      if(data.data.hasOwnProperty('success')){
-        this.showAlert = true;
-        this.alertMessage = data.data.success;
-        this.alertType = "success";
-      } else {
-        this.showAlert = true;
-        this.alertMessage = data.data.error;
-        this.alertType = "danger";
-      }
-      this.loadRoles();
-    });
+        console.log(data.data)
+        if(data.data.hasOwnProperty('success')){
+          this.showAlert = true;
+          this.alertMessage = data.data.success;
+          this.alertType = "success";
+        } else {
+          this.showAlert = true;
+          this.alertMessage = data.data.error;
+          this.alertType = "danger";
+        }
+        this.loadRoles();
+      });
+  });
   }
 }
