@@ -49,10 +49,6 @@ app.post('/addrole', cors(), function (request, response) {
   })
 });
 
-app.put('/editrole', cors(), function (request, response) {
-  console.log(request.body)
-	rolesHandler.editRole(request.body, db).then(result => {
-    console.log(result)
 app.post('/addcapability', cors(), function (request, response) {
   capabilityHandler.createCapability(request.body, db).then(result => {
     response.send(result)
@@ -114,8 +110,8 @@ app.get("/role", cors(), function(request, response) {
   db.query(getRoleQuery,[request.query.roleID]).then(rows => {
     response.send(rows);
   });
-})
+});
 
 app.listen(PORT, () => {
   console.log("Server is running on PORT:", PORT);
-})
+});
