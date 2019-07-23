@@ -1,7 +1,7 @@
 const createRoleQuery = "INSERT INTO role(name, department_id, band_id, summary, job_spec_url) VALUES (?,?,?,?,?) "
 const editRoleQuery = "UPDATE role SET name=?, summary=?, job_spec_url=? WHERE role_id=?"
 const createRoleCapabilityLinkQuery = "INSERT INTO role_capability(role_id,capability_id) VALUES (?,?) "
-const deleterole = " DELETE FROM role where role_id= ? "
+const deleterole = "DELETE FROM role where role_id= ?"
 
 
 class RolesHandler {
@@ -43,9 +43,10 @@ editRole(params, db){
 
     deleteRole(params, db) {
         return new Promise((resolve, reject) => {
-
+                console.log("roleid" + [params.roleId])
             try {
                 db.query(deleterole, [params.roleId]).then(rows => {
+                    console.log(rows)
                     resolve({ "success": "Successfully deleting role" })
                 })
             } catch (err) {
