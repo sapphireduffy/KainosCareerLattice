@@ -23,7 +23,7 @@ const capabilitiesQuery = "SELECT name, capability_id FROM capability WHERE depa
 const departmentsQuery = "SELECT name FROM department WHERE department_id = ?"
 const rolesInDepQuery = "SELECT * FROM viewTableData WHERE department_id = ?"
 const bandsQuery = "SELECT * FROM band"
-const getRoleQuery = "SELECT role_id, name, summary, job_spec_url FROM role WHERE role_id = ?"
+const getRoleQuery = "SELECT role_id,name,summary,job_spec_url,school_id FROM viewRoleData WHERE role_id = ?"
 const capabilityNameQuery = "SELECT name FROM capability WHERE capability_id = ?"
 const bandNameQuery = "SELECT name FROM band WHERE band_id = ?"
 
@@ -40,9 +40,7 @@ app.delete('/deleteRole', cors(), function (request, response) {
 });
 
 app.post('/addrole', cors(), function (request, response) {
-  console.log(request.body)
 	rolesHandler.createRole(request.body, db).then(result => {
-    console.log(result)
     response.send(result)
   }, reject => {
     response.send(reject)
@@ -98,7 +96,7 @@ app.get("/bands", cors(), function(request, response) {
   });
 });
 
-app.post('/login', function (request, response) {
+app.post('/login', cors(), function (request, response) {
 	loginHandler.login(request.body, db).then(token => {
     response.cookie(tokenCookieName,token)
 		response.send({tokenCookieName:token})

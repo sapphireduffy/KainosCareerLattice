@@ -18,6 +18,7 @@ const getCapabilityNameUrl = "/api/capabilityName";
 @Injectable()
 export class DataService {
   headers: any;
+  public isAdmin: boolean
 
   constructor() {}
 
@@ -207,16 +208,7 @@ export class DataService {
         return response;
       })
       .catch(function(error) {
-        if (error.response) {
-          return {
-            error: error.response.data.Message,
-            statusCode: error.response.statusCode
-          };
-        } else {
-          if (error.message) {
-            return { error: error.message };
-          }
-        }
+        return { error: error.message };
       });
   }
 

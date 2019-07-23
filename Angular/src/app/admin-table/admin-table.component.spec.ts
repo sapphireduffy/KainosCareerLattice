@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AlertComponentComponent } from './alert-component.component';
+import { AdminTableComponent } from './admin-table.component';
 
-describe('AlertComponentComponent', () => {
-  let component: AlertComponentComponent;
-  let fixture: ComponentFixture<AlertComponentComponent>;
+describe('AdminTableComponent', () => {
+  let component: AdminTableComponent;
+  let fixture: ComponentFixture<AdminTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlertComponentComponent ]
+      declarations: [ AdminTableComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AlertComponentComponent);
+    fixture = TestBed.createComponent(AdminTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
