@@ -6,6 +6,7 @@ import { DataService } from "../_services/data.service";
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { TouchSequence } from 'selenium-webdriver';
+import { Response } from 'selenium-webdriver/http';
 
 @Component({
   selector: "app-edit-role-modal",
@@ -49,21 +50,20 @@ export class EditRoleModalComponent implements OnInit {
   }
 
   setEditRole() {
-    this.editedRole = {
-      roleId: this.roleToEdit.role_id,
-      roleName: this.editRoleForm.get("roleName").value,
-      summary: this.editRoleForm.get("roleSummary").value,
-      jobSpecUrl: this.editRoleForm.get("roleSharePointLink").value,
-    };
-  }
-  deleteUser(){
-    return confirm("Are you sure?");
-  
+    // this.editedRole = {
+    //   roleId: this.roleToEdit.role_id,
+    //   roleName: this.editRoleForm.get("roleName").value,
+    //   summary: this.editRoleForm.get("roleSummary").value,
+    //   jobSpecUrl: this.editRoleForm.get("roleSharePointLink").value,
+    // };
   }
 
-  clickMethod(name: string) {
-    if(confirm("Are you sure to delete "+name)) {
-      console.log("Implement delete functionality here");
+
+  deleteRole() {
+    if(confirm("Are you sure you want to delete this role ")) {
+      this.dataService.deleteRole(this.roleToEdit.role_id).then(response =>{
+        console.log(response)
+      })
     }
   }
 

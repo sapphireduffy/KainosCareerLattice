@@ -3,16 +3,17 @@ import axios from "axios";
 
 const departmentUrl = "/api/departments";
 const capabilityUrl = "/api/capabilities";
-const getCapabilityNameUrl = "/api/capabilityName";
 const getAllDataUrl = "/api/allData";
+
 const getRolesInDepartmentURL = "/api/rolesInDep";
 const getBandsURL = "/api/bands";
-const getBandsNameURL = "/api/bandName";
 const roleUrl = "/api/role";
 const addRoleUrl = "/api/addrole";
 const editRoleUrl = "/api/editrole";
 const getUniqueBandURL = "/api/uniqueband";
-const deleteRoleURL = "/api/deleterole";
+const deleteRoleURL = "/api/deleteRole";
+const getBandsNameURL = "/api/bandName";
+const getCapabilityNameUrl = "/api/capabilityName";
 
 @Injectable()
 export class DataService {
@@ -56,31 +57,6 @@ export class DataService {
       .get(capabilityUrl, {
         params: {
           departmentID: departmentID
-        },
-        headers: this.getHeaders()
-      })
-      .then(function(response) {
-        return response.data;
-      })
-      .catch(function(error) {
-        if (error.response) {
-          return {
-            error: error.response.data.Message,
-            statusCode: error.response.statusCode
-          };
-        } else {
-          if (error.message) {
-            return { error: error.message };
-          }
-        }
-      });
-  }
-
-  getCapabilityNameById(capabilityId: number) {
-    return axios
-      .get(getCapabilityNameUrl, {
-        params: {
-          capabilityId: capabilityId
         },
         headers: this.getHeaders()
       })
@@ -155,31 +131,6 @@ export class DataService {
     return axios
       .get(getBandsURL, {
         params: {},
-        headers: this.getHeaders()
-      })
-      .then(function(response) {
-        return response.data;
-      })
-      .catch(function(error) {
-        if (error.response) {
-          return {
-            error: error.response.data.Message,
-            statusCode: error.response.statusCode
-          };
-        } else {
-          if (error.message) {
-            return { error: error.message };
-          }
-        }
-      });
-  }
-
-  getBandNameById(bandId: number) {
-    return axios
-      .get(getBandsNameURL, {
-        params: {
-          bandId: bandId
-        },
         headers: this.getHeaders()
       })
       .then(function(response) {
@@ -289,9 +240,11 @@ export class DataService {
       });
   }
 
-  deleteRole(roleID: any) {
+  deleteRole(roleId: any) {
     return axios
-      .delete(deleteRoleURL, { headers: this.getHeaders() })
+      .delete(deleteRoleURL, { 
+        data:{roleId:roleId},
+        headers: this.getHeaders() })
       .then(function(response) {
         return response;
       })
