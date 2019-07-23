@@ -14,7 +14,7 @@ export class AdminAuthGuardComponent implements CanActivate {
 
     cookieName = 'adminMode'
 
-    isAdminMode(){
+    isAdminMode() : boolean{
       return this.cookieService.get(this.cookieName) == 'true'
     }
 
@@ -22,7 +22,7 @@ export class AdminAuthGuardComponent implements CanActivate {
       this.cookieService.set(this.cookieName, value)
     }
 
-    isAdmin(){
+    isAdmin() : boolean {
       if(this.authGuard.validToken()){
         return decode(this.cookieService.get('token'))["Type"] == "Admin"
       }

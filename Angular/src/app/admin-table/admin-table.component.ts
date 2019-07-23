@@ -29,7 +29,7 @@ export class AdminTableComponent implements OnInit {
     this.loadRoles();
   }
 
-  roleExists(cap, band){
+  roleExists(cap, band) : Object {
     for(var i = 0; i < this.jobsInDep.length; i++){
       if(this.jobsInDep[i].capability_id == cap.capability_id && this.jobsInDep[i].band_id == band.band_id){
         return {"Role":this.jobsInDep[i].RoleName, "ID":this.jobsInDep[i].role_id}

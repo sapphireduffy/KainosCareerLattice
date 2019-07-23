@@ -23,11 +23,15 @@ export class AddRoleModalComponent implements OnInit {
     private dataService: DataService,
   ) {}
 
+  roleNameMaxLength = 100
+  roleSummaryMaxLength = 1000
+  roleSharepointMaxLength = 500
+
   ngOnInit() {
     this.addRoleForm = this.formBuilder.group({
-      roleName: ["", Validators.maxLength(100)],
-      roleSummary: ["", Validators.maxLength(65000)],
-      roleSharePointLink: ["", Validators.maxLength(500)]
+      roleName: ["", Validators.maxLength(this.roleNameMaxLength)],
+      roleSummary: ["", Validators.maxLength(this.roleSummaryMaxLength)],
+      roleSharePointLink: ["", Validators.maxLength(this.roleSharepointMaxLength)]
     });
   }
 
