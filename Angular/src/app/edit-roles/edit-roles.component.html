@@ -1,33 +1,31 @@
 <header>
-        <app-navbar></app-navbar>
-      </header>
-
-      <div class='container'>
-        <ngb-alert *ngIf="showAlert" type="{{alertType}}" (close)="showAlert = false">{{alertMessage}}</ngb-alert>
-        <table class='table'>
-            <ng-container>
-                <tr role='row'>
-                    <th
-                    class="job-family"
-                    scope="col"
-                    [attr.colspan]="capabilities.length + 1"
-                    rowspan="1"
-                    *ngFor="let department of departmentName"
-                  >
-                    {{ department.name }}
-                  </th>
-                </tr>
-                <tr>
-                    <th class='job-family'></th>
-                    <th scope="row" *ngFor='let capability of capabilities' class='job-headings'>{{capability.name}}</th>
-                </tr>
-                <tr *ngFor="let band of bands">
-                  <td scope='row' [class.job-level-inspire]='band.band_id <= 3' [class.job-level-explore]='band.band_id  > 3 && band.band_id <= 6' 
-                  [class.job-level-discover]='band.band_id  > 6' class='job-level' (click)="this.modalService.openBandInfoModal(band.band_id)">{{band.name}}</td>
-                  <td *ngFor="let cap of capabilities">
-                      <button scope='row' (click)="switchModal(roleExists(cap, band))" class='role-clickable'>{{roleExists(cap, band).Role}}</button>
-                  </td>
-                </tr>
-            </ng-container>
-        </table>
-      </div>
+  <app-navbar></app-navbar>
+</header>
+<div class='container'>
+  <ngb-alert *ngIf="showAlert" type="{{alertType}}" (close)="showAlert = false">{{alertMessage}}</ngb-alert>
+  <table class='table'>
+      <ng-container>
+          <tr role='row'>
+              <th
+              class="job-family"
+              scope="col"
+              [attr.colspan]="capabilities.length + 1"
+              rowspan="1"
+              *ngFor="let department of departmentName">
+              {{ department.name }}
+            </th>
+          </tr>
+          <tr>
+              <th class='job-family'></th>
+              <th scope="row" *ngFor='let capability of capabilities' class='job-headings'>{{capability.name}}</th>
+          </tr>
+          <tr *ngFor="let band of bands">
+            <td scope='row' [class.job-level-inspire]='band.band_id <= 3' [class.job-level-explore]='band.band_id  > 3 && band.band_id <= 6' 
+            [class.job-level-discover]='band.band_id  > 6' class='job-level' (click)="this.modalService.openBandInfoModal(band.band_id)">{{band.name}}</td>
+            <td *ngFor="let cap of capabilities">
+                <button scope='row' (click)="switchModal(roleExists(cap, band))" class='role-clickable'>{{roleExists(cap, band).Role}}</button>
+            </td>
+          </tr>
+      </ng-container>
+  </table>
+</div>

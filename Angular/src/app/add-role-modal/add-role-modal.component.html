@@ -4,8 +4,7 @@
     type="button"
     class="close"
     aria-label="Close"
-    (click)="activeModal.dismiss()"
-  >
+    (click)="activeModal.dismiss()">
     x
   </button>
 </div>
@@ -19,33 +18,26 @@
         formControlName="roleName"
         class="form-control"
         [ngClass]="{ 'is-invalid': submitted && formControls.roleName.errors }"
-        required
-      />
+        required/>
       <div
         *ngIf="submitted && formControls.roleName.errors"
-        class="invalid-feedback"
-      >
+        class="invalid-feedback">
         <div *ngIf="formControls.roleName.errors.required">
           Role Name is a required field
         </div>
       </div>
     </div>
-
     <div class="form-group">
       <label for="roleSummary">Role Summary</label>
       <input
         type="text"
         formControlName="roleSummary"
         class="form-control"
-        [ngClass]="{
-          'is-invalid': submitted && formControls.roleSummary.errors
-        }"
-        required
-      />
+        [ngClass]="{'is-invalid': submitted && formControls.roleSummary.errors}"
+        required/>
       <div
         *ngIf="submitted && formControls.roleSummary.errors"
-        class="invalid-feedback"
-      >
+        class="invalid-feedback">
         <div *ngIf="formControls.roleSummary.errors.maxlength">
           Max characters reached for Role Summary
         </div>
@@ -54,23 +46,18 @@
         </div>
       </div>
     </div>
-
     <div class="form-group">
       <label for="roleSharePointLink">Role Sharepoint Link</label>
       <input
         type="url"
         formControlName="roleSharePointLink"
         class="form-control"
-        [ngClass]="{
-          'is-invalid': submitted
-        }"
+        [ngClass]="{'is-invalid': submitted}"
         pattern="https://kainossoftwareltd.sharepoint.com/.+"
-        required
-      />
+        required/>
       <div
         *ngIf="submitted"
-        class="invalid-feedback"
-      >
+        class="invalid-feedback">
         <div *ngIf="formControls.roleSharePointLink.errors?.required">
           Role Sharepoint link is a required field
         </div>
