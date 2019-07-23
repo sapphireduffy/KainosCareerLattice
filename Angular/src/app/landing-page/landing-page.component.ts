@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataService } from '../_services/data.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 
 export class LandingPageComponent implements OnInit {
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private dataService: DataService){}
 
   ngOnInit(): void {}
 
