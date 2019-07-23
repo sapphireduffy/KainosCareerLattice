@@ -7,21 +7,33 @@
                 </span>
 
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                    <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
-                        <input class="input100" type="text" formControlName="username" name="Username">
-                        <span class="focus-input100" data-placeholder="Username"></span>
-                    </div>
+                    <div class="form-group">
+                        <div class="wrap-input100 m-t-85 m-b-35" data-validate = "Enter username">
+                            <input class="form-control" pattern="^[A-Za-z0-9.-]+@kainos.com$" type="text" formControlName="username" name="Username" placeholder="Username" required>
+                            <div *ngIf="form.controls['username'].invalid && (form.controls['username'].touched || submitted)" class="alert alert-danger">
+                                <div *ngIf="form.controls['username'].errors.required">
+                                    Username is required.
+                                </div>
+                                <div *ngIf="form.controls['username'].errors.pattern">
+                                    Username must be a kainos email.
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="wrap-input100 m-b-50" data-validate="Enter password">
+                            <input type="password" formControlName="password" name="Password" placeholder="Password" required>
+                            <div *ngIf="form.controls['password'].invalid && (form.controls['password'].touched || submitted)" class="alert alert-danger">
+                                <div *ngIf="form.controls['password'].errors.required">
+                                    Password is required.
+                                </div>
+                            </div>
+                        </div>
 
-                    <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
-                        <input class="input100" type="password" formControlName="password"  name="Password">
-                        <span class="focus-input100" data-placeholder="Password"></span>
-                    </div>
-                    
-
-                    <div class="container-login100-form-btn">
-                        <button type="submit" class="login100-form-btn">
-                            Login
-                        </button>
+                        <div class="container-login100-form-btn">
+                            <button class="form-control" type="submit" name="Submit" >
+                                Login
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
