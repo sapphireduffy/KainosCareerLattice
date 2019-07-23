@@ -1,67 +1,61 @@
 <header>
     <app-navbar></app-navbar>
 </header>
-
 <div class ="container">
-<div class="grid-container">
-    <div class="row">
-
-        <div class="col-sm" (click)="switchDepartment(1)">
-            <div class="card" >
-                    <img class="card-img-top" src="../../assets/salesmarketing.png" alt="Card image cap">
+    <div class="grid-container">
+        <div class="row">
+            <div class="col-sm" (click)="switchDepartment(1)">
+                <div class="card" >
+                        <img class="card-img-top" src="../../assets/salesmarketing.png" alt="Card image cap">
+                        <div class="card-body">
+                            <h4 class="card-title"><a>Sales & Marketing</a></h4>
+                        </div>
+                </div>
+            </div>
+            <div class="col-sm" (click)= "switchDepartment(2)">
+                <div class="card">
+                    <img class="card-img-top" src="../../assets/engineering.png" alt="Card image cap">
                     <div class="card-body">
-                        <h4 class="card-title"><a>Sales & Marketing</a></h4>
+                        <h4 class="card-title"><a>Technical</a></h4>
                     </div>
+                </div>
             </div>
-        </div>
-
-        <div class="col-sm" (click)= "switchDepartment(2)">
-            <div class="card">
-                <img class="card-img-top" src="../../assets/engineering.png" alt="Card image cap">
-                <div class="card-body">
-                    <h4 class="card-title"><a>Technical</a></h4>
+            <div class="col-sm" (click)= "switchDepartment(3)">
+                <div class="card">
+                    <img class="card-img-top" src="../../assets/consulting.png" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title"><a>Consulting</a></h4>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="col-sm" (click)= "switchDepartment(3)">
-            <div class="card">
-                <img class="card-img-top" src="../../assets/consulting.png" alt="Card image cap">
-                <div class="card-body">
-                    <h4 class="card-title"><a>Consulting</a></h4>
+        <div class="row">
+            <div class="col-sm" (click)= "switchDepartment(4)">
+                <div class="card">
+                    <img class="card-img-top" src="../../assets/experiencedesign.png" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title"><a>Experience Design</a></h4>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-sm" (click)= "switchDepartment(4)">
-            <div class="card">
-                <img class="card-img-top" src="../../assets/experiencedesign.png" alt="Card image cap">
-                <div class="card-body">
-                    <h4 class="card-title"><a>Experience Design</a></h4>
+            <div class="col-sm" (click)= "switchDepartment(5)">
+                <div class="card">
+                    <img class="card-img-top" src="../../assets/managing.png" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title"><a>Management</a></h4>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-sm" (click)= "switchDepartment(5)">
-            <div class="card">
-                <img class="card-img-top" src="../../assets/managing.png" alt="Card image cap">
-                <div class="card-body">
-                    <h4 class="card-title"><a>Management</a></h4>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm" (click)= "switchDepartment(6)">
-            <div class="card">
-                <img class="card-img-top" src="../../assets/centralservices.png" alt="Card image cap">
-                <div class="card-body">
-                    <h4 class="card-title"><a>Central Services Team</a></h4>
+            <div class="col-sm" (click)= "switchDepartment(6)">
+                <div class="card">
+                    <img class="card-img-top" src="../../assets/centralservices.png" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title"><a>Central Services Team</a></h4>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
 </div>

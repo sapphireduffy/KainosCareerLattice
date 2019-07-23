@@ -5,15 +5,16 @@ const departmentUrl = "/api/departments";
 const capabilityUrl = "/api/capabilities";
 const getAllDataUrl = "/api/allData";
 
-const getRolesInDepartmentURL = '/api/rolesInDep';
+const getRolesInDepartmentURL = "/api/rolesInDep";
 const getBandsURL = "/api/bands";
 const roleUrl = "/api/role";
+const addRoleUrl = "/api/addrole";
 const getUniqueBandURL = "/api/uniqueband";
 
 @Injectable()
 export class DataService {
   headers: any;
-  isAdmin: boolean;
+  public isAdmin: boolean
 
   constructor() {}
 
@@ -126,8 +127,7 @@ export class DataService {
   getBands() {
     return axios
       .get(getBandsURL, {
-        params: {
-        },
+        params: {},
         headers: this.getHeaders()
       })
       .then(function(response) {
@@ -194,6 +194,17 @@ export class DataService {
             return { error: error.message };
           }
         }
+      });
+  }
+
+  createRole(param: any) {
+    return axios
+      .post(addRoleUrl, param, { headers: this.getHeaders() })
+      .then(function(response) {
+        return response;
+      })
+      .catch(function(error) {
+        return { error: error.message };
       });
   }
 }

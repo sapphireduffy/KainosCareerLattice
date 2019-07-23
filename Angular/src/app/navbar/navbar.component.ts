@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthGuardComponent } from '../auth-guard/auth-guard.component';
-import { DataService } from '../_services/data.service';
+import { AdminAuthGuardComponent } from '../admin-auth-guard/admin-auth-guard.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,28 +10,28 @@ import { Router } from '@angular/router';
 
 export class NavbarComponent implements OnInit {
 
-  constructor(private authComponent: AuthGuardComponent, private router: Router, private dataService: DataService) {
-    //on first time load, read user type from token
-    if(typeof this.dataService.isAdmin == "undefined")
-    {
-      if(this.authComponent.isAdmin())
-        {
-          this.dataService.isAdmin = true;
-        }
-      else
-        {
-          this.dataService.isAdmin = false;
-        }
-    }
-  }
+  //adminAuthComponent needed in HTML for getting and setting adminMode token
+  constructor(private router: Router, private authGuard: AdminAuthGuardComponent) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   goToHome(){
     this.router.navigate(['home'])
   }
 
-  switchRoleToAdmin(switchToAdmin: boolean){
-    this.dataService.isAdmin = switchToAdmin
+  getIdParam(){
+    var urlParams = new URLSearchParams(window.location.search)
+    return parseInt(urlParams.get("id"))
+  }
+
+  setAdminMode(adminMode){
+    this.authGuard.setAdminMode(adminMode)
+    if(adminMode && this.router.url.includes("career")){
+      this.router.navigate(['editroles'], { queryParams: { id: this.getIdParam() }})
+    } else if(!adminMode && this.router.url.includes("editroles")){
+      this.router.navigate(['career'], { queryParams: { id: this.getIdParam() }})
+    } else {
+      this.router.navigate(['home'])
+    }
   }
 }

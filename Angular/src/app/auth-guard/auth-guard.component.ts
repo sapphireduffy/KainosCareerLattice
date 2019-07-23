@@ -8,7 +8,7 @@ import { decode, verify } from 'jsonwebtoken'
 export class AuthGuardComponent implements CanActivate {
     constructor(private router: Router, private cookieService: CookieService){}
 
-    validToken(){
+    validToken() : boolean {
       try {
         var token = this.cookieService.get('token')
         if(token){
@@ -19,10 +19,6 @@ export class AuthGuardComponent implements CanActivate {
         }
       } catch (err){}
       return false
-    }
-
-    isAdmin(){
-      return decode(this.cookieService.get('token'))["Type"] == "Admin"
     }
     
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {

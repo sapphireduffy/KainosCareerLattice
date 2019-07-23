@@ -2,11 +2,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { CareerTableComponent } from './career-table/career-table.component';
 import { AuthGuardComponent } from './auth-guard/auth-guard.component';
+import { AdminAuthGuardComponent } from './admin-auth-guard/admin-auth-guard.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { NgModule } from '@angular/core';
+import { AdminTableComponent } from './admin-table/admin-table.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
+  {path: 'editroles', component: AdminTableComponent, canActivate:[AdminAuthGuardComponent]},
   {path: 'home', component: LandingPageComponent, canActivate:[AuthGuardComponent]},
   {path: 'career', component: CareerTableComponent, canActivate:[AuthGuardComponent]},
   {path: '**', redirectTo: 'login', pathMatch: 'full'},
