@@ -18,6 +18,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { BandInformationComponent } from './band-information/band-information.component';
 import { EditRolesComponent } from './edit-roles/edit-roles.component';
 import { AddRoleModalComponent } from "./add-role-modal/add-role-modal.component";
+import { AdminAuthGuardComponent } from './admin-auth-guard/admin-auth-guard.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,9 @@ import { AddRoleModalComponent } from "./add-role-modal/add-role-modal.component
     EditRolesComponent,
     AddRoleModalComponent
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [
+    AppComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -42,6 +45,7 @@ import { AddRoleModalComponent } from "./add-role-modal/add-role-modal.component
   providers: [
     HttphandlerService,
     AuthGuardComponent,
+    AdminAuthGuardComponent,
     DataService,
     CookieService
   ],
