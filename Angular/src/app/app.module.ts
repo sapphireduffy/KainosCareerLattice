@@ -18,7 +18,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { BandInformationComponent } from './band-information/band-information.component';
 import { AdminTableComponent } from './admin-table/admin-table.component';
 import { AddRoleModalComponent } from "./add-role-modal/add-role-modal.component";
-import { AlertComponentComponent } from './alert-component/alert-component.component';
 import { EditRoleModalComponent } from './edit-role-modal/edit-role-modal.component';
 
 import { AddCapabilityComponent } from './add-capability/add-capability.component';
@@ -33,10 +32,8 @@ import { AdminAuthGuardComponent } from './admin-auth-guard/admin-auth-guard.com
     NavbarComponent,
     RoleInformationComponent,
     BandInformationComponent,
-    EditRolesComponent,
     AddRoleModalComponent,
-    AlertComponentComponent,
-    EditRoleModalComponent
+    EditRoleModalComponent,
     AddCapabilityComponent,
     AdminTableComponent,
     AddRoleModalComponent
@@ -62,9 +59,8 @@ import { AdminAuthGuardComponent } from './admin-auth-guard/admin-auth-guard.com
     RoleInformationComponent,
     BandInformationComponent,
     AddRoleModalComponent,
-    EditRoleModalComponent
-
+    EditRoleModalComponent,
     AddCapabilityComponent
   ]
 })
-export class AppModule {}
+export class AppModule { }

@@ -114,8 +114,8 @@ app.get("/role", cors(), function(request, response) {
   db.query(getRoleQuery,[request.query.roleID]).then(rows => {
     response.send(rows);
   });
-});
+})
 
 app.listen(PORT, () => {
   console.log("Server is running on PORT:", PORT);
-});
+})
