@@ -6,9 +6,6 @@ class RolesHandler {
 
     createRole(params, db){
         return new Promise( ( resolve, reject ) => {
-            console.log(createRoleQuery)
-            console.log([params.roleName,params.departmentId,params.bandId,params.summary,params.jobSpecUrl])
-            console.log(db.query(createRoleQuery,[params.roleName,params.departmentId,params.bandId,params.summary,params.jobSpecUrl]))
             try {
                 db.query(createRoleQuery,[params.roleName,params.departmentId,params.bandId,params.summary,params.jobSpecUrl]).then(rows => {
                     console.log(rows.insertId)

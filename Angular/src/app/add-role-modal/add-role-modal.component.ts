@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { Role } from "../model/Role";
 import { DataService } from "../_services/data.service";
-import { Router } from '@angular/router';
 
 @Component({
   selector: "app-add-role-modal",
@@ -22,14 +21,13 @@ export class AddRoleModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
     private dataService: DataService,
-    private router: Router
   ) {}
 
   ngOnInit() {
     this.addRoleForm = this.formBuilder.group({
       roleName: ["", Validators.required],
       roleSummary: ["", Validators.maxLength(65000)],
-      roleSharePointLink: ["", Validators.maxLength(500)]
+      roleSharePointLink: ["", Validators.required]
     });
   }
 
