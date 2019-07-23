@@ -1,10 +1,9 @@
 # Kainos Career Lattice
 An interactive, responsive and accessible application that allows users to view all the different departments, capabilities and job roles within Kainos. 
 
-# Secret files
+# Setup
 All secret files must be moved to ther root directory of the project after cloning
 
-# Setup
 Run 
 ```
 npm install
