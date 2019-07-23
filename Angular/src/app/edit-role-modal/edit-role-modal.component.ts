@@ -52,6 +52,16 @@ export class EditRoleModalComponent implements OnInit {
       capabilityId: this.capabilityId
     };
   }
+  deleteUser(){
+    return confirm("Are you sure?");
+  
+  }
+
+  clickMethod(name: string) {
+    if(confirm("Are you sure to delete "+name)) {
+      console.log("Implement delete functionality here");
+    }
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -72,4 +82,7 @@ export class EditRoleModalComponent implements OnInit {
 
     
   }
+
+
+
 }

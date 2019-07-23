@@ -27,6 +27,16 @@ const getRoleQuery = "SELECT role_id, name, summary, job_spec_url FROM role WHER
 
 const tokenCookieName = 'token'
 
+app.delete('/deleterole', cors(), function (request, response) {
+  console.log(request.body)
+	rolesHandler.deleteRole(request.body, db).then(result => {
+    console.log(result)
+    response.send(result)
+  }, reject => {
+    response.send(reject)
+  })
+});
+
 app.post('/addrole', cors(), function (request, response) {
   console.log(request.body)
 	rolesHandler.createRole(request.body, db).then(result => {

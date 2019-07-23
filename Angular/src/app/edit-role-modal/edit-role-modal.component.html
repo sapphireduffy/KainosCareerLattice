@@ -44,9 +44,9 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" ng-click="deleteUser()" class="btn btn-danger w3-right" style="align-self: flex-start">
-    <b>Delete</b> 
-  </button>  
+    <button type="button" class="btn btn-danger" (click)="clickMethod()">
+      <b>Delete</b>
+    </button>
     <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss()">
       Close
     </button>
