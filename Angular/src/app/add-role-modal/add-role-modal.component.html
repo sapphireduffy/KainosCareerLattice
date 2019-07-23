@@ -16,6 +16,7 @@
       <input
         type="text"
         formControlName="roleName"
+        maxlength="100"
         class="form-control"
         [ngClass]="{ 'is-invalid': submitted && formControls.roleName.errors }"
         required/>
@@ -32,15 +33,13 @@
       <input
         type="text"
         formControlName="roleSummary"
+        maxlength="65000"
         class="form-control"
         [ngClass]="{'is-invalid': submitted && formControls.roleSummary.errors}"
         required/>
       <div
         *ngIf="submitted && formControls.roleSummary.errors"
         class="invalid-feedback">
-        <div *ngIf="formControls.roleSummary.errors.maxlength">
-          Max characters reached for Role Summary
-        </div>
         <div *ngIf="formControls.roleSummary.errors.required">
           Role Summary is a required field
         </div>
@@ -51,6 +50,7 @@
       <input
         type="url"
         formControlName="roleSharePointLink"
+        maxlength="500"
         class="form-control"
         [ngClass]="{'is-invalid': submitted}"
         pattern="https://kainossoftwareltd.sharepoint.com/.+"

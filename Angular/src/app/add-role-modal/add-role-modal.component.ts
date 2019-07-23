@@ -25,9 +25,9 @@ export class AddRoleModalComponent implements OnInit {
 
   ngOnInit() {
     this.addRoleForm = this.formBuilder.group({
-      roleName: ["", Validators.required],
+      roleName: ["", Validators.maxLength(100)],
       roleSummary: ["", Validators.maxLength(65000)],
-      roleSharePointLink: ["", Validators.required]
+      roleSharePointLink: ["", Validators.maxLength(500)]
     });
   }
 
