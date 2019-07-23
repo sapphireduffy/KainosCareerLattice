@@ -1,0 +1,14 @@
+{
+  "name": "variables",
+  "version": "1.0.0",
+  "description": "",
+  "main": "vars.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.0.0"
+  }
+}
