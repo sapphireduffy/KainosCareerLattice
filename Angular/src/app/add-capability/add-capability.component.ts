@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { Capability } from "../model/capability";
 import { DataService } from "../_services/data.service";
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -22,8 +21,7 @@ export class AddCapabilityComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
-    private dataService: DataService,
-    private router: Router
+    private dataService: DataService
   ) {}
 
   ngOnInit() {

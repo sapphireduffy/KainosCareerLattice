@@ -4,12 +4,10 @@
       type="button"
       class="close"
       aria-label="Close"
-      (click)="activeModal.dismiss()"
-    >
+      (click)="activeModal.dismiss()">
       x
     </button>
   </div>
-  
   <form [formGroup]="addCapabilityForm" (ngSubmit)="onSubmit()" autocomplete="off">
     <div class="modal-body" data-keyboard="false" data-backdrop="static">
       <div class="form-group">
@@ -18,25 +16,21 @@
           type="text"
           formControlName="capabilityName"
           class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && formControls.capabilityName.errors }"
-        />
+          [ngClass]="{ 'is-invalid': submitted && formControls.capabilityName.errors }"/>
         <div
           *ngIf="submitted && formControls.capabilityName.errors"
-          class="invalid-feedback"
-        >
+          class="invalid-feedback">
           <div *ngIf="formControls.capabilityName.errors.required">
             Capability Name is a required field
           </div>
         </div>
       </div>
     </div>
-  
     <div class="modal-footer">
       <button
         type="button"
         class="btn btn-secondary"
-        (click)="activeModal.dismiss()"
-      >
+        (click)="activeModal.dismiss()">
         Close
       </button>
       <button type="submit" class="btn btn-success">
