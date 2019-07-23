@@ -20,10 +20,6 @@ export class AuthGuardComponent implements CanActivate {
       } catch (err){}
       return false
     }
-
-    isAdmin(){
-      return decode(this.cookieService.get('token'))["Type"] == "Admin"
-    }
     
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
       if(this.validToken()){

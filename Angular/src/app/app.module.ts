@@ -20,6 +20,7 @@ import { EditRolesComponent } from './edit-roles/edit-roles.component';
 import { AddRoleModalComponent } from "./add-role-modal/add-role-modal.component";
 import {MatIconModule, MatIcon} from '@angular/material/icon';
 import { AddCapabilityComponent } from './add-capability/add-capability.component';
+import { AdminAuthGuardComponent } from './admin-auth-guard/admin-auth-guard.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,9 @@ import { AddCapabilityComponent } from './add-capability/add-capability.componen
     AddRoleModalComponent,
     AddCapabilityComponent
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [
+    AppComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -46,6 +49,7 @@ import { AddCapabilityComponent } from './add-capability/add-capability.componen
   providers: [
     HttphandlerService,
     AuthGuardComponent,
+    AdminAuthGuardComponent,
     DataService,
     CookieService
   ],

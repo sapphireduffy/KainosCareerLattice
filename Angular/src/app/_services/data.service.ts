@@ -15,7 +15,7 @@ const getUniqueBandURL = "/api/uniqueband";
 @Injectable()
 export class DataService {
   headers: any;
-  isAdmin: boolean;
+  public isAdmin: boolean
 
   constructor() {}
 
