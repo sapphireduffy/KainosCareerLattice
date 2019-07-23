@@ -116,6 +116,8 @@ export class EditRolesComponent implements OnInit {
       const modalRef = this.modalService.open(EditRoleModalComponent);
       console.log(response[0]);
       modalRef.componentInstance.roleToEdit = response[0];
+      modalRef.componentInstance.capabilities = this.capabilities;
+      modalRef.componentInstance.bands = this.bands;
       modalRef.componentInstance.roleEdited.subscribe(data =>{
      
         console.log(data.data)

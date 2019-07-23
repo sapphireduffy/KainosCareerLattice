@@ -5,6 +5,7 @@ import { Role } from "../model/Role";
 import { DataService } from "../_services/data.service";
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: "app-edit-role-modal",
@@ -13,10 +14,15 @@ import { Observable } from 'rxjs';
 })
 export class EditRoleModalComponent implements OnInit {
   @Input() roleToEdit:any;
+  @Input() currentCapabilityId:any;
+  @Input() currentBandId:any;
+  @Input() capbilities:any;
+  @Input() bands:any;
   @Output() roleEdited = new EventEmitter();
   editedRole: Role;
   public editRoleForm: FormGroup;
   public submitted = false;
+  public currentBandName;
   constructor(
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
@@ -25,11 +31,12 @@ export class EditRoleModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("role to edit  " + this.roleToEdit);
     this.editRoleForm = this.formBuilder.group({
       roleName: [this.roleToEdit.name, Validators.required],
       roleSummary: [this.roleToEdit.summary, Validators.maxLength(65000)],
-      roleSharePointLink: [this.roleToEdit.job_spec_url, Validators.maxLength(500)]
+      roleSharePointLink: [this.roleToEdit.job_spec_url, Validators.maxLength(500)],
+      roleBand: [this.currentBandName],
+      roleCapability: [this.currentCapabilityId]
     });
   }
 
@@ -56,8 +63,6 @@ export class EditRoleModalComponent implements OnInit {
       return;
     }
     this.setEditRole();
-
-    console.log(this.editedRole);
 
     this.dataService
       .editRole(this.editedRole)
