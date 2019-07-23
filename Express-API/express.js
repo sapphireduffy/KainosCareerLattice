@@ -23,7 +23,7 @@ const capabilitiesQuery = "SELECT name, capability_id FROM capability WHERE depa
 const departmentsQuery = "SELECT name FROM department WHERE department_id = ?"
 const rolesInDepQuery = "SELECT * FROM viewTableData WHERE department_id = ?"
 const bandsQuery = "SELECT * FROM band"
-const getRoleQuery = "SELECT role_id, name, summary, job_spec_url FROM role WHERE role_id = ?"
+const getRoleQuery = "SELECT role_id,name,summary,job_spec_url,school_id FROM viewRoleData WHERE role_id = ?"
 
 const tokenCookieName = 'token'
 
