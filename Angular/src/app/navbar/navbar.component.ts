@@ -15,6 +15,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {}
 
+  goToHome(){
+    this.router.navigate(['home'])
+  }
+
   getIdParam(){
     var urlParams = new URLSearchParams(window.location.search)
     return parseInt(urlParams.get("id"))
