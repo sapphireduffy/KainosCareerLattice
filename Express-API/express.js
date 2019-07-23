@@ -7,8 +7,10 @@ const PORT = 8000
 
 const Database = require('./db.js')
 const LoginHandler = require('./login.js')
+const RolesHandler = require('./roles.js')
 const db = new Database()
 const loginHandler = new LoginHandler()
+const rolesHandler = new RolesHandler()
 
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(express.urlencoded())
@@ -24,6 +26,26 @@ const bandsQuery = "SELECT * FROM band"
 const getRoleQuery = "SELECT role_id, name, summary, job_spec_url FROM role WHERE role_id = ?"
 
 const tokenCookieName = 'token'
+
+app.post('/addrole', cors(), function (request, response) {
+  console.log(request.body)
+	rolesHandler.createRole(request.body, db).then(result => {
+    console.log(result)
+    response.send(result)
+  }, reject => {
+    response.send(reject)
+  })
+});
+
+app.put('/editrole', cors(), function (request, response) {
+  console.log(request.body)
+	rolesHandler.editRole(request.body, db).then(result => {
+    console.log(result)
+    response.send(result)
+  }, reject => {
+    response.send(reject)
+  })
+});
 
 app.get("/roles", cors(), function(request, response) {
   db.query(rolesQuery,[request.query.departmentID]).then(rows => {
@@ -64,7 +86,7 @@ app.get("/bands", cors(), function(request, response) {
   });
 });
 
-app.post('/login', cors(), function (request, response) {
+app.post('/login', function (request, response) {
 	loginHandler.login(request.body, db).then(token => {
     response.cookie(tokenCookieName,token)
 		response.send({tokenCookieName:token})

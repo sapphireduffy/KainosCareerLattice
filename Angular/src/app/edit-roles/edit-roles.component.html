@@ -3,7 +3,9 @@
       </header>
 
       <div class='container'>
+        <div *ngIf="showAlert">
           <alert [alertMessage]="alertMessage" [alertType]="alertType" ></alert>
+        </div>
         <table class='table'>
             <ng-container>
                 <tr role='row'>

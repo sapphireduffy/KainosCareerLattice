@@ -7,17 +7,17 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: "app-add-role-modal",
-  templateUrl: "./add-role-modal.component.html",
-  styleUrls: ["./add-role-modal.component.css"]
+  selector: "app-edit-role-modal",
+  templateUrl: "./edit-role-modal.component.html",
+  styleUrls: ["./edit-role-modal.component.css"]
 })
-export class AddRoleModalComponent implements OnInit {
+export class EditRoleModalComponent implements OnInit {
   @Input() departmentId;
   @Input() bandId;
   @Input() capabilityId;
-  @Output() roleAdded = new EventEmitter();
-  newRole: Role;
-  public addRoleForm: FormGroup;
+  @Output() roleEdited = new EventEmitter();
+  editedRole: Role;
+  public editRoleForm: FormGroup;
   public submitted = false;
   constructor(
     private formBuilder: FormBuilder,
@@ -27,7 +27,7 @@ export class AddRoleModalComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.addRoleForm = this.formBuilder.group({
+    this.editRoleForm = this.formBuilder.group({
       roleName: ["", Validators.required],
       roleSummary: ["", Validators.maxLength(65000)],
       roleSharePointLink: ["", Validators.maxLength(500)]
@@ -35,38 +35,38 @@ export class AddRoleModalComponent implements OnInit {
   }
 
   get formControls() {
-    return this.addRoleForm.controls;
+    return this.editRoleForm.controls;
   }
 
   closeModal() {
     this.activeModal.close();
   }
 
-  setNewRole() {
-    this.newRole = {
-      roleName: this.addRoleForm.get("roleName").value,
+  setEditRole() {
+    this.editedRole = {
+      roleName: this.editRoleForm.get("roleName").value,
       departmentId: this.departmentId,
       bandId: this.bandId,
-      summary: this.addRoleForm.get("roleSummary").value,
-      jobSpecUrl: this.addRoleForm.get("roleSharePointLink").value,
+      summary: this.editRoleForm.get("roleSummary").value,
+      jobSpecUrl: this.editRoleForm.get("roleSharePointLink").value,
       capabilityId: this.capabilityId
     };
   }
 
   onSubmit() {
     this.submitted = true;
-    if (this.addRoleForm.invalid) {
+    if (this.editRoleForm.invalid) {
       return;
     }
-    this.setNewRole();
+    this.setEditRole();
 
-    console.log(this.newRole);
+    console.log(this.editedRole);
 
     this.dataService
-      .createRole(this.newRole)
-      .then(result => this.roleAdded.emit(result))
+      .editRole(this.editedRole)
+      .then(result => this.roleEdited.emit(result))
       .catch(error => {
-        this.roleAdded.emit(error);
+        this.roleEdited.emit(error);
       });
     this.closeModal();
 

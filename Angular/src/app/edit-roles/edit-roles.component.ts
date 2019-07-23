@@ -4,6 +4,8 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { RoleInformationComponent } from "../role-information/role-information.component";
 import { BandInformationComponent } from '../band-information/band-information.component';
 import { AddRoleModalComponent } from '../add-role-modal/add-role-modal.component';
+import { Router } from '@angular/router';
+import { EditRoleModalComponent } from '../edit-role-modal/edit-role-modal.component';
 
 @Component({
   selector: "app-edit-roles",
@@ -18,18 +20,54 @@ export class EditRolesComponent implements OnInit {
   id:any;
   alertMessage:string;
   alertType:string;
+  showAlert = false;
 
   constructor(
     private dataService: DataService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
-    this.alertMessage = "test";
-    this.alertType = "success";
     var urlParams = new URLSearchParams(window.location.search);
     this.id = parseInt(urlParams.get("id"));
     console.log(this.id)
+    this.loadRoles();
+  }
+
+  roleExists(cap, band){
+    for(var i = 0; i < this.jobsInDep.length; i++){
+      if(this.jobsInDep[i].capability_id == cap.capability_id && this.jobsInDep[i].band_id == band.band_id){
+        return {"Role":this.jobsInDep[i].RoleName, "ID":this.jobsInDep[i].role_id}
+      }
+    }
+   
+    return {"Role":"Add new role", "ID":-1, "BandId":band.band_id, "CapabilityId": cap.capability_id}
+  }
+
+  async switchModal(selectedRole) {
+    if(selectedRole.ID == -1){
+      this.openAddRoleModal(selectedRole.BandId, selectedRole.CapabilityId);
+    }else{
+      this.openEditRoleModal(selectedRole.ID) ;
+    }
+  }
+
+  async openRoleInfoModal(selectedRoleId){
+    await this.dataService.getRoleInformation(selectedRoleId).then(response => {
+      const modalRef = this.modalService.open(RoleInformationComponent);
+      modalRef.componentInstance.roleToDisplay = response[0];
+    });
+  }
+
+  async openBandInfoModal(selectedBandId) {
+    await this.dataService.getBandInformation(selectedBandId).then(response => {
+      const modalRef = this.modalService.open(BandInformationComponent);
+      modalRef.componentInstance.bandToDisplay = response[0];
+    });
+  }
+
+  loadRoles(){
 
     this.dataService.getCapabilityNamesByDepartment(this.id).then(response => {
       console.log(response)
@@ -52,42 +90,43 @@ export class EditRolesComponent implements OnInit {
     });
   }
 
-  roleExists(cap, band){
-    for(var i = 0; i < this.jobsInDep.length; i++){
-      if(this.jobsInDep[i].capability_id == cap.capability_id && this.jobsInDep[i].band_id == band.band_id){
-        return {"Role":this.jobsInDep[i].RoleName, "ID":this.jobsInDep[i].role_id}
-      }
-    }
-   
-    return {"Role":"Add new role", "ID":-1, "BandId":band.band_id, "CapabilityId": cap.capability_id}
-  }
-
-  async switchModal(selectedRole) {
-    if(selectedRole.ID == -1){
-      this.openAddRoleModal(selectedRole.BandId, selectedRole.CapabilityId);
-    }else{
-      this.openRoleInfoModal(selectedRole.ID);
-    }
-  }
-
-  async openRoleInfoModal(selectedRoleId){
-    await this.dataService.getRoleInformation(selectedRoleId).then(response => {
-      const modalRef = this.modalService.open(RoleInformationComponent);
-      modalRef.componentInstance.roleToDisplay = response[0];
-    });
-  }
-
-  async openBandInfoModal(selectedBandId) {
-    await this.dataService.getBandInformation(selectedBandId).then(response => {
-      const modalRef = this.modalService.open(BandInformationComponent);
-      modalRef.componentInstance.bandToDisplay = response[0];
-    });
-  }
-
   openAddRoleModal(roleBandId, roleCapabilityId) {
     const modalRef = this.modalService.open(AddRoleModalComponent);
     modalRef.componentInstance.departmentId = this.id;
     modalRef.componentInstance.bandId = roleBandId;
     modalRef.componentInstance.capabilityId =  roleCapabilityId;
+    modalRef.componentInstance.roleAdded.subscribe(data =>{
+     
+      console.log(data.data)
+      if(data.data.hasOwnProperty('success')){
+        this.showAlert = true;
+        this.alertMessage = data.data.success;
+        this.alertType = "success";
+      } else {
+        this.showAlert = true;
+        this.alertMessage = data.data.error;
+        this.alertType = "danger";
+      }
+      this.loadRoles();
+    });
+  }
+
+  openEditRoleModal(roleId) {
+    const modalRef = this.modalService.open(EditRoleModalComponent);
+    modalRef.componentInstance.roleId = roleId;
+    modalRef.componentInstance.roleAdded.subscribe(data =>{
+     
+      console.log(data.data)
+      if(data.data.hasOwnProperty('success')){
+        this.showAlert = true;
+        this.alertMessage = data.data.success;
+        this.alertType = "success";
+      } else {
+        this.showAlert = true;
+        this.alertMessage = data.data.error;
+        this.alertType = "danger";
+      }
+      this.loadRoles();
+    });
   }
 }
