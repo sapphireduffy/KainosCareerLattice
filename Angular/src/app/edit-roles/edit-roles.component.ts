@@ -112,9 +112,11 @@ export class EditRolesComponent implements OnInit {
   }
 
   async openEditRoleModal(roleId) {
-    await this.dataService.getRoleInformation(roleId).then(response => {
+    console.log("called it");
+    await this.dataService.getEditRole(roleId).then(response => {
+      console.log("called it");
       const modalRef = this.modalService.open(EditRoleModalComponent);
-      console.log(response[0]);
+      console.log(response);
       modalRef.componentInstance.roleToEdit = response[0];
       modalRef.componentInstance.capabilities = this.capabilities;
       modalRef.componentInstance.bands = this.bands;

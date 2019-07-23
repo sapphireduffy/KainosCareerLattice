@@ -31,13 +31,15 @@ export class EditRoleModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
     this.editRoleForm = this.formBuilder.group({
-      roleName: [this.roleToEdit.name, Validators.required],
+      roleName: [this.roleToEdit.RoleName, Validators.required],
       roleSummary: [this.roleToEdit.summary, Validators.maxLength(65000)],
       roleSharePointLink: [this.roleToEdit.job_spec_url, Validators.maxLength(500)],
-      roleBand: [this.currentBandName],
-      roleCapability: [this.currentCapabilityId]
+      roleBand: [this.roleToEdit.band_id],
+      roleCapability: [this.roleToEdit.capability_id]
     });
+
   }
 
   get formControls() {
@@ -54,7 +56,11 @@ export class EditRoleModalComponent implements OnInit {
       roleName: this.editRoleForm.get("roleName").value,
       summary: this.editRoleForm.get("roleSummary").value,
       jobSpecUrl: this.editRoleForm.get("roleSharePointLink").value,
+      capabilityId: this.editRoleForm.get("roleCapability").value
     };
+
+    console.log(this.editRoleForm.get("roleBand").value)
+    console.log(this.editRoleForm.get("roleCapability").value)
   }
 
   onSubmit() {
@@ -71,7 +77,5 @@ export class EditRoleModalComponent implements OnInit {
         this.roleEdited.emit(error);
       });
     this.closeModal();
-
-
   }
 }
