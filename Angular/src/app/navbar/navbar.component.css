@@ -3,7 +3,11 @@
     color: #fff; 
     font-size: x-large;
     margin: 0;
-  }
+}
+
+.clickable {
+    cursor: pointer;
+}
 
 .bg-primary {
     background-color: #003471!important;
