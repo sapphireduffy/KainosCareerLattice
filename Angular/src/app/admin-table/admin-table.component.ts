@@ -1,5 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { DataService } from "../_services/data.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { RoleInformationComponent } from "../role-information/role-information.component";
+import { BandInformationComponent } from '../band-information/band-information.component';
+import { AddRoleModalComponent } from '../add-role-modal/add-role-modal.component';
+import { Router } from '@angular/router';
+import { AddCapabilityComponent } from '../add-capability/add-capability.component';
 import { ModalService } from '../modal.service';
 
 @Component({
@@ -43,9 +49,16 @@ export class AdminTableComponent implements OnInit {
       this.modalService.openAddRoleModal(selectedRole.BandId, selectedRole.CapabilityId, this.departmentId).then(data => {
         this.displayAlert(data)
       })
-    }else{
+    }
+    else {
       this.modalService.openRoleInfoModal(selectedRole.ID);
     }
+  }
+
+  openCapabilityModal(){
+    this.modalService.openAddCapabilityModal(this.departmentId).then(data => {
+      this.displayAlert(data)
+    });
   }
 
   loadRoles(){

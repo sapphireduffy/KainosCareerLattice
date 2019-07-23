@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RoleInformationComponent } from './role-information/role-information.component';
 import { BandInformationComponent } from './band-information/band-information.component';
 import { AddRoleModalComponent } from './add-role-modal/add-role-modal.component';
+import { AddCapabilityComponent } from './add-capability/add-capability.component';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,17 @@ export class ModalService {
       modalRef.componentInstance.roleAdded.subscribe(data =>{
         resolve(data.data)
       });
+    })
+  }
+
+  openAddCapabilityModal(departmentId) {
+    return new Promise((resolve, reject) => {
+      const modalRef = this.modalService.open(AddCapabilityComponent);
+      modalRef.componentInstance.departmentId = departmentId;
+
+      modalRef.componentInstance.capabilityAdded.subscribe(data => {
+        resolve(data.data)
+      })
     })
   }
 }

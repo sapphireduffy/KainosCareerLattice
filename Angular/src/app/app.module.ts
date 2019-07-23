@@ -18,6 +18,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { BandInformationComponent } from './band-information/band-information.component';
 import { AdminTableComponent } from './admin-table/admin-table.component';
 import { AddRoleModalComponent } from "./add-role-modal/add-role-modal.component";
+import { AddCapabilityComponent } from './add-capability/add-capability.component';
 import { AdminAuthGuardComponent } from './admin-auth-guard/admin-auth-guard.component';
 
 @NgModule({
@@ -29,6 +30,7 @@ import { AdminAuthGuardComponent } from './admin-auth-guard/admin-auth-guard.com
     NavbarComponent,
     RoleInformationComponent,
     BandInformationComponent,
+    AddCapabilityComponent,
     AdminTableComponent,
     AddRoleModalComponent
   ],
@@ -52,7 +54,8 @@ import { AdminAuthGuardComponent } from './admin-auth-guard/admin-auth-guard.com
   entryComponents: [
     RoleInformationComponent,
     BandInformationComponent,
-    AddRoleModalComponent
+    AddRoleModalComponent,
+    AddCapabilityComponent
   ]
 })
 export class AppModule {}
