@@ -72,7 +72,8 @@ CREATE TABLE role_capability (
     capability_id INT,
     PRIMARY KEY (role_id , capability_id),
     FOREIGN KEY (role_id)
-        REFERENCES role (role_id),
+        REFERENCES role (role_id)
+        ON DELETE CASCADE,
     FOREIGN KEY (capability_id)
         REFERENCES capability (capability_id)
 );
@@ -94,7 +95,7 @@ FROM department;
 
 CREATE VIEW viewTableData AS
 SELECT department.department_id, department.name AS 'DepartmentName', band.band_id, band.name AS 'BandName', 
-capability.capability_id, capability.name AS 'CapabilityName', role.role_id, role.name AS 'RoleName'
+capability.capability_id, capability.name AS 'CapabilityName', role.role_id, role.name AS 'RoleName', band.school_id
 FROM department JOIN capability ON department.department_id = capability.department_id JOIN role_capability ON
 role_capability.capability_id = capability.capability_id JOIN role ON role_capability.role_id = role.role_id JOIN band
 ON band.band_id = role.band_id 
@@ -105,12 +106,16 @@ SELECT band.band_id, band.name, band.school_id, band.description_id,commercial_a
 customer_focus, developing_yourself_and_others, planning_and_organising, job_specific_knowledge
 FROM band JOIN  band_description_id ON band.description_id = band_description_id.description_id;
 
+CREATE VIEW viewRoleData AS
+SELECT role_id, role.name, summary, job_spec_url, school_id 
+FROM role JOIN band ON role.band_id = band.band_id;
+
 -- ---------------------------------- INSERTS ---------------------------- --
 
 INSERT INTO user (username, password, type)
-VALUES ('test2', '$2b$10$GEAEIw3jp4OxKlaLtUuxFuCAWKebSmUxX8ZuJfUugVaNLjE50sORG', 'Employee');
+VALUES ('employee@kainos.com', '$2b$10$GEAEIw3jp4OxKlaLtUuxFuCAWKebSmUxX8ZuJfUugVaNLjE50sORG', 'Employee');
 INSERT INTO user (username, password, type)
-VALUES ('test', '$2b$10$qBQmrmL04mQ1cog6P.zdqeFb6aT1s.ZPIqxYva03L0CYVR9q26xgi', 'Admin');
+VALUES ('admin@kainos.com', '$2b$10$qBQmrmL04mQ1cog6P.zdqeFb6aT1s.ZPIqxYva03L0CYVR9q26xgi', 'Admin');
 
 INSERT INTO department(name) -- All Departments
 VALUES ('Sales & Marketing'), ('Technical'), ('Consulting'), ('Experience Design'), ('Management'),
@@ -235,3 +240,4 @@ VALUES (51,10), (52,10), (53,10), (54,10);
 
 INSERT INTO role_capability (role_id, capability_id) -- role-capability links for Central Services Teams
 VALUES (55,11), (56,11), (57,11), (58,11);
+ 
