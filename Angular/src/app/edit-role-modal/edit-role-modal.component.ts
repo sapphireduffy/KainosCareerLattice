@@ -12,9 +12,7 @@ import { Observable } from 'rxjs';
   styleUrls: ["./edit-role-modal.component.css"]
 })
 export class EditRoleModalComponent implements OnInit {
-  @Input() departmentId;
-  @Input() bandId;
-  @Input() capabilityId;
+  @Input() roleToEdit:any;
   @Output() roleEdited = new EventEmitter();
   editedRole: Role;
   public editRoleForm: FormGroup;
@@ -24,13 +22,14 @@ export class EditRoleModalComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private dataService: DataService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
+    console.log("role to edit  " + this.roleToEdit);
     this.editRoleForm = this.formBuilder.group({
-      roleName: ["", Validators.required],
-      roleSummary: ["", Validators.maxLength(65000)],
-      roleSharePointLink: ["", Validators.maxLength(500)]
+      roleName: [this.roleToEdit.name, Validators.required],
+      roleSummary: [this.roleToEdit.summary, Validators.maxLength(65000)],
+      roleSharePointLink: [this.roleToEdit.job_spec_url, Validators.maxLength(500)]
     });
   }
 
@@ -44,12 +43,10 @@ export class EditRoleModalComponent implements OnInit {
 
   setEditRole() {
     this.editedRole = {
+      roleId: this.roleToEdit.role_id,
       roleName: this.editRoleForm.get("roleName").value,
-      departmentId: this.departmentId,
-      bandId: this.bandId,
       summary: this.editRoleForm.get("roleSummary").value,
       jobSpecUrl: this.editRoleForm.get("roleSharePointLink").value,
-      capabilityId: this.capabilityId
     };
   }
 
@@ -70,6 +67,6 @@ export class EditRoleModalComponent implements OnInit {
       });
     this.closeModal();
 
-    
+
   }
 }

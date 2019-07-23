@@ -1,5 +1,5 @@
 const createRoleQuery = "INSERT INTO role(name, department_id, band_id, summary, job_spec_url) VALUES (?,?,?,?,?) "
-const editRoleQuery = "UPDATE role SET name=?, department_id=?, band_id=?, summary=?, job_spec_url=?) WHERE role_id=?"
+const editRoleQuery = "UPDATE role SET name=?, summary=?, job_spec_url=? WHERE role_id=?"
 const createRoleCapabilityLinkQuery = "INSERT INTO role_capability(role_id,capability_id) VALUES (?,?) "
 
 class RolesHandler {
@@ -28,11 +28,8 @@ class RolesHandler {
 editRole(params, db){
     return new Promise( ( resolve, reject ) => {
         console.log(editRoleQuery)
-        console.log([params.roleName,params.departmentId,params.bandId,params.summary,params.jobSpecUrl])
-        console.log(db.query(editRoleQuery,[params.roleName,params.departmentId,params.bandId,params.summary,params.jobSpecUrl]))
         try {
-            db.query(editRoleQuery,[params.roleName,params.departmentId,params.bandId,params.summary,params.jobSpecUrl, params.roleId]).then(rows => {
-                console.log(rows.insertId)
+            db.query(editRoleQuery,[params.roleName,params.summary,params.jobSpecUrl, params.roleId]).then(rows => {
                     resolve({"success":"Successfully edited role"})
                 
             })
