@@ -17,7 +17,6 @@ export class AddRoleModalComponent implements OnInit {
   newRole: Role;
   public addRoleForm: FormGroup;
   public submitted = false;
-  public validUrl = true;
   constructor(
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
