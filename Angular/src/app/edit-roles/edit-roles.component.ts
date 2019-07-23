@@ -6,6 +6,7 @@ import { BandInformationComponent } from '../band-information/band-information.c
 import { AddRoleModalComponent } from '../add-role-modal/add-role-modal.component';
 import { Router } from '@angular/router';
 import { AddCapabilityComponent } from '../add-capability/add-capability.component';
+import { ModalService } from '../modal.service';
 
 @Component({
   selector: "app-edit-roles",
@@ -17,22 +18,20 @@ export class EditRolesComponent implements OnInit {
   capabilities = [];
   jobsInDep: any;
   bands: any;
-  id:any;
+  departmentId:any;
   alertMessage:string;
   alertType:string;
   showAlert;
 
   constructor(
     private dataService: DataService,
-    private modalService: NgbModal,
-    private router:Router
+    private modalService: ModalService,
   ) {}
 
   ngOnInit(): void {
     this.showAlert = false;
     var urlParams = new URLSearchParams(window.location.search);
-    this.id = parseInt(urlParams.get("id"));
-    console.log(this.id)
+    this.departmentId = parseInt(urlParams.get("id"));
     this.loadRoles();
   }
 
@@ -42,96 +41,63 @@ export class EditRolesComponent implements OnInit {
         return {"Role":this.jobsInDep[i].RoleName, "ID":this.jobsInDep[i].role_id}
       }
     }
-   
     return {"Role":"Add new role", "ID":-1, "BandId":band.band_id, "CapabilityId": cap.capability_id}
   }
 
   async switchModal(selectedRole) {
     if(selectedRole.ID == -1){
-      this.openAddRoleModal(selectedRole.BandId, selectedRole.CapabilityId);
+      this.modalService.openAddRoleModal(selectedRole.BandId, selectedRole.CapabilityId, this.departmentId).then(data => {
+        this.displayAlert(data)
+      })
     }
     else if (selectedRole == 'addCapability') {
-      this.openAddCapabilityModal();
+      this.modalService.openAddCapabilityModal(this.departmentId);
     }
     else {
-      this.openRoleInfoModal(selectedRole.ID);
+      this.modalService.openRoleInfoModal(selectedRole.ID);
     }
   }
 
-  openAddCapabilityModal() {
-    const modalRef = this.modalService.open(AddCapabilityComponent);
-    modalRef.componentInstance.departmentId = this.id;
-    modalRef.componentInstance.capabilityAdded.subscribe(data =>{
-     
-      console.log(data.data)
-      if(data.data.hasOwnProperty('success')){
-        this.showAlert = true;
-        this.alertMessage = data.data.success;
-        this.alertType = "success";
-      } else {
-        this.showAlert = true;
-        this.alertMessage = data.data.error;
-        this.alertType = "danger";
-      }
-      this.loadRoles();
-    });
-  }
-
-  async openRoleInfoModal(selectedRoleId){
+  /*async openRoleInfoModal(selectedRoleId){
     await this.dataService.getRoleInformation(selectedRoleId).then(response => {
-      const modalRef = this.modalService.open(RoleInformationComponent);
+      const modalRef = this.modalService.openRoleInfoModal(selected)
       modalRef.componentInstance.roleToDisplay = response[0];
     });
-  }
+  }*/
 
-  async openBandInfoModal(selectedBandId) {
+  /*async openBandInfoModal(selectedBandId) {
     await this.dataService.getBandInformation(selectedBandId).then(response => {
       const modalRef = this.modalService.open(BandInformationComponent);
       modalRef.componentInstance.bandToDisplay = response[0];
     });
-  }
+  }*/
 
   loadRoles(){
-
-    this.dataService.getCapabilityNamesByDepartment(this.id).then(response => {
-      console.log(response)
+    this.dataService.getCapabilityNamesByDepartment(this.departmentId).then(response => {
       this.capabilities = response;
     });
-
-    this.dataService.getRolesInDepartment(this.id).then(response => {
-      console.log(response)
+    this.dataService.getRolesInDepartment(this.departmentId).then(response => {
       this.jobsInDep = response;
     });
-
     this.dataService.getBands().then(response => {
-      console.log(response)
       this.bands = response;
     });
-
-    this.dataService.getDepartmentDetails(this.id).then(response => {
-      console.log(response)
+    this.dataService.getDepartmentDetails(this.departmentId).then(response => {
       this.departmentName = response;
     });
   }
 
-  openAddRoleModal(roleBandId, roleCapabilityId) {
-    const modalRef = this.modalService.open(AddRoleModalComponent);
-    modalRef.componentInstance.departmentId = this.id;
-    modalRef.componentInstance.bandId = roleBandId;
-    modalRef.componentInstance.capabilityId =  roleCapabilityId;
-    modalRef.componentInstance.roleAdded.subscribe(data =>{
-     
-      console.log(data.data)
-      if(data.data.hasOwnProperty('success')){
-        this.showAlert = true;
-        this.alertMessage = data.data.success;
-        this.alertType = "success";
-      } else {
-        this.showAlert = true;
-        this.alertMessage = data.data.error;
-        this.alertType = "danger";
-      }
-      this.loadRoles();
-    });
+  displayAlert(data){
+    if(data.hasOwnProperty('success')){
+      this.showAlert = true;
+      this.alertMessage = data.success;
+      this.alertType = "success";
+    } else {
+      this.showAlert = true;
+      this.alertMessage = data.error;
+      this.alertType = "danger";
+    }
+    this.loadRoles();
   }
+  
 }

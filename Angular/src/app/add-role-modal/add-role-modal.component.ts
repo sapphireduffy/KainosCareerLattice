@@ -4,7 +4,6 @@ import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { Role } from "../model/Role";
 import { DataService } from "../_services/data.service";
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: "app-add-role-modal",
@@ -60,8 +59,6 @@ export class AddRoleModalComponent implements OnInit {
     }
     this.setNewRole();
 
-    console.log(this.newRole);
-
     this.dataService
       .createRole(this.newRole)
       .then(result => this.roleAdded.emit(result))
@@ -69,7 +66,5 @@ export class AddRoleModalComponent implements OnInit {
         this.roleAdded.emit(error);
       });
     this.closeModal();
-
-    
   }
 }

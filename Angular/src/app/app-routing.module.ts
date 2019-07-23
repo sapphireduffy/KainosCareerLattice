@@ -8,7 +8,7 @@ import { EditRolesComponent } from './edit-roles/edit-roles.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'editroles', component: EditRolesComponent},
+  {path: 'editroles', component: EditRolesComponent, canActivate:[AuthGuardComponent]},
   {path: 'home', component: LandingPageComponent, canActivate:[AuthGuardComponent]},
   {path: 'career', component: CareerTableComponent, canActivate:[AuthGuardComponent]},
   {path: '**', redirectTo: 'login', pathMatch: 'full'},
