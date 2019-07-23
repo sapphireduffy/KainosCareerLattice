@@ -11,6 +11,7 @@ const roleUrl = "/api/role";
 const addRoleUrl = "/api/addrole";
 const editRoleUrl = "/api/editrole";
 const getUniqueBandURL = "/api/uniqueband";
+const deleteRoleURL = "/api/deleterole";
 
 @Injectable()
 export class DataService {
@@ -220,6 +221,26 @@ export class DataService {
   editRole(param: any) {
     return axios
       .put(editRoleUrl, param, { headers: this.getHeaders() })
+      .then(function(response) {
+        return response;
+      })
+      .catch(function(error) {
+        if (error.response) {
+          return {
+            error: error.response.data.Message,
+            statusCode: error.response.statusCode
+          };
+        } else {
+          if (error.message) {
+            return { error: error.message };
+          }
+        }
+      });
+  }
+
+  deleteRole(roleID: any) {
+    return axios
+      .delete(deleteRoleURL, { headers: this.getHeaders() })
       .then(function(response) {
         return response;
       })
