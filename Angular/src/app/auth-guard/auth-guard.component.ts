@@ -8,7 +8,7 @@ import { decode, verify } from 'jsonwebtoken'
 export class AuthGuardComponent implements CanActivate {
     constructor(private router: Router, private cookieService: CookieService){}
 
-    validToken(){
+    validToken() : boolean {
       try {
         var token = this.cookieService.get('token')
         if(token){

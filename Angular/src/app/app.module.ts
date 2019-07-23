@@ -16,7 +16,7 @@ import { LandingPageComponent } from "./landing-page/landing-page.component";
 import { RoleInformationComponent } from "./role-information/role-information.component";
 import { NavbarComponent } from './navbar/navbar.component';
 import { BandInformationComponent } from './band-information/band-information.component';
-import { EditRolesComponent } from './edit-roles/edit-roles.component';
+import { AdminTableComponent } from './admin-table/admin-table.component';
 import { AddRoleModalComponent } from "./add-role-modal/add-role-modal.component";
 import {MatIconModule, MatIcon} from '@angular/material/icon';
 import { AddCapabilityComponent } from './add-capability/add-capability.component';
@@ -31,9 +31,9 @@ import { AdminAuthGuardComponent } from './admin-auth-guard/admin-auth-guard.com
     NavbarComponent,
     RoleInformationComponent,
     BandInformationComponent,
-    EditRolesComponent,
-    AddRoleModalComponent,
-    AddCapabilityComponent
+    AddCapabilityComponent,
+    AdminTableComponent,
+    AddRoleModalComponent
   ],
   bootstrap: [
     AppComponent
