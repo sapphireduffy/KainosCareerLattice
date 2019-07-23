@@ -59,7 +59,7 @@ CREATE TABLE role (
     name VARCHAR(100) NOT NULL,
     department_id INT,
     band_id INT,
-    summary MEDIUMTEXT,
+    summary VARCHAR(1000),
     job_spec_url VARCHAR(500),
     FOREIGN KEY (department_id)
         REFERENCES department (department_id),
@@ -109,6 +109,12 @@ FROM band JOIN  band_description_id ON band.description_id = band_description_id
 CREATE VIEW viewRoleData AS
 SELECT role_id, role.name, summary, job_spec_url, school_id 
 FROM role JOIN band ON role.band_id = band.band_id;
+
+CREATE VIEW viewEditRole AS
+SELECT role.role_id, role.name AS 'RoleName', summary, job_spec_url, capability.capability_id, capability.name AS 'CapabilityName', 
+band.band_id, band.name AS 'BandName'
+FROM role JOIN role_capability ON role.role_id = role_capability.role_id JOIN capability ON capability.capability_id = 
+role_capability.capability_id JOIN band ON band.band_id = role.band_id;
 
 -- ---------------------------------- INSERTS ---------------------------- --
 
@@ -240,4 +246,3 @@ VALUES (51,10), (52,10), (53,10), (54,10);
 
 INSERT INTO role_capability (role_id, capability_id) -- role-capability links for Central Services Teams
 VALUES (55,11), (56,11), (57,11), (58,11);
- 

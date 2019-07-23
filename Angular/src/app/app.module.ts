@@ -21,6 +21,7 @@ import { AddRoleModalComponent } from "./add-role-modal/add-role-modal.component
 import { AlertComponentComponent } from './alert-component/alert-component.component';
 import { EditRoleModalComponent } from './edit-role-modal/edit-role-modal.component';
 
+import { AddCapabilityComponent } from './add-capability/add-capability.component';
 import { AdminAuthGuardComponent } from './admin-auth-guard/admin-auth-guard.component';
 
 @NgModule({
@@ -36,6 +37,7 @@ import { AdminAuthGuardComponent } from './admin-auth-guard/admin-auth-guard.com
     AddRoleModalComponent,
     AlertComponentComponent,
     EditRoleModalComponent
+    AddCapabilityComponent,
     AdminTableComponent,
     AddRoleModalComponent
   ],
@@ -62,6 +64,7 @@ import { AdminAuthGuardComponent } from './admin-auth-guard/admin-auth-guard.com
     AddRoleModalComponent,
     EditRoleModalComponent
 
+    AddCapabilityComponent
   ]
 })
 export class AppModule {}
