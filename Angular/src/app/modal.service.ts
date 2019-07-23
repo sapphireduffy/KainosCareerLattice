@@ -17,21 +17,21 @@ export class ModalService {
 
   async openRoleInfoModal(selectedRoleId){
     await this.dataService.getRoleInformation(selectedRoleId).then(response => {
-      const modalRef = this.modalService.open(RoleInformationComponent);
+      const modalRef = this.modalService.open(RoleInformationComponent, { backdrop: "static" });
       modalRef.componentInstance.roleToDisplay = response[0];
     });
   }
 
   async openBandInfoModal(selectedBandId) {
     await this.dataService.getBandInformation(selectedBandId).then(response => {
-      const modalRef = this.modalService.open(BandInformationComponent);
+      const modalRef = this.modalService.open(BandInformationComponent, { backdrop: "static" });
       modalRef.componentInstance.bandToDisplay = response[0];
     });
   }
 
   openAddRoleModal(roleBandId, roleCapabilityId, departmentId) {
     return new Promise( ( resolve, reject ) => {
-      const modalRef = this.modalService.open(AddRoleModalComponent);
+      const modalRef = this.modalService.open(AddRoleModalComponent, { backdrop: "static" });
       modalRef.componentInstance.departmentId = departmentId;
       modalRef.componentInstance.bandId = roleBandId;
       modalRef.componentInstance.capabilityId =  roleCapabilityId;
