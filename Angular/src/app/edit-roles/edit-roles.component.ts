@@ -118,6 +118,7 @@ export class EditRolesComponent implements OnInit {
       modalRef.componentInstance.capabilities = this.capabilities;
       modalRef.componentInstance.bands = this.bands;
       modalRef.componentInstance.roleEdited.subscribe(data =>{
+       
         if(data.data.hasOwnProperty('success')){
           this.showAlert = true;
           this.alertMessage = data.data.success;

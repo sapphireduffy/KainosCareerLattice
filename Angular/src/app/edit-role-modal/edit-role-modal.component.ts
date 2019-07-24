@@ -14,13 +14,13 @@ import { TouchSequence } from 'selenium-webdriver';
 })
 export class EditRoleModalComponent implements OnInit {
   @Input() roleToEdit:any;
-  @Input() currentCapabilityId:any;
-  @Input() currentBandId:any;
   @Input() capbilities:any;
   @Input() bands:any;
   @Output() roleEdited = new EventEmitter();
   roleExists;
   editedRole: Role;
+  initialBandId: number;
+  initialCapabilityId: number;
   public editRoleForm: FormGroup;
   public submitted = false;
   public currentBandName;
@@ -32,7 +32,12 @@ export class EditRoleModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+    this.initialBandId = this.roleToEdit.band_id;
+    this.initialCapabilityId = this.roleToEdit.capability_id;
+
+    console.log("this is the band ID " + this.initialBandId);
+    console.log("this is the cap ID " + this.initialCapabilityId);
+
     this.editRoleForm = this.formBuilder.group({
       roleName: [this.roleToEdit.RoleName, Validators.required],
       roleSummary: [this.roleToEdit.summary, Validators.maxLength(65000)],
@@ -71,7 +76,7 @@ export class EditRoleModalComponent implements OnInit {
     this.setEditRole();
     await this.checkIfRoleExists();
     console.log(this.roleExists)
-    if (this.roleExists == false)
+    if ((this.roleExists == false) || ((this.roleExists) == true && ((this.editedRole.bandId == this.initialBandId) && (this.editedRole.capabilityId == this.initialCapabilityId))))
     {
       console.log(this.roleExists);
       this.dataService
