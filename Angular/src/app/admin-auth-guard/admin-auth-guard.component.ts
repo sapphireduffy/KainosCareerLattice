@@ -36,10 +36,7 @@ export class AdminAuthGuardComponent implements CanActivate {
     this.router.navigate(["login"]);
   }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (this.isAdmin() && this.isAdminMode()) {
       console.log("ADMIN VALID");
       return true;
