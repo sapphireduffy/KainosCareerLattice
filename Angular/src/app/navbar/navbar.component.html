@@ -1,26 +1,11 @@
 <nav class="navbar navbar-dark bg-primary">
-  <img
-    src="../../assets/Kainos_Logo.png"
-    style="height: 50px;"
-    alt="Kainos Logo"
-    class="d-inline-block align-top"
-  />
+  <img src="../../assets/Kainos_Logo.png" style="height: 50px;" alt="Kainos Logo" class="d-inline-block align-top" />
   <p class="nav-element clickable" (click)="goToHome()">Career Lattice</p>
   <div *ngIf="this.authGuard.isAdmin()" class="btn-group btn-toggle">
-    <button
-      (click)="this.setAdminMode(true)"
-      class="btn"
-      [ngClass]="{ 'btn-primary': this.authGuard.isAdminMode() }"
-    >
-      Admin
-    </button>
-    <button
-      (click)="this.setAdminMode(false)"
-      class="btn"
-      [ngClass]="{ 'btn-primary': !this.authGuard.isAdminMode() }"
-    >
-      Employee
-    </button>
+    <button click)="this.setAdminMode(true)" class="btn"
+      [ngClass]="{ 'btn-primary': this.authGuard.isAdminMode() }">Admin</button>
+    <button (click)="this.setAdminMode(false)" class="btn"
+      [ngClass]="{ 'btn-primary': !this.authGuard.isAdminMode() }">Employee</button>
   </div>
   <p *ngIf="!this.authGuard.isAdmin()" class="nav-element">Employee</p>
   <button (click)="logout()" class="btn logout-btn">Logout</button>

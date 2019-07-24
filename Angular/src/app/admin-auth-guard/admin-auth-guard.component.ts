@@ -11,11 +11,7 @@ import { AuthGuardComponent } from "../auth-guard/auth-guard.component";
 
 @Injectable()
 export class AdminAuthGuardComponent implements CanActivate {
-  constructor(
-    private router: Router,
-    private cookieService: CookieService,
-    private authGuard: AuthGuardComponent
-  ) {}
+  constructor(private router: Router, private cookieService: CookieService, private authGuard: AuthGuardComponent) { }
 
   cookieName = "adminMode";
 
