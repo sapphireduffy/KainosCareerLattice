@@ -1,5 +1,5 @@
 const getBandQuery = "SELECT * FROM viewBandData WHERE band_id = ?"
-const allBandsQuery = "SELECT * FROM band"
+const allBandsQuery = "SELECT * FROM band order by school_id ASC"
 const addBandDescriptionQuery = "INSERT INTO band_description_id(commercial_awareness,communicating_and_teamwork,"+
     "innovation_and_continuous_improvement,customer_focus,developing_yourself_and_others,planning_and_organising,"+
     "job_specific_knowledge) VALUES (?,?,?,?,?,?,?)"
