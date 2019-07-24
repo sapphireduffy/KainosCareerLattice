@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BandInformationComponent } from './band-information.component';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 describe('BandInformationComponent', () => {
   let component: BandInformationComponent;
@@ -8,6 +9,7 @@ describe('BandInformationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      providers: [ NgbActiveModal ],
       declarations: [ BandInformationComponent ]
     })
     .compileComponents();
