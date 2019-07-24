@@ -9,7 +9,7 @@ import { AuthGuardComponent } from '../auth-guard/auth-guard.component';
 import { AdminAuthGuardComponent } from '../admin-auth-guard/admin-auth-guard.component';
 import { CookieService } from 'ngx-cookie-service';
 
-fdescribe('AdminTableComponent', () => {
+describe('AdminTableComponent', () => {
   let component: AdminTableComponent;
   let fixture: ComponentFixture<AdminTableComponent>;
 
