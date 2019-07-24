@@ -48,3 +48,7 @@ table {
   overflow-x: auto; 
   width: 90%;
 }
+
+#addBand {
+  margin-top: 8px;
+}

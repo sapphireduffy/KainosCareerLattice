@@ -5,6 +5,7 @@ import { RoleInformationComponent } from './role-information/role-information.co
 import { BandInformationComponent } from './band-information/band-information.component';
 import { AddRoleModalComponent } from './add-role-modal/add-role-modal.component';
 import { AddCapabilityComponent } from './add-capability/add-capability.component';
+import { AddBandComponent } from './add-band/add-band.component';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,17 @@ export class ModalService {
       modalRef.componentInstance.departmentId = departmentId;
 
       modalRef.componentInstance.capabilityAdded.subscribe(data => {
+        resolve(data.data)
+      })
+    })
+  }
+
+  openAddBandModal(departmentId) {
+    return new Promise((resolve, reject) => {
+      const modalRef = this.modalService.open(AddBandComponent);
+      modalRef.componentInstance.departmentId = departmentId;
+
+      modalRef.componentInstance.bandAdded.subscribe(data => {
         resolve(data.data)
       })
     })
