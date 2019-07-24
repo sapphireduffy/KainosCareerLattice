@@ -12,4 +12,12 @@ export class MockObjects {
         planning_and_organising: "",
         job_specific_knowledge: ""
     }
+
+    public static role = {
+        school_id: 1,
+        role_id: 1,
+        name: "",
+        summary: "",
+        job_spec_url: ""
+    }
 }
