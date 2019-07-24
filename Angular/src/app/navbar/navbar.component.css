@@ -1,18 +1,21 @@
-
 .nav-element {
-    color: #fff; 
-    font-size: x-large;
-    margin: 0;
+  color: #fff;
+  font-size: x-large;
+  margin: 0;
 }
 
 .clickable {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .bg-primary {
-    background-color: #003471!important;
+  background-color: #003471 !important;
 }
 
 body {
-    padding-top: 40px;
+  padding-top: 40px;
+}
+
+.logout-btn {
+  padding: 10px;
 }
