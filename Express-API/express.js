@@ -85,6 +85,10 @@ app.get("/role", cors(), function(request, response) {
   sendResponseData(rolesHandler.getRoleViewData(request.query, db), response)
 })
 
+app.post("/addband", cors(), function (request, response) {
+	sendResponseData(bandHandler.addBand(request.body, db), response)
+})
+
 app.listen(PORT, () => {
   console.log("Server is running on PORT:", PORT)
 })
