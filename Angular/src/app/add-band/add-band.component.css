@@ -10,3 +10,7 @@
 #openDescriptionBtn:hover {
     cursor: pointer;
 }
+
+#descriptionContainer label {
+    margin-top: 20px;
+}

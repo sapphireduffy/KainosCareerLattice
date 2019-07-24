@@ -45,7 +45,7 @@
         </div>
 
         <nav (click)="toggleDescription()" id="openDescriptionBtn">Open Description</nav>
-        <div *ngIf="showDescription" class="form-group">
+        <div *ngIf="showDescription" class="form-group" id="descriptionContainer">
             <label for="commercialAwarenessDescription">Commercial Awareness</label>
             <textarea formControlName="commercialAwarenessDescription" class="form-control"></textarea>
             <div
