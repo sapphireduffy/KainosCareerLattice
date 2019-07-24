@@ -7,6 +7,7 @@ import { AddRoleModalComponent } from '../add-role-modal/add-role-modal.componen
 import { Router } from '@angular/router';
 import { AddCapabilityComponent } from '../add-capability/add-capability.component';
 import { ModalService } from '../modal.service';
+import { EditRoleModalComponent } from '../edit-role-modal/edit-role-modal.component';
 
 @Component({
   selector: "app-admin-table",
@@ -51,12 +52,18 @@ export class AdminTableComponent implements OnInit {
       })
     }
     else {
-      this.modalService.openRoleInfoModal(selectedRole.ID);
+      this.modalService.openEditRoleModal(selectedRole.ID, this.capabilities, this.bands);
     }
   }
 
   openCapabilityModal(){
     this.modalService.openAddCapabilityModal(this.departmentId).then(data => {
+      this.displayAlert(data)
+    });
+  }
+
+  openEditModal(roleId, capabilities, bands){
+    this.modalService.openEditRoleModal(roleId, capabilities, bands).then(data => {
       this.displayAlert(data)
     });
   }

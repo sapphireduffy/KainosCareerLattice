@@ -4,6 +4,9 @@ const editRoleCapabilityTableQuery = "UPDATE role_capability SET capability_id=?
 const createRoleCapabilityLinkQuery = "INSERT INTO role_capability(role_id,capability_id) VALUES (?,?) "
 const deleterole = "DELETE FROM role where role_id= ?"
 
+const rolesInDepartmentQuery =  "SELECT role_id, name, department_id, band_id FROM role WHERE department_id = ?"
+const fullRolesInDepartmentQuery = "SELECT * FROM viewTableData WHERE department_id = ?"
+const roleViewDataQuery = "SELECT role_id,name,summary,job_spec_url,school_id FROM viewRoleData WHERE role_id = ?"
 
 class RolesHandler {
     constructor(config) { }
@@ -53,5 +56,40 @@ editRole(params, db){
         })
     }
 
+    getRolesInDept(params, db){
+        return new Promise( ( resolve, reject ) => {
+            try {
+                db.query(rolesInDepartmentQuery,[params.departmentID]).then(rows => {
+                    resolve(rows)
+                })
+            } catch (err){
+                reject({"error":"Error getting roles in department"})
+            }
+        })
+    }
+
+    getFullRole(params, db){
+        return new Promise( ( resolve, reject ) => {
+            try {
+                db.query(fullRolesInDepartmentQuery,[params.departmentID]).then(rows => {
+                    resolve(rows)
+                })
+            } catch (err){
+                reject({"error":"Error getting full roles in department"})
+            }
+        })
+    }
+
+    getRoleViewData(params, db){
+        return new Promise( ( resolve, reject ) => {
+            try {
+                db.query(roleViewDataQuery,[params.roleID]).then(rows => {
+                    resolve(rows)
+                })
+            } catch (err){
+                reject({"error":"Error getting roles view in department"})
+            }
+        })
+    }
 }
 module.exports = RolesHandler
