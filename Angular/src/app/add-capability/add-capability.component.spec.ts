@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataService } from '../_services/data.service';
 
-fdescribe('AddCapabilityComponent', () => {
+describe('AddCapabilityComponent', () => {
   let component: AddCapabilityComponent;
   let fixture: ComponentFixture<AddCapabilityComponent>;
 
