@@ -1,7 +1,7 @@
 const getBandQuery = "SELECT * FROM viewBandData WHERE band_id = ?"
 const allBandsQuery = "SELECT * FROM band"
 
-class RolesHandler {
+class bandHandler {
     constructor( config ) { }
 
     getBands(params, db){
@@ -28,4 +28,4 @@ class RolesHandler {
         })
     }
 }
-module.exports = RolesHandler
+module.exports = BandHandler

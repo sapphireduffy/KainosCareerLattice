@@ -36,6 +36,14 @@ app.post("/addrole", cors(), function (request, response) {
 	sendResponseData(rolesHandler.createRole(request.body, db), response)
 })
 
+app.post("/addband", cors(), function (request, response) {
+  sendResponseData(bandHandler.createBand(request.body, db), response)
+})
+
+app.post("/description", cors(), function (request, response) {
+  sendResponseData(descriptionHandler.createDescription(request.body, db), response)
+})
+
 app.post("/addcapability", cors(), function (request, response) {
   sendResponseData(capabilityHandler.createCapability(request.body, db), response)
 })

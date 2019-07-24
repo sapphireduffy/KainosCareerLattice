@@ -19,6 +19,7 @@ export class AddBandComponent implements OnInit {
   newBand: Band;
   public addBandForm: FormGroup;
   public submitted = false;
+  descriptionId;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -76,12 +77,18 @@ export class AddBandComponent implements OnInit {
 
     console.log(this.newBand);
 
-    this.dataService
+    /*this.dataService
       .createBand(this.newBand)
       .then(result => this.bandAdded.emit(result))
       .catch(error => {
         this.bandAdded.emit(error);
       });
+    this.closeModal();*/
+
+    this.dataService
+    .createDescription(this.newBand).then(result => this.descriptionId = result)
+    .then(console.log(this.descriptionId))
+
     this.closeModal();
   }
 }
