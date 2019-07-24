@@ -27,6 +27,7 @@ const bandsQuery = "SELECT * FROM band"
 const bandNameQuery = "SELECT name FROM band WHERE band_id = ?"
 const getRoleQuery = "SELECT role_id, name, summary, job_spec_url FROM role WHERE role_id = ?"
 const viewEditRole = "SELECT role_id, capability_id, band_id, RoleName, summary, job_spec_url, CapabilityName, BandName FROM viewEditRole WHERE role_id = ?"
+const RoleBandCapabilityExists = "SELECT EXISTS(SELECT * FROM viewEditRole WHERE capability_id=? AND band_id=?) AS result"
 
 
 const tokenCookieName = 'token'
@@ -120,6 +121,12 @@ app.get("/role", cors(), function(request, response) {
 
 app.get("/viewEditRole", cors(), function(request, response) {
   db.query(viewEditRole,[request.query.roleID]).then(rows => {
+    response.send(rows);
+  });
+});
+
+app.get("/roleBandCapabilityExists", cors(), function(request, response) {
+  db.query(RoleBandCapabilityExists,[request.query.capabilityId, request.query.bandId]).then(rows => {
     response.send(rows);
   });
 });

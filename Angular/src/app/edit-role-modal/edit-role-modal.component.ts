@@ -19,6 +19,7 @@ export class EditRoleModalComponent implements OnInit {
   @Input() capbilities:any;
   @Input() bands:any;
   @Output() roleEdited = new EventEmitter();
+  roleExists;
   editedRole: Role;
   public editRoleForm: FormGroup;
   public submitted = false;
@@ -62,19 +63,39 @@ export class EditRoleModalComponent implements OnInit {
     console.log(this.editedRole)
   }
 
-  onSubmit() {
+  async onSubmit() {
     this.submitted = true;
     if (this.editRoleForm.invalid) {
       return;
     }
     this.setEditRole();
-
-    this.dataService
-      .editRole(this.editedRole)
-      .then(result => this.roleEdited.emit(result))
-      .catch(error => {
-        this.roleEdited.emit(error);
-      });
-    this.closeModal();
+    await this.checkIfRoleExists();
+    console.log(this.roleExists)
+    if (this.roleExists == false)
+    {
+      console.log(this.roleExists);
+      this.dataService
+     .editRole(this.editedRole)
+     .then(result => this.roleEdited.emit(result))
+     .catch(error => {
+       this.roleEdited.emit(error);
+     });
+   this.closeModal();
+    
   }
+}
+
+async checkIfRoleExists() {
+ await this.dataService
+  .getRoleBandCapabilityExists(this.editedRole.capabilityId, this.editedRole.bandId)
+  .then(
+    result =>
+    { 
+       this.roleExists =  result[0]["result"] == 1 ? true : false;
+  })
+  .catch(error => {
+    console.log(error);
+  });
+}
+
 }
