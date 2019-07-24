@@ -22,7 +22,7 @@ app.use(express.urlencoded())
 //Parse JSON bodies (as sent by API clients)
 app.use(express.json())
 
-const tokenCookieName = 'token'
+const tokenCookieName = "token"
 
 function sendResponseData(query, response){
   query.then(result => {
@@ -32,11 +32,11 @@ function sendResponseData(query, response){
   })
 }
 
-app.post('/addrole', cors(), function (request, response) {
+app.post("/addrole", cors(), function (request, response) {
 	sendResponseData(rolesHandler.createRole(request.body, db), response)
 })
 
-app.post('/addcapability', cors(), function (request, response) {
+app.post("/addcapability", cors(), function (request, response) {
   sendResponseData(capabilityHandler.createCapability(request.body, db), response)
 })
 
@@ -64,7 +64,7 @@ app.get("/bands", cors(), function(request, response) {
   sendResponseData(bandHandler.allBands(db), response)
 })
 
-app.post('/login', cors(), function (request, response) {
+app.post("/login", cors(), function (request, response) {
 	loginHandler.login(request.body, db).then(token => {
     response.cookie(tokenCookieName,token)
 		response.send({tokenCookieName:token})
