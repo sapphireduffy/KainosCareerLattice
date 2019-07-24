@@ -112,17 +112,12 @@ export class EditRolesComponent implements OnInit {
   }
 
   async openEditRoleModal(roleId) {
-    console.log("called it");
     await this.dataService.getEditRole(roleId).then(response => {
-      console.log("called it");
       const modalRef = this.modalService.open(EditRoleModalComponent);
-      console.log(response);
       modalRef.componentInstance.roleToEdit = response[0];
       modalRef.componentInstance.capabilities = this.capabilities;
       modalRef.componentInstance.bands = this.bands;
       modalRef.componentInstance.roleEdited.subscribe(data =>{
-     
-        console.log(data.data)
         if(data.data.hasOwnProperty('success')){
           this.showAlert = true;
           this.alertMessage = data.data.success;

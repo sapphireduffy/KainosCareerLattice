@@ -56,11 +56,10 @@ export class EditRoleModalComponent implements OnInit {
       roleName: this.editRoleForm.get("roleName").value,
       summary: this.editRoleForm.get("roleSummary").value,
       jobSpecUrl: this.editRoleForm.get("roleSharePointLink").value,
-      capabilityId: this.editRoleForm.get("roleCapability").value
+      capabilityId: this.editRoleForm.get("roleCapability").value,
+      bandId: this.editRoleForm.get("roleBand").value
     };
-
-    console.log(this.editRoleForm.get("roleBand").value)
-    console.log(this.editRoleForm.get("roleCapability").value)
+    console.log(this.editedRole)
   }
 
   onSubmit() {
