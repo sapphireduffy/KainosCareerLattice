@@ -26,9 +26,9 @@
       <tr *ngFor="let band of bands">
         <td
           scope="row"
-          [class.job-level-inspire]="band.band_id <= 3"
-          [class.job-level-explore]="band.band_id > 3 && band.band_id <= 6"
-          [class.job-level-discover]="band.band_id > 6"
+          [class.job-level-inspire]="band.school_id == 1"
+          [class.job-level-explore]="band.school_id == 2"
+          [class.job-level-discover]="band.school_id == 3"
           class="job-level"
           (click)="this.modalService.openBandInfoModal(band.band_id)">
           {{ band.name }}

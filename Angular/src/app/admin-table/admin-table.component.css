@@ -49,6 +49,11 @@ table {
   width: 90%;
 }
 
-#addBand {
+.addBand {
   margin-top: 8px;
+}
+
+.addBandAbove {
+  margin: 0;
+  margin-bottom: 8px;
 }
