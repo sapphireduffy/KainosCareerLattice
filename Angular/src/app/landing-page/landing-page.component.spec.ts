@@ -13,14 +13,18 @@ describe('LandingPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LandingPageComponent,
-                      NavbarComponent
-                    ],
-      imports: [ RouterTestingModule ],
-      providers: [ AdminAuthGuardComponent,
-                   AuthGuardComponent,
-                   CookieService
-                 ]
+      declarations: [ 
+        LandingPageComponent,
+        NavbarComponent
+      ],
+      imports: [ 
+        RouterTestingModule 
+      ],
+      providers: [ 
+        AdminAuthGuardComponent,
+        AuthGuardComponent,
+        CookieService
+      ]
     })
     .compileComponents();
   }));

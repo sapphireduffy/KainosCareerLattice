@@ -15,17 +15,20 @@ describe('AdminTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminTableComponent,
-                      NavbarComponent
-                    ],
-     imports: [ NgbAlertModule,
-                RouterTestingModule
-              ],
-     providers: [ AuthGuardComponent,
-                  AdminAuthGuardComponent,
-                  DataService,
-                  CookieService
-                ]
+      declarations: [ 
+        AdminTableComponent,
+        NavbarComponent
+      ], 
+      imports: [ 
+        NgbAlertModule,
+        RouterTestingModule
+      ],
+      providers: [ 
+        AuthGuardComponent,
+        AdminAuthGuardComponent,
+        DataService,
+        CookieService
+      ]
     })
     .compileComponents();
   }));

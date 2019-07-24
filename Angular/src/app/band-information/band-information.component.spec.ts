@@ -10,8 +10,12 @@ describe('BandInformationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers: [ NgbActiveModal ],
-      declarations: [ BandInformationComponent ]
+      providers: [ 
+        NgbActiveModal 
+      ],
+      declarations: [ 
+        BandInformationComponent 
+      ]
     })
     .compileComponents();
   }));
