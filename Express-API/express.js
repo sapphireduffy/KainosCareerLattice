@@ -28,6 +28,8 @@ const bandsQuery = "SELECT * FROM band"
 const getRoleQuery = "SELECT role_id,name,summary,job_spec_url,school_id FROM viewRoleData WHERE role_id = ?"
 const capabilityNameQuery = "SELECT name FROM capability WHERE capability_id = ?"
 const bandNameQuery = "SELECT name FROM band WHERE band_id = ?"
+const viewEditRole = "SELECT role_id, capability_id, band_id, RoleName, summary, job_spec_url, CapabilityName, BandName FROM viewEditRole WHERE role_id = ?"
+
 
 const tokenCookieName = 'token'
 
@@ -111,6 +113,13 @@ app.get("/role", cors(), function(request, response) {
     response.send(rows);
   });
 });
+
+app.get("/viewEditRole", cors(), function(request, response) {
+  db.query(viewEditRole,[request.query.roleID]).then(rows => {
+    response.send(rows);
+  });
+});
+
 
 app.listen(PORT, () => {
   console.log("Server is running on PORT:", PORT);

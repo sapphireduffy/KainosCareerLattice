@@ -44,18 +44,18 @@
 
     <div>
       <div class="form-group">
-        <label for="bands">{{roleBand}}</label>
-        Band: <select class="form-control" formControlName="roleBand" required>
-          <option *ngFor="let band of bands">{{band.name}}</option>
+        <label for ="bands"></label>
+        Band: <select class="form-control" formControlName="roleBand">
+          <option *ngFor="let band of bands" [selected]="roleToEdit.band_id == band.band_id" [value]="band.band_id">{{band.name}}</option>
         </select>
       </div>
     </div>
 
     <div>
       <div class="form-group">
-        Capability: <select name="Capability" value="" class="custom-select" placeholder="Please Select Location"
+        Capability: <select class="form-control" formControlName="roleCapability"
           required>
-          <option *ngFor="let capability of capabilities">{{capability.name}} </option>
+          <option *ngFor="let capability of capabilities" [selected]="roleToEdit.capability_id == capability.capability_id" [value]="capability.capability_id">{{capability.name}} </option>
         </select>
       </div>
     </div>

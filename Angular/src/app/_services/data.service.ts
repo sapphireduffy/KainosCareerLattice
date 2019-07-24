@@ -11,6 +11,7 @@ const roleUrl = "/api/role";
 const addRoleUrl = "/api/addrole";
 const editRoleUrl = "/api/editrole";
 const addCapabilityURL = "/api/addcapability";
+const viewEditRoleUrl = "/api/viewEditRole";
 const getUniqueBandURL = "/api/uniqueband";
 const deleteRoleURL = "/api/deleteRole";
 const getBandsNameURL = "/api/bandName";
@@ -274,4 +275,31 @@ export class DataService {
         }
       });
   }
+
+  getEditRole(roleID: number) {
+    return axios
+      .get(viewEditRoleUrl, {
+        params: {
+          roleID: roleID
+        },
+        headers: this.getHeaders()
+      })
+      .then(function(response) {
+        return response.data;
+      })
+      .catch(function(error) {
+        if (error.response) {
+          return {
+            error: error.response.data.Message,
+            statusCode: error.response.statusCode
+          };
+        } else {
+          if (error.message) {
+            return { error: error.message };
+          }
+        }
+      });
+  }
+
+  
 }

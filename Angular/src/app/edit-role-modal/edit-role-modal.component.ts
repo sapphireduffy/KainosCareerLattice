@@ -14,11 +14,11 @@ import { Response } from 'selenium-webdriver/http';
   styleUrls: ["./edit-role-modal.component.css"]
 })
 export class EditRoleModalComponent implements OnInit {
-  @Input() roleToEdit:any;
-  @Input() currentCapabilityId:any;
-  @Input() currentBandId:any;
-  @Input() capbilities:any;
-  @Input() bands:any;
+  @Input() roleToEdit: any;
+  @Input() currentCapabilityId: any;
+  @Input() currentBandId: any;
+  @Input() capbilities: any;
+  @Input() bands: any;
   @Output() roleEdited = new EventEmitter();
   editedRole: Role;
   public editRoleForm: FormGroup;
@@ -32,13 +32,15 @@ export class EditRoleModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.editRoleForm = this.formBuilder.group({
-      roleName: [this.roleToEdit.name, Validators.required],
+      roleName: [this.roleToEdit.RoleName, Validators.required],
       roleSummary: [this.roleToEdit.summary, Validators.maxLength(65000)],
       roleSharePointLink: [this.roleToEdit.job_spec_url, Validators.maxLength(500)],
-      roleBand: [this.currentBandName],
-      roleCapability: [this.currentCapabilityId]
+      roleBand: [this.roleToEdit.band_id],
+      roleCapability: [this.roleToEdit.capability_id]
     });
+
   }
 
   get formControls() {
@@ -50,18 +52,19 @@ export class EditRoleModalComponent implements OnInit {
   }
 
   setEditRole() {
-    // this.editedRole = {
-    //   roleId: this.roleToEdit.role_id,
-    //   roleName: this.editRoleForm.get("roleName").value,
-    //   summary: this.editRoleForm.get("roleSummary").value,
-    //   jobSpecUrl: this.editRoleForm.get("roleSharePointLink").value,
-    // };
+    this.editedRole = {
+      roleId: this.roleToEdit.role_id,
+      roleName: this.editRoleForm.get("roleName").value,
+      summary: this.editRoleForm.get("roleSummary").value,
+      jobSpecUrl: this.editRoleForm.get("roleSharePointLink").value,
+      capabilityId: this.editRoleForm.get("roleCapability").value
+    };
   }
 
 
   deleteRole() {
-    if(confirm("Are you sure you want to delete this role ")) {
-      this.dataService.deleteRole(this.roleToEdit.role_id).then(response =>{
+    if (confirm("Are you sure you want to delete this role ")) {
+      this.dataService.deleteRole(this.roleToEdit.role_id).then(response => {
         console.log(response)
       })
     }
@@ -81,8 +84,6 @@ export class EditRoleModalComponent implements OnInit {
         this.roleEdited.emit(error);
       });
     this.closeModal();
-
-
   }
 
 
