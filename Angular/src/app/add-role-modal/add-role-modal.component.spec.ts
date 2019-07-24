@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddRoleModalComponent } from './add-role-modal.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { DataService } from '../_services/data.service';
 
 describe('AddRoleModalComponent', () => {
   let component: AddRoleModalComponent;
@@ -8,7 +11,11 @@ describe('AddRoleModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddRoleModalComponent ]
+      declarations: [ AddRoleModalComponent ],
+      imports: [ ReactiveFormsModule ],
+      providers: [ NgbActiveModal,
+                   DataService
+                 ]
     })
     .compileComponents();
   }));
