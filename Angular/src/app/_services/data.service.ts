@@ -3,20 +3,24 @@ import axios from "axios";
 
 const departmentUrl = "/api/departments";
 const capabilityUrl = "/api/capabilities";
-const getCapabilityNameUrl = "/api/capabilityName";
 const getAllDataUrl = "/api/allData";
+
 const getRolesInDepartmentURL = "/api/rolesInDep";
 const getBandsURL = "/api/bands";
-const getBandsNameURL = "/api/bandName";
 const roleUrl = "/api/role";
 const addRoleUrl = "/api/addrole";
 const editRoleUrl = "/api/editrole";
+const addCapabilityURL = "/api/addcapability";
 const viewEditRoleUrl = "/api/viewEditRole";
 const getUniqueBandURL = "/api/uniqueband";
+const deleteRoleURL = "/api/deleteRole";
+const getBandsNameURL = "/api/bandName";
+const getCapabilityNameUrl = "/api/capabilityName";
 
 @Injectable()
 export class DataService {
   headers: any;
+  public isAdmin: boolean
 
   constructor() {}
 
@@ -56,31 +60,6 @@ export class DataService {
       .get(capabilityUrl, {
         params: {
           departmentID: departmentID
-        },
-        headers: this.getHeaders()
-      })
-      .then(function(response) {
-        return response.data;
-      })
-      .catch(function(error) {
-        if (error.response) {
-          return {
-            error: error.response.data.Message,
-            statusCode: error.response.statusCode
-          };
-        } else {
-          if (error.message) {
-            return { error: error.message };
-          }
-        }
-      });
-  }
-
-  getCapabilityNameById(capabilityId: number) {
-    return axios
-      .get(getCapabilityNameUrl, {
-        params: {
-          capabilityId: capabilityId
         },
         headers: this.getHeaders()
       })
@@ -174,31 +153,6 @@ export class DataService {
       });
   }
 
-  getBandNameById(bandId: number) {
-    return axios
-      .get(getBandsNameURL, {
-        params: {
-          bandId: bandId
-        },
-        headers: this.getHeaders()
-      })
-      .then(function(response) {
-        return response.data;
-      })
-      .catch(function(error) {
-        if (error.response) {
-          return {
-            error: error.response.data.Message,
-            statusCode: error.response.statusCode
-          };
-        } else {
-          if (error.message) {
-            return { error: error.message };
-          }
-        }
-      });
-  }
-
   getRoleInformation(roleID: number) {
     return axios
       .get(roleUrl, {
@@ -249,9 +203,40 @@ export class DataService {
       });
   }
 
+  createCapability(param: any) {
+    return axios
+      .post(addCapabilityURL, param, { headers: this.getHeaders() })
+      .then(function(response) {
+        return response;
+      })
+      .catch(function(error) {
+        if (error.response) {
+          return {
+            error: error.response.data.Message,
+            statsuCode: error.response.statusCode
+          };
+        } else {
+          if (error.message) {
+            return { error: error.message };
+          }
+        }
+      });
+  }
+
   createRole(param: any) {
     return axios
       .post(addRoleUrl, param, { headers: this.getHeaders() })
+      .then(function(response) {
+        return response;
+      })
+      .catch(function(error) {
+        return { error: error.message };
+      });
+  }
+
+  editRole(param: any) {
+    return axios
+      .put(editRoleUrl, param, { headers: this.getHeaders() })
       .then(function(response) {
         return response;
       })
@@ -269,9 +254,11 @@ export class DataService {
       });
   }
 
-  editRole(param: any) {
+  deleteRole(roleId: any) {
     return axios
-      .put(editRoleUrl, param, { headers: this.getHeaders() })
+      .delete(deleteRoleURL, { 
+        data:{roleId:roleId},
+        headers: this.getHeaders() })
       .then(function(response) {
         return response;
       })

@@ -8,9 +8,11 @@ const PORT = 8000
 const Database = require('./db.js')
 const LoginHandler = require('./login.js')
 const RolesHandler = require('./roles.js')
+const CapabilityHandler = require('./capability')
 const db = new Database()
 const loginHandler = new LoginHandler()
 const rolesHandler = new RolesHandler()
+const capabilityHandler = new CapabilityHandler()
 
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(express.urlencoded())
@@ -20,20 +22,20 @@ app.use(express.json())
 
 const rolesQuery = "SELECT role_id, name, department_id, band_id FROM role WHERE department_id = ?"
 const capabilitiesQuery = "SELECT name, capability_id FROM capability WHERE department_id = ?"
-const capabilityNameQuery = "SELECT name FROM capability WHERE capability_id = ?"
 const departmentsQuery = "SELECT name FROM department WHERE department_id = ?"
 const rolesInDepQuery = "SELECT * FROM viewTableData WHERE department_id = ?"
 const bandsQuery = "SELECT * FROM band"
+const getRoleQuery = "SELECT role_id,name,summary,job_spec_url,school_id FROM viewRoleData WHERE role_id = ?"
+const capabilityNameQuery = "SELECT name FROM capability WHERE capability_id = ?"
 const bandNameQuery = "SELECT name FROM band WHERE band_id = ?"
-const getRoleQuery = "SELECT role_id, name, summary, job_spec_url FROM role WHERE role_id = ?"
 const viewEditRole = "SELECT role_id, capability_id, band_id, RoleName, summary, job_spec_url, CapabilityName, BandName FROM viewEditRole WHERE role_id = ?"
 
 
 const tokenCookieName = 'token'
 
-app.post('/addrole', cors(), function (request, response) {
+app.delete('/deleteRole', cors(), function (request, response) {
   console.log(request.body)
-	rolesHandler.createRole(request.body, db).then(result => {
+	rolesHandler.deleteRole(request.body, db).then(result => {
     console.log(result)
     response.send(result)
   }, reject => {
@@ -41,10 +43,16 @@ app.post('/addrole', cors(), function (request, response) {
   })
 });
 
-app.put('/editrole', cors(), function (request, response) {
-  console.log(request.body)
-	rolesHandler.editRole(request.body, db).then(result => {
-    console.log(result)
+app.post('/addrole', cors(), function (request, response) {
+	rolesHandler.createRole(request.body, db).then(result => {
+    response.send(result)
+  }, reject => {
+    response.send(reject)
+  })
+});
+
+app.post('/addcapability', cors(), function (request, response) {
+  capabilityHandler.createCapability(request.body, db).then(result => {
     response.send(result)
   }, reject => {
     response.send(reject)
@@ -59,12 +67,6 @@ app.get("/roles", cors(), function(request, response) {
 
 app.get("/capabilities", cors(), function(request, response) {
   db.query(capabilitiesQuery,[request.query.departmentID]).then(rows => {
-    response.send(rows);
-  });
-});
-
-app.get("/capabilityName", cors(), function(request, response) {
-  db.query(capabilityNameQuery,[request.query.capabilityId]).then(rows => {
     response.send(rows);
   });
 });
@@ -96,13 +98,7 @@ app.get("/bands", cors(), function(request, response) {
   });
 });
 
-app.get("/bandName", cors(), function(request, response) {
-  db.query(bandNameQuery,[request.query.bandId]).then(rows => {
-    response.send(rows);
-  });
-});
-
-app.post('/login', function (request, response) {
+app.post('/login', cors(), function (request, response) {
 	loginHandler.login(request.body, db).then(token => {
     response.cookie(tokenCookieName,token)
 		response.send({tokenCookieName:token})
