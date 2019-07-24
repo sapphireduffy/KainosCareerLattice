@@ -12,12 +12,19 @@ class RolesHandler {
     addBand(params, db){
         return new Promise( ( resolve, reject ) => {
             try {
-                db.query(addBandDescriptionQuery,[params.commercialAwareness,params.communicatingAndTeamwork,
-                params.innovatioAndContinuousImprovement,params.customerFocus,
-                params.developingYourselfAndOthers,params.planningAndOrganising,
-                params.jobSpecificKnowledge]).then(rows => {
-                    db.query(addBandQuery,[params.name, params.schoolId, rows.insertId,
-                    params.training, params.responsibilities]).then(result => {
+                db.query(addBandDescriptionQuery,[
+                    params.commercialAwareness,params.communicatingAndTeamwork,
+                    params.innovatioAndContinuousImprovement,params.customerFocus,
+                    params.developingYourselfAndOthers,params.planningAndOrganising,
+                    params.jobSpecificKnowledge
+                ]).then(rows => {
+                    db.query(addBandQuery,[
+                        params.name, 
+                        params.schoolId, 
+                        rows.insertId,
+                        params.training, 
+                        params.responsibilities
+                    ]).then(result => {
                         resolve({"success":"Successfully added band"})
                     })
                 })
