@@ -20,6 +20,7 @@ export class AddBandComponent implements OnInit {
   public addBandForm: FormGroup;
   public submitted = false;
   descriptionId;
+  showDescription = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -84,5 +85,9 @@ export class AddBandComponent implements OnInit {
         this.bandAdded.emit(error);
       });
     this.closeModal();
+  }
+
+  toggleDescription(){
+    this.showDescription  = !this.showDescription;
   }
 }

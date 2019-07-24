@@ -18,9 +18,9 @@
                 class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && formControls.bandName.errors }"/>
             <div
-                *ngIf="submitted && formControls.bandName.errors"
+                *ngIf="submitted"
                 class="invalid-feedback">
-                <div *ngIf="formControls.bandName.errors.required">
+                <div *ngIf="formControls.bandName.errors?.required">
                     Band Name is a required field
                 </div>
             </div>
@@ -36,15 +36,16 @@
                 <option value="3">Discover</option>
             </select>
             <div
-                *ngIf="submitted && formControls.schoolId.errors"
+                *ngIf="submitted"
                 class="invalid-feedback">
-                <div *ngIf="formControls.schoolId.errors.required">
+                <div *ngIf="formControls.schoolId.errors?.required">
                     School Name is a required field
                 </div>
             </div>
         </div>
 
-        <div class="form-group">
+        <nav (click)="toggleDescription()" id="openDescriptionBtn">Open Description</nav>
+        <div *ngIf="showDescription" class="form-group">
             <label for="commercialAwarenessDescription">Commercial Awareness</label>
             <textarea formControlName="commercialAwarenessDescription" class="form-control"></textarea>
             <div
