@@ -7,7 +7,6 @@ const getAllDataUrl = "/api/allData";
 
 const getRolesInDepartmentURL = "/api/rolesInDep";
 const getBandsURL = "/api/bands";
-const addDescriptionURL = "/api/description";
 const roleUrl = "/api/role";
 const addRoleUrl = "/api/addrole";
 const addCapabilityURL = "/api/addcapability";
@@ -223,17 +222,6 @@ export class DataService {
   createRole(param: any) {
     return axios
       .post(addRoleUrl, param, { headers: this.getHeaders() })
-      .then(function(response) {
-        return response;
-      })
-      .catch(function(error) {
-        return { error: error.message };
-      });
-  }
-
-  createDescription(param: any) {
-    return axios
-      .post(addDescriptionURL, param, { headers: this.getHeaders() })
       .then(function(response) {
         return response;
       })

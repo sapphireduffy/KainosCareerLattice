@@ -1,20 +1,20 @@
 const getBandQuery = "SELECT * FROM viewBandData WHERE band_id = ?"
 const allBandsQuery = "SELECT * FROM band"
-const addBandDescriptionQuery = "INSERT INTO band_description(commercial_awareness,communicating_and_teamwork,"+
-    "innovation_and_continuous_improvement,customer_focus,developing_yourself_and_others,planning_and_organising"+
+const addBandDescriptionQuery = "INSERT INTO band_description_id(commercial_awareness,communicating_and_teamwork,"+
+    "innovation_and_continuous_improvement,customer_focus,developing_yourself_and_others,planning_and_organising,"+
     "job_specific_knowledge) VALUES (?,?,?,?,?,?,?)"
 const addBandQuery = "INSERT INTO band(name,school_id,description_id,training,responsibilities)"+
     " VALUES(?,?,?,?,?)"
 
-class bandHandler {
+class BandHandler {
     constructor( config ) { }
 
     addBand(params, db){
         return new Promise( ( resolve, reject ) => {
             try {
                 db.query(addBandDescriptionQuery,[params.commercialAwareness,params.communicatingAndTeamwork,
-                params.innovatioAndContinuousImprovement,params.customerFocus,
-                params.developingYourselfAndOthers,params.planningAndOrganising,
+                params.innovationAndContinuousImprovement,params.customerFocus,
+                params.developingYourselfAndOthers,params.planningAndOrganisation,
                 params.jobSpecificKnowledge]).then(rows => {
                     db.query(addBandQuery,[params.name, params.schoolId, rows.insertId,
                     params.training, params.responsibilities]).then(result => {
