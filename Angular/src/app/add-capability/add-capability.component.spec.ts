@@ -11,11 +11,16 @@ describe('AddCapabilityComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddCapabilityComponent ],
-      imports: [ ReactiveFormsModule ],
-      providers: [ NgbActiveModal,
-                   DataService 
-                 ]
+      declarations: [ 
+        AddCapabilityComponent 
+      ],
+      imports: [ 
+        ReactiveFormsModule 
+      ],
+      providers: [ 
+        NgbActiveModal, 
+        DataService 
+      ]
     })
     .compileComponents();
   }));

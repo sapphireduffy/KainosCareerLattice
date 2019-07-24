@@ -11,11 +11,16 @@ describe('AddRoleModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddRoleModalComponent ],
-      imports: [ ReactiveFormsModule ],
-      providers: [ NgbActiveModal,
-                   DataService
-                 ]
+      declarations: [ 
+        AddRoleModalComponent 
+      ],
+      imports: [ 
+        ReactiveFormsModule 
+      ],
+      providers: [ 
+        NgbActiveModal,
+        DataService
+      ]
     })
     .compileComponents();
   }));

@@ -10,8 +10,12 @@ describe('RoleInformationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers: [ NgbActiveModal ],
-      declarations: [ RoleInformationComponent ]
+      providers: [ 
+        NgbActiveModal 
+      ],
+      declarations: [ 
+        RoleInformationComponent 
+      ]
     })
     .compileComponents();
   }));
