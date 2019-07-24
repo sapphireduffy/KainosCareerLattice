@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RoleInformationComponent } from './role-information.component';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 describe('RoleInformationComponent', () => {
   let component: RoleInformationComponent;
@@ -8,6 +9,7 @@ describe('RoleInformationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      providers: [ NgbActiveModal ],
       declarations: [ RoleInformationComponent ]
     })
     .compileComponents();
