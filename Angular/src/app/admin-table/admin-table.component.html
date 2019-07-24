@@ -31,9 +31,9 @@
             [class.job-level-explore]='band.school_id == 2' 
             [class.job-level-discover]='band.school_id == 3' 
             class='job-level'>
-            <button class='btn btn-secondary addBandAbove' *ngIf="i == 0" (click)="openAddBandModal()">+ Add Above</button>
+            <button class='btn btn-secondary addBandAbove' *ngIf="i == 0" (click)="openAddBandModal(band.priority, null)">+ Add Above</button>
             <p (click)="this.modalService.openBandInfoModal(band.band_id)">{{band.name}}</p>
-            <button class='btn btn-secondary addBand' (click)="openAddBandModal()">+ Add Below</button>
+            <button class='btn btn-secondary addBand' (click)="openAddBandModal(null, band.priority)">+ Add Below</button>
 
             </td>
             <td *ngFor="let cap of capabilities">

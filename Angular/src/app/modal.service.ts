@@ -54,11 +54,14 @@ export class ModalService {
     })
   }
 
-  openAddBandModal(departmentId) {
+  openAddBandModal(departmentId, aboveValue, belowValue) {
     return new Promise((resolve, reject) => {
+      console.log("AboveVal: " + aboveValue);
+      console.log("BelowVal: " + belowValue);
       const modalRef = this.modalService.open(AddBandComponent);
+      modalRef.componentInstance.abovePriorityVal = aboveValue;
+      modalRef.componentInstance.belowPriorityVal = belowValue;
       modalRef.componentInstance.departmentId = departmentId;
-
       modalRef.componentInstance.bandAdded.subscribe(data => {
         resolve(data.data)
       })

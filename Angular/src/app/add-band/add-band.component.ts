@@ -15,6 +15,8 @@ const DESCRIPTION_MAX_LEN = 16777215
 export class AddBandComponent implements OnInit {
 
   @Input() departmentId;
+  @Input() abovePriorityVal;
+  @Input() belowPriorityVal;
   @Output() bandAdded = new EventEmitter();
   newBand: Band;
   public addBandForm: FormGroup;
@@ -65,7 +67,9 @@ export class AddBandComponent implements OnInit {
       planningAndOrganisation: this.addBandForm.get("planningAndOrganisation").value,
       jobSpecificKnowledge: this.addBandForm.get("jobSpecificKnowledge").value,
       training: this.addBandForm.get("training").value,
-      responsibilities: this.addBandForm.get("responsibilities").value
+      responsibilities: this.addBandForm.get("responsibilities").value,
+      aboveValue: this.abovePriorityVal,
+      belowValue: this.belowPriorityVal
     }
   }
 

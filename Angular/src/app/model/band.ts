@@ -11,4 +11,6 @@ export class Band {
     jobSpecificKnowledge: string;
     training: string;
     responsibilities: string;
+    aboveValue: number;
+    belowValue: number;
 }
