@@ -34,7 +34,7 @@ const tokenCookieName = 'token'
 
 app.post('/addrole', cors(), function (request, response) {
   console.log(request.body)
-	rolesHandler.createRole(request.body, db).then(result => {
+  rolesHandler.createRole(request.body, db).then(result => {
     console.log(result)
     response.send(result)
   }, reject => {
@@ -44,7 +44,7 @@ app.post('/addrole', cors(), function (request, response) {
 
 app.put('/editrole', cors(), function (request, response) {
   console.log(request.body)
-	rolesHandler.editRole(request.body, db).then(result => {
+  rolesHandler.editRole(request.body, db).then(result => {
     console.log(result)
     response.send(result)
   }, reject => {
@@ -52,25 +52,25 @@ app.put('/editrole', cors(), function (request, response) {
   })
 });
 
-app.get("/roles", cors(), function(request, response) {
-  db.query(rolesQuery,[request.query.departmentID]).then(rows => {
+app.get("/roles", cors(), function (request, response) {
+  db.query(rolesQuery, [request.query.departmentID]).then(rows => {
     response.send(rows);
   });
 });
 
-app.get("/capabilities", cors(), function(request, response) {
-  db.query(capabilitiesQuery,[request.query.departmentID]).then(rows => {
+app.get("/capabilities", cors(), function (request, response) {
+  db.query(capabilitiesQuery, [request.query.departmentID]).then(rows => {
     response.send(rows);
   });
 });
 
-app.get("/capabilityName", cors(), function(request, response) {
-  db.query(capabilityNameQuery,[request.query.capabilityId]).then(rows => {
+app.get("/capabilityName", cors(), function (request, response) {
+  db.query(capabilityNameQuery, [request.query.capabilityId]).then(rows => {
     response.send(rows);
   });
 });
 
-app.get("/uniqueband", cors(), function(request, response) {
+app.get("/uniqueband", cors(), function (request, response) {
   db.query(
     "SELECT * FROM viewBandData WHERE band_id = ?",
     [request.query.bandId]
@@ -79,54 +79,55 @@ app.get("/uniqueband", cors(), function(request, response) {
   });
 });
 
-app.get("/departments", cors(), function(request, response) {
-  db.query(departmentsQuery,[request.query.departmentID]).then(rows => {
+app.get("/departments", cors(), function (request, response) {
+  db.query(departmentsQuery, [request.query.departmentID]).then(rows => {
     response.send(rows);
   });
 });
 
-app.get("/rolesInDep", cors(), function(request, response) {
-  db.query(rolesInDepQuery,[request.query.departmentID]).then(rows => {
+app.get("/rolesInDep", cors(), function (request, response) {
+  db.query(rolesInDepQuery, [request.query.departmentID]).then(rows => {
     response.send(rows);
   });
 });
 
-app.get("/bands", cors(), function(request, response) {
+app.get("/bands", cors(), function (request, response) {
   db.query(bandsQuery).then(rows => {
     response.send(rows);
   });
 });
 
-app.get("/bandName", cors(), function(request, response) {
-  db.query(bandNameQuery,[request.query.bandId]).then(rows => {
+app.get("/bandName", cors(), function (request, response) {
+  db.query(bandNameQuery, [request.query.bandId]).then(rows => {
     response.send(rows);
   });
 });
 
 app.post('/login', function (request, response) {
-	loginHandler.login(request.body, db).then(token => {
-    response.cookie(tokenCookieName,token)
-		response.send({tokenCookieName:token})
-	}, reason => {
-		console.log(reason)
-		response.send(reason)
-	})
+  loginHandler.login(request.body, db).then(token => {
+    response.cookie(tokenCookieName, token)
+    response.send({ tokenCookieName: token })
+  }, 
+    reason => {
+    console.log(reason)
+    response.send(reason)
+  })
 });
 
-app.get("/role", cors(), function(request, response) {
-  db.query(getRoleQuery,[request.query.roleID]).then(rows => {
+app.get("/role", cors(), function (request, response) {
+  db.query(getRoleQuery, [request.query.roleID]).then(rows => {
     response.send(rows);
   });
 });
 
-app.get("/viewEditRole", cors(), function(request, response) {
-  db.query(viewEditRole,[request.query.roleID]).then(rows => {
+app.get("/viewEditRole", cors(), function (request, response) {
+  db.query(viewEditRole, [request.query.roleID]).then(rows => {
     response.send(rows);
   });
 });
 
-app.get("/roleBandCapabilityExists", cors(), function(request, response) {
-  db.query(RoleBandCapabilityExists,[request.query.capabilityId, request.query.bandId]).then(rows => {
+app.get("/roleBandCapabilityExists", cors(), function (request, response) {
+  db.query(RoleBandCapabilityExists, [request.query.capabilityId, request.query.bandId]).then(rows => {
     response.send(rows);
   });
 });

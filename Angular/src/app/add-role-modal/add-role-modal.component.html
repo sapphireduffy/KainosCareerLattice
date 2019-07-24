@@ -32,14 +32,15 @@
 
     <div class="form-group">
       <label for="roleSummary">Role Summary</label>
-      <input
-        type="text"
-        formControlName="roleSummary"
-        class="form-control"
-        [ngClass]="{
-          'is-invalid': submitted && formControls.roleSummary.errors
-        }"
-      />
+      <textarea 
+      type="text"
+      formControlName="roleSummary"
+      class="form-control"
+      rows="3"
+      [ngClass]="{
+        'is-invalid': submitted && formControls.roleSummary.errors
+      }"
+    ></textarea>
       <div
         *ngIf="submitted && formControls.roleSummary.errors"
         class="invalid-feedback"
