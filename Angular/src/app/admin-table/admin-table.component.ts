@@ -9,10 +9,10 @@ import { EditRoleModalComponent } from '../edit-role-modal/edit-role-modal.compo
 
 @Component({
   selector: "app-edit-roles",
-  templateUrl: "./edit-roles.component.html",
-  styleUrls: ["./edit-roles.component.css"]
+  templateUrl: "./admin-table.component.html",
+  styleUrls: ["./admin-table.component.css"]
 })
-export class EditRolesComponent implements OnInit {
+export class AdminTableComponent implements OnInit {
   departmentName: any;
   capabilities = [];
   jobsInDep: any;
@@ -114,6 +114,7 @@ export class EditRolesComponent implements OnInit {
   async openEditRoleModal(roleId) {
     await this.dataService.getEditRole(roleId).then(response => {
       const modalRef = this.modalService.open(EditRoleModalComponent);
+      console.log(response[0])
       modalRef.componentInstance.roleToEdit = response[0];
       modalRef.componentInstance.capabilities = this.capabilities;
       modalRef.componentInstance.bands = this.bands;

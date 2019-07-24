@@ -4,8 +4,7 @@
     type="button"
     class="close"
     aria-label="Close"
-    (click)="activeModal.dismiss()"
-  >
+    (click)="activeModal.dismiss()">
     x
   </button>
 </div>
@@ -17,19 +16,18 @@
       <input
         type="text"
         formControlName="roleName"
+        maxlength="100"
         class="form-control"
         [ngClass]="{ 'is-invalid': submitted && formControls.roleName.errors }"
-      />
+        required/>
       <div
         *ngIf="submitted && formControls.roleName.errors"
-        class="invalid-feedback"
-      >
+        class="invalid-feedback">
         <div *ngIf="formControls.roleName.errors.required">
           Role Name is a required field
         </div>
       </div>
     </div>
-
     <div class="form-group">
       <label for="roleSummary">Role Summary</label>
       <textarea 
@@ -43,30 +41,30 @@
     ></textarea>
       <div
         *ngIf="submitted && formControls.roleSummary.errors"
-        class="invalid-feedback"
-      >
-        <div *ngIf="formControls.roleSummary.errors.maxlength">
-          Max characters reached for Role Summary
+        class="invalid-feedback">
+        <div *ngIf="formControls.roleSummary.errors.required">
+          Role Summary is a required field
         </div>
       </div>
     </div>
-
     <div class="form-group">
       <label for="roleSharePointLink">Role Sharepoint Link</label>
       <input
-        type="text"
+        type="url"
         formControlName="roleSharePointLink"
+        maxlength="500"
         class="form-control"
-        [ngClass]="{
-          'is-invalid': submitted && formControls.roleSharePointLink.errors
-        }"
-      />
+        [ngClass]="{'is-invalid': submitted}"
+        pattern="https://kainossoftwareltd.sharepoint.com/.+"
+        required/>
       <div
-        *ngIf="submitted && formControls.roleSharePointLink.errors"
-        class="invalid-feedback"
-      >
-        <div *ngIf="formControls.roleSharePointLink.errors.maxlength">
-          Max characters reached for Role Sharepoint Link
+        *ngIf="submitted"
+        class="invalid-feedback">
+        <div *ngIf="formControls.roleSharePointLink.errors?.required">
+          Role Sharepoint link is a required field
+        </div>
+        <div *ngIf="formControls.roleSharePointLink.errors?.pattern">
+          Role Sharepoint link is not valid (must start with https://kainossoftwareltd.sharepoint.com/)
         </div>
       </div>
     </div>

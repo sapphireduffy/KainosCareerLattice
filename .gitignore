@@ -2,6 +2,7 @@
 config.json
 privateKey.js
 config.json
+login.json
 secretFiles.zip
 
 /dist/

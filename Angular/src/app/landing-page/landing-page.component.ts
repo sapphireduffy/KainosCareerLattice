@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AdminAuthGuardComponent } from '../admin-auth-guard/admin-auth-guard.component';
 
 @Component({
   selector: 'app-landing-page',
@@ -9,11 +10,19 @@ import { Router } from '@angular/router';
 
 export class LandingPageComponent implements OnInit {
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private authGuard: AdminAuthGuardComponent) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.authGuard.isAdmin()) {
+      this.authGuard.setAdminMode(true);
+    }
+  }
 
   public switchDepartment(choosenDeptID: number) {
-    this.router.navigate(['career'], { queryParams: { id: choosenDeptID }})
+    if (this.authGuard.isAdmin() && this.authGuard.isAdminMode()) {
+      this.router.navigate(['editroles'], { queryParams: { id: choosenDeptID } })
+    } else {
+      this.router.navigate(['career'], { queryParams: { id: choosenDeptID } })
+    }
   }
 }

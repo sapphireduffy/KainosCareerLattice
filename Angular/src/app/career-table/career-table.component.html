@@ -2,7 +2,6 @@
   <app-navbar></app-navbar>
 </header>
 <div class="container">
-  <button (click)="openAddRoleModal()">add role</button>
   <table class="table">
     <ng-container>
       <tr role="row">
@@ -11,8 +10,7 @@
           scope="col"
           [attr.colspan]="capabilities.length + 1"
           rowspan="1"
-          *ngFor="let department of departmentName"
-        >
+          *ngFor="let department of departmentName">
           {{ department.name }}
         </th>
       </tr>
@@ -21,8 +19,7 @@
         <th
           scope="row"
           *ngFor="let capability of capabilities"
-          class="job-headings"
-        >
+          class="job-headings">
           {{ capability.name }}
         </th>
       </tr>
@@ -33,22 +30,18 @@
           [class.job-level-explore]="band.band_id > 3 && band.band_id <= 6"
           [class.job-level-discover]="band.band_id > 6"
           class="job-level"
-          (click)="openBandInfoModal(band.band_id)"
-        >
+          (click)="this.modalService.openBandInfoModal(band.band_id)">
           {{ band.name }}
         </td>
         <td *ngFor="let cap of capabilities">
           <span *ngFor="let job of jobsInDep">
             <span
               scope="row"
-              *ngIf="
-                job.capability_id == cap.capability_id &&
-                job.band_id == band.band_id
-              "
-              (click)="openRoleInfoModal(job.role_id)"
-              class="role-clickable"
-              >{{ job.RoleName }}</span
-            >
+              *ngIf="job.capability_id == cap.capability_id && job.band_id == band.band_id"
+              (click)="this.modalService.openRoleInfoModal(job.role_id)"
+              class="role-clickable">
+              {{ job.RoleName }}
+            </span>
           </span>
         </td>
       </tr>

@@ -1,32 +1,32 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddRoleModalComponent } from './add-role-modal.component';
+import { AddCapabilityComponent } from './add-capability.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataService } from '../_services/data.service';
 
-describe('AddRoleModalComponent', () => {
-  let component: AddRoleModalComponent;
-  let fixture: ComponentFixture<AddRoleModalComponent>;
+describe('AddCapabilityComponent', () => {
+  let component: AddCapabilityComponent;
+  let fixture: ComponentFixture<AddCapabilityComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ 
-        AddRoleModalComponent 
+        AddCapabilityComponent 
       ],
       imports: [ 
         ReactiveFormsModule 
       ],
       providers: [ 
-        NgbActiveModal,
-        DataService
+        NgbActiveModal, 
+        DataService 
       ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddRoleModalComponent);
+    fixture = TestBed.createComponent(AddCapabilityComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
