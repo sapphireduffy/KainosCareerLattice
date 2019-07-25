@@ -59,6 +59,12 @@ export class AdminTableComponent implements OnInit {
     })
   }
 
+  openCapabilityModal(){
+    this.modalService.openAddCapabilityModal(this.departmentId).then(data => {
+      this.displayAlert(data)
+    });
+  }
+
   openEditModal(roleId, capabilities, bands){
     this.modalService.openEditRoleModal(roleId, capabilities, bands).then(data => {
       this.displayAlert(data)
