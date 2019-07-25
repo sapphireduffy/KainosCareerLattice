@@ -6,10 +6,14 @@ node_js:
 addons:
   chrome: stable
 before_install:
-- openssl aes-256-cbc -K $encrypted_c9b12307f510_key -iv $encrypted_c9b12307f510_iv -in secrets.tar.enc -out secrets.tar -d
-- google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+- openssl aes-256-cbc -k "$super_secret_password" -in secrets.tar.enc -out secrets.tar -d
+- google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost
+  &
 install:
 - cd Angular/
 - npm install
 script:
 - ng test --watch=false --browsers=ChromeHeadless
+env:
+  global:
+    secure: K/CdcS8AbSA3yU8xUEFOzhfTxY0xTUR4e3JmTGQvAm7l6ZFB1rAPULFM3Gn1+EFF1krGAJwLWRna982LwG8ZF/z1duG2SrTOpfaEVfe6M9kVAxN5PH1ZKxe31+YtUCrfKxRPoPOyWsYg0zPr98tAhlm0nJMWltZ83khkiPoqU+rJXpLyx4CxhQbxVBFpyMVfJfRIO3C8ARJprPAe5m+51zrbxtzXhjOutIkqbTvNvioKct1EZ/AuDKUlcOl9V87y0UaI580r/Ch0lNZHqk4A3hrbiu+Bp4Nz98rJjznc/Z1k1ZX9BCIvw2U8+pt+b9T5aGJKpGurBjToVyNZJXTLd3NsIyPtOtLEqwoiwjKNsFbiScGLY8tCEOy8xhcqZnOP3JRGljR+9tAxMkhEnpS9oDjY6HU6tt10R7aLYWNPDgQpw9Njxb1tWOXF2EfrHwrsyRgNL6FNvKnqfdo6nGPFAX0qJigHp/jhNQwHN9lPTRQEkkX8l1UFuQ6T/OIYfhEbC15Vwc7mEf4slYiJU3M74LX+UruaBi8hho4xjHQ4BU3G96PcCWnkMFpDs9ECQy54Z5Age+pnsw1f9J6gQOVIWzsLW1ALLaBIAf/OobAjA8kRNHtOTA90lcvoaGUKkCcl2fTYhmRLesxhIp9xF0Ca/eBZGRhn8rEut4k3/V8O8LE=
