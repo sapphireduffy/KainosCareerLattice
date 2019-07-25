@@ -5,6 +5,7 @@ import { RoleInformationComponent } from './role-information/role-information.co
 import { BandInformationComponent } from './band-information/band-information.component';
 import { AddRoleModalComponent } from './add-role-modal/add-role-modal.component';
 import { AddCapabilityComponent } from './add-capability/add-capability.component';
+import { AddBandComponent } from './add-band/add-band.component';
 import { EditRoleModalComponent } from './edit-role-modal/edit-role-modal.component';
 
 @Injectable({
@@ -52,6 +53,19 @@ export class ModalService {
         resolve(data.data)
       })
     })
+  }
+
+  openAddBandModal(departmentId, aboveValue, belowValue, schoolId) {
+    return new Promise((resolve, reject) => {
+      const modalRef = this.modalService.open(AddBandComponent);
+      modalRef.componentInstance.schoolId = schoolId;
+      modalRef.componentInstance.abovePriorityVal = aboveValue;
+      modalRef.componentInstance.belowPriorityVal = belowValue;
+      modalRef.componentInstance.departmentId = departmentId;
+      modalRef.componentInstance.bandAdded.subscribe(data => {
+        resolve(data.data)
+      });
+    });
   }
 
   async openEditRoleModal(roleId, capabilities, bands) {

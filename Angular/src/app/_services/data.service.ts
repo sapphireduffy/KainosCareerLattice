@@ -10,6 +10,7 @@ const addRoleUrl = "/api/addRole";
 const editRoleUrl = "/api/editRole";
 const viewEditRoleUrl = "/api/viewEditRole";
 const addCapabilityURL = "/api/addcapability";
+const addBandURL = "/api/addband";
 const getUniqueBandURL = "/api/uniqueband";
 const getRoleBandCapabilityExistsUrl = "/api/roleBandCapabilityExists";
 const deleteRoleURL = "/api/deleteRole";
@@ -291,5 +292,16 @@ export class DataService {
       .catch(function (error) {
         return { error: error.message };
       });
+  }
+  
+  createBand(param: any) {
+    return axios
+      .post(addBandURL, param, { headers: this.getHeaders() })
+      .then(function(response) {
+        return response;
+    })
+    .catch(function(error) {
+      return { error: error.message };
+    });
   }
 }

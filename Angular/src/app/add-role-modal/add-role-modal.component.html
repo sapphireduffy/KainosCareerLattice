@@ -29,9 +29,17 @@
     </div>
     <div class="form-group">
       <label for="roleSharePointLink">Role Sharepoint Link</label>
-      <input type="url" formControlName="roleSharePointLink" maxlength="500" class="form-control"
-        [ngClass]="{'is-invalid': submitted}" pattern="https://kainossoftwareltd.sharepoint.com/.+" required />
-      <div *ngIf="submitted" class="invalid-feedback">
+      <input
+        type="url"
+        formControlName="roleSharePointLink"
+        maxlength="500"
+        class="form-control"
+        [ngClass]="{'is-invalid': submitted && formControls.roleSharePointLink.errors}"
+        pattern="https://kainossoftwareltd.sharepoint.com/.+"
+        required/>
+      <div
+        *ngIf="submitted && formControls.roleSharePointLink.errors"
+        class="invalid-feedback">
         <div *ngIf="formControls.roleSharePointLink.errors?.required">
           Role Sharepoint link is a required field
         </div>

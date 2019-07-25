@@ -65,7 +65,13 @@ export class AdminTableComponent implements OnInit {
     });
   }
 
-  loadRoles() {
+  openAddBandModal(aboveValue, belowValue, schoolId) {
+    this.modalService.openAddBandModal(this.departmentId, aboveValue, belowValue, schoolId).then(data => {
+      this.displayAlert(data);
+    })
+  }
+
+  loadRoles(){
     this.dataService.getCapabilityNamesByDepartment(this.departmentId).then(response => {
       this.capabilities = response;
     });

@@ -1,0 +1,142 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Add Band</h5>
+    <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="activeModal.dismiss()">
+        x
+    </button>
+    </div>
+    <form [formGroup]="addBandForm" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div class="modal-body" data-keyboard="false" data-backdrop="static">
+        <div class="form-group">
+            <label for="bandName">Band Name</label>
+            <input
+                type="text"
+                formControlName="bandName"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && formControls.bandName.errors }"/>
+            <div
+                *ngIf="submitted"
+                class="invalid-feedback">
+                <div *ngIf="formControls.bandName.errors?.required">
+                    Band Name is a required field
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-secondary dropdown-toggle" type="button" (click)="toggleDescription()" id="openDescriptionBtn">Open Description</button>
+        <div *ngIf="showDescription" class="form-group" id="descriptionContainer">
+            <label for="commercialAwarenessDescription">Commercial Awareness</label>
+            <textarea formControlName="commercialAwarenessDescription" class="form-control"></textarea>
+            <div
+            *ngIf="submitted && formControls.commercialAwarenessDescription.errors"
+            class="invalid-feedback">
+                <div *ngIf="formControls.commercialAwarenessDescription.errors.maxLength">
+                    Commercial Awareness description is too long
+                </div>
+            </div>
+
+            <label for="communicatingAndTeamwork">Communicating & Teamwork</label>
+            <textarea formControlName="communicatingAndTeamwork" class="form-control"></textarea>
+            <div
+            *ngIf="submitted && formControls.communicatingAndTeamwork.errors"
+            class="invalid-feedback">
+                <div *ngIf="formControls.communicatingAndTeamwork.errors.maxLength">
+                    Communicating & Teamwork description is too long
+                </div>
+            </div>
+
+            <label for="innovationAndContinuousImprovement">Innovation & Continuous Improvement</label>
+            <textarea formControlName="innovationAndContinuousImprovement" class="form-control"></textarea>
+            <div
+            *ngIf="submitted && formControls.innovationAndContinuousImprovement.errors"
+            class="invalid-feedback">
+                <div *ngIf="formControls.innovationAndContinuousImprovement.errors.maxLength">
+                    Innovation & Continuous Improvement description is too long
+                </div>
+            </div>
+
+            <label for="customerFocus">Customer Focus</label>
+            <textarea formControlName="customerFocus" class="form-control"></textarea>
+            <div
+            *ngIf="submitted && formControls.customerFocus.errors"
+            class="invalid-feedback">
+                <div *ngIf="formControls.customerFocus.errors.maxLength">
+                    Customer Focus description is too long
+                </div>
+            </div>
+
+            <label for="developingYourselfAndOthers">Developing Yourself & Others</label>
+            <textarea formControlName="developingYourselfAndOthers" class="form-control"></textarea>
+            <div
+            *ngIf="submitted && formControls.developingYourselfAndOthers.errors"
+            class="invalid-feedback">
+                <div *ngIf="formControls.developingYourselfAndOthers.errors.maxLength">
+                    Developing Yourself & Others description is too long
+                </div>
+            </div>
+
+            <label for="planningAndOrganisation">Planning & Organising</label>
+            <textarea formControlName="planningAndOrganisation" class="form-control"></textarea>
+            <div
+            *ngIf="submitted && formControls.planningAndOrganisation.errors"
+            class="invalid-feedback">
+                <div *ngIf="formControls.planningAndOrganisation.errors.maxLength">
+                    Planning & Organisation description is too long
+                </div>
+            </div>
+
+            <label for="jobSpecificKnowledge">Job-specific Knowledge</label>
+            <textarea formControlName="jobSpecificKnowledge" class="form-control"></textarea>
+            <div
+            *ngIf="submitted && formControls.jobSpecificKnowledge.errors"
+            class="invalid-feedback">
+                <div *ngIf="formControls.jobSpecificKnowledge.errors.maxLength">
+                    Job Specific Knowledge description is too long
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="training">Training</label>
+            <textarea
+            formControlName="training"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && formControls.training.errors }"></textarea>
+            <div
+                *ngIf="submitted && formControls.training.errors"
+                class="invalid-feedback">
+                <div *ngIf="formControls.training.errors.maxLength">
+                    Data too long
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="training">Responsibilities</label>
+            <textarea
+            formControlName="responsibilities"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && formControls.responsibilities.errors }"></textarea>
+            <div
+                *ngIf="submitted && formControls.responsibilities.errors"
+                class="invalid-feedback">
+                <div *ngIf="formControls.responsibilities.errors.maxLength">
+                    Data too long
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="activeModal.dismiss()">
+        Close
+        </button>
+        <button type="submit" class="btn btn-success">
+        Add Band
+        </button>
+    </div>
+</form>

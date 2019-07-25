@@ -19,6 +19,7 @@ import { BandInformationComponent } from './band-information/band-information.co
 import { AddRoleModalComponent } from "./add-role-modal/add-role-modal.component";
 import { EditRoleModalComponent } from './edit-role-modal/edit-role-modal.component';
 import { AdminAuthGuardComponent } from './admin-auth-guard/admin-auth-guard.component';
+import { AddBandComponent } from './add-band/add-band.component';
 import { AdminTableComponent } from './admin-table/admin-table.component';
 import { AddCapabilityComponent } from './add-capability/add-capability.component';
 
@@ -34,6 +35,8 @@ import { AddCapabilityComponent } from './add-capability/add-capability.componen
     AddRoleModalComponent,
     EditRoleModalComponent,
     AddCapabilityComponent,
+    AddRoleModalComponent,
+    AddBandComponent,
     AdminTableComponent
   ],
   bootstrap: [
@@ -57,6 +60,8 @@ import { AddCapabilityComponent } from './add-capability/add-capability.componen
     RoleInformationComponent,
     BandInformationComponent,
     AddRoleModalComponent,
+    AddCapabilityComponent,
+    AddBandComponent,
     EditRoleModalComponent,
     AddCapabilityComponent
   ]
