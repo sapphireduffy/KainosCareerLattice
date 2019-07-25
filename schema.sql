@@ -24,13 +24,13 @@ CREATE TABLE school (
 
 CREATE TABLE band_description (
 	description_id INT PRIMARY KEY AUTO_INCREMENT,
-    commercial_awareness MEDIUMTEXT,
-    communicating_and_teamwork MEDIUMTEXT,
-    innovation_and_continuous_improvement MEDIUMTEXT,
-    customer_focus MEDIUMTEXT,
-    developing_yourself_and_others MEDIUMTEXT,
-    planning_and_organising MEDIUMTEXT,
-    job_specific_knowledge MEDIUMTEXT
+    commercial_awareness VARCHAR(1000),
+    communicating_and_teamwork VARCHAR(1000),
+    innovation_and_continuous_improvement VARCHAR(1000),
+    customer_focus VARCHAR(1000),
+    developing_yourself_and_others VARCHAR(1000),
+    planning_and_organising VARCHAR(1000),
+    job_specific_knowledge VARCHAR(1000)
 );
 
 CREATE TABLE band (
