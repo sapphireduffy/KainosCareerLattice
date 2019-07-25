@@ -1,22 +1,21 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
-import { Role } from "../model/Role";
+import { Capability } from "../model/Capability";
 import { DataService } from "../_services/data.service";
 
 @Component({
-  selector: "app-edit-role-modal",
-  templateUrl: "./edit-role-modal.component.html",
-  styleUrls: ["./edit-role-modal.component.css"]
+  selector: "app-edit-capability-modal",
+  templateUrl: "./edit-capability-modal.component.html",
+  styleUrls: ["./edit-capability-modal.component.css"]
 })
-export class EditRoleModalComponent implements OnInit {
-  @Input() roleToEdit: any;
-  @Output() roleEdited = new EventEmitter();
-  roleExists;
-  editedRole: Role;
-  initialBandId: number;
+export class EditCapabilityModalComponent implements OnInit {
+  @Input() capabilityToEdit: any;
+  @Output() capabilityEdited = new EventEmitter();
+  capabilityExists;
+  editedCapability: Capability;
   initialCapabilityId: number;
-  public editRoleForm: FormGroup;
+  public editCapabilityForm: FormGroup;
   public submitted = false;
   constructor(
     private formBuilder: FormBuilder,
@@ -25,83 +24,67 @@ export class EditRoleModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.initialBandId = this.roleToEdit.band_id;
-    this.initialCapabilityId = this.roleToEdit.capability_id;
+    this.initialCapabilityId = this.capabilityToEdit.capability_id;
 
-    this.editRoleForm = this.formBuilder.group({
-      roleName: [this.roleToEdit.RoleName, Validators.required],
-      roleSummary: [this.roleToEdit.summary, Validators.maxLength(65000)],
-      roleSharePointLink: [this.roleToEdit.job_spec_url, Validators.maxLength(500)],
-      roleBand: [this.roleToEdit.band_id],
-      roleCapability: [this.roleToEdit.capability_id]
+    this.editCapabilityForm = this.formBuilder.group({
+      capabilityName: [this.capabilityToEdit.CapabilityName, Validators.required],
+      capabilityDepartment: [this.capabilityToEdit.department_id]
     });
   }
 
   get formControls() {
-    return this.editRoleForm.controls;
+    return this.editCapabilityForm.controls;
   }
 
   closeModal() {
     this.activeModal.close();
   }
 
-  setEditRole() {
-    this.editedRole = {
-      roleId: this.roleToEdit.role_id,
-      roleName: this.editRoleForm.get("roleName").value,
-      summary: this.editRoleForm.get("roleSummary").value,
-      jobSpecUrl: this.editRoleForm.get("roleSharePointLink").value,
-      capabilityId: this.editRoleForm.get("roleCapability").value,
-      bandId: this.editRoleForm.get("roleBand").value
+  setEditCapability() {
+    this.editedCapability = {
+      capabilityId: this.capabilityToEdit.capability_id,
+      capabilityName: this.editCapabilityForm.get("capabilityName").value,
+      departmentId: this.editCapabilityForm.get("capabilityDepartment").value,
     };
   }
 
   async onSubmit() {
     this.submitted = true;
-    if (this.editRoleForm.invalid) {
+    if (this.editCapabilityForm.invalid) {
       return;
     }
-    this.setEditRole();
-    await this.checkIfRoleExists();
+    this.setEditCapability();
+    await this.checkIfCapabilityExists();
     
-    if ((this.editedRole.bandId == this.initialBandId)
-      && (this.editedRole.capabilityId == this.initialCapabilityId)) {
+    if (this.editedCapability.capabilityId == this.initialCapabilityId) {
         this.writeToDatabse();
       }
-      else if ((this.roleExists == false )) {
+      else if (this.capabilityExists == false ) {
         this.writeToDatabse();
       }
   }
 
-  async checkIfRoleExists() {
-    await this.dataService
-      .getRoleBandCapabilityExists(this.editedRole.capabilityId, this.editedRole.bandId)
-      .then(
-        result => {
-          this.roleExists = result[0]["result"] == 1 ? true : false;
-        })
-      .catch(error => {
-        console.log(error);
-      });
+  async checkIfCapabilityExists() {
+    this.capabilityExists=false;
+
+    // await this.dataService
+    //   .getCapabilityBandCapabilityExists(this.editedCapability.capabilityId, this.editedCapability.bandId)
+    //   .then(
+    //     result => {
+    //       this.capabilityExists = result[0]["result"] == 1 ? true : false;
+    //     })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
   }
 
   writeToDatabse() {
          this.dataService
-        .editRole(this.editedRole)
-        .then(result => this.roleEdited.emit(result))
+        .editCapability(this.editedCapability)
+        .then(result => this.capabilityEdited.emit(result))
         .catch(error => {
-          this.roleEdited.emit(error);
+          this.capabilityEdited.emit(error);
         });
       this.closeModal();
-  }
-
-  deleteRole() {
-    if (confirm("Are you sure you want to delete this role ")) {
-      this.dataService.deleteRole(this.roleToEdit.role_id).then(response => {
-        console.log(response)
-        this.roleEdited.emit(response);
-      })
-    }
-    this.closeModal();
   }
 }

@@ -1,4 +1,6 @@
 export interface Capability {
-    departmentId: number;
-    name: string;
+    capabilityId?: number;
+    departmentId?: number;
+    name?: string;
+    capabilityName?: string;
 }
