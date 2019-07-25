@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { Role } from "../model/Role";
-import { DataService } from "../_services/data.service";
+import { DataService } from "../services/data.service";
 
 @Component({
   selector: "app-edit-role-modal",

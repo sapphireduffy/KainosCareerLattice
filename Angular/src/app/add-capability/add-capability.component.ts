@@ -2,8 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { Capability } from "../model/capability";
-import { DataService } from "../_services/data.service";
-import { Observable } from 'rxjs';
+import { DataService } from "../services/data.service";
 
 @Component({
   selector: 'app-add-capability',
