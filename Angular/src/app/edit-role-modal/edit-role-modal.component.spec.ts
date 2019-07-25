@@ -1,33 +1,35 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddRoleModalComponent } from './add-role-modal.component';
+import { EditRoleModalComponent } from './edit-role-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataService } from '../_services/data.service';
+import { MockObjects } from '../mock-objects';
 
-describe('AddRoleModalComponent', () => {
-  let component: AddRoleModalComponent;
-  let fixture: ComponentFixture<AddRoleModalComponent>;
+describe('EditRoleModalComponent', () => {
+  let component: EditRoleModalComponent;
+  let fixture: ComponentFixture<EditRoleModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AddRoleModalComponent
-      ],
       imports: [
         ReactiveFormsModule
+      ],
+      declarations: [
+        EditRoleModalComponent 
       ],
       providers: [
         NgbActiveModal,
         DataService
       ]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddRoleModalComponent);
+    fixture = TestBed.createComponent(EditRoleModalComponent);
     component = fixture.componentInstance;
+    component.roleToEdit = MockObjects.role;
     fixture.detectChanges();
   });
 
