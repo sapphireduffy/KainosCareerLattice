@@ -71,7 +71,7 @@ export class ModalService {
 
     async openEditCapabilityModal(capabilityId, departments) {
     return new Promise((resolve, reject) => {
-      this.dataService.getCapability().then(response => {
+      this.dataService.getCapability(capabilityId).then(response => {
         const modalRef = this.modalService.open(EditCapabilityModalComponent);
         modalRef.componentInstance.capabilityToEdit = response[0];
         modalRef.componentInstance.departments = departments;

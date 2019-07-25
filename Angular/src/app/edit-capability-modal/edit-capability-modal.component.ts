@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
-import { Capability } from "../model/Capability";
-import { DataService } from "../_services/data.service";
+import { Capability } from "../model/capability";
+import { DataService } from "../services/data.service";
 
 @Component({
   selector: "app-edit-capability-modal",
@@ -43,7 +43,7 @@ export class EditCapabilityModalComponent implements OnInit {
   setEditCapability() {
     this.editedCapability = {
       capabilityId: this.capabilityToEdit.capability_id,
-      capabilityName: this.editCapabilityForm.get("capabilityName").value,
+      name: this.editCapabilityForm.get("capabilityName").value,
       departmentId: this.editCapabilityForm.get("capabilityDepartment").value,
     };
   }
