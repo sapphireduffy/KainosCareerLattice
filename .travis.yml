@@ -15,4 +15,5 @@ env:
     secure: K50VH2QOh7mAPg7HzzSYWnuhxRas7Tzu58okvBeuItq4rgO4QSIxyT86CjUDo1ZhvhvFlc9CNYMbopJK80idloqJQ9nXKL3BOY6J19UdGXTiVHmgTZ2tRqpjy1VIBApBCqc47ImjoDlIqONj7mO1auxJKa1h+5Jhlw//3JzHXAIGtsBvWP3wkDk68eKd0izTG+3NaMISKG+gQLwcs1FitTtESi+7kKXZG2igEkUg8s91UVAi37/kekSJtOjpDNrrpSWgBK2SjXpDsD9W9c13eN6AGz3YLVvTJl4ZHU7tWboWivVC1ayr4wCQ1lQxOZ0agNP6j1ViINMuikrPcGpsrbRel61HvspcgUO/XI+Zp4WBPuPaGlz3BErWrrly3yRTrlW7GdfcT/xB2EfZHJeP3uaVl7uqY/rQGZs26CZfAT1XU/1avAWD39+VdVFMUzGXMYz/Wtjwp0VCAxI1M3qsEkxHV2PWccm/d0B4vZUQSZvtFxPfuceZBQCi+kELvgfFc8vzhP1PqE5obkJmw4Fi1H604UyXhLlQFm3pob5GKJ91UCaeE6byJrbknYqU3wGjNBBAhNe8NWI9/QyMzTjdR8557ORqmN56I8SOaQ3J8cxxfs03oxnYk9kfQudMn5DNbKlupJIh7TZXeBmQYn/JDl7qQc3KRUTa3dvx+FGlgpo=
 before_install:
 - echo $super_secret_password
+- openssl aes-256-cbc -k "$super_secret_password" -in secrets.tar.enc -out secrets.tar -d
 - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
