@@ -15,12 +15,7 @@ import { Response } from 'selenium-webdriver/http';
 })
 export class EditRoleModalComponent implements OnInit {
   @Input() roleToEdit: any;
-  @Input() currentCapabilityId: any;
-  @Input() currentBandId: any;
-  @Input() capbilities: any;
-  @Input() bands: any;
   @Output() roleEdited = new EventEmitter();
-  @Output() roleDeleted = new EventEmitter();
   roleExists;
   editedRole: Role;
   initialBandId: number;
@@ -65,16 +60,6 @@ export class EditRoleModalComponent implements OnInit {
     };
   }
 
-  deleteRole() {
-    if (confirm("Are you sure you want to delete this role ")) {
-      this.dataService.deleteRole(this.roleToEdit.role_id).then(response => {
-        console.log(response)
-        this.roleEdited.emit(response);
-      })
-    }
-    this.closeModal();
-  }
-
   async onSubmit() {
     this.submitted = true;
     if (this.editRoleForm.invalid) {
@@ -112,5 +97,15 @@ export class EditRoleModalComponent implements OnInit {
           this.roleEdited.emit(error);
         });
       this.closeModal();
-    }
   }
+
+  deleteRole() {
+    if (confirm("Are you sure you want to delete this role ")) {
+      this.dataService.deleteRole(this.roleToEdit.role_id).then(response => {
+        console.log(response)
+        this.roleEdited.emit(response);
+      })
+    }
+    this.closeModal();
+  }
+}

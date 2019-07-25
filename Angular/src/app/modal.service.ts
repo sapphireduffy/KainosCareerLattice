@@ -43,10 +43,10 @@ export class ModalService {
     })
   }
 
-   openEditRoleModal(roleId, capabilities, bands) {
+  openEditRoleModal(roleId, capabilities, bands) {
     return new Promise( ( resolve, reject ) => {
       this.dataService.getEditRole(roleId).then(response => {
-        const modalRef = this.modalService.open(EditRoleModalComponent);
+        const modalRef = this.modalService.open(EditRoleModalComponent, { backdrop: "static" });
         modalRef.componentInstance.roleToEdit = response[0];
         modalRef.componentInstance.capabilities = capabilities;
         modalRef.componentInstance.bands = bands;

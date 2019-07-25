@@ -23,7 +23,7 @@ export class AdminTableComponent implements OnInit {
   alertMessage: string;
   alertType: string;
   showAlert = false;
-  departmentId:any;
+  departmentId: any;
 
   constructor(
     private dataService: DataService,
@@ -43,8 +43,7 @@ export class AdminTableComponent implements OnInit {
         return { "Role": this.jobsInDep[i].RoleName, "ID": this.jobsInDep[i].role_id }
       }
     }
-
-    return { "Role": "Add new role", "ID": -1, "BandId": band.band_id, "CapabilityId": cap.capability_id }
+    return { "Role": "+", "ID": -1, "BandId": band.band_id, "CapabilityId": cap.capability_id }
   }
 
   async switchModal(selectedRole) {
@@ -57,7 +56,6 @@ export class AdminTableComponent implements OnInit {
       this.openEditModal(selectedRole.ID, this.capabilities, this.bands);
     }
   }
-
 
   openEditModal(roleId, capabilities, bands){
     this.modalService.openEditRoleModal(roleId, capabilities, bands).then(data => {
