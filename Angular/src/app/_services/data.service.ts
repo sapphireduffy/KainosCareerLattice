@@ -9,6 +9,7 @@ const getRolesInDepartmentURL = "/api/rolesInDep";
 const getBandsURL = "/api/bands";
 const roleUrl = "/api/role";
 const addRoleUrl = "/api/addrole";
+const addCapabilityURL = "/api/addcapability";
 const getUniqueBandURL = "/api/uniqueband";
 
 @Injectable()
@@ -188,6 +189,26 @@ export class DataService {
           return {
             error: error.response.data.Message,
             statusCode: error.response.statusCode
+          };
+        } else {
+          if (error.message) {
+            return { error: error.message };
+          }
+        }
+      });
+  }
+
+  createCapability(param: any) {
+    return axios
+      .post(addCapabilityURL, param, { headers: this.getHeaders() })
+      .then(function(response) {
+        return response;
+      })
+      .catch(function(error) {
+        if (error.response) {
+          return {
+            error: error.response.data.Message,
+            statsuCode: error.response.statusCode
           };
         } else {
           if (error.message) {

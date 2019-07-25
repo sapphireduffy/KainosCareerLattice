@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BandInformationComponent } from './band-information.component';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { MockObjects } from '../mock-objects';
 
 describe('BandInformationComponent', () => {
   let component: BandInformationComponent;
@@ -8,7 +10,12 @@ describe('BandInformationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BandInformationComponent ]
+      providers: [ 
+        NgbActiveModal 
+      ],
+      declarations: [ 
+        BandInformationComponent 
+      ]
     })
     .compileComponents();
   }));
@@ -16,6 +23,7 @@ describe('BandInformationComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(BandInformationComponent);
     component = fixture.componentInstance;
+    component.bandToDisplay = MockObjects.band
     fixture.detectChanges();
   });
 

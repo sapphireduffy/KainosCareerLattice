@@ -10,15 +10,19 @@ import { AdminAuthGuardComponent } from '../admin-auth-guard/admin-auth-guard.co
 
 export class LandingPageComponent implements OnInit {
 
-  constructor(private router: Router, private authGuard: AdminAuthGuardComponent){}
+  constructor(private router: Router, private authGuard: AdminAuthGuardComponent) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.authGuard.isAdmin()) {
+      this.authGuard.setAdminMode(true);
+    }
+  }
 
   public switchDepartment(choosenDeptID: number) {
-    if(this.authGuard.isAdmin() && this.authGuard.isAdminMode()){
-      this.router.navigate(['editroles'], { queryParams: { id: choosenDeptID }})
+    if (this.authGuard.isAdmin() && this.authGuard.isAdminMode()) {
+      this.router.navigate(['editroles'], { queryParams: { id: choosenDeptID } })
     } else {
-      this.router.navigate(['career'], { queryParams: { id: choosenDeptID }})
+      this.router.navigate(['career'], { queryParams: { id: choosenDeptID } })
     }
   }
 }

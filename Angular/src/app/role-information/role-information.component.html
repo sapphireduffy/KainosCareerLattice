@@ -1,5 +1,9 @@
 <div>
-  <div class="modal-header">
+  <!-- Set header colour depending on band level of the role -->
+  <div class="modal-header" 
+  [class.inspire]="roleToDisplay.school_id == 1"
+  [class.explore]="roleToDisplay.school_id == 2" 
+  [class.discover]="roleToDisplay.school_id == 3" >
     <h2 class="modal-title" id="exampleModalLabel">{{ roleToDisplay.name }}</h2>
     <button
       type="button"
