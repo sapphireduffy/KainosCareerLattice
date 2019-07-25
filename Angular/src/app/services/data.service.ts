@@ -21,255 +21,102 @@ export class DataService {
   constructor() { }
 
   getHeaders() {
-    return (this.headers = {
-      "Content-Type": "application/json"
+    return (this.headers = { "Content-Type": "application/json" });
+  }
+
+  getData(url, params){
+    return axios.get(url, { params: params, headers: this.getHeaders() })
+      .then(function (response) {
+        return response.data;
+      })
+      .catch(function (error) {
+        return {
+          error: error.response.data.Message,
+          statusCode: error.response.statusCode
+        };
     });
   }
 
-  deleteRole(roleId: any) {
-    return axios
-      .delete(deleteRoleURL, { 
-        data:{roleId:roleId},
-        headers: this.getHeaders() })
+  postData(url, params){
+    return axios.post(url, params, { headers: this.getHeaders() })
+      .then(function (response) {
+        return response;
+      })
+      .catch(function (error) {
+        return {
+          error: error.response.data.Message,
+          statusCode: error.response.statusCode
+        };
+      });
+  }
+
+  deleteData(url, data){
+    return axios.delete(url, { data: data, headers: this.getHeaders() })
       .then(function(response) {
         return response;
       })
       .catch(function(error) {
-        if (error.response) {
-          return {
-            error: error.response.data.Message,
-            statusCode: error.response.statusCode
-          };
-        } else {
-          if (error.message) {
-            return { error: error.message };
-          }
-        }
+        return {
+          error: error.response.data.Message,
+          statusCode: error.response.statusCode
+        };
+    });
+  }
+
+  putData(url, params){
+    return axios.put(url, params, { headers: this.getHeaders() })
+      .then(function (response) {
+        return response;
+      })
+      .catch(function (error) {
+        return {
+          error: error.response.data.Message,
+          statusCode: error.response.statusCode
+        };
       });
+  }
+
+  deleteRole(roleId: any) {
+    return this.deleteData(deleteRoleURL,{roleId:roleId})
   }
 
   getDepartmentDetails(departmentID: number) {
-    return axios
-      .get(departmentUrl, {
-        params: {
-          departmentID: departmentID
-        },
-        headers: this.getHeaders()
-      })
-      .then(function (response) {
-        return response.data;
-      })
-      .catch(function (error) {
-        if (error.response) {
-          return {
-            error: error.response.data.Message,
-            statusCode: error.response.statusCode
-          };
-        } else {
-          if (error.message) {
-            return { error: error.message };
-          }
-        }
-      });
+    return this.getData(departmentUrl, { departmentID: departmentID })
   }
 
   getCapabilityNamesByDepartment(departmentID: number) {
-    return axios
-      .get(capabilityUrl, {
-        params: {
-          departmentID: departmentID
-        },
-        headers: this.getHeaders()
-      })
-      .then(function (response) {
-        return response.data;
-      })
-      .catch(function (error) {
-        if (error.response) {
-          return {
-            error: error.response.data.Message,
-            statusCode: error.response.statusCode
-          };
-        } else {
-          if (error.message) {
-            return { error: error.message };
-          }
-        }
-      });
+    return this.getData(capabilityUrl, { departmentID: departmentID })
   }
 
   getRolesInDepartment(departmentID: number) {
-    return axios
-      .get(getRolesInDepartmentURL, {
-        params: {
-          departmentID: departmentID
-        },
-        headers: this.getHeaders()
-      })
-      .then(function (response) {
-        return response.data;
-      })
-      .catch(function (error) {
-        if (error.response) {
-          return {
-            error: error.response.data.Message,
-            statusCode: error.response.statusCode
-          };
-        } else {
-          if (error.message) {
-            return { error: error.message };
-          }
-        }
-      });
+    return this.getData(getRolesInDepartmentURL,{ departmentID: departmentID })
   }
 
   getBands() {
-    return axios
-      .get(getBandsURL, {
-        params: {},
-        headers: this.getHeaders()
-      })
-      .then(function (response) {
-        return response.data;
-      })
-      .catch(function (error) {
-        if (error.response) {
-          return {
-            error: error.response.data.Message,
-            statusCode: error.response.statusCode
-          };
-        } else {
-          if (error.message) {
-            return { error: error.message };
-          }
-        }
-      });
+    return this.getData(getBandsURL, {})
   }
 
   getBandInformation(bandId: number) {
-    return axios
-      .get(getUniqueBandURL, {
-        params: {
-          bandId: bandId
-        },
-        headers: this.getHeaders()
-      })
-      .then(function (response) {
-        return response.data;
-      })
-      .catch(function (error) {
-        if (error.response) {
-          return {
-            error: error.response.data.Message,
-            statusCode: error.response.statusCode
-          };
-        } else {
-          if (error.message) {
-            return { error: error.message };
-          }
-        }
-      });
+    return this.getData(getUniqueBandURL, { bandId: bandId })
   }
 
   createCapability(param: any) {
-    return axios
-      .post(addCapabilityURL, param, { headers: this.getHeaders() })
-      .then(function (response) {
-        return response;
-      })
-      .catch(function (error) {
-        if (error.response) {
-          return {
-            error: error.response.data.Message,
-            statusCode: error.response.statusCode
-          };
-        } else {
-          if (error.message) {
-            return { error: error.message };
-          }
-        }
-      });
+    return this.postData(addCapabilityURL, param)
   }
 
   editRole(param: any) {
-    return axios
-      .put(editRoleUrl, param, { headers: this.getHeaders() })
-      .then(function (response) {
-        return response;
-      })
-      .catch(function (error) {
-        if (error.response) {
-          return {
-            error: error.response.data.Message,
-            statusCode: error.response.statusCode
-          };
-        } else {
-          if (error.message) {
-            return { error: error.message };
-          }
-        }
-      });
+    return this.putData(editRoleUrl, param)
   }
 
   getRole(roleID: number) {
-    return axios
-      .get(getRoleUrl, {
-        params: {
-          roleID: roleID
-        },
-        headers: this.getHeaders()
-      })
-      .then(function (response) {
-        return response.data;
-      })
-      .catch(function (error) {
-        if (error.response) {
-          return {
-            error: error.response.data.Message,
-            statusCode: error.response.statusCode
-          };
-        } else {
-          if (error.message) {
-            return { error: error.message };
-          }
-        }
-      });
+    return this.getData(getRoleUrl, { roleID: roleID })
   }
 
   getRoleBandCapabilityExists(capabilityId: number, bandId: number) {
-    return axios
-      .get(getRoleBandCapabilityExistsUrl, {
-        params: {
-          capabilityId: capabilityId,
-          bandId: bandId
-        },
-        headers: this.getHeaders()
-      })
-      .then(function (response) {
-        return response.data;
-      })
-      .catch(function (error) {
-        if (error.response) {
-          return {
-            error: error.response.data.Message,
-            statusCode: error.response.statusCode
-          };
-        } else {
-          if (error.message) {
-            return { error: error.message };
-          }
-        }
-      });
+    return this.getData(getRoleBandCapabilityExistsUrl, { capabilityId: capabilityId, bandId: bandId })
   }
 
   createRole(param: any) {
-    return axios
-      .post(addRoleUrl, param, { headers: this.getHeaders() })
-      .then(function (response) {
-        return response;
-      })
-      .catch(function (error) {
-        return { error: error.message };
-      });
+    return this.postData(addRoleUrl, param)
   }
 }
