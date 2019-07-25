@@ -7,6 +7,7 @@ const fullRolesInDepartmentQuery = "SELECT * FROM viewTableData WHERE department
 const roleViewDataQuery = "SELECT role_id,name,summary,job_spec_url,school_id FROM viewRoleData WHERE role_id = ?"
 const viewEditRole = "SELECT role_id, capability_id, band_id, RoleName, summary, job_spec_url, CapabilityName, BandName FROM viewEditRole WHERE role_id = ?"
 const RoleBandCapabilityExists = "SELECT EXISTS(SELECT * FROM viewEditRole WHERE capability_id=? AND band_id=?) AS result"
+const deleterole = "DELETE FROM role where role_id= ?"
 
 class RolesHandler {
     constructor( config ) { }
@@ -22,6 +23,18 @@ class RolesHandler {
                 })
             } catch (err){
                 reject({"error":"Error adding role"})
+            }
+        })
+    }
+
+    deleteRole(params, db) {
+        return new Promise((resolve, reject) => {
+            try {
+                db.query(deleterole, [params.roleId]).then(rows => {
+                    resolve({ "success": "Successfully deleting role" })
+                })
+            } catch (err) {
+                reject({ "error": "Error deleting role" })
             }
         })
     }

@@ -31,6 +31,10 @@ function sendResponseData(query, response){
   })
 }
 
+app.delete('/deleteRole', cors(), function (request, response) {
+  sendResponseData(rolesHandler.deleteRole(request.body, db), response)
+});
+
 app.put('/editrole', cors(), function (request, response) {
   sendResponseData(rolesHandler.editRole(request.body, db), response)
 })

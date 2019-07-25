@@ -12,6 +12,7 @@ const viewEditRoleUrl = "/api/viewEditRole";
 const addCapabilityURL = "/api/addcapability";
 const getUniqueBandURL = "/api/uniqueband";
 const getRoleBandCapabilityExistsUrl = "/api/roleBandCapabilityExists";
+const deleteRoleURL = "/api/deleteRole";
 
 @Injectable()
 export class DataService {
@@ -24,6 +25,22 @@ export class DataService {
     return (this.headers = {
       "Content-Type": "application/json"
     });
+  }
+
+  deleteRole(roleId: any) {
+    return axios
+      .delete(deleteRoleURL, { 
+        data:{roleId:roleId},
+        headers: this.getHeaders() })
+      .then(function(response) {
+        return response;
+      })
+      .catch(function(error) {
+          return {
+            error: error.response.data.Message,
+            statusCode: error.response.statusCode
+          }
+      });
   }
 
   getDepartmentDetails(departmentID: number) {
