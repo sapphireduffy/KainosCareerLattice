@@ -21,18 +21,21 @@ export class EditRoleModalComponent implements OnInit {
   @Input() bands: any;
   @Output() roleEdited = new EventEmitter();
   @Output() roleDeleted = new EventEmitter();
+  roleExists;
   editedRole: Role;
+  initialBandId: number;
+  initialCapabilityId: number;
   public editRoleForm: FormGroup;
   public submitted = false;
-  public currentBandName;
   constructor(
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
-    private dataService: DataService,
-    private router: Router
+    private dataService: DataService
   ) { }
 
   ngOnInit() {
+    this.initialBandId = this.roleToEdit.band_id;
+    this.initialCapabilityId = this.roleToEdit.capability_id;
 
     this.editRoleForm = this.formBuilder.group({
       roleName: [this.roleToEdit.RoleName, Validators.required],
@@ -41,7 +44,6 @@ export class EditRoleModalComponent implements OnInit {
       roleBand: [this.roleToEdit.band_id],
       roleCapability: [this.roleToEdit.capability_id]
     });
-
   }
 
   get formControls() {
@@ -61,9 +63,7 @@ export class EditRoleModalComponent implements OnInit {
       capabilityId: this.editRoleForm.get("roleCapability").value,
       bandId: this.editRoleForm.get("roleBand").value
     };
-    console.log(this.editedRole)
   }
-
 
   deleteRole() {
     if (confirm("Are you sure you want to delete this role ")) {
@@ -75,22 +75,42 @@ export class EditRoleModalComponent implements OnInit {
     this.closeModal();
   }
 
-  onSubmit() {
+  async onSubmit() {
     this.submitted = true;
     if (this.editRoleForm.invalid) {
       return;
     }
     this.setEditRole();
-
-    this.dataService
-      .editRole(this.editedRole)
-      .then(result => this.roleEdited.emit(result))
-      .catch(error => {
-        this.roleEdited.emit(error);
-      });
-    this.closeModal();
+    await this.checkIfRoleExists();
+    
+    if ((this.editedRole.bandId == this.initialBandId)
+      && (this.editedRole.capabilityId == this.initialCapabilityId)) {
+        this.writeToDatabse();
+      }
+      else if ((this.roleExists == false )) {
+        this.writeToDatabse();
+      }
   }
 
+  async checkIfRoleExists() {
+    await this.dataService
+      .getRoleBandCapabilityExists(this.editedRole.capabilityId, this.editedRole.bandId)
+      .then(
+        result => {
+          this.roleExists = result[0]["result"] == 1 ? true : false;
+        })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
-
-}
+  writeToDatabse() {
+         this.dataService
+        .editRole(this.editedRole)
+        .then(result => this.roleEdited.emit(result))
+        .catch(error => {
+          this.roleEdited.emit(error);
+        });
+      this.closeModal();
+    }
+  }

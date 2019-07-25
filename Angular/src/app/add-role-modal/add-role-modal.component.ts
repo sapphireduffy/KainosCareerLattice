@@ -21,7 +21,7 @@ export class AddRoleModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
     private dataService: DataService,
-  ) {}
+  ) { }
 
   roleNameMaxLength = 100
   roleSummaryMaxLength = 1000

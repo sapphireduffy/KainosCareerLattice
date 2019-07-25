@@ -10,7 +10,7 @@ import { ModalService } from '../modal.service';
 import { EditRoleModalComponent } from '../edit-role-modal/edit-role-modal.component';
 
 @Component({
-  selector: "app-admin-table",
+  selector: "app-edit-roles",
   templateUrl: "./admin-table.component.html",
   styleUrls: ["./admin-table.component.css"]
 })
@@ -19,30 +19,32 @@ export class AdminTableComponent implements OnInit {
   capabilities = [];
   jobsInDep: any;
   bands: any;
+  id: any;
+  alertMessage: string;
+  alertType: string;
+  showAlert = false;
   departmentId:any;
-  alertMessage:string;
-  alertType:string;
-  showAlert;
 
   constructor(
     private dataService: DataService,
     private modalService: ModalService,
-  ) {}
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.showAlert = false;
     var urlParams = new URLSearchParams(window.location.search);
-    this.departmentId = parseInt(urlParams.get("id"));
+    this.id = parseInt(urlParams.get("id"));
     this.loadRoles();
   }
 
-  roleExists(cap, band) : Object {
-    for(var i = 0; i < this.jobsInDep.length; i++){
-      if(this.jobsInDep[i].capability_id == cap.capability_id && this.jobsInDep[i].band_id == band.band_id){
-        return {"Role":this.jobsInDep[i].RoleName, "ID":this.jobsInDep[i].role_id}
+  roleExists(cap, band) {
+    for (var i = 0; i < this.jobsInDep.length; i++) {
+      if (this.jobsInDep[i].capability_id == cap.capability_id && this.jobsInDep[i].band_id == band.band_id) {
+        return { "Role": this.jobsInDep[i].RoleName, "ID": this.jobsInDep[i].role_id }
       }
     }
-    return {"Role":"+", "ID":-1, "BandId":band.band_id, "CapabilityId": cap.capability_id}
+
+    return { "Role": "Add new role", "ID": -1, "BandId": band.band_id, "CapabilityId": cap.capability_id }
   }
 
   async switchModal(selectedRole) {
@@ -56,11 +58,6 @@ export class AdminTableComponent implements OnInit {
     }
   }
 
-  openCapabilityModal(){
-    this.modalService.openAddCapabilityModal(this.departmentId).then(data => {
-      this.displayAlert(data)
-    });
-  }
 
   openEditModal(roleId, capabilities, bands){
     this.modalService.openEditRoleModal(roleId, capabilities, bands).then(data => {
@@ -69,16 +66,17 @@ export class AdminTableComponent implements OnInit {
   }
 
   loadRoles(){
-    this.dataService.getCapabilityNamesByDepartment(this.departmentId).then(response => {
+    console.log(this.id)
+    this.dataService.getCapabilityNamesByDepartment(this.id).then(response => {
       this.capabilities = response;
     });
-    this.dataService.getRolesInDepartment(this.departmentId).then(response => {
+    this.dataService.getRolesInDepartment(this.id).then(response => {
       this.jobsInDep = response;
     });
     this.dataService.getBands().then(response => {
       this.bands = response;
     });
-    this.dataService.getDepartmentDetails(this.departmentId).then(response => {
+    this.dataService.getDepartmentDetails(this.id).then(response => {
       this.departmentName = response;
     });
   }
@@ -95,5 +93,4 @@ export class AdminTableComponent implements OnInit {
     }
     this.loadRoles();
   }
-  
 }

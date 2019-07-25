@@ -6,7 +6,7 @@ const addBandDescriptionQuery = "INSERT INTO band_description(commercial_awarene
 const addBandQuery = "INSERT INTO band(name,school_id,description_id,training,responsibilities)"+
     " VALUES(?,?,?,?,?)"
 
-class RolesHandler {
+class BandHandler {
     constructor( config ) { }
 
     addBand(params, db){
@@ -58,4 +58,4 @@ class RolesHandler {
         })
     }
 }
-module.exports = RolesHandler
+module.exports = BandHandler

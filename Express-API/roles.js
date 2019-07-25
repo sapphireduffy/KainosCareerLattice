@@ -7,6 +7,8 @@ const deleterole = "DELETE FROM role where role_id= ?"
 const rolesInDepartmentQuery =  "SELECT role_id, name, department_id, band_id FROM role WHERE department_id = ?"
 const fullRolesInDepartmentQuery = "SELECT * FROM viewTableData WHERE department_id = ?"
 const roleViewDataQuery = "SELECT role_id,name,summary,job_spec_url,school_id FROM viewRoleData WHERE role_id = ?"
+const viewEditRole = "SELECT role_id, capability_id, band_id, RoleName, summary, job_spec_url, CapabilityName, BandName FROM viewEditRole WHERE role_id = ?"
+const RoleBandCapabilityExists = "SELECT EXISTS(SELECT * FROM viewEditRole WHERE capability_id=? AND band_id=?) AS result"
 
 class RolesHandler {
     constructor(config) { }
@@ -26,21 +28,21 @@ class RolesHandler {
         })
     }
 
-
-editRole(params, db){
-    return new Promise( ( resolve, reject ) => {
-        try {
-            db.query(editRoleTableQuery,[params.roleName,params.summary,params.jobSpecUrl, params.bandId, params.roleId]).then(rows => {
-                db.query(editRoleCapabilityTableQuery, [params.capabilityId, params.roleId]).then(result => {
-                    resolve({"success":"Successfully edited role"})
-                    reject({"error":"Error editing role inner"})
+    editRole(params, db){
+        return new Promise( ( resolve, reject ) => {
+            try {
+                db.query(editRoleTableQuery,[params.roleName,params.summary,params.jobSpecUrl, params.bandId, params.roleId]).then(rows => {
+                    db.query(editRoleCapabilityTableQuery, [params.capabilityId, params.roleId]).then(success => {
+                        resolve({"success":"Successfully edited role"})
+                    }, fail => {
+                        reject({"error":"Error editing role inner"})
+                    })
                 })
-            })
-        } catch (err){  
-            reject({"error":"Error editing role"})
-        }
-    })
-}
+            } catch (err){
+                reject({"error":"Error editing role"})
+            }
+        })
+    }
 
     deleteRole(params, db) {
         return new Promise((resolve, reject) => {
@@ -88,6 +90,30 @@ editRole(params, db){
                 })
             } catch (err){
                 reject({"error":"Error getting roles view in department"})
+            }
+        })
+    }
+
+    viewEditRole(params, db){
+        return new Promise( ( resolve, reject ) => {
+            try {
+                db.query(viewEditRole,[params.roleID]).then(rows => {
+                    resolve(rows)
+                })
+            } catch (err){
+                reject({"error":"Error getting role information"})
+            }
+        })
+    }
+
+    roleBandCapabilityExists(params, db){
+        return new Promise( ( resolve, reject ) => {
+            try {
+                db.query(RoleBandCapabilityExists,[params.capabilityId, params.bandId]).then(rows => {
+                    resolve(rows)
+                })
+            } catch (err){
+                reject({"error":"Error getting role information"})
             }
         })
     }
