@@ -15,10 +15,12 @@ class BandHandler {
         return new Promise((resolve, reject) => {
         try {
             // Insert description data into 'band_description' table
-            db.query(addBandDescriptionQuery,[params.commercialAwareness,params.communicatingAndTeamwork,
-            params.innovationAndContinuousImprovement,params.customerFocus,
-            params.developingYourselfAndOthers,params.planningAndOrganisation,
-            params.jobSpecificKnowledge]).then(rows => {
+            db.query(addBandDescriptionQuery,
+                [params.commercialAwareness,params.communicatingAndTeamwork,
+                params.innovationAndContinuousImprovement,params.customerFocus,
+                params.developingYourselfAndOthers,params.planningAndOrganisation,
+                params.jobSpecificKnowledge
+            ]).then(rows => {
                 // Inserting a band to the top of a school
                 if(params.aboveValue != null) {
                     console.log(params.aboveValue)

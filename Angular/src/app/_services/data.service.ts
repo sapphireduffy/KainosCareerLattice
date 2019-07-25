@@ -232,9 +232,9 @@ export class DataService {
 
   createBand(param: any) {
     return axios
-    .post(addBandURL, param, { headers: this.getHeaders() })
-    .then(function(response) {
-      return response;
+      .post(addBandURL, param, { headers: this.getHeaders() })
+      .then(function(response) {
+        return response;
     })
     .catch(function(error) {
       return { error: error.message };
