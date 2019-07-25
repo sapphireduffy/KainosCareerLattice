@@ -5,10 +5,9 @@ const departmentUrl = "/api/departments";
 const capabilityUrl = "/api/capabilities";
 const getRolesInDepartmentURL = "/api/rolesInDep";
 const getBandsURL = "/api/bands";
-const roleUrl = "/api/role";
 const addRoleUrl = "/api/addRole";
 const editRoleUrl = "/api/editRole";
-const viewEditRoleUrl = "/api/viewEditRole";
+const getRoleUrl = "/api/getRole";
 const addCapabilityURL = "/api/addcapability";
 const getUniqueBandURL = "/api/uniqueband";
 const getRoleBandCapabilityExistsUrl = "/api/roleBandCapabilityExists";
@@ -147,31 +146,6 @@ export class DataService {
       });
   }
 
-  getRoleInformation(roleID: number) {
-    return axios
-      .get(roleUrl, {
-        params: {
-          roleID: roleID
-        },
-        headers: this.getHeaders()
-      })
-      .then(function (response) {
-        return response.data;
-      })
-      .catch(function (error) {
-        if (error.response) {
-          return {
-            error: error.response.data.Message,
-            statusCode: error.response.statusCode
-          };
-        } else {
-          if (error.message) {
-            return { error: error.message };
-          }
-        }
-      });
-  }
-
   getBandInformation(bandId: number) {
     return axios
       .get(getUniqueBandURL, {
@@ -237,9 +211,9 @@ export class DataService {
       });
   }
 
-  getEditRole(roleID: number) {
+  getRole(roleID: number) {
     return axios
-      .get(viewEditRoleUrl, {
+      .get(getRoleUrl, {
         params: {
           roleID: roleID
         },

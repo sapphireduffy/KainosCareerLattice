@@ -18,7 +18,7 @@ export class ModalService {
   ) { }
 
   async openRoleInfoModal(selectedRoleId){
-    await this.dataService.getRoleInformation(selectedRoleId).then(response => {
+    await this.dataService.getRole(selectedRoleId).then(response => {
       const modalRef = this.modalService.open(RoleInformationComponent, { backdrop: "static" });
       modalRef.componentInstance.roleToDisplay = response[0];
     });
@@ -56,7 +56,7 @@ export class ModalService {
 
   async openEditRoleModal(roleId, capabilities, bands) {
     return new Promise((resolve, reject) => {
-      this.dataService.getEditRole(roleId).then(response => {
+      this.dataService.getRole(roleId).then(response => {
         const modalRef = this.modalService.open(EditRoleModalComponent);
         modalRef.componentInstance.roleToEdit = response[0];
         modalRef.componentInstance.capabilities = capabilities;

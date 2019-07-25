@@ -5,8 +5,7 @@ const editRoleTableQuery = "UPDATE role SET name=?, summary=?, job_spec_url=?, b
 const editRoleCapabilityTableQuery = "UPDATE role_capability SET capability_id=? WHERE role_id=?"
 
 const rolesInDepartmentQuery = "SELECT role_id, band_id, capability_id, RoleName FROM viewTableData WHERE department_id = ?"
-const roleViewDataQuery = "SELECT role_id,name,summary,job_spec_url,school_id FROM viewRoleData WHERE role_id = ?"
-const viewEditRole = "SELECT role_id, capability_id, band_id, RoleName, summary, job_spec_url, CapabilityName, BandName FROM viewEditRole WHERE role_id = ?"
+const getRoleQuery = "SELECT role_id, capability_id, band_id, RoleName, summary, job_spec_url, CapabilityName, BandName, school_id FROM viewEditRole WHERE role_id = ?"
 const RoleBandCapabilityExists = "SELECT EXISTS(SELECT * FROM viewEditRole WHERE capability_id=? AND band_id=?) AS result"
 
 const deleterole = "DELETE FROM role where role_id= ?"
@@ -71,22 +70,10 @@ class RolesHandler {
         })
     }
 
-    getRoleViewData(params, db){
+    getRole(params, db){
         return new Promise( ( resolve, reject ) => {
             try {
-                db.query(roleViewDataQuery,[params.roleID]).then(rows => {
-                    resolve(rows)
-                })
-            } catch (err){
-                reject({"error":"Error getting roles view in department"})
-            }
-        })
-    }
-
-    viewEditRole(params, db){
-        return new Promise( ( resolve, reject ) => {
-            try {
-                db.query(viewEditRole,[params.roleID]).then(rows => {
+                db.query(getRoleQuery,[params.roleID]).then(rows => {
                     resolve(rows)
                 })
             } catch (err){

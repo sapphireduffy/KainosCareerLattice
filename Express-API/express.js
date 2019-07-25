@@ -82,16 +82,12 @@ app.post("/login", cors(), function (request, response) {
 	})
 })
 
-app.get("/role", cors(), function(request, response) {
-  sendResponseData(rolesHandler.getRoleViewData(request.query, db), response)
-})
-
 app.post("/addband", cors(), function (request, response) {
 	sendResponseData(bandHandler.addBand(request.body, db), response)
 })
 
-app.get("/viewEditRole", cors(), function (request, response) {
-  sendResponseData(rolesHandler.viewEditRole(request.query, db), response)
+app.get("/getRole", cors(), function (request, response) {
+  sendResponseData(rolesHandler.getRole(request.query, db), response)
 })
 
 app.get("/roleBandCapabilityExists", cors(), function (request, response) {
