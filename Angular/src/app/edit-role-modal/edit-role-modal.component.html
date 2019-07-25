@@ -22,9 +22,8 @@
   
       <div class="form-group">
         <label for="roleSummary">Role Summary</label>
-        <textarea type="text" formControlName="roleSummary" class="form-control" rows="3" [ngClass]="{
-              'is-invalid': submitted && formControls.roleSummary.errors
-            }"></textarea>
+        <textarea type="text" formControlName="roleSummary" class="form-control" rows="3" maxlength="1000" 
+         [ngClass]="{'is-invalid': submitted && formControls.roleSummary.errors}" required></textarea>
         <div *ngIf="submitted && formControls.roleSummary.errors" class="invalid-feedback">
           <div *ngIf="formControls.roleSummary.errors.maxlength">
             Max characters reached for Role Summary
@@ -34,9 +33,8 @@
   
       <div class="form-group">
         <label for="roleSharePointLink">Role Sharepoint Link</label>
-        <input type="text" formControlName="roleSharePointLink" class="form-control" [ngClass]="{
-              'is-invalid': submitted && formControls.roleSharePointLink.errors
-            }" />
+        <input type="text" formControlName="roleSharePointLink" class="form-control" maxlength="500"  
+        [ngClass]="{'is-invalid': submitted && formControls.roleSharePointLink.errors}" required />
         <div *ngIf="submitted && formControls.roleSharePointLink.errors" class="invalid-feedback">
           <div *ngIf="formControls.roleSharePointLink.errors.maxlength">
             Max characters reached for Role Sharepoint Link

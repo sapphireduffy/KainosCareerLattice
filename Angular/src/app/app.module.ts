@@ -34,8 +34,7 @@ import { AddCapabilityComponent } from './add-capability/add-capability.componen
     AddRoleModalComponent,
     EditRoleModalComponent,
     AddCapabilityComponent,
-    AdminTableComponent,
-    AddRoleModalComponent
+    AdminTableComponent
   ],
   bootstrap: [
     AppComponent

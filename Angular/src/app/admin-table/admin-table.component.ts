@@ -17,43 +17,42 @@ export class AdminTableComponent implements OnInit {
   capabilities = [];
   jobsInDep: any;
   bands: any;
-  id:any;
-  alertMessage:string;
-  alertType:string;
+  id: any;
+  alertMessage: string;
+  alertType: string;
   showAlert = false;
 
   constructor(
     private dataService: DataService,
     private modalService: NgbModal,
-    private router:Router
-  ) {}
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     var urlParams = new URLSearchParams(window.location.search);
     this.id = parseInt(urlParams.get("id"));
-    console.log(this.id)
     this.loadRoles();
   }
 
-  roleExists(cap, band){
-    for(var i = 0; i < this.jobsInDep.length; i++){
-      if(this.jobsInDep[i].capability_id == cap.capability_id && this.jobsInDep[i].band_id == band.band_id){
-        return {"Role":this.jobsInDep[i].RoleName, "ID":this.jobsInDep[i].role_id}
+  roleExists(cap, band) {
+    for (var i = 0; i < this.jobsInDep.length; i++) {
+      if (this.jobsInDep[i].capability_id == cap.capability_id && this.jobsInDep[i].band_id == band.band_id) {
+        return { "Role": this.jobsInDep[i].RoleName, "ID": this.jobsInDep[i].role_id }
       }
     }
-   
-    return {"Role":"Add new role", "ID":-1, "BandId":band.band_id, "CapabilityId": cap.capability_id}
+
+    return { "Role": "Add new role", "ID": -1, "BandId": band.band_id, "CapabilityId": cap.capability_id }
   }
 
   async switchModal(selectedRole) {
-    if(selectedRole.ID == -1){
+    if (selectedRole.ID == -1) {
       this.openAddRoleModal(selectedRole.BandId, selectedRole.CapabilityId);
-    }else{
-      this.openEditRoleModal(selectedRole.ID) ;
+    } else {
+      this.openEditRoleModal(selectedRole.ID);
     }
   }
 
-  async openRoleInfoModal(selectedRoleId){
+  async openRoleInfoModal(selectedRoleId) {
     await this.dataService.getRoleInformation(selectedRoleId).then(response => {
       const modalRef = this.modalService.open(RoleInformationComponent);
       modalRef.componentInstance.roleToDisplay = response[0];
@@ -67,25 +66,20 @@ export class AdminTableComponent implements OnInit {
     });
   }
 
-  loadRoles(){
-
+  loadRoles() {
     this.dataService.getCapabilityNamesByDepartment(this.id).then(response => {
-      console.log(response)
       this.capabilities = response;
     });
 
     this.dataService.getRolesInDepartment(this.id).then(response => {
-      console.log(response)
       this.jobsInDep = response;
     });
 
     this.dataService.getBands().then(response => {
-      console.log(response)
       this.bands = response;
     });
 
     this.dataService.getDepartmentDetails(this.id).then(response => {
-      console.log(response)
       this.departmentName = response;
     });
   }
@@ -94,11 +88,10 @@ export class AdminTableComponent implements OnInit {
     const modalRef = this.modalService.open(AddRoleModalComponent);
     modalRef.componentInstance.departmentId = this.id;
     modalRef.componentInstance.bandId = roleBandId;
-    modalRef.componentInstance.capabilityId =  roleCapabilityId;
-    modalRef.componentInstance.roleAdded.subscribe(data =>{
-     
-      console.log(data.data)
-      if(data.data.hasOwnProperty('success')){
+    modalRef.componentInstance.capabilityId = roleCapabilityId;
+    modalRef.componentInstance.roleAdded.subscribe(data => {
+
+      if (data.data.hasOwnProperty('success')) {
         this.showAlert = true;
         this.alertMessage = data.data.success;
         this.alertType = "success";
@@ -118,9 +111,9 @@ export class AdminTableComponent implements OnInit {
       modalRef.componentInstance.roleToEdit = response[0];
       modalRef.componentInstance.capabilities = this.capabilities;
       modalRef.componentInstance.bands = this.bands;
-      modalRef.componentInstance.roleEdited.subscribe(data =>{
-       
-        if(data.data.hasOwnProperty('success')){
+      modalRef.componentInstance.roleEdited.subscribe(data => {
+
+        if (data.data.hasOwnProperty('success')) {
           this.showAlert = true;
           this.alertMessage = data.data.success;
           this.alertType = "success";
@@ -131,6 +124,6 @@ export class AdminTableComponent implements OnInit {
         }
         this.loadRoles();
       });
-  });
+    });
   }
 }

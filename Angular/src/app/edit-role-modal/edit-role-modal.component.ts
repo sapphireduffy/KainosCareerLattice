@@ -35,7 +35,6 @@ export class EditRoleModalComponent implements OnInit {
       roleBand: [this.roleToEdit.band_id],
       roleCapability: [this.roleToEdit.capability_id]
     });
-
   }
 
   get formControls() {
@@ -64,19 +63,14 @@ export class EditRoleModalComponent implements OnInit {
     }
     this.setEditRole();
     await this.checkIfRoleExists();
-    if ((this.roleExists == false) ||
-      ((this.roleExists) == true &&
-        ((this.editedRole.bandId == this.initialBandId) &&
-          (this.editedRole.capabilityId == this.initialCapabilityId)))) {
-      this.dataService
-        .editRole(this.editedRole)
-        .then(result => this.roleEdited.emit(result))
-        .catch(error => {
-          this.roleEdited.emit(error);
-        });
-      this.closeModal();
-
-    }
+    
+    if ((this.editedRole.bandId == this.initialBandId)
+      && (this.editedRole.capabilityId == this.initialCapabilityId)) {
+        this.writeToDatabse();
+      }
+      else if ((this.roleExists == false )) {
+        this.writeToDatabse();
+      }
   }
 
   async checkIfRoleExists() {
@@ -90,4 +84,14 @@ export class EditRoleModalComponent implements OnInit {
         console.log(error);
       });
   }
-}
+
+  writeToDatabse() {
+         this.dataService
+        .editRole(this.editedRole)
+        .then(result => this.roleEdited.emit(result))
+        .catch(error => {
+          this.roleEdited.emit(error);
+        });
+      this.closeModal();
+    }
+  }

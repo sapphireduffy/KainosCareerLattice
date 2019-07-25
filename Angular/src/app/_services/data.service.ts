@@ -6,8 +6,8 @@ const capabilityUrl = "/api/capabilities";
 const getRolesInDepartmentURL = "/api/rolesInDep";
 const getBandsURL = "/api/bands";
 const roleUrl = "/api/role";
-const addRoleUrl = "/api/addrole";
-const editRoleUrl = "/api/editrole";
+const addRoleUrl = "/api/addRole";
+const editRoleUrl = "/api/editRole";
 const viewEditRoleUrl = "/api/viewEditRole";
 const addCapabilityURL = "/api/addcapability";
 const getUniqueBandURL = "/api/uniqueband";
@@ -18,7 +18,7 @@ export class DataService {
   headers: any;
   public isAdmin: boolean
 
-  constructor() {}
+  constructor() { }
 
   getHeaders() {
     return (this.headers = {
@@ -34,10 +34,10 @@ export class DataService {
         },
         headers: this.getHeaders()
       })
-      .then(function(response) {
+      .then(function (response) {
         return response.data;
       })
-      .catch(function(error) {
+      .catch(function (error) {
         if (error.response) {
           return {
             error: error.response.data.Message,
@@ -59,10 +59,10 @@ export class DataService {
         },
         headers: this.getHeaders()
       })
-      .then(function(response) {
+      .then(function (response) {
         return response.data;
       })
-      .catch(function(error) {
+      .catch(function (error) {
         if (error.response) {
           return {
             error: error.response.data.Message,
@@ -84,10 +84,10 @@ export class DataService {
         },
         headers: this.getHeaders()
       })
-      .then(function(response) {
+      .then(function (response) {
         return response.data;
       })
-      .catch(function(error) {
+      .catch(function (error) {
         if (error.response) {
           return {
             error: error.response.data.Message,
@@ -107,10 +107,10 @@ export class DataService {
         params: {},
         headers: this.getHeaders()
       })
-      .then(function(response) {
+      .then(function (response) {
         return response.data;
       })
-      .catch(function(error) {
+      .catch(function (error) {
         if (error.response) {
           return {
             error: error.response.data.Message,
@@ -132,10 +132,10 @@ export class DataService {
         },
         headers: this.getHeaders()
       })
-      .then(function(response) {
+      .then(function (response) {
         return response.data;
       })
-      .catch(function(error) {
+      .catch(function (error) {
         if (error.response) {
           return {
             error: error.response.data.Message,
@@ -157,10 +157,10 @@ export class DataService {
         },
         headers: this.getHeaders()
       })
-      .then(function(response) {
+      .then(function (response) {
         return response.data;
       })
-      .catch(function(error) {
+      .catch(function (error) {
         if (error.response) {
           return {
             error: error.response.data.Message,
@@ -177,10 +177,10 @@ export class DataService {
   createCapability(param: any) {
     return axios
       .post(addCapabilityURL, param, { headers: this.getHeaders() })
-      .then(function(response) {
+      .then(function (response) {
         return response;
       })
-      .catch(function(error) {
+      .catch(function (error) {
         if (error.response) {
           return {
             error: error.response.data.Message,
@@ -197,10 +197,10 @@ export class DataService {
   editRole(param: any) {
     return axios
       .put(editRoleUrl, param, { headers: this.getHeaders() })
-      .then(function(response) {
+      .then(function (response) {
         return response;
       })
-      .catch(function(error) {
+      .catch(function (error) {
         if (error.response) {
           return {
             error: error.response.data.Message,
@@ -222,10 +222,10 @@ export class DataService {
         },
         headers: this.getHeaders()
       })
-      .then(function(response) {
+      .then(function (response) {
         return response.data;
       })
-      .catch(function(error) {
+      .catch(function (error) {
         if (error.response) {
           return {
             error: error.response.data.Message,
@@ -248,10 +248,10 @@ export class DataService {
         },
         headers: this.getHeaders()
       })
-      .then(function(response) {
+      .then(function (response) {
         return response.data;
       })
-      .catch(function(error) {
+      .catch(function (error) {
         if (error.response) {
           return {
             error: error.response.data.Message,
@@ -268,14 +268,11 @@ export class DataService {
   createRole(param: any) {
     return axios
       .post(addRoleUrl, param, { headers: this.getHeaders() })
-      .then(function(response) {
+      .then(function (response) {
         return response;
       })
-      .catch(function(error) {
+      .catch(function (error) {
         return { error: error.message };
       });
   }
 }
-
-  
-
