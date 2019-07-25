@@ -20,6 +20,7 @@ export class EditRoleModalComponent implements OnInit {
   @Input() capbilities: any;
   @Input() bands: any;
   @Output() roleEdited = new EventEmitter();
+  @Output() roleDeleted = new EventEmitter();
   editedRole: Role;
   public editRoleForm: FormGroup;
   public submitted = false;
@@ -68,8 +69,10 @@ export class EditRoleModalComponent implements OnInit {
     if (confirm("Are you sure you want to delete this role ")) {
       this.dataService.deleteRole(this.roleToEdit.role_id).then(response => {
         console.log(response)
+        this.roleEdited.emit(response);
       })
     }
+    this.closeModal();
   }
 
   onSubmit() {

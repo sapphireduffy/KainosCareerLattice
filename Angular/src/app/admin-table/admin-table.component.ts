@@ -52,7 +52,7 @@ export class AdminTableComponent implements OnInit {
       })
     }
     else {
-      this.modalService.openEditRoleModal(selectedRole.ID, this.capabilities, this.bands);
+      this.openEditModal(selectedRole.ID, this.capabilities, this.bands);
     }
   }
 
