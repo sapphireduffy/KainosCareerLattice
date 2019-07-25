@@ -32,7 +32,7 @@ export class ModalService {
   }
 
   openAddRoleModal(roleBandId, roleCapabilityId, departmentId) {
-    return new Promise( ( resolve, reject ) => {
+    return new Promise( (resolve, reject) => {
       const modalRef = this.modalService.open(AddRoleModalComponent, { backdrop: "static" });
       modalRef.componentInstance.departmentId = departmentId;
       modalRef.componentInstance.bandId = roleBandId;
@@ -47,7 +47,6 @@ export class ModalService {
     return new Promise((resolve, reject) => {
       const modalRef = this.modalService.open(AddCapabilityComponent);
       modalRef.componentInstance.departmentId = departmentId;
-
       modalRef.componentInstance.capabilityAdded.subscribe(data => {
         resolve(data.data)
       })

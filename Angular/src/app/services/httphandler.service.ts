@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import axios from "axios";
+import axios, { AxiosPromise } from "axios";
 
 
 @Injectable({
@@ -7,7 +7,7 @@ import axios from "axios";
 })
 export class HttphandlerService {
   headers = { "Content-Type": "application/json" };
-  axiosRequest: any;
+  axiosRequest: AxiosPromise;
 
   constructor() { }
 
