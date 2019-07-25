@@ -21,6 +21,7 @@ class BandHandler {
             params.jobSpecificKnowledge]).then(rows => {
                 // Inserting a band to the top of a school
                 if(params.aboveValue != null) {
+                    console.log(params.aboveValue)
                     // Prepare table for insertion and then insert the data
                     db.query(prepareBandTableQueryAbove, [params.aboveValue, params.schoolId])
                     db.query(addBandQuery, [params.name, params.schoolId, rows.insertId,
@@ -30,6 +31,7 @@ class BandHandler {
                 }
                 // Inserting a band below another band
                 else {
+                    console.log(params.belowValue)
                     // Prepare table for insertion and then insert the data
                     db.query(prepareBandTableQueryBelow, [params.belowValue, params.schoolId])
                     db.query(addBandQuery, [params.name, params.schoolId, rows.insertId,
