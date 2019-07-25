@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RoleInformationComponent } from './role-information.component';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { MockObjects } from '../mock-objects';
 
 describe('RoleInformationComponent', () => {
   let component: RoleInformationComponent;
@@ -8,7 +10,12 @@ describe('RoleInformationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RoleInformationComponent ]
+      providers: [ 
+        NgbActiveModal 
+      ],
+      declarations: [ 
+        RoleInformationComponent 
+      ]
     })
     .compileComponents();
   }));
@@ -16,6 +23,7 @@ describe('RoleInformationComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RoleInformationComponent);
     component = fixture.componentInstance;
+    component.roleToDisplay = MockObjects.role
     fixture.detectChanges();
   });
 

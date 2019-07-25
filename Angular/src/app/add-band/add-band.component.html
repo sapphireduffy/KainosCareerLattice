@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <nav (click)="toggleDescription()" id="openDescriptionBtn">Open Description</nav>
+        <button class="btn btn-secondary dropdown-toggle" type="button" (click)="toggleDescription()" id="openDescriptionBtn">Open Description</button>
         <div *ngIf="showDescription" class="form-group" id="descriptionContainer">
             <label for="commercialAwarenessDescription">Commercial Awareness</label>
             <textarea formControlName="commercialAwarenessDescription" class="form-control"></textarea>
