@@ -53,6 +53,19 @@ export class ModalService {
     })
   }
 
+  openAddBandModal(departmentId, aboveValue, belowValue, schoolId) {
+    return new Promise((resolve, reject) => {
+      const modalRef = this.modalService.open(AddBandComponent);
+      modalRef.componentInstance.schoolId = schoolId;
+      modalRef.componentInstance.abovePriorityVal = aboveValue;
+      modalRef.componentInstance.belowPriorityVal = belowValue;
+      modalRef.componentInstance.departmentId = departmentId;
+      modalRef.componentInstance.bandAdded.subscribe(data => {
+        resolve(data.data)
+      });
+    });
+  }
+
   async openEditRoleModal(roleId, capabilities, bands) {
     return new Promise((resolve, reject) => {
       this.dataService.getRole(roleId).then(response => {

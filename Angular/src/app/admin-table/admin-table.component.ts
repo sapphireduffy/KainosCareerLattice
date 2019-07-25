@@ -2,17 +2,24 @@ import { Component, OnInit } from "@angular/core";
 import { DataService } from "../services/data.service";
 import { ModalService } from '../services/modal.service';
 
+interface Role {
+  capability_id?: number
+  band_id?: number
+  RoleName?: string
+  role_id?: number
+}
+
 @Component({
   selector: "app-edit-roles",
   templateUrl: "./admin-table.component.html",
   styleUrls: ["./admin-table.component.css"]
 })
 export class AdminTableComponent implements OnInit {
-  departmentName: any;
+  departmentName: string;
   capabilities = [];
-  jobsInDep: any;
-  bands: any;
-  departmentId: any;
+  jobsInDep:  Role[];
+  bands: [];
+  departmentId: number;
   alertMessage: string;
   alertType: string;
   showAlert = false;
@@ -28,8 +35,8 @@ export class AdminTableComponent implements OnInit {
     this.loadRoles();
   }
 
-  async switchModal(selectedRole) {
-    if(selectedRole.ID == -1){
+  async switchModal(selectedRole): Promise<void> {
+    if(selectedRole.ID === -1){
       this.openAddModal(selectedRole.BandId, selectedRole.CapabilityId, this.departmentId)
     }
     else {
@@ -52,13 +59,25 @@ export class AdminTableComponent implements OnInit {
     })
   }
 
+  openCapabilityModal(){
+    this.modalService.openAddCapabilityModal(this.departmentId).then(data => {
+      this.displayAlert(data)
+    });
+  }
+
   openEditModal(roleId, capabilities, bands){
     this.modalService.openEditRoleModal(roleId, capabilities, bands).then(data => {
       this.displayAlert(data)
     });
   }
 
-  loadRoles() {
+  openAddBandModal(aboveValue, belowValue, schoolId) {
+    this.modalService.openAddBandModal(this.departmentId, aboveValue, belowValue, schoolId).then(data => {
+      this.displayAlert(data);
+    })
+  }
+
+  loadRoles(){
     this.dataService.getCapabilityNamesByDepartment(this.departmentId).then(response => {
       this.capabilities = response;
     });
@@ -78,14 +97,13 @@ export class AdminTableComponent implements OnInit {
 
   displayAlert(data){
     if(data.hasOwnProperty('success')){
-      this.showAlert = true;
       this.alertMessage = data.success;
       this.alertType = "success";
     } else {
-      this.showAlert = true;
       this.alertMessage = data.error;
       this.alertType = "danger";
     }
+    this.showAlert = true;
     this.loadRoles();
   }
 }
