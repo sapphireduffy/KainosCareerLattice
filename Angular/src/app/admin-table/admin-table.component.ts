@@ -107,7 +107,6 @@ export class AdminTableComponent implements OnInit {
   async openEditRoleModal(roleId) {
     await this.dataService.getEditRole(roleId).then(response => {
       const modalRef = this.modalService.open(EditRoleModalComponent);
-      console.log(response[0])
       modalRef.componentInstance.roleToEdit = response[0];
       modalRef.componentInstance.capabilities = this.capabilities;
       modalRef.componentInstance.bands = this.bands;
