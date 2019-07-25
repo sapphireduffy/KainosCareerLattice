@@ -102,6 +102,5 @@ editRole(params, db){
             }
         })
     }
-
 }
 export default new RolesHandler();
