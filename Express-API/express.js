@@ -53,10 +53,6 @@ app.post("/addcapability", cors(), function (request, response) {
   sendResponseData(capabilityHandler.createCapability(request.body, db), response)
 })
 
-app.get("/roles", cors(), function(request, response) {
-  sendResponseData(rolesHandler.getRolesInDept(request.query, db), response)
-})
-
 app.get("/capabilities", cors(), function(request, response) {
   sendResponseData(capabilityHandler.getCapabiltiies(request.query, db), response)
 })
