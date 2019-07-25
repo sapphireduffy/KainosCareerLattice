@@ -7,58 +7,27 @@ import axios from "axios";
 })
 export class HttphandlerService {
   headers = { "Content-Type": "application/json" };
+  axiosRequest: any;
 
   constructor() { }
 
-  getData(url, params){
-    return axios.get(url, { params: params, headers: this.headers })
-      .then(function (response) {
+  request(url, params, type){
+    switch(type.toLowerCase()){
+      case "get": this.axiosRequest = axios.get(url, {params: params, headers: this.headers}); break;
+      case "post": this.axiosRequest = axios.post(url, params, {headers: this.headers}); break;
+      case "delete": this.axiosRequest = axios.delete(url, {data: params, headers: this.headers}); break;
+      case "put": this.axiosRequest = axios.put(url, params, {headers: this.headers}); break;
+    }
+    return this.axiosRequest.then(
+      function (response) {
         return response.data;
       })
-      .catch(function (error) {
+      .catch(
+      function (error) {
         return {
           error: error.response.data.Message,
           statusCode: error.response.statusCode
-        };
-    });
-  }
-
-  postData(url, params){
-    return axios.post(url, params, { headers: this.headers })
-      .then(function (response) {
-        return response;
+        }
       })
-      .catch(function (error) {
-        return {
-          error: error.response.data.Message,
-          statusCode: error.response.statusCode
-        };
-      });
-  }
-
-  deleteData(url, data){
-    return axios.delete(url, { data: data, headers: this.headers })
-      .then(function(response) {
-        return response;
-      })
-      .catch(function(error) {
-        return {
-          error: error.response.data.Message,
-          statusCode: error.response.statusCode
-        };
-    });
-  }
-
-  putData(url, params){
-    return axios.put(url, params, { headers: this.headers })
-      .then(function (response) {
-        return response;
-      })
-      .catch(function (error) {
-        return {
-          error: error.response.data.Message,
-          statusCode: error.response.statusCode
-        };
-      });
   }
 }

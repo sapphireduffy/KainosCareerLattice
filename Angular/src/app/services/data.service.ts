@@ -21,50 +21,50 @@ export class DataService {
   constructor(private httpHandler : HttphandlerService) { }
 
   deleteRole(roleId: any) {
-    return this.httpHandler.deleteData(deleteRoleURL,{roleId:roleId})
+    return this.httpHandler.request(deleteRoleURL,{roleId:roleId}, "delete")
   }
 
   getDepartmentDetails(departmentID: number) {
-    return this.httpHandler.getData(departmentUrl, { departmentID: departmentID })
+    return this.httpHandler.request(departmentUrl, { departmentID: departmentID }, "get")
   }
 
   getCapabilityNamesByDepartment(departmentID: number) {
-    return this.httpHandler.getData(capabilityUrl, { departmentID: departmentID })
+    return this.httpHandler.request(capabilityUrl, { departmentID: departmentID }, "get")
   }
 
   getRolesInDepartment(departmentID: number) {
-    return this.httpHandler.getData(getRolesInDepartmentURL,{ departmentID: departmentID })
+    return this.httpHandler.request(getRolesInDepartmentURL,{ departmentID: departmentID }, "get")
   }
 
   getBands() {
-    return this.httpHandler.getData(getBandsURL, {})
+    return this.httpHandler.request(getBandsURL, {}, "get")
   }
 
   getBandInformation(bandId: number) {
-    return this.httpHandler.getData(getUniqueBandURL, { bandId: bandId })
+    return this.httpHandler.request(getUniqueBandURL, { bandId: bandId }, "get")
   }
 
   createCapability(param: any) {
-    return this.httpHandler.postData(addCapabilityURL, param)
+    return this.httpHandler.request(addCapabilityURL, param, "post")
   }
 
   editRole(param: any) {
-    return this.httpHandler.putData(editRoleUrl, param)
+    return this.httpHandler.request(editRoleUrl, param, "put")
   }
 
   getRole(roleID: number) {
-    return this.httpHandler.getData(getRoleUrl, { roleID: roleID })
+    return this.httpHandler.request(getRoleUrl, { roleID: roleID }, "get")
   }
 
   getRoleBandCapabilityExists(capabilityId: number, bandId: number) {
-    return this.httpHandler.getData(getRoleBandCapabilityExistsUrl, { capabilityId: capabilityId, bandId: bandId })
+    return this.httpHandler.request(getRoleBandCapabilityExistsUrl, { capabilityId: capabilityId, bandId: bandId }, "get")
   }
 
   createRole(param: any) {
-    return this.httpHandler.postData(addRoleUrl, param)
+    return this.httpHandler.request(addRoleUrl, param, "post")
   }
 
   login(param: any){
-    return this.httpHandler.postData(loginUrl, param)
+    return this.httpHandler.request(loginUrl, param, "post")
   }
 }
