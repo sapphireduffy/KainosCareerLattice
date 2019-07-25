@@ -29,10 +29,8 @@ class RolesHandler {
 
     deleteRole(params, db) {
         return new Promise((resolve, reject) => {
-                console.log("roleid" + [params.roleId])
             try {
                 db.query(deleterole, [params.roleId]).then(rows => {
-                    console.log(rows)
                     resolve({ "success": "Successfully deleting role" })
                 })
             } catch (err) {

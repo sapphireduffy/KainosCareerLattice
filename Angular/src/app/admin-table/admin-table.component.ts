@@ -1,11 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { DataService } from "../_services/data.service";
-import { RoleInformationComponent } from "../role-information/role-information.component";
-import { BandInformationComponent } from '../band-information/band-information.component';
-import { AddRoleModalComponent } from '../add-role-modal/add-role-modal.component';
-import { Router } from '@angular/router';
-import { EditRoleModalComponent } from '../edit-role-modal/edit-role-modal.component';
 import { ModalService } from '../modal.service';
+
+interface Role {
+  capability_id?: number
+  band_id?: number
+  RoleName?: string
+  role_id?: number
+}
 
 @Component({
   selector: "app-edit-roles",
@@ -13,11 +15,11 @@ import { ModalService } from '../modal.service';
   styleUrls: ["./admin-table.component.css"]
 })
 export class AdminTableComponent implements OnInit {
-  departmentName: any;
+  departmentName: string;
   capabilities = [];
-  jobsInDep: any;
-  bands: any;
-  departmentId: any;
+  jobsInDep:  Role[];
+  bands: [];
+  departmentId: number;
   alertMessage: string;
   alertType: string;
   showAlert = false;
@@ -33,8 +35,8 @@ export class AdminTableComponent implements OnInit {
     this.loadRoles();
   }
 
-  async switchModal(selectedRole) {
-    if(selectedRole.ID == -1){
+  async switchModal(selectedRole): Promise<void> {
+    if(selectedRole.ID === -1){
       this.openAddModal(selectedRole.BandId, selectedRole.CapabilityId, this.departmentId)
     }
     else {
@@ -83,14 +85,13 @@ export class AdminTableComponent implements OnInit {
 
   displayAlert(data){
     if(data.hasOwnProperty('success')){
-      this.showAlert = true;
       this.alertMessage = data.success;
       this.alertType = "success";
     } else {
-      this.showAlert = true;
       this.alertMessage = data.error;
       this.alertType = "danger";
     }
+    this.showAlert = true;
     this.loadRoles();
   }
 }
