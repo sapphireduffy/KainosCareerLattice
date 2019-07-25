@@ -104,4 +104,4 @@ editRole(params, db){
     }
 
 }
-module.exports = RolesHandler
+export default new RolesHandler();

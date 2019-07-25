@@ -184,7 +184,7 @@ export class DataService {
         if (error.response) {
           return {
             error: error.response.data.Message,
-            statsuCode: error.response.statusCode
+            statusCode: error.response.statusCode
           };
         } else {
           if (error.message) {

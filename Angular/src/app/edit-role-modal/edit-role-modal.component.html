@@ -26,7 +26,7 @@
          [ngClass]="{'is-invalid': submitted && formControls.roleSummary.errors}" required></textarea>
         <div *ngIf="submitted && formControls.roleSummary.errors" class="invalid-feedback">
           <div *ngIf="formControls.roleSummary.errors.maxlength">
-            Max characters reached for Role Summary
+            Role Summary should be no more than 1000 characters
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@
         [ngClass]="{'is-invalid': submitted && formControls.roleSharePointLink.errors}" required />
         <div *ngIf="submitted && formControls.roleSharePointLink.errors" class="invalid-feedback">
           <div *ngIf="formControls.roleSharePointLink.errors.maxlength">
-            Max characters reached for Role Sharepoint Link
+            Role Sharepoint Link should be more more than 500 characters
           </div>
         </div>
       </div>
