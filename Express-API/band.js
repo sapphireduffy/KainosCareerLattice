@@ -1,12 +1,12 @@
-const getBandQuery = "SELECT * FROM viewBandData WHERE band_id = ? order by school_id ASC, priority ASC"
-const allBandsQuery = "SELECT * FROM band order by school_id ASC, priority ASC"
+const getBandQuery = "SELECT * FROM viewBandData WHERE band_id = ? order by school_id ASC, priority_in_school ASC"
+const allBandsQuery = "SELECT * FROM band order by school_id ASC, priority_in_school ASC"
 const addBandDescriptionQuery = "INSERT INTO band_description(commercial_awareness,communicating_and_teamwork,"+
     "innovation_and_continuous_improvement,customer_focus,developing_yourself_and_others,planning_and_organising,"+
     "job_specific_knowledge) VALUES (?,?,?,?,?,?,?)"
-const addBandQuery = "INSERT INTO band(name,school_id,description_id,training,responsibilities,priority)"+
+const addBandQuery = "INSERT INTO band(name,school_id,description_id,training,responsibilities,priority_in_school)"+
     " VALUES(?,?,?,?,?,?)"
-const prepareBandTableQueryBelow = "update band set priority = priority + 1 where priority > ? AND school_id = ?;"
-const prepareBandTableQueryAbove = "update band set priority = priority + 1 where priority >= ? AND school_id = ?;"
+const prepareBandTableQueryBelow = "update band set priority_in_school = priority_in_school + 1 where priority_in_school > ? AND school_id = ?;"
+const prepareBandTableQueryAbove = "update band set priority_in_school = priority_in_school + 1 where priority_in_school >= ? AND school_id = ?;"
 
 class BandHandler {
     constructor( config ) { }
