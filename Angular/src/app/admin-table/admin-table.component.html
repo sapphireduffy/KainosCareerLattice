@@ -17,7 +17,7 @@
             <button class='btn btn-primary' id='addCapability' (click)="openCapabilityModal()">+ Add Capability</button>
           </div>
         </th>
-        <th scope="row" *ngFor='let capability of capabilities' class='job-headings'>{{capability.name}}</th>
+        <th scope="row" *ngFor='let capability of capabilities' class='job-headings' (click)="this.modalService.openBandInfoModal(capability.capability_id)">{{capability.name}}</th>
       </tr>
       <tr *ngFor="let band of bands">
         <td scope='row' [class.job-level-inspire]='band.band_id <= 3'

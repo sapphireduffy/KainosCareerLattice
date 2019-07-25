@@ -9,6 +9,7 @@ const addRoleUrl = "/api/addRole";
 const editRoleUrl = "/api/editRole";
 const getRoleUrl = "/api/getRole";
 const addCapabilityURL = "/api/addcapability";
+const getCapabilityURL = "/api/getCapability"
 const getUniqueBandURL = "/api/uniqueband";
 const getRoleBandCapabilityExistsUrl = "/api/roleBandCapabilityExists";
 const deleteRoleURL = "/api/deleteRole";
@@ -46,6 +47,10 @@ export class DataService {
 
   createCapability(param: any) {
     return this.httpHandler.request(addCapabilityURL, param, "post")
+  }
+
+  getCapability(capabilityID: number) {
+    return this.httpHandler.request(getCapabilityURL, { capabilityID: capabilityID }, "get")
   }
 
   editRole(param: any) {
