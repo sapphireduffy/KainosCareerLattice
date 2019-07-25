@@ -5,9 +5,6 @@ node_js:
 - 12.5.0
 addons:
   chrome: stable
-before_install:
-- echo $super_secret_password
-- google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 install:
 - cd Angular/
 - npm install
@@ -15,4 +12,7 @@ script:
 - ng test --watch=false --browsers=ChromeHeadless
 env:
   global:
-    secure: K/CdcS8AbSA3yU8xUEFOzhfTxY0xTUR4e3JmTGQvAm7l6ZFB1rAPULFM3Gn1+EFF1krGAJwLWRna982LwG8ZF/z1duG2SrTOpfaEVfe6M9kVAxN5PH1ZKxe31+YtUCrfKxRPoPOyWsYg0zPr98tAhlm0nJMWltZ83khkiPoqU+rJXpLyx4CxhQbxVBFpyMVfJfRIO3C8ARJprPAe5m+51zrbxtzXhjOutIkqbTvNvioKct1EZ/AuDKUlcOl9V87y0UaI580r/Ch0lNZHqk4A3hrbiu+Bp4Nz98rJjznc/Z1k1ZX9BCIvw2U8+pt+b9T5aGJKpGurBjToVyNZJXTLd3NsIyPtOtLEqwoiwjKNsFbiScGLY8tCEOy8xhcqZnOP3JRGljR+9tAxMkhEnpS9oDjY6HU6tt10R7aLYWNPDgQpw9Njxb1tWOXF2EfrHwrsyRgNL6FNvKnqfdo6nGPFAX0qJigHp/jhNQwHN9lPTRQEkkX8l1UFuQ6T/OIYfhEbC15Vwc7mEf4slYiJU3M74LX+UruaBi8hho4xjHQ4BU3G96PcCWnkMFpDs9ECQy54Z5Age+pnsw1f9J6gQOVIWzsLW1ALLaBIAf/OobAjA8kRNHtOTA90lcvoaGUKkCcl2fTYhmRLesxhIp9xF0Ca/eBZGRhn8rEut4k3/V8O8LE=
+    secure: K50VH2QOh7mAPg7HzzSYWnuhxRas7Tzu58okvBeuItq4rgO4QSIxyT86CjUDo1ZhvhvFlc9CNYMbopJK80idloqJQ9nXKL3BOY6J19UdGXTiVHmgTZ2tRqpjy1VIBApBCqc47ImjoDlIqONj7mO1auxJKa1h+5Jhlw//3JzHXAIGtsBvWP3wkDk68eKd0izTG+3NaMISKG+gQLwcs1FitTtESi+7kKXZG2igEkUg8s91UVAi37/kekSJtOjpDNrrpSWgBK2SjXpDsD9W9c13eN6AGz3YLVvTJl4ZHU7tWboWivVC1ayr4wCQ1lQxOZ0agNP6j1ViINMuikrPcGpsrbRel61HvspcgUO/XI+Zp4WBPuPaGlz3BErWrrly3yRTrlW7GdfcT/xB2EfZHJeP3uaVl7uqY/rQGZs26CZfAT1XU/1avAWD39+VdVFMUzGXMYz/Wtjwp0VCAxI1M3qsEkxHV2PWccm/d0B4vZUQSZvtFxPfuceZBQCi+kELvgfFc8vzhP1PqE5obkJmw4Fi1H604UyXhLlQFm3pob5GKJ91UCaeE6byJrbknYqU3wGjNBBAhNe8NWI9/QyMzTjdR8557ORqmN56I8SOaQ3J8cxxfs03oxnYk9kfQudMn5DNbKlupJIh7TZXeBmQYn/JDl7qQc3KRUTa3dvx+FGlgpo=
+before_install:
+- echo $super_secret_password
+- google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
