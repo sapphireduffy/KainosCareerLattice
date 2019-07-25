@@ -110,12 +110,11 @@ export class AdminTableComponent implements OnInit {
       modalRef.componentInstance.bands = this.bands;
       modalRef.componentInstance.roleEdited.subscribe(data => {
 
+        this.showAlert = true;
         if (data.data.hasOwnProperty('success')) {
-          this.showAlert = true;
           this.alertMessage = data.data.success;
           this.alertType = "success";
         } else {
-          this.showAlert = true;
           this.alertMessage = data.data.error;
           this.alertType = "danger";
         }
