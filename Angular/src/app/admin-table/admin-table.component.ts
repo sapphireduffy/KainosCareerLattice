@@ -1,11 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { DataService } from "../_services/data.service";
-import { RoleInformationComponent } from "../role-information/role-information.component";
-import { BandInformationComponent } from '../band-information/band-information.component';
-import { AddRoleModalComponent } from '../add-role-modal/add-role-modal.component';
-import { Router } from '@angular/router';
-import { EditRoleModalComponent } from '../edit-role-modal/edit-role-modal.component';
-import { ModalService } from '../modal.service';
+import { DataService } from "../services/data.service";
+import { ModalService } from '../services/modal.service';
 
 @Component({
   selector: "app-edit-roles",

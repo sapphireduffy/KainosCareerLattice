@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BandInformationComponent } from './band-information.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { MockObjects } from '../mock-objects';
+import { MockObjects } from '../services/mock-objects';
 
 describe('BandInformationComponent', () => {
   let component: BandInformationComponent;
