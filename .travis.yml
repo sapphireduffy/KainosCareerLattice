@@ -6,6 +6,7 @@ node_js:
 addons:
   chrome: stable
 before_install:
+- echo $super_secret_password
 - openssl aes-256-cbc -k "$super_secret_password" -in secrets.tar.enc -out secrets.tar -d
 - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost
   &
