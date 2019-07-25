@@ -37,10 +37,10 @@ CREATE TABLE band (
     band_id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
     school_id INT,
-    priority_in_school INT,
-    description_id INT UNIQUE NOT NULL,
+    description_id INT NOT NULL,
     training MEDIUMTEXT,
     responsibilities MEDIUMTEXT,
+    priority_in_school INT,
     FOREIGN KEY (school_id)
         REFERENCES school (school_id),
 	FOREIGN KEY (description_id)
@@ -103,7 +103,7 @@ ON band.band_id = role.band_id
 ORDER BY band.band_id ASC, capability.capability_id ASC;
 
 CREATE VIEW viewBandData AS
-SELECT band.band_id, band.priority_in_school, band.name, band.school_id, band.description_id, commercial_awareness, communicating_and_teamwork, innovation_and_continuous_improvement,
+SELECT band.band_id, band.priority_in_school, band.name, band.school_id, band.description_id,commercial_awareness, communicating_and_teamwork, innovation_and_continuous_improvement,
 customer_focus, developing_yourself_and_others, planning_and_organising, job_specific_knowledge
 FROM band JOIN  band_description ON band.description_id = band_description.description_id;
 
@@ -116,34 +116,6 @@ SELECT role.role_id, role.name AS 'RoleName', summary, job_spec_url, capability.
 band.band_id, band.name AS 'BandName'
 FROM role JOIN role_capability ON role.role_id = role_capability.role_id JOIN capability ON capability.capability_id = 
 role_capability.capability_id JOIN band ON band.band_id = role.band_id;
-
-DELIMITER //
-CREATE PROCEDURE insertBand(IN new_name VARCHAR(100), IN new_school_id INT, IN new_priority_in_school INT,
-                            IN comm_aware MEDIUMTEXT, IN comm_and_team MEDIUMTEXT, IN inno_and_improve MEDIUMTEXT, 
-                            IN cust_focus MEDIUMTEXT, IN development MEDIUMTEXT, IN plan_and_org MEDIUMTEXT, 
-                            IN job_know MEDIUMTEXT)
-BEGIN
-    DECLARE desc_id INTEGER;
-
-    -- add the band_description of the new band
-    INSERT INTO band_description(commercial_awareness, communicating_and_teamwork, 
-                                 innovation_and_continuous_improvement, customer_focus, 
-                                 developing_yourself_and_others, planning_and_organising, 
-                                 job_specific_knowledge)
-    VALUES(comm_aware, comm_and_team, inno_and_improve, cust_focus, development, plan_and_org, job_know);
-
-    -- get the new description_id
-    SELECT MAX(description_id) INTO desc_id FROM band_description;
-
-    -- increment the priority of the bands being moved 
-    UPDATE band SET band.priority_in_school = band.priority_in_school + 1
-    WHERE band.school_id = new_school_id AND band.priority_in_school >= new_priority_in_school;
-
-    -- add new band
-    INSERT INTO band(name, school_id, priority_in_school, description_id) 
-    VALUES (new_name, new_school_id, new_priority_in_school, desc_id);
-END;//
-DELIMITER ;
 
 -- ---------------------------------- INSERTS ---------------------------- --
 
@@ -195,9 +167,9 @@ INSERT INTO band_description (commercial_awareness, communicating_and_teamwork, 
 	customer_focus, developing_yourself_and_others, planning_and_organising, job_specific_knowledge)
 VALUES (null, null, null, null, null, null, null);
 
-INSERT INTO band (name, school_id, priority_in_school, description_id) -- All Bands
-VALUES ('Executive', 1, 1, 1), ('Leadership Executive', 1, 2, 2), ('Principal', 1, 3, 3), ('Manager', 2, 1, 4), 
-('Consultant', 2, 2, 5), ('Senior Associate', 2, 3, 6), ('Associate', 3, 1, 7), ('Trainee', 3, 2, 8), ('Apprentice', 3, 3, 9);
+INSERT INTO band (name, school_id, description_id, priority_in_school) -- All Bands
+VALUES ('Executive', 1, 1, 1), ('Leadership Executive', 1, 2, 2), ('Principal', 1, 3, 3), ('Manager', 2, 4, 1), ('Consultant', 2, 5, 2),
+('Senior Associate', 2, 6, 3), ('Associate', 3, 7, 1), ('Trainee', 3, 8, 2), ('Apprentice', 3, 9, 3);
 
 INSERT INTO role (name, department_id, band_id) -- Roles in the Sales & Marketing department
 VALUES ('Head of Business Unit', 1, 1), ('Head of Business Unit', 1, 1), ('Head of Business Unit', 1, 1), ('Head of Business Unit', 1, 1);
@@ -226,7 +198,7 @@ VALUES ('Lead Software Engineer', 2, 5, 'Expert in their field, is consulted by 
 ('Trainee Software Engineer', 2, 8, 'Graduate entry level, here to learn, but primarily to contribute to projects.', 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Shared%20Documents/Job%20Descriptions/Software%20Engineering/Job%20Specification%20-%20Software%20Engineer%20-%20Trainee.pdf?csf=1&e=5JqNE0'),
 ('Apprentice Software Engineer', 2, 9, 'Here primarily to learn; contributes to projects.', null);
 INSERT INTO role (name, department_id, band_id, summary, job_spec_url)
-VALUES ('Senior Security Architect', 2, 4, 'Serves the companys commercial and delivery interests, owns single initiatives or projects, advocates effective coaching and ensures that it happens.', 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Shared%20Documents/Job%20Descriptions/Cyber%20Security/Job%20Specification%20-%20Senior%20Security%20Architect%20-%20Manager.pdf?csf=1&e=DJdlxg'), 
+VALUES ('Senior Security Architect', 2, 4, 'Serves the company\'s commercial and delivery interests, owns single initiatives or projects, advocates effective coaching and ensures that it happens.', 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Shared%20Documents/Job%20Descriptions/Cyber%20Security/Job%20Specification%20-%20Senior%20Security%20Architect%20-%20Manager.pdf?csf=1&e=DJdlxg'), 
 ('Security Architect', 2, 5, 'Expert in their field, is consulted by others, supervises others, works well even if under pressure, effectively coaches people.', 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Shared%20Documents/Job%20Descriptions/Cyber%20Security/Job%20Specification%20-%20Security%20Architect%20-%20Consultant.pdf?csf=1&e=4T0KM0'), 
 ('Security Engineer', 2, 6, 'Works within teams to establish good security practices, supporting the design, development and testing of the service being delivered for both application and infrastructure. Is viewed as an authority figure for cyber security and will bring strong technical leadership including mentoring and coaching Kainos people, to strengthen our security capability across the organisation.', 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Shared%20Documents/Job%20Descriptions/Cyber%20Security/Job%20Specification%20-%20Senior%20Security%20Engineer%20-%20Senior%20Associate.pdf?csf=1&e=3XLX9o');
 INSERT INTO role (name, department_id, band_id, summary, job_spec_url) 

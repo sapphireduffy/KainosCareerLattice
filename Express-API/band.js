@@ -31,11 +31,10 @@ class BandHandler {
                 }
                 // Inserting a band below another band
                 else {
-                    console.log(params.belowValue)
                     // Prepare table for insertion and then insert the data
                     db.query(prepareBandTableQueryBelow, [params.belowValue, params.schoolId])
                     db.query(addBandQuery, [params.name, params.schoolId, rows.insertId,
-                    params.training, params.responsibilities, params.belowValue]).then(result => {
+                    params.training, params.responsibilities, params.belowValue+1]).then(result => {
                         resolve({"success":"Successfully added band"})
                     })
                 }

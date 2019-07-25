@@ -51,11 +51,11 @@
         formControlName="roleSharePointLink"
         maxlength="500"
         class="form-control"
-        [ngClass]="{'is-invalid': submitted}"
+        [ngClass]="{'is-invalid': submitted && formControls.roleSharePointLink.errors}"
         pattern="https://kainossoftwareltd.sharepoint.com/.+"
         required/>
       <div
-        *ngIf="submitted"
+        *ngIf="submitted && formControls.roleSharePointLink.errors"
         class="invalid-feedback">
         <div *ngIf="formControls.roleSharePointLink.errors?.required">
           Role Sharepoint link is a required field
