@@ -6,10 +6,8 @@ node_js:
 addons:
   chrome: stable
 before_install:
-- openssl aes-256-cbc -K $encrypted_c9b12307f510_key -iv $encrypted_c9b12307f510_iv
-  -in privateKey.js.enc -out privateKey.js -d
-- google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost
-  &
+- openssl aes-256-cbc -K $encrypted_c9b12307f510_key -iv $encrypted_c9b12307f510_iv -in secrets.tar.enc -out secrets.tar -d
+- google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 install:
 - cd Angular/
 - npm install

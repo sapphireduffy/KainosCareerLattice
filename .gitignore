@@ -4,6 +4,7 @@ privateKey.js
 config.json
 login.json
 secretFiles.zip
+secrets.tar
 
 /dist/
 /bazel-out
