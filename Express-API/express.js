@@ -16,13 +16,12 @@ const rolesHandler = new RolesHandler()
 const capabilityHandler = new CapabilityHandler()
 const bandHandler = new BandHandler()
 const departmentHandler = new DepartmentHandler()
+const tokenCookieName = "token"
 
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(express.urlencoded())
 //Parse JSON bodies (as sent by API clients)
 app.use(express.json())
-
-const tokenCookieName = "token"
 
 function sendResponseData(query, response){
   query.then(result => {
@@ -31,6 +30,14 @@ function sendResponseData(query, response){
     response.send(reject)
   })
 }
+
+app.delete('/deleteRole', cors(), function (request, response) {
+  sendResponseData(rolesHandler.deleteRole(request.body, db), response)
+});
+
+app.put('/editrole', cors(), function (request, response) {
+  sendResponseData(rolesHandler.editRole(request.body, db), response)
+})
 
 app.post("/addrole", cors(), function (request, response) {
 	sendResponseData(rolesHandler.createRole(request.body, db), response)
@@ -79,6 +86,14 @@ app.get("/role", cors(), function(request, response) {
 
 app.post("/addband", cors(), function (request, response) {
 	sendResponseData(bandHandler.addBand(request.body, db), response)
+})
+
+app.get("/viewEditRole", cors(), function (request, response) {
+  sendResponseData(rolesHandler.viewEditRole(request.query, db), response)
+})
+
+app.get("/roleBandCapabilityExists", cors(), function (request, response) {
+  sendResponseData(rolesHandler.roleBandCapabilityExists(request.query, db), response)
 })
 
 app.listen(PORT, () => {

@@ -2,7 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
-import { NgbModule, NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "./login/login.component";
@@ -16,11 +16,12 @@ import { LandingPageComponent } from "./landing-page/landing-page.component";
 import { RoleInformationComponent } from "./role-information/role-information.component";
 import { NavbarComponent } from './navbar/navbar.component';
 import { BandInformationComponent } from './band-information/band-information.component';
-import { AdminTableComponent } from './admin-table/admin-table.component';
 import { AddRoleModalComponent } from "./add-role-modal/add-role-modal.component";
-import { AddCapabilityComponent } from './add-capability/add-capability.component';
+import { EditRoleModalComponent } from './edit-role-modal/edit-role-modal.component';
 import { AdminAuthGuardComponent } from './admin-auth-guard/admin-auth-guard.component';
 import { AddBandComponent } from './add-band/add-band.component';
+import { AdminTableComponent } from './admin-table/admin-table.component';
+import { AddCapabilityComponent } from './add-capability/add-capability.component';
 
 @NgModule({
   declarations: [
@@ -31,10 +32,12 @@ import { AddBandComponent } from './add-band/add-band.component';
     NavbarComponent,
     RoleInformationComponent,
     BandInformationComponent,
-    AddCapabilityComponent,
-    AdminTableComponent,
     AddRoleModalComponent,
-    AddBandComponent
+    EditRoleModalComponent,
+    AddCapabilityComponent,
+    AddRoleModalComponent,
+    AddBandComponent,
+    AdminTableComponent
   ],
   bootstrap: [
     AppComponent
@@ -58,7 +61,9 @@ import { AddBandComponent } from './add-band/add-band.component';
     BandInformationComponent,
     AddRoleModalComponent,
     AddCapabilityComponent,
-    AddBandComponent
+    AddBandComponent,
+    EditRoleModalComponent,
+    AddCapabilityComponent
   ]
 })
 export class AppModule {}

@@ -1,62 +1,66 @@
 import { Component, OnInit } from "@angular/core";
 import { DataService } from "../_services/data.service";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { RoleInformationComponent } from "../role-information/role-information.component";
-import { BandInformationComponent } from '../band-information/band-information.component';
-import { AddRoleModalComponent } from '../add-role-modal/add-role-modal.component';
-import { Router } from '@angular/router';
-import { AddCapabilityComponent } from '../add-capability/add-capability.component';
 import { ModalService } from '../modal.service';
 
+interface Role {
+  capability_id?: number
+  band_id?: number
+  RoleName?: string
+  role_id?: number
+}
+
 @Component({
-  selector: "app-admin-table",
+  selector: "app-edit-roles",
   templateUrl: "./admin-table.component.html",
   styleUrls: ["./admin-table.component.css"]
 })
 export class AdminTableComponent implements OnInit {
-  departmentName: any;
+  departmentName: string;
   capabilities = [];
-  jobsInDep: any;
-  bands: any;
-  departmentId:any;
-  alertMessage:string;
-  alertType:string;
-  showAlert;
+  jobsInDep:  Role[];
+  bands: [];
+  departmentId: number;
+  alertMessage: string;
+  alertType: string;
+  showAlert = false;
 
   constructor(
     private dataService: DataService,
     private modalService: ModalService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.showAlert = false;
     var urlParams = new URLSearchParams(window.location.search);
     this.departmentId = parseInt(urlParams.get("id"));
     this.loadRoles();
   }
 
-  roleExists(cap, band) : Object {
-    for(var i = 0; i < this.jobsInDep.length; i++){
-      if(this.jobsInDep[i].capability_id == cap.capability_id && this.jobsInDep[i].band_id == band.band_id){
-        return {"Role":this.jobsInDep[i].RoleName, "ID":this.jobsInDep[i].role_id}
-      }
-    }
-    return {"Role":"+", "ID":-1, "BandId":band.band_id, "CapabilityId": cap.capability_id}
-  }
-
-  async switchModal(selectedRole) {
-    if(selectedRole.ID == -1){
-      this.modalService.openAddRoleModal(selectedRole.BandId, selectedRole.CapabilityId, this.departmentId).then(data => {
-        this.displayAlert(data)
-      })
+  async switchModal(selectedRole): Promise<void> {
+    if(selectedRole.ID === -1){
+      this.openAddModal(selectedRole.BandId, selectedRole.CapabilityId, this.departmentId)
     }
     else {
-      this.modalService.openRoleInfoModal(selectedRole.ID);
+      this.openEditModal(selectedRole.ID, this.capabilities, this.bands);
     }
   }
 
-  openCapabilityModal(){
-    this.modalService.openAddCapabilityModal(this.departmentId).then(data => {
+  roleExists(cap, band) {
+    for (var i = 0; i < this.jobsInDep.length; i++) {
+      if (this.jobsInDep[i].capability_id == cap.capability_id && this.jobsInDep[i].band_id == band.band_id) {
+        return { "Role": this.jobsInDep[i].RoleName, "ID": this.jobsInDep[i].role_id }
+      }
+    }
+    return { "Role": "+", "ID": -1, "BandId": band.band_id, "CapabilityId": cap.capability_id }
+  }
+
+  openAddModal(bandId, capabilityId, departmentId){
+    this.modalService.openAddRoleModal(bandId, capabilityId, departmentId).then(data => {
+      this.displayAlert(data)
+    })
+  }
+
+  openEditModal(roleId, capabilities, bands){
+    this.modalService.openEditRoleModal(roleId, capabilities, bands).then(data => {
       this.displayAlert(data)
     });
   }
@@ -71,12 +75,15 @@ export class AdminTableComponent implements OnInit {
     this.dataService.getCapabilityNamesByDepartment(this.departmentId).then(response => {
       this.capabilities = response;
     });
+
     this.dataService.getRolesInDepartment(this.departmentId).then(response => {
       this.jobsInDep = response;
     });
+
     this.dataService.getBands().then(response => {
       this.bands = response;
     });
+
     this.dataService.getDepartmentDetails(this.departmentId).then(response => {
       this.departmentName = response;
     });
@@ -84,15 +91,13 @@ export class AdminTableComponent implements OnInit {
 
   displayAlert(data){
     if(data.hasOwnProperty('success')){
-      this.showAlert = true;
       this.alertMessage = data.success;
       this.alertType = "success";
     } else {
-      this.showAlert = true;
       this.alertMessage = data.error;
       this.alertType = "danger";
     }
+    this.showAlert = true;
     this.loadRoles();
   }
-  
 }
