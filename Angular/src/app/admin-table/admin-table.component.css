@@ -30,6 +30,10 @@ table {
   color: white;
 }
 
+.job-level:hover .addBand {
+  display: block;
+}
+
 .job-level-inspire {
   background-color: #5c068c;
 }
@@ -50,10 +54,16 @@ table {
 }
 
 .addBand {
+  display: none;
+  margin: 0 auto;
   margin-top: 8px;
 }
 
 .addBandAbove {
-  margin: 0;
+  margin: 0 auto;
   margin-bottom: 8px;
+}
+
+p {
+  margin: 0.5em 0;
 }

@@ -17,6 +17,7 @@ export class AddBandComponent implements OnInit {
   @Input() departmentId;
   @Input() abovePriorityVal;
   @Input() belowPriorityVal;
+  @Input() schoolId;
   @Output() bandAdded = new EventEmitter();
   newBand: Band;
   public addBandForm: FormGroup;
@@ -33,7 +34,6 @@ export class AddBandComponent implements OnInit {
   ngOnInit() {
     this.addBandForm = this.formBuilder.group({
       bandName: ["", Validators.required],
-      schoolId: ["", Validators.required],
       commercialAwarenessDescription: ["", Validators.maxLength(DESCRIPTION_MAX_LEN)],
       communicatingAndTeamwork: ["", Validators.maxLength(DESCRIPTION_MAX_LEN)],
       innovationAndContinuousImprovement: ["", Validators.maxLength(DESCRIPTION_MAX_LEN)],
@@ -58,7 +58,7 @@ export class AddBandComponent implements OnInit {
     this.newBand = {
       departmentId: this.departmentId,
       name: this.addBandForm.get("bandName").value,
-      schoolId: +this.addBandForm.get("schoolId").value,
+      schoolId: +this.schoolId,
       commercialAwareness: this.addBandForm.get("commercialAwarenessDescription").value,
       communicatingAndTeamwork: this.addBandForm.get("communicatingAndTeamwork").value,
       innovationAndContinuousImprovement: this.addBandForm.get("innovationAndContinuousImprovement").value,

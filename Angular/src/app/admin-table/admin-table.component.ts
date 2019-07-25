@@ -61,8 +61,8 @@ export class AdminTableComponent implements OnInit {
     });
   }
 
-  openAddBandModal(aboveValue, belowValue) {
-    this.modalService.openAddBandModal(this.departmentId, aboveValue, belowValue).then(data => {
+  openAddBandModal(aboveValue, belowValue, schoolId) {
+    this.modalService.openAddBandModal(this.departmentId, aboveValue, belowValue, schoolId).then(data => {
       this.displayAlert(data);
     })
   }

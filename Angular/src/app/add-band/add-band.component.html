@@ -25,25 +25,6 @@
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="schoolId">School ID</label>
-            <select 
-            formControlName="schoolId"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && formControls.schoolId.errors }">
-                <option value="1" selected>Inspire</option>
-                <option value="2">Explore</option>
-                <option value="3">Discover</option>
-            </select>
-            <div
-                *ngIf="submitted"
-                class="invalid-feedback">
-                <div *ngIf="formControls.schoolId.errors?.required">
-                    School Name is a required field
-                </div>
-            </div>
-        </div>
-
         <nav (click)="toggleDescription()" id="openDescriptionBtn">Open Description</nav>
         <div *ngIf="showDescription" class="form-group" id="descriptionContainer">
             <label for="commercialAwarenessDescription">Commercial Awareness</label>

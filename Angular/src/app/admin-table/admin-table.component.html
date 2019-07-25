@@ -17,7 +17,7 @@
           </tr>
           <tr>
               <th class='job-family'>
-                <div class='container'>
+                <div>
                   <button class='btn btn-primary' id='addCapability' (click)="openCapabilityModal()">+ Add Capability</button>
                   <!-- <button class='btn btn-primary' id='addBand' (click)="openAddBandModal()">+ Add Band</button> -->
                 </div>
@@ -31,9 +31,9 @@
             [class.job-level-explore]='band.school_id == 2' 
             [class.job-level-discover]='band.school_id == 3' 
             class='job-level'>
-            <button class='btn btn-secondary addBandAbove' *ngIf="band.priority == 1" (click)="openAddBandModal(band.priority, null)">+ Add Above</button>
+            <button class='btn btn-secondary addBand addBandAbove' *ngIf="band.priority == 1" (click)="openAddBandModal(band.priority, null, band.school_id)">+ Add Above</button>
             <p (click)="this.modalService.openBandInfoModal(band.band_id)">{{band.name}}</p>
-            <button class='btn btn-secondary addBand' (click)="openAddBandModal(null, band.priority)">+ Add Below</button>
+            <button class='btn btn-secondary addBand' (click)="openAddBandModal(null, band.priority, band.school_id)">+ Add Below</button>
 
             </td>
             <td *ngFor="let cap of capabilities">
