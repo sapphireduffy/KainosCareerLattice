@@ -21,6 +21,7 @@ import { EditRoleModalComponent } from './edit-role-modal/edit-role-modal.compon
 import { AdminAuthGuardComponent } from './admin-auth-guard/admin-auth-guard.component';
 import { AdminTableComponent } from './admin-table/admin-table.component';
 import { AddCapabilityComponent } from './add-capability/add-capability.component';
+import { EditCapabilityModalComponent } from './edit-capability-modal/edit-capability-modal.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AddCapabilityComponent } from './add-capability/add-capability.componen
     AddRoleModalComponent,
     EditRoleModalComponent,
     AddCapabilityComponent,
-    AdminTableComponent
+    AdminTableComponent,
+    EditCapabilityModalComponent
   ],
   bootstrap: [
     AppComponent
