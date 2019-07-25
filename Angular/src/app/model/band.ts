@@ -1,4 +1,4 @@
-export class Band {
+export interface Band {
     departmentId: number;
     name: string;
     schoolId: number;

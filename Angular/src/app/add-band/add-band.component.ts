@@ -5,7 +5,7 @@ import { Band } from "../model/band";
 import { DataService } from "../_services/data.service";
 import { Observable } from 'rxjs';
 
-const DESCRIPTION_MAX_LEN = 16777215
+const DESCRIPTION_MAX_LEN = 1000
 
 @Component({
   selector: "app-add-band",
