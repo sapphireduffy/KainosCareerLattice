@@ -3,8 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { EditRoleModalComponent } from './edit-role-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { DataService } from '../_services/data.service';
-import { MockObjects } from '../mock-objects';
+import { DataService } from '../services/data.service';
+import { MockObjects } from '../services/mock-objects';
 
 describe('EditRoleModalComponent', () => {
   let component: EditRoleModalComponent;

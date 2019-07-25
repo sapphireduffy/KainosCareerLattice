@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { DataService } from "../_services/data.service";
-import { ModalService } from '../modal.service';
+import { DataService } from "../services/data.service";
+import { ModalService } from '../services/modal.service';
 
 @Component({
   selector: "app-career-table",

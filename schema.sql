@@ -106,13 +106,9 @@ SELECT band.band_id, band.name, band.school_id, band.description_id,commercial_a
 customer_focus, developing_yourself_and_others, planning_and_organising, job_specific_knowledge
 FROM band JOIN  band_description_id ON band.description_id = band_description_id.description_id;
 
-CREATE VIEW viewRoleData AS
-SELECT role_id, role.name, summary, job_spec_url, school_id 
-FROM role JOIN band ON role.band_id = band.band_id;
-
 CREATE VIEW viewEditRole AS
 SELECT role.role_id, role.name AS 'RoleName', summary, job_spec_url, capability.capability_id, capability.name AS 'CapabilityName', 
-band.band_id, band.name AS 'BandName'
+band.band_id, band.name AS 'BandName', band.school_id
 FROM role JOIN role_capability ON role.role_id = role_capability.role_id JOIN capability ON capability.capability_id = 
 role_capability.capability_id JOIN band ON band.band_id = role.band_id;
 
