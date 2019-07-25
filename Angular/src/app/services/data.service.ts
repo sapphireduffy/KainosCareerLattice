@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import axios from "axios";
+import { HttphandlerService } from './httphandler.service';
 
 const departmentUrl = "/api/departments";
 const capabilityUrl = "/api/capabilities";
@@ -12,111 +12,59 @@ const addCapabilityURL = "/api/addcapability";
 const getUniqueBandURL = "/api/uniqueband";
 const getRoleBandCapabilityExistsUrl = "/api/roleBandCapabilityExists";
 const deleteRoleURL = "/api/deleteRole";
+const loginUrl = "/api/login"
 
 @Injectable()
 export class DataService {
-  headers: any;
   public isAdmin: boolean
 
-  constructor() { }
-
-  getHeaders() {
-    return (this.headers = { "Content-Type": "application/json" });
-  }
-
-  getData(url, params){
-    return axios.get(url, { params: params, headers: this.getHeaders() })
-      .then(function (response) {
-        return response.data;
-      })
-      .catch(function (error) {
-        return {
-          error: error.response.data.Message,
-          statusCode: error.response.statusCode
-        };
-    });
-  }
-
-  postData(url, params){
-    return axios.post(url, params, { headers: this.getHeaders() })
-      .then(function (response) {
-        return response;
-      })
-      .catch(function (error) {
-        return {
-          error: error.response.data.Message,
-          statusCode: error.response.statusCode
-        };
-      });
-  }
-
-  deleteData(url, data){
-    return axios.delete(url, { data: data, headers: this.getHeaders() })
-      .then(function(response) {
-        return response;
-      })
-      .catch(function(error) {
-        return {
-          error: error.response.data.Message,
-          statusCode: error.response.statusCode
-        };
-    });
-  }
-
-  putData(url, params){
-    return axios.put(url, params, { headers: this.getHeaders() })
-      .then(function (response) {
-        return response;
-      })
-      .catch(function (error) {
-        return {
-          error: error.response.data.Message,
-          statusCode: error.response.statusCode
-        };
-      });
-  }
+  constructor(private httpHandler : HttphandlerService) { }
 
   deleteRole(roleId: any) {
-    return this.deleteData(deleteRoleURL,{roleId:roleId})
+    return this.httpHandler.deleteData(deleteRoleURL,{roleId:roleId})
   }
 
   getDepartmentDetails(departmentID: number) {
-    return this.getData(departmentUrl, { departmentID: departmentID })
+    return this.httpHandler.getData(departmentUrl, { departmentID: departmentID })
   }
 
   getCapabilityNamesByDepartment(departmentID: number) {
-    return this.getData(capabilityUrl, { departmentID: departmentID })
+    return this.httpHandler.getData(capabilityUrl, { departmentID: departmentID })
   }
 
   getRolesInDepartment(departmentID: number) {
-    return this.getData(getRolesInDepartmentURL,{ departmentID: departmentID })
+    return this.httpHandler.getData(getRolesInDepartmentURL,{ departmentID: departmentID })
   }
 
   getBands() {
-    return this.getData(getBandsURL, {})
+    return this.httpHandler.getData(getBandsURL, {})
   }
 
   getBandInformation(bandId: number) {
-    return this.getData(getUniqueBandURL, { bandId: bandId })
+    return this.httpHandler.getData(getUniqueBandURL, { bandId: bandId })
   }
 
   createCapability(param: any) {
-    return this.postData(addCapabilityURL, param)
+    return this.httpHandler.postData(addCapabilityURL, param)
   }
 
   editRole(param: any) {
-    return this.putData(editRoleUrl, param)
+    return this.httpHandler.putData(editRoleUrl, param)
   }
 
   getRole(roleID: number) {
-    return this.getData(getRoleUrl, { roleID: roleID })
+    return this.httpHandler.getData(getRoleUrl, { roleID: roleID })
   }
 
   getRoleBandCapabilityExists(capabilityId: number, bandId: number) {
-    return this.getData(getRoleBandCapabilityExistsUrl, { capabilityId: capabilityId, bandId: bandId })
+    return this.httpHandler.getData(getRoleBandCapabilityExistsUrl, { capabilityId: capabilityId, bandId: bandId })
   }
 
   createRole(param: any) {
-    return this.postData(addRoleUrl, param)
+    return this.httpHandler.postData(addRoleUrl, param)
+  }
+
+  login(param: any){
+    return this.httpHandler.postData(loginUrl, param)
   }
 }
