@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { DataService } from "../_services/data.service";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { RoleInformationComponent } from "../role-information/role-information.component";
 import { BandInformationComponent } from '../band-information/band-information.component';
 import { AddRoleModalComponent } from '../add-role-modal/add-role-modal.component';
 import { Router } from '@angular/router';
 import { EditRoleModalComponent } from '../edit-role-modal/edit-role-modal.component';
+import { ModalService } from '../modal.service';
 
 @Component({
   selector: "app-edit-roles",
@@ -17,21 +17,29 @@ export class AdminTableComponent implements OnInit {
   capabilities = [];
   jobsInDep: any;
   bands: any;
-  id: any;
+  departmentId: any;
   alertMessage: string;
   alertType: string;
   showAlert = false;
 
   constructor(
     private dataService: DataService,
-    private modalService: NgbModal,
-    private router: Router
+    private modalService: ModalService,
   ) { }
 
   ngOnInit(): void {
     var urlParams = new URLSearchParams(window.location.search);
-    this.id = parseInt(urlParams.get("id"));
+    this.departmentId = parseInt(urlParams.get("id"));
     this.loadRoles();
+  }
+
+  async switchModal(selectedRole) {
+    if(selectedRole.ID == -1){
+      this.openAddModal(selectedRole.BandId, selectedRole.CapabilityId, this.departmentId)
+    }
+    else {
+      this.openEditModal(selectedRole.ID, this.capabilities, this.bands);
+    }
   }
 
   roleExists(cap, band) {
@@ -40,38 +48,27 @@ export class AdminTableComponent implements OnInit {
         return { "Role": this.jobsInDep[i].RoleName, "ID": this.jobsInDep[i].role_id }
       }
     }
-
-    return { "Role": "Add new role", "ID": -1, "BandId": band.band_id, "CapabilityId": cap.capability_id }
+    return { "Role": "+", "ID": -1, "BandId": band.band_id, "CapabilityId": cap.capability_id }
   }
 
-  async switchModal(selectedRole) {
-    if (selectedRole.ID == -1) {
-      this.openAddRoleModal(selectedRole.BandId, selectedRole.CapabilityId);
-    } else {
-      this.openEditRoleModal(selectedRole.ID);
-    }
+  openAddModal(bandId, capabilityId, departmentId){
+    this.modalService.openAddRoleModal(bandId, capabilityId, departmentId).then(data => {
+      this.displayAlert(data)
+    })
   }
 
-  async openRoleInfoModal(selectedRoleId) {
-    await this.dataService.getRoleInformation(selectedRoleId).then(response => {
-      const modalRef = this.modalService.open(RoleInformationComponent);
-      modalRef.componentInstance.roleToDisplay = response[0];
-    });
-  }
-
-  async openBandInfoModal(selectedBandId) {
-    await this.dataService.getBandInformation(selectedBandId).then(response => {
-      const modalRef = this.modalService.open(BandInformationComponent);
-      modalRef.componentInstance.bandToDisplay = response[0];
+  openEditModal(roleId, capabilities, bands){
+    this.modalService.openEditRoleModal(roleId, capabilities, bands).then(data => {
+      this.displayAlert(data)
     });
   }
 
   loadRoles() {
-    this.dataService.getCapabilityNamesByDepartment(this.id).then(response => {
+    this.dataService.getCapabilityNamesByDepartment(this.departmentId).then(response => {
       this.capabilities = response;
     });
 
-    this.dataService.getRolesInDepartment(this.id).then(response => {
+    this.dataService.getRolesInDepartment(this.departmentId).then(response => {
       this.jobsInDep = response;
     });
 
@@ -79,47 +76,21 @@ export class AdminTableComponent implements OnInit {
       this.bands = response;
     });
 
-    this.dataService.getDepartmentDetails(this.id).then(response => {
+    this.dataService.getDepartmentDetails(this.departmentId).then(response => {
       this.departmentName = response;
     });
   }
 
-  openAddRoleModal(roleBandId, roleCapabilityId) {
-    const modalRef = this.modalService.open(AddRoleModalComponent);
-    modalRef.componentInstance.departmentId = this.id;
-    modalRef.componentInstance.bandId = roleBandId;
-    modalRef.componentInstance.capabilityId = roleCapabilityId;
-    modalRef.componentInstance.roleAdded.subscribe(data => {
-    this.showAlert = true;
-      if (data.data.hasOwnProperty('success')) {
-        this.alertMessage = data.data.success;
-        this.alertType = "success";
-      } else {
-        this.alertMessage = data.data.error;
-        this.alertType = "danger";
-      }
-      this.loadRoles();
-    });
-  }
-
-  async openEditRoleModal(roleId) {
-    await this.dataService.getEditRole(roleId).then(response => {
-      const modalRef = this.modalService.open(EditRoleModalComponent);
-      modalRef.componentInstance.roleToEdit = response[0];
-      modalRef.componentInstance.capabilities = this.capabilities;
-      modalRef.componentInstance.bands = this.bands;
-      modalRef.componentInstance.roleEdited.subscribe(data => {
-
-        this.showAlert = true;
-        if (data.data.hasOwnProperty('success')) {
-          this.alertMessage = data.data.success;
-          this.alertType = "success";
-        } else {
-          this.alertMessage = data.data.error;
-          this.alertType = "danger";
-        }
-        this.loadRoles();
-      });
-    });
+  displayAlert(data){
+    if(data.hasOwnProperty('success')){
+      this.showAlert = true;
+      this.alertMessage = data.success;
+      this.alertType = "success";
+    } else {
+      this.showAlert = true;
+      this.alertMessage = data.error;
+      this.alertType = "danger";
+    }
+    this.loadRoles();
   }
 }

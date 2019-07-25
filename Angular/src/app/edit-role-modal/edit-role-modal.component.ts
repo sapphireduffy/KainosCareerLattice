@@ -93,5 +93,15 @@ export class EditRoleModalComponent implements OnInit {
           this.roleEdited.emit(error);
         });
       this.closeModal();
-    }
   }
+
+  deleteRole() {
+    if (confirm("Are you sure you want to delete this role ")) {
+      this.dataService.deleteRole(this.roleToEdit.role_id).then(response => {
+        console.log(response)
+        this.roleEdited.emit(response);
+      })
+    }
+    this.closeModal();
+  }
+}
