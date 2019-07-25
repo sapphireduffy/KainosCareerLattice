@@ -31,6 +31,7 @@ class RolesHandler {
     editRole(params, db){
         return new Promise( ( resolve, reject ) => {
             try {
+                console.log(params.roleName)
                 db.query(editRoleTableQuery,[params.roleName,params.summary,params.jobSpecUrl, params.bandId, params.roleId]).then(rows => {
                     db.query(editRoleCapabilityTableQuery, [params.capabilityId, params.roleId]).then(success => {
                         resolve({"success":"Successfully edited role"})

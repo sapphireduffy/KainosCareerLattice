@@ -23,8 +23,6 @@ app.use(express.urlencoded())
 //Parse JSON bodies (as sent by API clients)
 app.use(express.json())
 
-const tokenCookieName = "token"
-
 function sendResponseData(query, response){
   query.then(result => {
     response.send(result)
@@ -33,16 +31,8 @@ function sendResponseData(query, response){
   })
 }
 
-app.delete('/deleteRole', cors(), function (request, response) {
-  console.log(request.body)
-  rolesHandler.deleteRole(request.body, db).then(result => {
-    console.log(result)
-    response.send(result)
-  }, reject => {
-    response.send(reject)
-  })
-});
 app.put('/editrole', cors(), function (request, response) {
+  console.log(request.body)
   sendResponseData(rolesHandler.editRole(request.body, db), response)
 })
 
@@ -100,9 +90,22 @@ app.get("/viewEditRole", cors(), function (request, response) {
 })
 
 app.get("/roleBandCapabilityExists", cors(), function (request, response) {
+  console.log("abc")
   sendResponseData(rolesHandler.roleBandCapabilityExists(request.query, db), response)
 })
+
+app.delete('/deleteRole', cors(), function (request, response) {
+  console.log(request.body)
+  rolesHandler.deleteRole(request.body, db).then(result => {
+    console.log(result)
+    response.send(result)
+  }, reject => {
+    response.send(reject)
+  })
+});
 
 app.listen(PORT, () => {
   console.log("Server is running on PORT:", PORT)
 })
+
+

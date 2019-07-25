@@ -1,13 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { DataService } from "../_services/data.service";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { RoleInformationComponent } from "../role-information/role-information.component";
-import { BandInformationComponent } from '../band-information/band-information.component';
-import { AddRoleModalComponent } from '../add-role-modal/add-role-modal.component';
-import { Router } from '@angular/router';
-import { AddCapabilityComponent } from '../add-capability/add-capability.component';
 import { ModalService } from '../modal.service';
-import { EditRoleModalComponent } from '../edit-role-modal/edit-role-modal.component';
 
 @Component({
   selector: "app-edit-roles",
@@ -27,8 +20,7 @@ export class AdminTableComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private modalService: ModalService,
-    private router: Router
+    private modalService: ModalService
   ) { }
 
   ngOnInit(): void {

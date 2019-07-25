@@ -14,7 +14,6 @@ const getUniqueBandURL = "/api/uniqueband";
 const getRoleBandCapabilityExistsUrl = "/api/roleBandCapabilityExists";
 const deleteRoleURL = "/api/deleteRole";
 
-
 @Injectable()
 export class DataService {
   headers: any;
@@ -179,38 +178,7 @@ export class DataService {
   createCapability(param: any) {
     return axios
       .post(addCapabilityURL, param, { headers: this.getHeaders() })
-      .then(function(response) {
-        return response;
-      })
-      .catch(function (error) {
-        if (error.response) {
-          return {
-            error: error.response.data.Message,
-            statsuCode: error.response.statusCode
-          };
-        } else {
-          if (error.message) {
-            return { error: error.message };
-          }
-        }
-      });
-  }
-
-  createRole(param: any) {
-    return axios
-      .post(addRoleUrl, param, { headers: this.getHeaders() })
-      .then(function(response) {
-        return response;
-      })
-      .catch(function(error) {
-        return { error: error.message };
-      });
-  }
-
-  editRole(param: any) {
-    return axios
-      .put(editRoleUrl, param, { headers: this.getHeaders() })
-      .then(function(response) {
+      .then(function (response) {
         return response;
       })
       .catch(function (error) {
@@ -227,15 +195,15 @@ export class DataService {
       });
   }
 
-  deleteRole(roleId: any) {
+  editRole(param: any) {
+    console.log(param)
     return axios
-      .delete(deleteRoleURL, { 
-        data:{roleId:roleId},
-        headers: this.getHeaders() })
-      .then(function(response) {
+      .put(editRoleUrl, param, { headers: this.getHeaders() })
+      .then(function (response) {
         return response;
       })
-      .catch(function(error) {
+      .catch(function (error) {
+        console.log(error)
         if (error.response) {
           return {
             error: error.response.data.Message,
@@ -299,4 +267,38 @@ export class DataService {
         }
       });
   }
+
+  createRole(param: any) {
+    return axios
+      .post(addRoleUrl, param, { headers: this.getHeaders() })
+      .then(function (response) {
+        return response;
+      })
+      .catch(function (error) {
+        return { error: error.message };
+      });
+  }
+
+  deleteRole(roleId: any) {
+    return axios
+      .delete(deleteRoleURL, { 
+        data:{roleId:roleId},
+        headers: this.getHeaders() })
+      .then(function(response) {
+        return response;
+      })
+      .catch(function(error) {
+        if (error.response) {
+          return {
+            error: error.response.data.Message,
+            statusCode: error.response.statusCode
+          };
+        } else {
+          if (error.message) {
+            return { error: error.message };
+          }
+        }
+      });
+  }
+
 }
