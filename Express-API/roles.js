@@ -26,21 +26,21 @@ class RolesHandler {
         })
     }
 
-
-editRole(params, db){
-    return new Promise( ( resolve, reject ) => {
-        try {
-            db.query(editRoleTableQuery,[params.roleName,params.summary,params.jobSpecUrl, params.bandId, params.roleId]).then(rows => {
-                db.query(editRoleCapabilityTableQuery, [params.capabilityId, params.roleId]).then(result => {
-                    resolve({"success":"Successfully edited role"})
-                    reject({"error":"Error editing role inner"})
+    editRole(params, db){
+        return new Promise( ( resolve, reject ) => {
+            try {
+                db.query(editRoleTableQuery,[params.roleName,params.summary,params.jobSpecUrl, params.bandId, params.roleId]).then(rows => {
+                    db.query(editRoleCapabilityTableQuery, [params.capabilityId, params.roleId]).then(success => {
+                        resolve({"success":"Successfully edited role"})
+                    }, fail => {
+                        reject({"error":"Error editing role inner"})
+                    })
                 })
-            })
-        } catch (err){
-            reject({"error":"Error editing role"})
-        }
-    })
-}
+            } catch (err){
+                reject({"error":"Error editing role"})
+            }
+        })
+    }
 
 
     getRolesInDept(params, db){
@@ -103,4 +103,4 @@ editRole(params, db){
         })
     }
 }
-export default new RolesHandler();
+module.exports = RolesHandler
