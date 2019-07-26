@@ -4,47 +4,38 @@
 <div class='container'>
   <ngb-alert *ngIf="showAlert" type="{{alertType}}" (close)="showAlert = false">{{alertMessage}}</ngb-alert>
   <table class='table'>
-      <ng-container>
-          <tr role='row'>
-              <th
-              class="job-family"
-              scope="col"
-              [attr.colspan]="capabilities.length + 1"
-              rowspan="1"
-              *ngFor="let department of departmentName">
-              {{ department.name }}
-              </th>
-          </tr>
-          <tr>
-              <th class='job-family'>
-                <div>
-                  <button class='btn btn-primary' id='addCapability' (click)="openCapabilityModal()">+ Add Capability</button>
-                </div>
-              </th>
-              <th scope="row" *ngFor='let capability of capabilities' class='job-headings'(click)="openEditCapabilityModal(capability.capability_id)" >{{capability.name}}</th>
-          </tr>
-          <tr *ngFor="let band of bands; let i = index">
-            <td 
-            scope='row' 
-            [class.job-level-inspire]='band.school_id == 1' 
-            [class.job-level-explore]='band.school_id == 2' 
-            [class.job-level-discover]='band.school_id == 3' 
-            class='job-level'>
-            <button class='btn btn-secondary addBand addBandAbove' *ngIf="band.priority_in_school == 1" (click)="openAddBandModal(band.priority_in_school, null, band.school_id)">+ Add Above</button>
-            <p (click)="this.modalService.openBandInfoModal(band.band_id)">{{band.name}}</p>
-            <button class='btn btn-secondary addBand' (click)="openAddBandModal(null, band.priority_in_school, band.school_id)">+ Add Below</button>
-
-            </td>
-            <td *ngFor="let cap of capabilities">
-                <button 
-                scope='row' 
-                (click)="switchModal(roleExists(cap, band))" 
-                class='role-clickable'
-                [ngClass]="{'btn-success': this.roleExists(cap, band).Role == '+'}">
-                {{roleExists(cap, band).Role}}
-                </button>
-            </td>
-          </tr>
-      </ng-container>
+    <ng-container>
+      <tr role='row'>
+        <th class="job-family" scope="col" [attr.colspan]="capabilities.length + 1" rowspan="1"
+          *ngFor="let department of departmentName">
+          {{ department.name }}
+        </th>
+      </tr>
+      <tr>
+        <th class='job-family'>
+          <div>
+            <button class='btn btn-primary' id='addCapability' (click)="openCapabilityModal()">+ Add Capability</button>
+          </div>
+        </th>
+        <th scope="row" *ngFor='let capability of capabilities' class='job-headings role-clickable'
+          (click)="openEditCapabilityModal(capability.capability_id)">{{capability.name}}</th>
+      </tr>
+      <tr *ngFor="let band of bands; let i = index">
+        <td scope='row' [class.job-level-inspire]='band.school_id == 1' [class.job-level-explore]='band.school_id == 2'
+          [class.job-level-discover]='band.school_id == 3' class='job-level'>
+          <button class='btn btn-secondary addBand addBandAbove' *ngIf="band.priority_in_school == 1"
+            (click)="openAddBandModal(band.priority_in_school, null, band.school_id)">+ Add Above</button>
+          <p class="role-clickable" (click)="this.openEditBandModal(band)">{{band.name}}</p>
+          <button class='btn btn-secondary addBand'
+            (click)="openAddBandModal(null, band.priority_in_school, band.school_id)">+ Add Below</button>
+        </td>
+        <td *ngFor="let cap of capabilities">
+          <button scope='row' (click)="switchModal(roleExists(cap, band))" class='role-clickable'
+            [ngClass]="{'btn-success': this.roleExists(cap, band).Role == '+'}">
+            {{roleExists(cap, band).Role}}
+          </button>
+        </td>
+      </tr>
+    </ng-container>
   </table>
 </div>

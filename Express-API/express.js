@@ -23,7 +23,7 @@ app.use(express.urlencoded())
 //Parse JSON bodies (as sent by API clients)
 app.use(express.json())
 
-function sendResponseData(query, response){
+function sendResponseData(query, response) {
   query.then(result => {
     response.send(result)
   }, reject => {
@@ -40,18 +40,18 @@ app.put('/editrole', cors(), function (request, response) {
 })
 
 app.post("/addrole", cors(), function (request, response) {
-	sendResponseData(rolesHandler.createRole(request.body, db), response)
+  sendResponseData(rolesHandler.createRole(request.body, db), response)
 })
 
 app.post("/addcapability", cors(), function (request, response) {
   sendResponseData(capabilityHandler.createCapability(request.body, db), response)
 })
 
-app.get("/capabilities", cors(), function(request, response) {
+app.get("/capabilities", cors(), function (request, response) {
   sendResponseData(capabilityHandler.getCapabilties(request.query, db), response)
 })
 
-app.get("/getCapability", cors(), function(request, response) {
+app.get("/getCapability", cors(), function (request, response) {
   sendResponseData(capabilityHandler.getCapability(request.query, db), response)
 })
 
@@ -63,45 +63,45 @@ app.get("/capabilityExists", cors(), function (request, response) {
   sendResponseData(capabilityHandler.capabilityExists(request.query, db), response)
 })
 
-app.get("/getcapability", cors(), function(request, response) {
+app.get("/getcapability", cors(), function (request, response) {
   sendResponseData(capabilityHandler.getCapability(request.query, db), response)
 })
 
-app.get("/getEditCapability", cors(), function(request, response) {
+app.get("/getEditCapability", cors(), function (request, response) {
   sendResponseData(capabilityHandler.getEditCapability(request.query, db), response)
 })
 
-app.get("/uniqueband", cors(), function(request, response) {
+app.get("/uniqueband", cors(), function (request, response) {
   sendResponseData(bandHandler.getBands(request.query, db), response)
 })
 
-app.get("/departments", cors(), function(request, response) {
+app.get("/departments", cors(), function (request, response) {
   sendResponseData(departmentHandler.getDepartments(request.query, db), response)
 })
 
-app.get("/allDepartments", cors(), function(request, response) {
+app.get("/allDepartments", cors(), function (request, response) {
   sendResponseData(departmentHandler.getAllDepartments(db), response)
 })
 
-app.get("/rolesInDep", cors(), function(request, response) {
+app.get("/rolesInDep", cors(), function (request, response) {
   sendResponseData(rolesHandler.getFullRole(request.query, db), response)
 })
 
-app.get("/bands", cors(), function(request, response) {
+app.get("/bands", cors(), function (request, response) {
   sendResponseData(bandHandler.allBands(db), response)
 })
 
 app.post("/login", cors(), function (request, response) {
-	loginHandler.login(request.body, db).then(token => {
-    response.cookie(tokenCookieName,token)
-		response.send({tokenCookieName:token})
-	}, reason => {
-		response.send(reason)
-	})
+  loginHandler.login(request.body, db).then(token => {
+    response.cookie(tokenCookieName, token)
+    response.send({ tokenCookieName: token })
+  }, reason => {
+    response.send(reason)
+  })
 })
 
 app.post("/addband", cors(), function (request, response) {
-	sendResponseData(bandHandler.addBand(request.body, db), response)
+  sendResponseData(bandHandler.addBand(request.body, db), response)
 })
 
 app.get("/getRole", cors(), function (request, response) {
@@ -110,6 +110,10 @@ app.get("/getRole", cors(), function (request, response) {
 
 app.get("/roleBandCapabilityExists", cors(), function (request, response) {
   sendResponseData(rolesHandler.roleBandCapabilityExists(request.query, db), response)
+})
+
+app.put("/editBand", cors(), function (request, response) {
+  sendResponseData(bandHandler.editBand(request.body, db), response)
 })
 
 app.listen(PORT, () => {

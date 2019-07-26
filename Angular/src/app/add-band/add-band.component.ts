@@ -27,7 +27,7 @@ export class AddBandComponent implements OnInit {
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
     private dataService: DataService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.addBandForm = this.formBuilder.group({
@@ -78,8 +78,6 @@ export class AddBandComponent implements OnInit {
     }
     this.setNewBand();
 
-    console.log(this.newBand);
-
     this.dataService
       .createBand(this.newBand)
       .then(result => this.bandAdded.emit(result))
@@ -89,7 +87,7 @@ export class AddBandComponent implements OnInit {
     this.closeModal();
   }
 
-  toggleDescription(){
-    this.showDescription  = !this.showDescription;
+  toggleDescription() {
+    this.showDescription = !this.showDescription;
   }
 }

@@ -19,6 +19,7 @@ const getUniqueBandURL = "/api/uniqueband";
 const getRoleBandCapabilityExistsUrl = "/api/roleBandCapabilityExists";
 const deleteRoleURL = "/api/deleteRole";
 const loginUrl = "/api/login"
+const editBandUrl = "/api/editBand";
 const addBandURL = "/api/addband"
 
  
@@ -26,10 +27,10 @@ const addBandURL = "/api/addband"
 export class DataService {
   public isAdmin: boolean
 
-  constructor(private httpHandler : HttphandlerService) { }
+  constructor(private httpHandler: HttphandlerService) { }
 
   deleteRole(roleId: any) {
-    return this.httpHandler.request(deleteRoleURL,{roleId:roleId}, "delete")
+    return this.httpHandler.request(deleteRoleURL, { roleId: roleId }, "delete")
   }
 
   getDepartmentDetails(departmentID: number) {
@@ -44,12 +45,12 @@ export class DataService {
     return this.httpHandler.request(capabilityUrl, { departmentID: departmentID }, "get")
   }
 
-  getCapabilityDetails(capabilityId: number){
+  getCapabilityDetails(capabilityId: number) {
     return this.httpHandler.request(getCapabilityUrl, { capabilityId: capabilityId }, "get")
   }
 
   getRolesInDepartment(departmentID: number) {
-    return this.httpHandler.request(getRolesInDepartmentURL,{ departmentID: departmentID }, "get")
+    return this.httpHandler.request(getRolesInDepartmentURL, { departmentID: departmentID }, "get")
   }
 
   getBands() {
@@ -97,8 +98,13 @@ export class DataService {
     return this.httpHandler.request(addRoleUrl, param, "post")
   }
 
-  login(param: any){
+  login(param: any) {
     return this.httpHandler.request(loginUrl, param, "post")
+  }
+
+  editBand(param: any) {
+    console.log(param)
+    return this.httpHandler.request(editBandUrl, param, "put")
   }
 
   createBand(param: any) {
