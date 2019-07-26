@@ -35,7 +35,6 @@ export class DataService {
   }
 
   getCapabilityDetails(capabilityId: number){
-    console.log(getCapabilityUrl, capabilityId)
     return this.httpHandler.request(getCapabilityUrl, { capabilityId: capabilityId }, "get")
   }
 
