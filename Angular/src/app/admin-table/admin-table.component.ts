@@ -17,7 +17,7 @@ interface Role {
 export class AdminTableComponent implements OnInit {
   departmentName: string;
   capabilities = [];
-  jobsInDep:  Role[];
+  jobsInDep: Role[];
   bands: [];
   departmentId: number;
   alertMessage: string;
@@ -36,7 +36,7 @@ export class AdminTableComponent implements OnInit {
   }
 
   async switchModal(selectedRole): Promise<void> {
-    if(selectedRole.ID === -1){
+    if (selectedRole.ID === -1) {
       this.openAddModal(selectedRole.BandId, selectedRole.CapabilityId, this.departmentId)
     }
     else {
@@ -53,19 +53,19 @@ export class AdminTableComponent implements OnInit {
     return { "Role": "+", "ID": -1, "BandId": band.band_id, "CapabilityId": cap.capability_id }
   }
 
-  openAddModal(bandId, capabilityId, departmentId){
+  openAddModal(bandId, capabilityId, departmentId) {
     this.modalService.openAddRoleModal(bandId, capabilityId, departmentId).then(data => {
       this.displayAlert(data)
     })
   }
 
-  openCapabilityModal(){
+  openCapabilityModal() {
     this.modalService.openAddCapabilityModal(this.departmentId).then(data => {
       this.displayAlert(data)
     });
   }
 
-  openEditModal(roleId, capabilities, bands){
+  openEditModal(roleId, capabilities, bands) {
     this.modalService.openEditRoleModal(roleId, capabilities, bands).then(data => {
       this.displayAlert(data)
     });
@@ -77,7 +77,14 @@ export class AdminTableComponent implements OnInit {
     })
   }
 
-  loadRoles(){
+  openEditBandModal(selectedBand) {
+    this.modalService.openEditBandModal(selectedBand)
+      .then(data => {
+        this.displayAlert(data)
+      });
+  }
+
+  loadRoles() {
     this.dataService.getCapabilityNamesByDepartment(this.departmentId).then(response => {
       this.capabilities = response;
     });
@@ -95,8 +102,8 @@ export class AdminTableComponent implements OnInit {
     });
   }
 
-  displayAlert(data){
-    if(data.hasOwnProperty('success')){
+  displayAlert(data) {
+    if (data.hasOwnProperty('success')) {
       this.alertMessage = data.success;
       this.alertType = "success";
     } else {

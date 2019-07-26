@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-const DESCRIPTION_MAX_LEN = 1000
+import { DataService } from '../services/data.service';
 @Component({
   selector: 'app-edit-band-modal',
   templateUrl: './edit-band-modal.component.html',
@@ -10,29 +10,21 @@ const DESCRIPTION_MAX_LEN = 1000
 
 export class EditBandModalComponent implements OnInit {
   @Input() bandToEdit;
-  @Input() schools;
+  @Output() bandEdited = new EventEmitter();
   public editBandForm: FormGroup;
-
+  public submitted = false;
   constructor(public activeModal: NgbActiveModal,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private dataService: DataService) { }
 
   ngOnInit() {
-    console.log(this.bandToEdit)
-    console.log(this.schools)
-
     this.editBandForm = this.formBuilder.group({
-      bandName: [this.bandToEdit.name, Validators.required],
-      school: [this.bandToEdit.school_id],
-      commercialAwarenessDescription: ["", Validators.maxLength(DESCRIPTION_MAX_LEN)],
-      communicatingAndTeamwork: ["", Validators.maxLength(DESCRIPTION_MAX_LEN)],
-      innovationAndContinuousImprovement: ["", Validators.maxLength(DESCRIPTION_MAX_LEN)],
-      customerFocus: ["", Validators.maxLength(DESCRIPTION_MAX_LEN)],
-      developingYourselfAndOthers: ["", Validators.maxLength(DESCRIPTION_MAX_LEN)],
-      planningAndOrganisation: ["", Validators.maxLength(DESCRIPTION_MAX_LEN)],
-      jobSpecificKnowledge: ["", Validators.maxLength(DESCRIPTION_MAX_LEN)],
-      training: ["", Validators.maxLength(DESCRIPTION_MAX_LEN)],
-      responsibilities: ["", Validators.maxLength(DESCRIPTION_MAX_LEN)]
+      bandName: [this.bandToEdit.name, Validators.required]
     });
+  }
+
+  get formControls() {
+    return this.editBandForm.controls;
   }
 
 
@@ -40,4 +32,26 @@ export class EditBandModalComponent implements OnInit {
     this.activeModal.close();
   }
 
+  onSubmit() {
+    this.submitted = true;
+    if (this.editBandForm.invalid) {
+      return;
+    }
+    var updatedBand = {
+      "name": this.editBandForm.get("bandName").value,
+      "band_id": this.bandToEdit.band_id
+    }
+
+    this.dataService
+      .editBand(updatedBand)
+      .then(
+        result => {
+          this.bandEdited.emit(result);
+        })
+      .catch(error => {
+        this.bandEdited.emit(error);
+      });
+
+    this.closeModal();
+  }
 }

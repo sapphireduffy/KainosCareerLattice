@@ -13,7 +13,7 @@ const getUniqueBandURL = "/api/uniqueband";
 const getRoleBandCapabilityExistsUrl = "/api/roleBandCapabilityExists";
 const deleteRoleURL = "/api/deleteRole";
 const loginUrl = "/api/login"
-const schoolsUrl = "/api/schools"
+const editBandUrl = "/api/editBand";
 
 @Injectable()
 export class DataService {
@@ -69,7 +69,9 @@ export class DataService {
     return this.httpHandler.request(loginUrl, param, "post")
   }
 
-  getSchools() {
-    return this.httpHandler.request(schoolsUrl, {}, "get")
+  editBand(param: any) {
+    console.log(param)
+    return this.httpHandler.request(editBandUrl, param, "put")
   }
+
 }

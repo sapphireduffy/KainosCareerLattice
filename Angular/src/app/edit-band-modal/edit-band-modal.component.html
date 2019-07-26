@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Edit Role</h5>
+    <h5 class="modal-title" id="exampleModalLabel">Edit Band</h5>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
         x
     </button>
@@ -17,58 +17,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <label for="schools"> School</label>
-            <select class="form-control" formControlName="school">
-                <option *ngFor="let school of schools" [selected]="bandToEdit.school_id == school.school_id"
-                    [value]="school.school_id">
-                    {{school.name}}</option>
-            </select>
-        </div>
-
-        <!-- <div class="form-group">
-          <label for="roleSummary">Role Summary</label>
-          <textarea type="text" formControlName="roleSummary" class="form-control" rows="3" maxlength="1000" 
-           [ngClass]="{'is-invalid': submitted && formControls.roleSummary.errors}" required></textarea>
-          <div *ngIf="submitted && formControls.roleSummary.errors" class="invalid-feedback">
-            <div *ngIf="formControls.roleSummary.errors.maxlength">
-              Role Summary should be no more than 1000 characters
-            </div>
-          </div>
-        </div>
-    
-        <div class="form-group">
-          <label for="roleSharePointLink">Role Sharepoint Link</label>
-          <input type="text" formControlName="roleSharePointLink" class="form-control" maxlength="500"  
-          [ngClass]="{'is-invalid': submitted && formControls.roleSharePointLink.errors}" required />
-          <div *ngIf="submitted && formControls.roleSharePointLink.errors" class="invalid-feedback">
-            <div *ngIf="formControls.roleSharePointLink.errors.maxlength">
-              Role Sharepoint Link should be more more than 500 characters
-            </div>
-          </div>
-        </div>
-    
-    
-        <div class="form-group">
-          <label for="bands"> Band:</label>
-          <select class="form-control" formControlName="roleBand">
-            <option *ngFor="let band of bands" [selected]="roleToEdit.band_id == band.band_id" [value]="band.band_id">
-              {{band.name}}</option>
-          </select>
-        </div>
-    
-    
-        <div class="form-group">
-          <label for="capability"> Capability:</label>
-          <select class="form-control" formControlName="roleCapability" required>
-            <option *ngFor="let capability of capabilities"
-              [selected]="roleToEdit.capability_id == capability.capability_id" [value]="capability.capability_id">
-              {{capability.name}} </option>
-          </select>
-        </div>
-     -->
-
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss()">
                 Close

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { Band } from "../model/band";
-import { DataService } from "../_services/data.service";
+import { DataService } from "../services/data.service";
 import { Observable } from 'rxjs';
 
 const DESCRIPTION_MAX_LEN = 1000
@@ -29,7 +29,7 @@ export class AddBandComponent implements OnInit {
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
     private dataService: DataService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.addBandForm = this.formBuilder.group({
@@ -91,7 +91,7 @@ export class AddBandComponent implements OnInit {
     this.closeModal();
   }
 
-  toggleDescription(){
-    this.showDescription  = !this.showDescription;
+  toggleDescription() {
+    this.showDescription = !this.showDescription;
   }
 }

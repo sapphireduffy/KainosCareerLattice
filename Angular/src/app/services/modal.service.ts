@@ -34,12 +34,13 @@ export class ModalService {
   }
 
   async openEditBandModal(selectedBand) {
-    await this.dataService.getSchools().then(response => {
+    return new Promise((resolve, reject) => {
       const modalRef = this.modalService.open(EditBandModalComponent, { backdrop: "static" });
       modalRef.componentInstance.bandToEdit = selectedBand;
-      modalRef.componentInstance.schools = response;
-    })
-
+      modalRef.componentInstance.bandEdited.subscribe(data => {
+        resolve(data)
+      });
+    });
   }
 
   openAddRoleModal(roleBandId, roleCapabilityId, departmentId) {
