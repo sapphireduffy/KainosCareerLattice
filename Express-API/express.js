@@ -10,12 +10,14 @@ const RolesHandler = require('./roles.js')
 const CapabilityHandler = require('./capability.js')
 const BandHandler = require('./band.js')
 const DepartmentHandler = require('./department.js')
+const SchoolHandler = require('./school.js')
 const db = new Database()
 const loginHandler = new LoginHandler()
 const rolesHandler = new RolesHandler()
 const capabilityHandler = new CapabilityHandler()
 const bandHandler = new BandHandler()
 const departmentHandler = new DepartmentHandler()
+const schoolHandler = new SchoolHandler()
 const tokenCookieName = "token"
 
 // Parse URL-encoded bodies (as sent by HTML forms)
@@ -23,7 +25,7 @@ app.use(express.urlencoded())
 //Parse JSON bodies (as sent by API clients)
 app.use(express.json())
 
-function sendResponseData(query, response){
+function sendResponseData(query, response) {
   query.then(result => {
     response.send(result)
   }, reject => {
@@ -40,44 +42,48 @@ app.put('/editrole', cors(), function (request, response) {
 })
 
 app.post("/addrole", cors(), function (request, response) {
-	sendResponseData(rolesHandler.createRole(request.body, db), response)
+  sendResponseData(rolesHandler.createRole(request.body, db), response)
 })
 
 app.post("/addcapability", cors(), function (request, response) {
   sendResponseData(capabilityHandler.createCapability(request.body, db), response)
 })
 
-app.get("/capabilities", cors(), function(request, response) {
+app.get("/capabilities", cors(), function (request, response) {
   sendResponseData(capabilityHandler.getCapabiltiies(request.query, db), response)
 })
 
-app.get("/uniqueband", cors(), function(request, response) {
+app.get("/uniqueband", cors(), function (request, response) {
   sendResponseData(bandHandler.getBands(request.query, db), response)
 })
 
-app.get("/departments", cors(), function(request, response) {
+app.get("/departments", cors(), function (request, response) {
   sendResponseData(departmentHandler.getDepartments(request.query, db), response)
 })
 
-app.get("/rolesInDep", cors(), function(request, response) {
+app.get("/rolesInDep", cors(), function (request, response) {
   sendResponseData(rolesHandler.getFullRole(request.query, db), response)
 })
 
-app.get("/bands", cors(), function(request, response) {
+app.get("/bands", cors(), function (request, response) {
   sendResponseData(bandHandler.allBands(db), response)
 })
 
+app.get("/schools", cors(), function (request, response) {
+  sendResponseData(s.allBands(db), response)
+})
+
 app.post("/login", cors(), function (request, response) {
-	loginHandler.login(request.body, db).then(token => {
-    response.cookie(tokenCookieName,token)
-		response.send({tokenCookieName:token})
-	}, reason => {
-		response.send(reason)
-	})
+  loginHandler.login(request.body, db).then(token => {
+    response.cookie(tokenCookieName, token)
+    response.send({ tokenCookieName: token })
+  }, reason => {
+    response.send(reason)
+  })
 })
 
 app.post("/addband", cors(), function (request, response) {
-	sendResponseData(bandHandler.addBand(request.body, db), response)
+  sendResponseData(bandHandler.addBand(request.body, db), response)
 })
 
 app.get("/getRole", cors(), function (request, response) {
