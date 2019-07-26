@@ -95,7 +95,6 @@ export class ModalService {
       this.dataService.getEditCapability(capabilityId).then(response => {
         const modalRef = this.modalService.open(EditCapabilityModalComponent, { backdrop: "static" });
         modalRef.componentInstance.capabilityToEdit = response[0];
-        console.log(response[0])
         modalRef.componentInstance.departments = departments;
         modalRef.componentInstance.capabilityEdited.subscribe(data => {
           resolve(data)
