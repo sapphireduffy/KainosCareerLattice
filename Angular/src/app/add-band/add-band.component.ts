@@ -80,12 +80,12 @@ export class AddBandComponent implements OnInit {
 
     console.log(this.newBand);
 
-    /*this.dataService
+    this.dataService
       .createBand(this.newBand)
       .then(result => this.bandAdded.emit(result))
       .catch(error => {
         this.bandAdded.emit(error);
-      });*/
+      });
     this.closeModal();
   }
 
