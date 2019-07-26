@@ -27,11 +27,11 @@ export class NavbarComponent implements OnInit {
 
   setAdminMode(adminMode) {
     this.authGuard.setAdminMode(adminMode);
-    if (adminMode && this.router.url.includes("career")) {
+    if (adminMode && (this.router.url.includes("career") || this.router.url.includes("editroles"))) {
       this.router.navigate(["editroles"], {
         queryParams: { id: this.getIdParam() }
       });
-    } else if (!adminMode && this.router.url.includes("editroles")) {
+    } else if (!adminMode && (this.router.url.includes("career") || this.router.url.includes("editroles"))) {
       this.router.navigate(["career"], {
         queryParams: { id: this.getIdParam() }
       });

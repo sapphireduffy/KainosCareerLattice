@@ -1,3 +1,8 @@
 .error-message {
     color: red;
 }
+
+.modal-header {
+    background-color: #003471;
+    color: white;
+}
