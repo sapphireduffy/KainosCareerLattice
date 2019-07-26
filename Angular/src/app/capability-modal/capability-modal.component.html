@@ -1,7 +1,7 @@
 <div>
     <!-- Set header colour depending on band level of the role -->
     <div class="modal-header">
-      <h2 class="modal-title" id="exampleModalLabel">{{ capability.name }}</h2>
+      <h2 class="modal-title" id="exampleModalLabel">{{ capability.CapabilityName }}</h2>
       <button
         type="button"
         class="close"
@@ -14,12 +14,12 @@
     <div class="modal-body">
       <div>
         <h5>Capability Lead</h5>
-        <p>{{ capability.lead }}</p>
+        <p>{{ capability.LeadName }}</p>
       </div>
   
       <div>
         <h5>Capability Lead Message</h5>
-        <p>{{ capability.lead_message }}</p>
+        <p>{{ capability.message }}</p>
       </div>
     </div>
     <div class="modal-footer">

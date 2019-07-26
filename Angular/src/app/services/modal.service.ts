@@ -33,6 +33,13 @@ export class ModalService {
     });
   }
 
+  async openCapabilityInfoModal(capabilityId) {
+    await this.dataService.getCapabilityDetails(capabilityId).then(response => {
+      const modalRef = this.modalService.open(CapabilityModalComponent, { backdrop: "static" })
+      modalRef.componentInstance.capability = response[0]
+    });
+  }
+
   openAddRoleModal(roleBandId, roleCapabilityId, departmentId) {
     return new Promise( (resolve, reject) => {
       const modalRef = this.modalService.open(AddRoleModalComponent, { backdrop: "static" });
@@ -80,10 +87,5 @@ export class ModalService {
         });
       });
     })
-  }
-
-  openCapabilityInfoModal() {
-    const modalRef = this.modalService.open(CapabilityModalComponent)
-    modalRef.componentInstance.capability = { "name" : "bob", "lead": "bob", "lead_message": "bob"}
   }
 }
