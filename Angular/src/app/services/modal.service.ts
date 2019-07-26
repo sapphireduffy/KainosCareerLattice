@@ -7,6 +7,7 @@ import { AddRoleModalComponent } from '../add-role-modal/add-role-modal.componen
 import { AddCapabilityComponent } from '../add-capability/add-capability.component';
 import { EditRoleModalComponent } from '../edit-role-modal/edit-role-modal.component';
 import { AddBandComponent } from '../add-band/add-band.component';
+import { CapabilityModalComponent } from '../capability-modal/capability-modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -79,5 +80,9 @@ export class ModalService {
         });
       });
     })
+  }
+
+  openCapabilityInfoModal() {
+    this.modalService.open(CapabilityModalComponent)
   }
 }

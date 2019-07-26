@@ -19,6 +19,7 @@
         <th
           scope="row"
           *ngFor="let capability of capabilities"
+          (click)="this.modalService.openCapabilityInfoModal()"
           class="job-headings">
           {{ capability.name }}
         </th>
