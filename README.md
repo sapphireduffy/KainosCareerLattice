@@ -89,7 +89,7 @@ Protractor tests the site through a browser to verify the behaviours of the appl
 
 To run these tests firstly run 
 ```
-npm start
+npm install
 ```
 in the Protractor directory to install the neccersairy libraries. Then run
 ```
