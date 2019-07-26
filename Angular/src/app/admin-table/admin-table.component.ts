@@ -78,6 +78,12 @@ export class AdminTableComponent implements OnInit {
     })
   }
 
+  openEditCapabilityModal(capabilityId) {
+    this.modalService.openEditCapabilityModal(capabilityId, this.departments).then(data => {
+      this.displayAlert(data);
+    })
+  }
+
   loadRoles(){
     this.dataService.getCapabilityNamesByDepartment(this.departmentId).then(response => {
       this.capabilities = response;

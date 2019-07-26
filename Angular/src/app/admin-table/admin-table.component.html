@@ -21,7 +21,7 @@
                   <button class='btn btn-primary' id='addCapability' (click)="openCapabilityModal()">+ Add Capability</button>
                 </div>
               </th>
-              <th scope="row" *ngFor='let capability of capabilities' class='job-headings'(click)="this.modalService.openEditCapabilityModal(capability.capability_id, this.departments)">{{capability.name}}</th>
+              <th scope="row" *ngFor='let capability of capabilities' class='job-headings'(click)="openEditCapabilityModal(capability.capability_id)">{{capability.name}}</th>
           </tr>
           <tr *ngFor="let band of bands; let i = index">
             <td 

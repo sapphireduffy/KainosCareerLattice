@@ -89,7 +89,7 @@ export class ModalService {
         modalRef.componentInstance.capabilityToEdit = response[0];
         modalRef.componentInstance.departments = departments;
         modalRef.componentInstance.capabilityEdited.subscribe(data => {
-          resolve(data.data)
+          resolve(data)
         });
       });
     })
