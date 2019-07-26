@@ -3,6 +3,7 @@ import { HttphandlerService } from './httphandler.service';
 
 const departmentUrl = "/api/departments";
 const capabilityUrl = "/api/capabilities";
+const getCapabilityUrl = "/api/getcapability"
 const getRolesInDepartmentURL = "/api/rolesInDep";
 const getBandsURL = "/api/bands";
 const addRoleUrl = "/api/addRole";
@@ -31,6 +32,10 @@ export class DataService {
 
   getCapabilityNamesByDepartment(departmentID: number) {
     return this.httpHandler.request(capabilityUrl, { departmentID: departmentID }, "get")
+  }
+
+  getCapabilityDetails(capabilityId: number){
+    return this.httpHandler.request(getCapabilityUrl, { capabilityId: capabilityId }, "get")
   }
 
   getRolesInDepartment(departmentID: number) {

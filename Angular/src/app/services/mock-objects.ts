@@ -20,4 +20,10 @@ export class MockObjects {
         summary: "",
         job_spec_url: ""
     }
+
+    public static capability = {
+        CapabilityName: "",
+        LeadName: "",
+        message: ""
+    }
 }

@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CapabilityModalComponent } from './capability-modal.component';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { MockObjects } from '../services/mock-objects';
 
 describe('CapabilityModalComponent', () => {
   let component: CapabilityModalComponent;
@@ -8,7 +10,12 @@ describe('CapabilityModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CapabilityModalComponent ]
+      declarations: [ 
+        CapabilityModalComponent 
+      ],
+      providers: [
+        NgbActiveModal
+      ]
     })
     .compileComponents();
   }));
@@ -16,6 +23,7 @@ describe('CapabilityModalComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CapabilityModalComponent);
     component = fixture.componentInstance;
+    component.capability = MockObjects.capability
     fixture.detectChanges();
   });
 

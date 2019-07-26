@@ -1,5 +1,6 @@
 const createCapabilityQuery = "INSERT INTO capability(name, department_id) VALUES (?,?) "
 const getCapabiltiiesQuery = "SELECT name, capability_id FROM capability WHERE department_id = ?"
+const getCapabilityQuery = "SELECT CapabilityName, LeadName, message FROM viewCapabilityDetails WHERE capability_id = ?"
 
 class CapabilityHandler {
     constructor( config ) { }
@@ -25,6 +26,18 @@ class CapabilityHandler {
                 })
             } catch (err){
                 reject({"error":"Error getting capabilities"})
+            }
+        })
+    }
+
+    getCapability(params, db){
+        return new Promise( ( resolve, reject ) => {
+            try {
+                db.query(getCapabilityQuery,[params.capabilityId]).then(rows => {
+                    resolve(rows)
+                })
+            } catch (err){
+                reject({"error":"Error getting capability"})
             }
         })
     }
