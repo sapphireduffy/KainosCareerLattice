@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AddCapabilityComponent } from './add-capability.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { DataService } from '../_services/data.service';
+import { DataService } from '../services/data.service';
 
 describe('AddCapabilityComponent', () => {
   let component: AddCapabilityComponent;
