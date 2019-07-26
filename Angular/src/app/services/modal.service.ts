@@ -6,6 +6,7 @@ import { BandInformationComponent } from '../band-information/band-information.c
 import { AddRoleModalComponent } from '../add-role-modal/add-role-modal.component';
 import { AddCapabilityComponent } from '../add-capability/add-capability.component';
 import { EditRoleModalComponent } from '../edit-role-modal/edit-role-modal.component';
+import { AddBandComponent } from '../add-band/add-band.component';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,7 @@ export class ModalService {
       modalRef.componentInstance.bandId = roleBandId;
       modalRef.componentInstance.capabilityId =  roleCapabilityId;
       modalRef.componentInstance.roleAdded.subscribe(data =>{
-        resolve(data.data)
+        resolve(data)
       });
     })
   }
@@ -48,7 +49,7 @@ export class ModalService {
       const modalRef = this.modalService.open(AddCapabilityComponent);
       modalRef.componentInstance.departmentId = departmentId;
       modalRef.componentInstance.capabilityAdded.subscribe(data => {
-        resolve(data.data)
+        resolve(data)
       })
     })
   }
@@ -61,12 +62,12 @@ export class ModalService {
       modalRef.componentInstance.belowPriorityVal = belowValue;
       modalRef.componentInstance.departmentId = departmentId;
       modalRef.componentInstance.bandAdded.subscribe(data => {
-        resolve(data.data)
+        resolve(data)
       });
     });
   }
 
-  async openEditRoleModal(roleId, capabilities, bands) {
+  openEditRoleModal(roleId, capabilities, bands) {
     return new Promise((resolve, reject) => {
       this.dataService.getRole(roleId).then(response => {
         const modalRef = this.modalService.open(EditRoleModalComponent);
@@ -74,7 +75,7 @@ export class ModalService {
         modalRef.componentInstance.capabilities = capabilities;
         modalRef.componentInstance.bands = bands;
         modalRef.componentInstance.roleEdited.subscribe(data => {
-          resolve(data.data)
+          resolve(data)
         });
       });
     })
