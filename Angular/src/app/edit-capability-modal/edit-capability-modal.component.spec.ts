@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditCapabilityModalComponent } from './edit-capability-modal.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { DataService } from '../services/data.service';
+import { MockObjects } from '../services/mock-objects';
 
 describe('EditCapabilityModalComponent', () => {
   let component: EditCapabilityModalComponent;
@@ -8,7 +12,16 @@ describe('EditCapabilityModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditCapabilityModalComponent ]
+      imports: [
+        ReactiveFormsModule
+      ],
+      declarations: [ 
+        EditCapabilityModalComponent 
+      ],
+      providers: [
+        NgbActiveModal,
+        DataService
+      ]
     })
     .compileComponents();
   }));
@@ -16,6 +29,7 @@ describe('EditCapabilityModalComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EditCapabilityModalComponent);
     component = fixture.componentInstance;
+    component.capabilityToEdit = MockObjects.editCapability;
     fixture.detectChanges();
   });
 
