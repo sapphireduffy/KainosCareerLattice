@@ -8,6 +8,7 @@ import { AddCapabilityComponent } from '../add-capability/add-capability.compone
 import { EditRoleModalComponent } from '../edit-role-modal/edit-role-modal.component';
 import { EditCapabilityModalComponent } from '../edit-capability-modal/edit-capability-modal.component';
 import { AddBandComponent } from '../add-band/add-band.component';
+import { EditBandModalComponent } from '../edit-band-modal/edit-band-modal.component';
 import { CapabilityModalComponent } from '../capability-modal/capability-modal.component';
 
 @Injectable({
@@ -20,7 +21,7 @@ export class ModalService {
     private modalService: NgbModal
   ) { }
 
-  async openRoleInfoModal(selectedRoleId){
+  async openRoleInfoModal(selectedRoleId) {
     await this.dataService.getRole(selectedRoleId).then(response => {
       const modalRef = this.modalService.open(RoleInformationComponent, { backdrop: "static" });
       modalRef.componentInstance.roleToDisplay = response[0];
@@ -34,6 +35,16 @@ export class ModalService {
     });
   }
 
+  async openEditBandModal(selectedBand) {
+    return new Promise((resolve, reject) => {
+      const modalRef = this.modalService.open(EditBandModalComponent, { backdrop: "static" });
+      modalRef.componentInstance.bandToEdit = selectedBand;
+      modalRef.componentInstance.bandEdited.subscribe(data => {
+        resolve(data)
+      });
+    })
+  }
+
   async openCapabilityInfoModal(capabilityId) {
     await this.dataService.getCapabilityDetails(capabilityId).then(response => {
       const modalRef = this.modalService.open(CapabilityModalComponent, { backdrop: "static" })
@@ -42,12 +53,12 @@ export class ModalService {
   }
 
   openAddRoleModal(roleBandId, roleCapabilityId, departmentId) {
-    return new Promise( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       const modalRef = this.modalService.open(AddRoleModalComponent, { backdrop: "static" });
       modalRef.componentInstance.departmentId = departmentId;
       modalRef.componentInstance.bandId = roleBandId;
-      modalRef.componentInstance.capabilityId =  roleCapabilityId;
-      modalRef.componentInstance.roleAdded.subscribe(data =>{
+      modalRef.componentInstance.capabilityId = roleCapabilityId;
+      modalRef.componentInstance.roleAdded.subscribe(data => {
         resolve(data)
       });
     })

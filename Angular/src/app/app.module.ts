@@ -23,6 +23,7 @@ import { AdminTableComponent } from './admin-table/admin-table.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CapabilityModalComponent } from './capability-modal/capability-modal.component';
 import { AddCapabilityComponent } from './add-capability/add-capability.component';
+import { EditBandModalComponent } from './edit-band-modal/edit-band-modal.component';
 import { EditCapabilityModalComponent } from './edit-capability-modal/edit-capability-modal.component';
 
 @NgModule({
@@ -42,6 +43,7 @@ import { EditCapabilityModalComponent } from './edit-capability-modal/edit-capab
     AddRoleModalComponent,
     AddBandComponent,
     AdminTableComponent,
+    EditBandModalComponent,
     CapabilityModalComponent
   ],
   bootstrap: [
@@ -69,8 +71,9 @@ import { EditCapabilityModalComponent } from './edit-capability-modal/edit-capab
     AddBandComponent,
     EditRoleModalComponent,
     AddCapabilityComponent,
+    EditBandModalComponent,
     EditCapabilityModalComponent,
     CapabilityModalComponent
   ]
 })
-export class AppModule {}
+export class AppModule { }

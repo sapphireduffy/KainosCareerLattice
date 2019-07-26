@@ -5,42 +5,28 @@
   <table class="table">
     <ng-container>
       <tr role="row">
-        <th
-          class="job-family"
-          scope="col"
-          [attr.colspan]="capabilities.length + 1"
-          rowspan="1"
+        <th class="job-family" scope="col" [attr.colspan]="capabilities.length + 1" rowspan="1"
           *ngFor="let department of departmentName">
           {{ department.name }}
         </th>
       </tr>
       <tr>
         <th class="job-family"></th>
-        <th
-          scope="row"
-          *ngFor="let capability of capabilities"
-          (click)="this.modalService.openCapabilityInfoModal(capability.capability_id)"
-          class="job-headings">
+        <th scope="row" *ngFor="let capability of capabilities"
+          (click)="this.modalService.openCapabilityInfoModal(capability.capability_id)" class="job-headings">
           {{ capability.name }}
         </th>
       </tr>
       <tr *ngFor="let band of bands">
-        <td
-          scope="row"
-          [class.job-level-inspire]="band.school_id == 1"
-          [class.job-level-explore]="band.school_id == 2"
-          [class.job-level-discover]="band.school_id == 3"
-          class="job-level"
+        <td scope="row" [class.job-level-inspire]="band.school_id == 1" [class.job-level-explore]="band.school_id == 2"
+          [class.job-level-discover]="band.school_id == 3" class="job-level"
           (click)="this.modalService.openBandInfoModal(band.band_id)">
           {{ band.name }}
         </td>
         <td *ngFor="let cap of capabilities">
           <span *ngFor="let job of jobsInDep">
-            <span
-              scope="row"
-              *ngIf="job.capability_id == cap.capability_id && job.band_id == band.band_id"
-              (click)="this.modalService.openRoleInfoModal(job.role_id)"
-              class="role-clickable">
+            <span scope="row" *ngIf="job.capability_id == cap.capability_id && job.band_id == band.band_id"
+              (click)="this.modalService.openRoleInfoModal(job.role_id)" class="role-clickable">
               {{ job.RoleName }}
             </span>
           </span>

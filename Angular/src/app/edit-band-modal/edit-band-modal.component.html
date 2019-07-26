@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Edit Band</h5>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+        x
+    </button>
+</div>
+
+<form [formGroup]="editBandForm" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div class="modal-body" data-keyboard="false" data-backdrop="static">
+        <div class="form-group">
+            <label for="bandName">Band Name</label>
+            <input type="text" formControlName="bandName" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && formControls.bandName.errors }" />
+            <div *ngIf="submitted && formControls.bandName.errors" class="invalid-feedback">
+                <div *ngIf="formControls.bandName.errors.required">
+                    Band Name is a required field
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss()">
+                Close
+            </button>
+            <button type="submit" class="btn btn-success">
+                Edit Band
+            </button>
+        </div>
+    </div>
+</form>
