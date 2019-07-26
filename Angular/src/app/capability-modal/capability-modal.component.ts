@@ -7,6 +7,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./capability-modal.component.css']
 })
 export class CapabilityModalComponent implements OnInit {
+  @Input() capability;
 
   constructor(public activeModal: NgbActiveModal) { }
 
