@@ -36,10 +36,12 @@ export class AdminTableComponent implements OnInit {
   }
 
   async switchModal(selectedRole): Promise<void> {
+    console.log(selectedRole)
     if(selectedRole.ID === -1){
       this.openAddModal(selectedRole.BandId, selectedRole.CapabilityId, this.departmentId)
     }
     else {
+      console.log(selectedRole)
       this.openEditModal(selectedRole.ID, this.capabilities, this.bands);
     }
   }
