@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AddBandComponent } from './add-band.component';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { DataService } from '../services/data.service';
 
 describe('AddBandComponent', () => {
   let component: AddBandComponent;
@@ -8,7 +10,16 @@ describe('AddBandComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddBandComponent ]
+      declarations: [ 
+        AddBandComponent 
+      ],
+      imports: [ 
+        ReactiveFormsModule 
+      ],
+      providers:[
+        NgbActiveModal,
+        DataService
+      ]
     })
     .compileComponents();
   }));

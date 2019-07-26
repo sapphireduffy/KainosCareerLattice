@@ -83,7 +83,7 @@ CREATE TABLE capability_lead (
     capability_lead_id INT PRIMARY KEY AUTO_INCREMENT,
     capability_id INT,
     name VARCHAR(100),
-    message MEDIUMTEXT,
+    message VARCHAR(200),
     FOREIGN KEY (capability_id)
         REFERENCES capability (capability_id)
 );
@@ -113,6 +113,10 @@ band.band_id, band.name AS 'BandName', band.school_id
 FROM role JOIN role_capability ON role.role_id = role_capability.role_id JOIN capability ON capability.capability_id = 
 role_capability.capability_id JOIN band ON band.band_id = role.band_id;
 
+CREATE VIEW viewCapabilityDetails AS
+SELECT capability.name AS 'CapabilityName' , capability_lead.capability_id, capability_lead.name AS 'LeadName', message
+FROM capability JOIN capability_lead ON capability.capability_id = capability_lead.capability_id;
+
 -- ---------------------------------- INSERTS ---------------------------- --
 
 INSERT INTO user (username, password, type)
@@ -131,6 +135,15 @@ INSERT INTO capability(name, department_id) -- Technical Capabilites
 VALUES ('Software Engineering', 2), ('Cyber Security', 2), ('Architect', 2), ('Ops', 2);
 INSERT INTO capability(name, department_id) -- Central Services Team Capabilites
 VALUES ('Systems', 6);
+
+INSERT INTO capability_lead(capability_id, name, message)
+VALUES (7, 'Brian Sunny', 'Hi there, my name is Brian and I am the lead of the Software Engineerinng capability here at Kainos. If you wish to contact me, my email is bsunny@kainos.com.');
+INSERT INTO capability_lead(capability_id, name, message)
+VALUES (8, 'Rachel Montgomery', 'Hi there, my name is Rachel and I am the lead of the Cyber Security capability here at Kainos. If you wish to contact me, my email is rachel@kainos.com.');
+INSERT INTO capability_lead(capability_id, name, message)
+VALUES (9, 'Stephen Smith', 'Hi there, my name is Stephen and I am the lead of the Architect capability here at Kainos. If you wish to contact me, my email is stephen@kainos.com.');
+INSERT INTO capability_lead(capability_id, name, message)
+VALUES (10, 'Nicole Wilkinson', 'Hi there, my name is Nicole and I am the lead of the Ops capability here at Kainos. If you wish to contact me, my email is nicole@kainos.com.');
 
 INSERT INTO school (name) -- All Schools
 VALUES ('Inspire'), ('Explore'), ('Discover');
