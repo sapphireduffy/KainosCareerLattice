@@ -27,7 +27,6 @@ export class EditBandModalComponent implements OnInit {
     return this.editBandForm.controls;
   }
 
-
   closeModal() {
     this.activeModal.close();
   }
