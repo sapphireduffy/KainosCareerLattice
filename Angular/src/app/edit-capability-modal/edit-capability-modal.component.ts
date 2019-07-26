@@ -14,7 +14,8 @@ export class EditCapabilityModalComponent implements OnInit {
   @Output() capabilityEdited = new EventEmitter();
   capabilityExists;
   editedCapability: Capability;
-  initialCapabilityId: number;
+  initialCapabilityName: string;
+  initialDepartmentId: number;
   public editCapabilityForm: FormGroup;
   public submitted = false;
   constructor(
@@ -24,10 +25,11 @@ export class EditCapabilityModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.initialCapabilityId = this.capabilityToEdit.capability_id;
+    this.initialCapabilityName = this.capabilityToEdit.name;
+    this.initialDepartmentId = this.capabilityToEdit.department_id;
 
     this.editCapabilityForm = this.formBuilder.group({
-      capabilityName: [this.capabilityToEdit.CapabilityName, Validators.required],
+      capabilityName: [this.capabilityToEdit.name, Validators.required],
       capabilityDepartment: [this.capabilityToEdit.department_id]
     });
   }
@@ -55,30 +57,29 @@ export class EditCapabilityModalComponent implements OnInit {
     }
     this.setEditCapability();
     await this.checkIfCapabilityExists();
-    
-    if (this.editedCapability.capabilityId == this.initialCapabilityId) {
-        this.writeToDatabse();
+    if (this.editedCapability.name === this.initialCapabilityName) {
+      if(this.editedCapability.departmentId === this.initialDepartmentId) {
+        this.closeModal();
       }
-      else if (this.capabilityExists == false ) {
-        this.writeToDatabse();
+      }
+     if (this.capabilityExists == false) {
+        this.writeToDatabase();
       }
   }
 
   async checkIfCapabilityExists() {
-    this.capabilityExists=false;
-
-    // await this.dataService
-    //   .getCapabilityBandCapabilityExists(this.editedCapability.capabilityId, this.editedCapability.bandId)
-    //   .then(
-    //     result => {
-    //       this.capabilityExists = result[0]["result"] == 1 ? true : false;
-    //     })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
+    await this.dataService
+      .getCapabilityExists(this.editedCapability.name, this.editedCapability.departmentId)
+      .then(
+        result => {
+          this.capabilityExists = result[0]["result"] == 1 ? true : false;
+        })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
-  writeToDatabse() {
+  writeToDatabase() {
          this.dataService
         .editCapability(this.editedCapability)
         .then(result => this.capabilityEdited.emit(result))

@@ -16,6 +16,7 @@ interface Role {
 })
 export class AdminTableComponent implements OnInit {
   departmentName: string;
+  departments: [];
   capabilities = [];
   jobsInDep:  Role[];
   bands: [];
@@ -81,6 +82,11 @@ export class AdminTableComponent implements OnInit {
     this.dataService.getDepartmentDetails(this.departmentId).then(response => {
       this.departmentName = response;
     });
+
+    this.dataService.getAllDepartments().then(response => {
+      this.departments = response;
+      console.log(this.departments);
+    })
   }
 
   displayAlert(data){

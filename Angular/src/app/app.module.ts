@@ -60,7 +60,8 @@ import { EditCapabilityModalComponent } from './edit-capability-modal/edit-capab
     BandInformationComponent,
     AddRoleModalComponent,
     EditRoleModalComponent,
-    AddCapabilityComponent
+    AddCapabilityComponent,
+    EditCapabilityModalComponent
   ]
 })
 export class AppModule {}
