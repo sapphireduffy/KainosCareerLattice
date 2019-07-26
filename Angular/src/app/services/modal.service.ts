@@ -83,6 +83,7 @@ export class ModalService {
   }
 
   openCapabilityInfoModal() {
-    this.modalService.open(CapabilityModalComponent)
+    const modalRef = this.modalService.open(CapabilityModalComponent)
+    modalRef.componentInstance.capability = { "name" : "bob", "lead": "bob", "lead_message": "bob"}
   }
 }
