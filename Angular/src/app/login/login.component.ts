@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms'
-import { HttphandlerService } from '../services/httphandler.service';
 import { Router } from '@angular/router';
 import { AuthGuardComponent } from '../auth-guard/auth-guard.component';
 import { DataService } from '../services/data.service';

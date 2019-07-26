@@ -7,6 +7,7 @@ import { AddRoleModalComponent } from '../add-role-modal/add-role-modal.componen
 import { AddCapabilityComponent } from '../add-capability/add-capability.component';
 import { EditRoleModalComponent } from '../edit-role-modal/edit-role-modal.component';
 import { EditCapabilityModalComponent } from '../edit-capability-modal/edit-capability-modal.component';
+import { AddBandComponent } from '../add-band/add-band.component';
 
 @Injectable({
   providedIn: 'root'
@@ -33,13 +34,13 @@ export class ModalService {
   }
 
   openAddRoleModal(roleBandId, roleCapabilityId, departmentId) {
-    return new Promise( ( resolve, reject ) => {
+    return new Promise( (resolve, reject) => {
       const modalRef = this.modalService.open(AddRoleModalComponent, { backdrop: "static" });
       modalRef.componentInstance.departmentId = departmentId;
       modalRef.componentInstance.bandId = roleBandId;
       modalRef.componentInstance.capabilityId =  roleCapabilityId;
       modalRef.componentInstance.roleAdded.subscribe(data =>{
-        resolve(data.data)
+        resolve(data)
       });
     })
   }
@@ -48,14 +49,26 @@ export class ModalService {
     return new Promise((resolve, reject) => {
       const modalRef = this.modalService.open(AddCapabilityComponent);
       modalRef.componentInstance.departmentId = departmentId;
-
       modalRef.componentInstance.capabilityAdded.subscribe(data => {
-        resolve(data.data)
+        resolve(data)
       })
     })
   }
 
-  async openEditRoleModal(roleId, capabilities, bands) {
+  openAddBandModal(departmentId, aboveValue, belowValue, schoolId) {
+    return new Promise((resolve, reject) => {
+      const modalRef = this.modalService.open(AddBandComponent);
+      modalRef.componentInstance.schoolId = schoolId;
+      modalRef.componentInstance.abovePriorityVal = aboveValue;
+      modalRef.componentInstance.belowPriorityVal = belowValue;
+      modalRef.componentInstance.departmentId = departmentId;
+      modalRef.componentInstance.bandAdded.subscribe(data => {
+        resolve(data)
+      });
+    });
+  }
+
+  openEditRoleModal(roleId, capabilities, bands) {
     return new Promise((resolve, reject) => {
       this.dataService.getRole(roleId).then(response => {
         const modalRef = this.modalService.open(EditRoleModalComponent);
@@ -63,7 +76,7 @@ export class ModalService {
         modalRef.componentInstance.capabilities = capabilities;
         modalRef.componentInstance.bands = bands;
         modalRef.componentInstance.roleEdited.subscribe(data => {
-          resolve(data.data)
+          resolve(data)
         });
       });
     })

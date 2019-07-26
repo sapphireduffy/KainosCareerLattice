@@ -18,6 +18,7 @@ import { BandInformationComponent } from './band-information/band-information.co
 import { AddRoleModalComponent } from "./add-role-modal/add-role-modal.component";
 import { EditRoleModalComponent } from './edit-role-modal/edit-role-modal.component';
 import { AdminAuthGuardComponent } from './admin-auth-guard/admin-auth-guard.component';
+import { AddBandComponent } from './add-band/add-band.component';
 import { AdminTableComponent } from './admin-table/admin-table.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AddCapabilityComponent } from './add-capability/add-capability.component';
@@ -36,7 +37,9 @@ import { EditCapabilityModalComponent } from './edit-capability-modal/edit-capab
     EditRoleModalComponent,
     AddCapabilityComponent,
     AdminTableComponent,
-    EditCapabilityModalComponent
+    EditCapabilityModalComponent,
+    AddRoleModalComponent,
+    AddBandComponent
   ],
   bootstrap: [
     AppComponent
@@ -59,6 +62,8 @@ import { EditCapabilityModalComponent } from './edit-capability-modal/edit-capab
     RoleInformationComponent,
     BandInformationComponent,
     AddRoleModalComponent,
+    AddCapabilityComponent,
+    AddBandComponent,
     EditRoleModalComponent,
     AddCapabilityComponent,
     EditCapabilityModalComponent

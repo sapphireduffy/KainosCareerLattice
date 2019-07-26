@@ -18,6 +18,7 @@ const getRoleBandCapabilityExistsUrl = "/api/roleBandCapabilityExists";
 const deleteRoleURL = "/api/deleteRole";
 const loginUrl = "/api/login"
 
+ 
 @Injectable()
 export class DataService {
   public isAdmin: boolean
