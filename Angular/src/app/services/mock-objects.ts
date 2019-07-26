@@ -26,4 +26,9 @@ export class MockObjects {
         LeadName: "",
         message: ""
     }
+
+    public static editCapability = {
+        department_id: 1,
+        name: ""
+    }
 }

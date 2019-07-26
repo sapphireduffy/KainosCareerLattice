@@ -1,0 +1,41 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Edit Capability</h5>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+      x
+    </button>
+  </div>
+  
+  <form [formGroup]="editCapabilityForm" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div class="modal-body" data-keyboard="false" data-backdrop="static">
+      <div *ngIf="capabilityExists" class="error-message">There is already an existing capability with that name in the specified department</div>
+      <div class="form-group">
+        <label for="capabilityName">Capability Name</label>
+        <input type="text" formControlName="capabilityName" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && formControls.capabilityName.errors }" />
+        <div *ngIf="submitted && formControls.capabilityName.errors" class="invalid-feedback">
+          <div *ngIf="formControls.capabilityName.errors.required">
+            Capability Name is a required field
+          </div>
+        </div>
+      </div>
+  
+  
+      <div class="form-group">
+        <label for="departments"> Department:</label>
+        <select class="form-control" formControlName="capabilityDepartment">
+          <option *ngFor="let department of departments" [selected]="capabilityToEdit.department_id == department.department_id" [value]="department.department_id">
+            {{department.name}}</option>
+        </select>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss()">
+          Close
+        </button>
+        <button type="submit" class="btn btn-success">
+          Edit Capability
+        </button>
+      </div>
+  
+    </div>
+  </form>
