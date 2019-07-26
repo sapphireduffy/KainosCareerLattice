@@ -10,14 +10,12 @@ const RolesHandler = require('./roles.js')
 const CapabilityHandler = require('./capability.js')
 const BandHandler = require('./band.js')
 const DepartmentHandler = require('./department.js')
-const SchoolHandler = require('./school.js')
 const db = new Database()
 const loginHandler = new LoginHandler()
 const rolesHandler = new RolesHandler()
 const capabilityHandler = new CapabilityHandler()
 const bandHandler = new BandHandler()
 const departmentHandler = new DepartmentHandler()
-const schoolHandler = new SchoolHandler()
 const tokenCookieName = "token"
 
 // Parse URL-encoded bodies (as sent by HTML forms)
@@ -69,10 +67,6 @@ app.get("/bands", cors(), function (request, response) {
   sendResponseData(bandHandler.allBands(db), response)
 })
 
-app.get("/schools", cors(), function (request, response) {
-  sendResponseData(s.allBands(db), response)
-})
-
 app.post("/login", cors(), function (request, response) {
   loginHandler.login(request.body, db).then(token => {
     response.cookie(tokenCookieName, token)
@@ -92,6 +86,10 @@ app.get("/getRole", cors(), function (request, response) {
 
 app.get("/roleBandCapabilityExists", cors(), function (request, response) {
   sendResponseData(rolesHandler.roleBandCapabilityExists(request.query, db), response)
+})
+
+app.put("/editBand", cors(), function (request, response) {
+  sendResponseData(bandHandler.editBand(request.body, db), response)
 })
 
 app.listen(PORT, () => {
