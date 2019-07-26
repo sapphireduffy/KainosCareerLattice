@@ -103,7 +103,7 @@ ON band.band_id = role.band_id
 ORDER BY band.band_id ASC, capability.capability_id ASC;
 
 CREATE VIEW viewBandData AS
-SELECT band.band_id, band.priority_in_school, band.name, band.school_id, band.description_id,commercial_awareness, communicating_and_teamwork, innovation_and_continuous_improvement,
+SELECT band.band_id, band.priority_in_school, band.name, band.school_id, band.description_id,band.training,band.responsibilities,commercial_awareness, communicating_and_teamwork, innovation_and_continuous_improvement,
 customer_focus, developing_yourself_and_others, planning_and_organising, job_specific_knowledge
 FROM band JOIN  band_description ON band.description_id = band_description.description_id;
 

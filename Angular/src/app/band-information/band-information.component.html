@@ -40,6 +40,14 @@
             <h5>Job Specific Knowledge</h5>
             <p>{{ bandToDisplay.job_specific_knowledge }}</p>
         </div>
+        <div *ngIf="bandToDisplay.training">
+            <h5>Training</h5>
+            <p>{{ bandToDisplay.training }}</p>
+        </div>
+        <div *ngIf="bandToDisplay.responsibilities">
+            <h5>Responsibilities</h5>
+            <p>{{ bandToDisplay.responsibilities }}</p>
+        </div>
     </div>
     <div class="modal-footer">
         <button
