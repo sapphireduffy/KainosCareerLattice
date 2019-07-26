@@ -23,6 +23,7 @@ import { AdminTableComponent } from './admin-table/admin-table.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CapabilityModalComponent } from './capability-modal/capability-modal.component';
 import { AddCapabilityComponent } from './add-capability/add-capability.component';
+import { EditCapabilityModalComponent } from './edit-capability-modal/edit-capability-modal.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,8 @@ import { AddCapabilityComponent } from './add-capability/add-capability.componen
     AddRoleModalComponent,
     EditRoleModalComponent,
     AddCapabilityComponent,
+    AdminTableComponent,
+    EditCapabilityModalComponent,
     AddRoleModalComponent,
     AddBandComponent,
     AdminTableComponent,
@@ -66,6 +69,7 @@ import { AddCapabilityComponent } from './add-capability/add-capability.componen
     AddBandComponent,
     EditRoleModalComponent,
     AddCapabilityComponent,
+    EditCapabilityModalComponent,
     CapabilityModalComponent
   ]
 })

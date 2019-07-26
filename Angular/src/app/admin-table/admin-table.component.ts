@@ -16,6 +16,7 @@ interface Role {
 })
 export class AdminTableComponent implements OnInit {
   departmentName: string;
+  departments: [];
   capabilities = [];
   jobsInDep:  Role[];
   bands: [];
@@ -77,6 +78,12 @@ export class AdminTableComponent implements OnInit {
     })
   }
 
+  openEditCapabilityModal(capabilityId) {
+    this.modalService.openEditCapabilityModal(capabilityId, this.departments).then(data => {
+      this.displayAlert(data);
+    })
+  }
+
   loadRoles(){
     this.dataService.getCapabilityNamesByDepartment(this.departmentId).then(response => {
       this.capabilities = response;
@@ -93,6 +100,10 @@ export class AdminTableComponent implements OnInit {
     this.dataService.getDepartmentDetails(this.departmentId).then(response => {
       this.departmentName = response;
     });
+
+    this.dataService.getAllDepartments().then(response => {
+      this.departments = response;
+    })
   }
 
   displayAlert(data){

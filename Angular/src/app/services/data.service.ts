@@ -2,20 +2,26 @@ import { Injectable } from "@angular/core";
 import { HttphandlerService } from './httphandler.service';
 
 const departmentUrl = "/api/departments";
+const allDepartmentsURL = "/api/allDepartments";
 const capabilityUrl = "/api/capabilities";
 const getCapabilityUrl = "/api/getcapability"
+const getEditCapabilityURL = "/api/getEditCapability"
 const getRolesInDepartmentURL = "/api/rolesInDep";
 const getBandsURL = "/api/bands";
 const addRoleUrl = "/api/addRole";
 const editRoleUrl = "/api/editRole";
 const getRoleUrl = "/api/getRole";
 const addCapabilityURL = "/api/addcapability";
+const getCapabilityURL = "/api/getCapability";
+const editCapabilityUrl = "/api/editCapability";
+const getCapabilityExists = "/api/capabilityExists"
 const getUniqueBandURL = "/api/uniqueband";
 const getRoleBandCapabilityExistsUrl = "/api/roleBandCapabilityExists";
 const deleteRoleURL = "/api/deleteRole";
 const loginUrl = "/api/login"
 const addBandURL = "/api/addband"
 
+ 
 @Injectable()
 export class DataService {
   public isAdmin: boolean
@@ -28,6 +34,10 @@ export class DataService {
 
   getDepartmentDetails(departmentID: number) {
     return this.httpHandler.request(departmentUrl, { departmentID: departmentID }, "get")
+  }
+
+  getAllDepartments() {
+    return this.httpHandler.request(allDepartmentsURL, {}, "get")
   }
 
   getCapabilityNamesByDepartment(departmentID: number) {
@@ -53,6 +63,23 @@ export class DataService {
   createCapability(param: any) {
     return this.httpHandler.request(addCapabilityURL, param, "post")
   }
+
+  getCapability(capabilityID: number) {
+    return this.httpHandler.request(getCapabilityURL, { capabilityID: capabilityID }, "get")
+  }
+
+  getEditCapability(capabilityID: number) {
+    return this.httpHandler.request(getEditCapabilityURL, { capabilityId: capabilityID }, "get")
+  }
+
+  editCapability(param: any) {
+    return this.httpHandler.request(editCapabilityUrl, param, "put")
+  }
+
+  getCapabilityExists(capabilityName: string, departmentID: number) {
+    return this.httpHandler.request(getCapabilityExists, { capabilityName: capabilityName, departmentID: departmentID }, "get")
+  }
+
 
   editRole(param: any) {
     return this.httpHandler.request(editRoleUrl, param, "put")

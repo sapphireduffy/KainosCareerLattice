@@ -48,11 +48,27 @@ app.post("/addcapability", cors(), function (request, response) {
 })
 
 app.get("/capabilities", cors(), function(request, response) {
-  sendResponseData(capabilityHandler.getCapabiltiies(request.query, db), response)
+  sendResponseData(capabilityHandler.getCapabilties(request.query, db), response)
+})
+
+app.get("/getCapability", cors(), function(request, response) {
+  sendResponseData(capabilityHandler.getCapability(request.query, db), response)
+})
+
+app.put('/editCapability', cors(), function (request, response) {
+  sendResponseData(capabilityHandler.editCapability(request.body, db), response)
+})
+
+app.get("/capabilityExists", cors(), function (request, response) {
+  sendResponseData(capabilityHandler.capabilityExists(request.query, db), response)
 })
 
 app.get("/getcapability", cors(), function(request, response) {
   sendResponseData(capabilityHandler.getCapability(request.query, db), response)
+})
+
+app.get("/getEditCapability", cors(), function(request, response) {
+  sendResponseData(capabilityHandler.getEditCapability(request.query, db), response)
 })
 
 app.get("/uniqueband", cors(), function(request, response) {
@@ -61,6 +77,10 @@ app.get("/uniqueband", cors(), function(request, response) {
 
 app.get("/departments", cors(), function(request, response) {
   sendResponseData(departmentHandler.getDepartments(request.query, db), response)
+})
+
+app.get("/allDepartments", cors(), function(request, response) {
+  sendResponseData(departmentHandler.getAllDepartments(db), response)
 })
 
 app.get("/rolesInDep", cors(), function(request, response) {
