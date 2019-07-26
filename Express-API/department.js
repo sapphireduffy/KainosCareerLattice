@@ -1,5 +1,5 @@
 const getDepartmentsQuery = "SELECT name FROM department WHERE department_id = ?"
-const allDepartmentsQuery = "SELECT * FROM department"
+const allDepartmentsQuery = "SELECT name, department_id FROM department"
 
 class DepartmentHandler {
     constructor( config ) { }

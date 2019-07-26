@@ -28,7 +28,6 @@
           <p class="role-clickable" (click)="this.openEditBandModal(band)">{{band.name}}</p>
           <button class='btn btn-secondary addBand'
             (click)="openAddBandModal(null, band.priority_in_school, band.school_id)">+ Add Below</button>
-
         </td>
         <td *ngFor="let cap of capabilities">
           <button scope='row' (click)="switchModal(roleExists(cap, band))" class='role-clickable'
