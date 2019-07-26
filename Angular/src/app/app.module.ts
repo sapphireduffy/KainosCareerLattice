@@ -22,6 +22,7 @@ import { AdminAuthGuardComponent } from './admin-auth-guard/admin-auth-guard.com
 import { AddBandComponent } from './add-band/add-band.component';
 import { AdminTableComponent } from './admin-table/admin-table.component';
 import { AddCapabilityComponent } from './add-capability/add-capability.component';
+import { EditBandModalComponent } from './edit-band-modal/edit-band-modal.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { AddCapabilityComponent } from './add-capability/add-capability.componen
     AddCapabilityComponent,
     AddRoleModalComponent,
     AddBandComponent,
-    AdminTableComponent
+    AdminTableComponent,
+    EditBandModalComponent
   ],
   bootstrap: [
     AppComponent
@@ -63,7 +65,9 @@ import { AddCapabilityComponent } from './add-capability/add-capability.componen
     AddCapabilityComponent,
     AddBandComponent,
     EditRoleModalComponent,
-    AddCapabilityComponent
+    AddCapabilityComponent,
+    EditBandModalComponent
+
   ]
 })
-export class AppModule {}
+export class AppModule { }

@@ -14,6 +14,7 @@ const addBandURL = "/api/addband";
 const getUniqueBandURL = "/api/uniqueband";
 const getRoleBandCapabilityExistsUrl = "/api/roleBandCapabilityExists";
 const deleteRoleURL = "/api/deleteRole";
+const schoolsUrl = "/api/schools";
 
 @Injectable()
 export class DataService {
@@ -30,17 +31,18 @@ export class DataService {
 
   deleteRole(roleId: any) {
     return axios
-      .delete(deleteRoleURL, { 
-        data:{roleId:roleId},
-        headers: this.getHeaders() })
-      .then(function(response) {
+      .delete(deleteRoleURL, {
+        data: { roleId: roleId },
+        headers: this.getHeaders()
+      })
+      .then(function (response) {
         return response;
       })
-      .catch(function(error) {
-          return {
-            error: error.response.data.Message,
-            statusCode: error.response.statusCode
-          }
+      .catch(function (error) {
+        return {
+          error: error.response.data.Message,
+          statusCode: error.response.statusCode
+        }
       });
   }
 
@@ -293,15 +295,38 @@ export class DataService {
         return { error: error.message };
       });
   }
-  
+
   createBand(param: any) {
     return axios
       .post(addBandURL, param, { headers: this.getHeaders() })
-      .then(function(response) {
+      .then(function (response) {
         return response;
-    })
-    .catch(function(error) {
-      return { error: error.message };
-    });
+      })
+      .catch(function (error) {
+        return { error: error.message };
+      });
+  }
+
+  getSchools() {
+    return axios
+      .get(schoolsUrl, {
+        headers: this.getHeaders()
+      })
+      .then(function (response) {
+
+        return response.data;
+      })
+      .catch(function (error) {
+        if (error.response) {
+          return {
+            error: error.response.data.Message,
+            statusCode: error.response.statusCode
+          };
+        } else {
+          if (error.message) {
+            return { error: error.message };
+          }
+        }
+      });
   }
 }

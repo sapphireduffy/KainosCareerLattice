@@ -7,6 +7,7 @@ import { AddRoleModalComponent } from './add-role-modal/add-role-modal.component
 import { AddCapabilityComponent } from './add-capability/add-capability.component';
 import { AddBandComponent } from './add-band/add-band.component';
 import { EditRoleModalComponent } from './edit-role-modal/edit-role-modal.component';
+import { EditBandModalComponent } from './edit-band-modal/edit-band-modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class ModalService {
     private modalService: NgbModal
   ) { }
 
-  async openRoleInfoModal(selectedRoleId){
+  async openRoleInfoModal(selectedRoleId) {
     await this.dataService.getRoleInformation(selectedRoleId).then(response => {
       const modalRef = this.modalService.open(RoleInformationComponent, { backdrop: "static" });
       modalRef.componentInstance.roleToDisplay = response[0];
@@ -32,13 +33,23 @@ export class ModalService {
     });
   }
 
+  async openEditBandModal(selectedBand) {
+    await this.dataService.getSchools().then(response => {
+      console.log(selectedBand)
+      const modalRef = this.modalService.open(EditBandModalComponent, { backdrop: "static" });
+      modalRef.componentInstance.bandToEdit = selectedBand;
+      modalRef.componentInstance.schools = response;
+    })
+
+  }
+
   openAddRoleModal(roleBandId, roleCapabilityId, departmentId) {
-    return new Promise( ( resolve, reject ) => {
+    return new Promise((resolve, reject) => {
       const modalRef = this.modalService.open(AddRoleModalComponent, { backdrop: "static" });
       modalRef.componentInstance.departmentId = departmentId;
       modalRef.componentInstance.bandId = roleBandId;
-      modalRef.componentInstance.capabilityId =  roleCapabilityId;
-      modalRef.componentInstance.roleAdded.subscribe(data =>{
+      modalRef.componentInstance.capabilityId = roleCapabilityId;
+      modalRef.componentInstance.roleAdded.subscribe(data => {
         resolve(data.data)
       });
     })
