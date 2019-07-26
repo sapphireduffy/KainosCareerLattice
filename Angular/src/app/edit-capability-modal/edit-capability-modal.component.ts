@@ -70,22 +70,22 @@ export class EditCapabilityModalComponent implements OnInit {
   async checkIfCapabilityExists() {
     await this.dataService
       .getCapabilityExists(this.editedCapability.name, this.editedCapability.departmentId)
-      .then(
-        result => {
-          this.capabilityExists = result[0]["result"] == 1 ? true : false;
+        .then(
+          result => {
+            this.capabilityExists = result[0]["result"] == 1 ? true : false;
         })
-      .catch(error => {
-        console.log(error);
+        .catch(error => {
+      console.log(error);
       });
   }
 
   writeToDatabase() {
-         this.dataService
-        .editCapability(this.editedCapability)
+    this.dataService
+      .editCapability(this.editedCapability)
         .then(result => this.capabilityEdited.emit(result))
-        .catch(error => {
-          this.capabilityEdited.emit(error);
-        });
-      this.closeModal();
+          .catch(error => {
+            this.capabilityEdited.emit(error);
+          });
+    this.closeModal();
   }
 }

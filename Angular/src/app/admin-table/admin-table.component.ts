@@ -110,7 +110,6 @@ export class AdminTableComponent implements OnInit {
 
     this.dataService.getAllDepartments().then(response => {
       this.departments = response;
-      console.log(this.departments);
     })
   }
 
