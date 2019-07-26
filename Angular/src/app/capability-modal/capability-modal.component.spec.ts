@@ -23,7 +23,7 @@ describe('CapabilityModalComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CapabilityModalComponent);
     component = fixture.componentInstance;
-    component.capability = MockObjects.role
+    component.capability = MockObjects.capability
     fixture.detectChanges();
   });
 
