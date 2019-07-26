@@ -6,10 +6,9 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "./login/login.component";
-import { HttphandlerService } from "./httphandler.service";
-import { AppRoutingModule } from "./app-routing.module";
+import { HttphandlerService } from "./services/httphandler.service";
 import { AuthGuardComponent } from "./auth-guard/auth-guard.component";
-import { DataService } from "./_services/data.service";
+import { DataService } from "./services/data.service";
 import { CareerTableComponent } from "./career-table/career-table.component";
 import { CookieService } from "ngx-cookie-service";
 import { LandingPageComponent } from "./landing-page/landing-page.component";
@@ -21,6 +20,7 @@ import { EditRoleModalComponent } from './edit-role-modal/edit-role-modal.compon
 import { AdminAuthGuardComponent } from './admin-auth-guard/admin-auth-guard.component';
 import { AddBandComponent } from './add-band/add-band.component';
 import { AdminTableComponent } from './admin-table/admin-table.component';
+import { AppRoutingModule } from './app-routing.module';
 import { AddCapabilityComponent } from './add-capability/add-capability.component';
 import { EditBandModalComponent } from './edit-band-modal/edit-band-modal.component';
 
