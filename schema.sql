@@ -113,6 +113,10 @@ band.band_id, band.name AS 'BandName', band.school_id
 FROM role JOIN role_capability ON role.role_id = role_capability.role_id JOIN capability ON capability.capability_id = 
 role_capability.capability_id JOIN band ON band.band_id = role.band_id;
 
+CREATE VIEW viewCapabilityDetails AS
+SELECT capability.name AS 'CapabilityName' , capability_lead.capability_id, capability_lead.name AS 'LeadName', message
+FROM capability JOIN capability_lead ON capability.capability_id = capability_lead.capability_id;
+
 -- ---------------------------------- INSERTS ---------------------------- --
 
 INSERT INTO user (username, password, type)
