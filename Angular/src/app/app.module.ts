@@ -21,6 +21,7 @@ import { AdminAuthGuardComponent } from './admin-auth-guard/admin-auth-guard.com
 import { AddBandComponent } from './add-band/add-band.component';
 import { AdminTableComponent } from './admin-table/admin-table.component';
 import { AppRoutingModule } from './app-routing.module';
+import { CapabilityModalComponent } from './capability-modal/capability-modal.component';
 import { AddCapabilityComponent } from './add-capability/add-capability.component';
 import { EditCapabilityModalComponent } from './edit-capability-modal/edit-capability-modal.component';
 
@@ -39,7 +40,9 @@ import { EditCapabilityModalComponent } from './edit-capability-modal/edit-capab
     AdminTableComponent,
     EditCapabilityModalComponent,
     AddRoleModalComponent,
-    AddBandComponent
+    AddBandComponent,
+    AdminTableComponent,
+    CapabilityModalComponent
   ],
   bootstrap: [
     AppComponent
@@ -66,7 +69,8 @@ import { EditCapabilityModalComponent } from './edit-capability-modal/edit-capab
     AddBandComponent,
     EditRoleModalComponent,
     AddCapabilityComponent,
-    EditCapabilityModalComponent
+    EditCapabilityModalComponent,
+    CapabilityModalComponent
   ]
 })
 export class AppModule {}

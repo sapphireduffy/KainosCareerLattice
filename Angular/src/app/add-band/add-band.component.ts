@@ -2,8 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { Band } from "../model/band";
-import { DataService } from "../_services/data.service";
-import { Observable } from 'rxjs';
+import { DataService } from "../services/data.service";
 
 const DESCRIPTION_MAX_LEN = 1000
 
@@ -13,7 +12,6 @@ const DESCRIPTION_MAX_LEN = 1000
   styleUrls: ["./add-band.component.css"]
 })
 export class AddBandComponent implements OnInit {
-
   @Input() departmentId;
   @Input() abovePriorityVal;
   @Input() belowPriorityVal;

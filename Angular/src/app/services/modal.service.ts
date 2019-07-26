@@ -8,6 +8,7 @@ import { AddCapabilityComponent } from '../add-capability/add-capability.compone
 import { EditRoleModalComponent } from '../edit-role-modal/edit-role-modal.component';
 import { EditCapabilityModalComponent } from '../edit-capability-modal/edit-capability-modal.component';
 import { AddBandComponent } from '../add-band/add-band.component';
+import { CapabilityModalComponent } from '../capability-modal/capability-modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,13 @@ export class ModalService {
     await this.dataService.getBandInformation(selectedBandId).then(response => {
       const modalRef = this.modalService.open(BandInformationComponent, { backdrop: "static" });
       modalRef.componentInstance.bandToDisplay = response[0];
+    });
+  }
+
+  async openCapabilityInfoModal(capabilityId) {
+    await this.dataService.getCapabilityDetails(capabilityId).then(response => {
+      const modalRef = this.modalService.open(CapabilityModalComponent, { backdrop: "static" })
+      modalRef.componentInstance.capability = response[0]
     });
   }
 
@@ -84,9 +92,10 @@ export class ModalService {
 
     async openEditCapabilityModal(capabilityId, departments) {
     return new Promise((resolve, reject) => {
-      this.dataService.getCapability(capabilityId).then(response => {
+      this.dataService.getEditCapability(capabilityId).then(response => {
         const modalRef = this.modalService.open(EditCapabilityModalComponent);
         modalRef.componentInstance.capabilityToEdit = response[0];
+        console.log(response[0])
         modalRef.componentInstance.departments = departments;
         modalRef.componentInstance.capabilityEdited.subscribe(data => {
           resolve(data)

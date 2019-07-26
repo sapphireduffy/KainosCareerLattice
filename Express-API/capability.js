@@ -1,8 +1,9 @@
 const createCapabilityQuery = "INSERT INTO capability(name, department_id) VALUES (?,?) "
 const getCapabiltiiesQuery = "SELECT name, capability_id FROM capability WHERE department_id = ?"
-const getCapabilityQuery = "SELECT name, capability_id, department_id FROM capability WHERE capability_id = ?"
+const getEditCapabilityQuery = "SELECT name, capability_id, department_id FROM capability WHERE capability_id = ?"
 const editCapabilityQuery = "UPDATE capability SET name=?, department_id=? WHERE capability_id=?"
 const capabilityExistsQuery = "SELECT EXISTS(SELECT * FROM capability WHERE name=? AND department_id=?) AS result"
+const getCapabilityQuery = "SELECT CapabilityName, LeadName, message FROM viewCapabilityDetails WHERE capability_id = ?"
 
 class CapabilityHandler {
     constructor( config ) { }
@@ -35,7 +36,19 @@ class CapabilityHandler {
     getCapability(params, db){
         return new Promise( ( resolve, reject ) => {
             try {
-                db.query(getCapabilityQuery,[params.capabilityID]).then(rows => {
+                db.query(getCapabilityQuery,[params.capabilityId]).then(rows => {
+                    resolve(rows)
+                })
+            } catch (err){
+                reject({"error":"Error getting capability"})
+            }
+        })
+    }
+
+    getEditCapability(params, db){
+        return new Promise( ( resolve, reject ) => {
+            try {
+                db.query(getEditCapabilityQuery,[params.capabilityId]).then(rows => {
                     resolve(rows)
                 })
             } catch (err){
