@@ -24,6 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CapabilityModalComponent } from './capability-modal/capability-modal.component';
 import { AddCapabilityComponent } from './add-capability/add-capability.component';
 import { EditBandModalComponent } from './edit-band-modal/edit-band-modal.component';
+import { EditCapabilityModalComponent } from './edit-capability-modal/edit-capability-modal.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,8 @@ import { EditBandModalComponent } from './edit-band-modal/edit-band-modal.compon
     AddRoleModalComponent,
     EditRoleModalComponent,
     AddCapabilityComponent,
+    AdminTableComponent,
+    EditCapabilityModalComponent,
     AddRoleModalComponent,
     AddBandComponent,
     AdminTableComponent,
@@ -69,6 +72,7 @@ import { EditBandModalComponent } from './edit-band-modal/edit-band-modal.compon
     EditRoleModalComponent,
     AddCapabilityComponent,
     EditBandModalComponent,
+    EditCapabilityModalComponent,
     CapabilityModalComponent
   ]
 })
