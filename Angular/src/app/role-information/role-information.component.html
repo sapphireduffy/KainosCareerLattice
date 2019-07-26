@@ -4,7 +4,7 @@
   [class.inspire]="roleToDisplay.school_id == 1"
   [class.explore]="roleToDisplay.school_id == 2" 
   [class.discover]="roleToDisplay.school_id == 3" >
-    <h2 class="modal-title" id="exampleModalLabel">{{ roleToDisplay.name }}</h2>
+    <h2 class="modal-title" id="exampleModalLabel">{{ roleToDisplay.RoleName }}</h2>
     <button
       type="button"
       class="close"
@@ -23,7 +23,7 @@
     <div *ngIf="roleToDisplay.job_spec_url">
       <h5>Job Description</h5>
       <p>
-        <a [href]="safeUrl">Sharepoint Link for: {{ roleToDisplay.name }}</a>
+        <a [href]="safeUrl">Sharepoint Link for: {{ roleToDisplay.RoleName }}</a>
       </p>
     </div>
   </div>

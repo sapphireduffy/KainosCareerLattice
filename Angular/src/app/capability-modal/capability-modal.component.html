@@ -1,0 +1,34 @@
+<div>
+    <!-- Set header colour depending on band level of the role -->
+    <div class="modal-header">
+      <h2 class="modal-title" id="exampleModalLabel">{{ capability.CapabilityName }}</h2>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="activeModal.dismiss()">
+        x
+      </button>
+    </div>
+  
+    <div class="modal-body">
+      <div>
+        <h5>Capability Lead</h5>
+        <p>{{ capability.LeadName }}</p>
+      </div>
+  
+      <div>
+        <h5>Capability Lead Message</h5>
+        <p>{{ capability.message }}</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="activeModal.dismiss()">
+        Close
+      </button>
+    </div>
+  </div>
+  

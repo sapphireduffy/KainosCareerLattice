@@ -12,7 +12,8 @@
       </tr>
       <tr>
         <th class="job-family"></th>
-        <th scope="row" *ngFor="let capability of capabilities" class="job-headings">
+        <th scope="row" *ngFor="let capability of capabilities"
+          (click)="this.modalService.openCapabilityInfoModal(capability.capability_id)" class="job-headings">
           {{ capability.name }}
         </th>
       </tr>

@@ -8,6 +8,7 @@ import { AddCapabilityComponent } from '../add-capability/add-capability.compone
 import { EditRoleModalComponent } from '../edit-role-modal/edit-role-modal.component';
 import { AddBandComponent } from '../add-band/add-band.component';
 import { EditBandModalComponent } from '../edit-band-modal/edit-band-modal.component';
+import { CapabilityModalComponent } from '../capability-modal/capability-modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,13 @@ export class ModalService {
       modalRef.componentInstance.bandEdited.subscribe(data => {
         resolve(data)
       });
+    })
+  }
+
+  async openCapabilityInfoModal(capabilityId) {
+    await this.dataService.getCapabilityDetails(capabilityId).then(response => {
+      const modalRef = this.modalService.open(CapabilityModalComponent, { backdrop: "static" })
+      modalRef.componentInstance.capability = response[0]
     });
   }
 
@@ -57,7 +65,7 @@ export class ModalService {
 
   openAddCapabilityModal(departmentId) {
     return new Promise((resolve, reject) => {
-      const modalRef = this.modalService.open(AddCapabilityComponent);
+      const modalRef = this.modalService.open(AddCapabilityComponent, { backdrop: "static" });
       modalRef.componentInstance.departmentId = departmentId;
       modalRef.componentInstance.capabilityAdded.subscribe(data => {
         resolve(data)
@@ -67,7 +75,7 @@ export class ModalService {
 
   openAddBandModal(departmentId, aboveValue, belowValue, schoolId) {
     return new Promise((resolve, reject) => {
-      const modalRef = this.modalService.open(AddBandComponent);
+      const modalRef = this.modalService.open(AddBandComponent, { backdrop: "static" });
       modalRef.componentInstance.schoolId = schoolId;
       modalRef.componentInstance.abovePriorityVal = aboveValue;
       modalRef.componentInstance.belowPriorityVal = belowValue;
@@ -81,7 +89,7 @@ export class ModalService {
   openEditRoleModal(roleId, capabilities, bands) {
     return new Promise((resolve, reject) => {
       this.dataService.getRole(roleId).then(response => {
-        const modalRef = this.modalService.open(EditRoleModalComponent);
+        const modalRef = this.modalService.open(EditRoleModalComponent, { backdrop: "static" });
         modalRef.componentInstance.roleToEdit = response[0];
         modalRef.componentInstance.capabilities = capabilities;
         modalRef.componentInstance.bands = bands;

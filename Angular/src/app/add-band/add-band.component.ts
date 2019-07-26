@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { Band } from "../model/band";
 import { DataService } from "../services/data.service";
-import { Observable } from 'rxjs';
 
 const DESCRIPTION_MAX_LEN = 1000
 
@@ -13,7 +12,6 @@ const DESCRIPTION_MAX_LEN = 1000
   styleUrls: ["./add-band.component.css"]
 })
 export class AddBandComponent implements OnInit {
-
   @Input() departmentId;
   @Input() abovePriorityVal;
   @Input() belowPriorityVal;
@@ -79,8 +77,6 @@ export class AddBandComponent implements OnInit {
       return;
     }
     this.setNewBand();
-
-    console.log(this.newBand);
 
     this.dataService
       .createBand(this.newBand)

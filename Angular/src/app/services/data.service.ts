@@ -3,6 +3,7 @@ import { HttphandlerService } from './httphandler.service';
 
 const departmentUrl = "/api/departments";
 const capabilityUrl = "/api/capabilities";
+const getCapabilityUrl = "/api/getcapability"
 const getRolesInDepartmentURL = "/api/rolesInDep";
 const getBandsURL = "/api/bands";
 const addRoleUrl = "/api/addRole";
@@ -14,6 +15,7 @@ const getRoleBandCapabilityExistsUrl = "/api/roleBandCapabilityExists";
 const deleteRoleURL = "/api/deleteRole";
 const loginUrl = "/api/login"
 const editBandUrl = "/api/editBand";
+const addBandURL = "/api/addband"
 
 @Injectable()
 export class DataService {
@@ -31,6 +33,10 @@ export class DataService {
 
   getCapabilityNamesByDepartment(departmentID: number) {
     return this.httpHandler.request(capabilityUrl, { departmentID: departmentID }, "get")
+  }
+
+  getCapabilityDetails(capabilityId: number) {
+    return this.httpHandler.request(getCapabilityUrl, { capabilityId: capabilityId }, "get")
   }
 
   getRolesInDepartment(departmentID: number) {
@@ -74,4 +80,7 @@ export class DataService {
     return this.httpHandler.request(editBandUrl, param, "put")
   }
 
+  createBand(param: any) {
+    return this.httpHandler.request(addBandURL, param, "post")
+  }
 }
