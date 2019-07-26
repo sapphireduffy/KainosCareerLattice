@@ -15,3 +15,8 @@
 #descriptionContainer label {
     margin-top: 20px;
 }
+
+.modal-header {
+    background-color: #003471;
+    color: white;
+}
