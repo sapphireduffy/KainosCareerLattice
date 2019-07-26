@@ -51,6 +51,10 @@ app.get("/capabilities", cors(), function(request, response) {
   sendResponseData(capabilityHandler.getCapabiltiies(request.query, db), response)
 })
 
+app.get("/getcapability", cors(), function(request, response) {
+  sendResponseData(capabilityHandler.getCapability(request.query, db), response)
+})
+
 app.get("/uniqueband", cors(), function(request, response) {
   sendResponseData(bandHandler.getBands(request.query, db), response)
 })

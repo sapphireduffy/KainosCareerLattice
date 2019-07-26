@@ -28,5 +28,17 @@ class CapabilityHandler {
             }
         })
     }
+
+    getCapability(params, db){
+        return new Promise( ( resolve, reject ) => {
+            try {
+                db.query(getCapabiltiiesQuery,[params.capabilityID]).then(rows => {
+                    resolve(rows)
+                })
+            } catch (err){
+                reject({"error":"Error getting capabilities"})
+            }
+        })
+    }
 }
 module.exports = CapabilityHandler;

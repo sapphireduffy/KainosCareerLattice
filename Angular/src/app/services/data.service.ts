@@ -32,6 +32,10 @@ export class DataService {
     return this.httpHandler.request(capabilityUrl, { departmentID: departmentID }, "get")
   }
 
+  getCapabilityDetails(capabilityId: number){
+    return this.httpHandler.request(capabilityUrl, { capabilityId: capabilityId }, "get")
+  }
+
   getRolesInDepartment(departmentID: number) {
     return this.httpHandler.request(getRolesInDepartmentURL,{ departmentID: departmentID }, "get")
   }
